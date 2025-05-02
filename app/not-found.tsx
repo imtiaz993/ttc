@@ -1,6 +1,6 @@
 const NotFound = () => (
   <div>
-    <button type="primary">Back Home</button>
+    <button>Back Home</button>
   </div>
 );
 export default NotFound;
