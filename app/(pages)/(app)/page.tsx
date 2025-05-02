@@ -12,10 +12,13 @@ export default function Home() {
   const prev = () => {
     setStep((prev) => prev - 1);
   };
+  const reset = () => {
+    setStep(0);
+  };
   const components = [
     <Overlay next={next} />,
     <Welcome next={next} />,
-    <ScratchGame step={step} next={next} />,
+    <ScratchGame step={step} next={next} reset={reset} />,
   ];
   return components[step];
 }

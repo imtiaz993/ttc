@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const Menu = () => {
+const Menu = ({ reset }) => {
   const [open, setOpen] = useState(true);
+  const [sound, setSound] = useState(true);
   return (
     <div className="mb-16">
       {!open && (
@@ -40,22 +41,131 @@ const Menu = () => {
           backgroundRepeat: "round",
         }}
       >
-        <div className="pt-5 px-4 flex justify-between">
-          <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
-          <Image
-            src="/icons/close.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-6 cursor-pointer"
-            onClick={() => {
-              setOpen(false);
-            }}
-          />
+        <div className="pt-5 px-4 flex flex-col justify-between h-full">
+          <div>
+            <div className=" flex justify-between">
+              <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
+              <Image
+                src="/icons/close.svg"
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-6 cursor-pointer"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              />
+            </div>
+            <div className="mt-10">
+              <p className="text-[#FFF8E7] font-medium mb-2.5">
+                On this adventure. I’d like to be
+              </p>
+              <div className="flex gap-5 mb-10">
+                <Image
+                  src="/images/char1.png"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-[75px] cursor-pointer"
+                />
+                <Image
+                  src="/images/char2.png"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-[75px] cursor-pointer"
+                />
+                <Image
+                  src="/images/char3.png"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-[75px] cursor-pointer"
+                />
+                <Image
+                  src="/images/char4.png"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-[75px] cursor-pointer"
+                />
+              </div>
+              <div>
+                <p className="text-[#FFF8E7] text-sm mb-2.5">
+                  Accessibility options
+                </p>
+                <div className="pb-2.5 mb-2.5 flex justify-between items-center border-b border-[#FFFFFF1A]">
+                  <p className="text-[#FFF8E7] font-medium">Tooltips</p>
+                  <Image
+                    src="/icons/toggle.svg"
+                    priority={true}
+                    sizes="100vw"
+                    height={0}
+                    width={0}
+                    alt=""
+                    className="w-6 cursor-pointer"
+                  />
+                </div>
+                <div className="pb-2.5 mb-10 flex justify-between items-center border-b border-[#FFFFFF1A]">
+                  <p className="text-[#FFF8E7] font-medium">Sound</p>
+                  <Image
+                    src={sound ? "/icons/volume-white.svg" : ""}
+                    priority={true}
+                    sizes="100vw"
+                    height={0}
+                    width={0}
+                    alt=""
+                    className="w-6 cursor-pointer"
+                    onClick={() => {
+                      setSound(!sound);
+                    }}
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-[#FFF8E7] font-medium">
+                    Restart the adventure
+                  </p>
+                  <Image
+                    src="/icons/refresh.svg"
+                    priority={true}
+                    sizes="100vw"
+                    height={0}
+                    width={0}
+                    alt=""
+                    className="w-6 cursor-pointer"
+                    onClick={() => {
+                      reset();
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mb-16">
+            <div className="flex justify-between items-center mb-3">
+              <p className="text-sm text-[#FFF8E7]">An initiative by</p>
+              <p className="text-[#FFF8E7] font-medium">MAP Bengaluru</p>
+            </div>
+            <div className="flex justify-between items-center mb-3">
+              <p className="text-sm text-[#FFF8E7]">UI UX by</p>
+              <p className="text-[#FFF8E7] font-medium">Sensory+</p>
+            </div>
+            <div className="flex justify-between items-center mb-3">
+              <p className="text-sm text-[#FFF8E7]">Developed by</p>
+              <p className="text-[#FFF8E7] font-medium">United Monks</p>
+            </div>
+          </div>
         </div>
-        <div className="mt-10"></div>
       </div>
     </div>
   );

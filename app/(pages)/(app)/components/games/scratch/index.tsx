@@ -5,7 +5,7 @@ import Step2 from "./step2";
 import Step3 from "./step3";
 import Result from "./result";
 
-const ScratchGame = ({ step, next }) => {
+const ScratchGame = ({ step, next, reset }) => {
   const components = [
     null,
     null,
@@ -17,7 +17,7 @@ const ScratchGame = ({ step, next }) => {
 
   return (
     <>
-      <Menu />
+      <Menu reset={reset} />
       {components[step]}
     </>
   );
