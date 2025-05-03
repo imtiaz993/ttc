@@ -5,7 +5,7 @@ const Menu = ({ reset }) => {
   const [open, setOpen] = useState(true);
   const [sound, setSound] = useState(true);
   return (
-    <div className="mb-16">
+    <div>
       {!open && (
         <div className="fixed top-5 right-4 left-4 flex justify-between">
           <Image
@@ -32,7 +32,7 @@ const Menu = ({ reset }) => {
         </div>
       )}
       <div
-        className={`fixed inset-0 transition-transform duration-500 ease-in-out ${
+        className={`fixed z-50 inset-0 transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{

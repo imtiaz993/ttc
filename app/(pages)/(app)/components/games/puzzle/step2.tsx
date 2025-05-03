@@ -2,9 +2,7 @@ import React from "react";
 import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 
-const ScratchStep2 = ({ step, next, prev, reset }) => {
-  console.log("t");
-
+const PuzzleStep2 = ({ step, next, prev, reset }) => {
   return (
     <div>
       <Menu reset={reset} />
@@ -13,4 +11,4 @@ const ScratchStep2 = ({ step, next, prev, reset }) => {
   );
 };
 
-export default ScratchStep2;
+export default PuzzleStep2;

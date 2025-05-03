@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Menu from "../../menu";
+import GameStepper from "../../gameStepper";
 
-const Step3 = ({next}) => {
+const ScratchStep3 = ({ step, next, prev, reset }) => {
   return (
-    <div>Step3</div>
-  )
-}
+    <div>
+      <Menu reset={reset} />
+      <GameStepper step={step} next={next} prev={prev} />
+    </div>
+  );
+};
 
-export default Step3
+export default ScratchStep3;

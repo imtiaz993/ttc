@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-dvh max-h-dvh overflow-hidden">
-        <div className="sm:hidden">{children}</div>
+        <div className="sm:hidden h-dvh">{children}</div>
         <div className="hidden sm:flex flex-col justify-center items-center h-dvh">
           <h1 className="text-center text-lg">
             Application is not accessiable, <br />
