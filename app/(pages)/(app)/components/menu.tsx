@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const Menu = ({ reset }) => {
-  const [open, setOpen] = useState(true);
+const Menu = ({ isOpen = false, reset }) => {
+  const [open, setOpen] = useState(isOpen);
   const [sound, setSound] = useState(true);
   return (
     <div>

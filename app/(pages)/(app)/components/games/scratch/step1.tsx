@@ -6,7 +6,7 @@ import GameStepper from "../../gameStepper";
 const ScratchStep1 = ({ step, next, prev, reset }) => {
   return (
     <>
-      <Menu reset={reset} />
+      <Menu reset={reset} isOpen={true} />
       <GameStepper step={step} next={next} prev={prev} />
       <div
         style={{
