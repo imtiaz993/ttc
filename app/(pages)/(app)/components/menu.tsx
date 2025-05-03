@@ -152,17 +152,17 @@ const Menu = ({ isOpen = false, reset }) => {
             </div>
           </div>
           <div className="mb-16">
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-[#FFF8E7]">An initiative by</p>
-              <p className="text-[#FFF8E7] font-medium">MAP Bengaluru</p>
+              <p className="text-[#FFF8E7] font-semibold">MAP Bengaluru</p>
             </div>
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-[#FFF8E7]">UI UX by</p>
-              <p className="text-[#FFF8E7] font-medium">Sensory+</p>
+              <p className="text-[#FFF8E7] font-semibold">Sensory+</p>
             </div>
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-4">
               <p className="text-sm text-[#FFF8E7]">Developed by</p>
-              <p className="text-[#FFF8E7] font-medium">United Monks</p>
+              <p className="text-[#FFF8E7] font-semibold">United Monks</p>
             </div>
           </div>
         </div>

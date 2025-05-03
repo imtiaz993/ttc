@@ -112,7 +112,7 @@ export default function Home() {
     PuzzleGame,
     ChamberGame,
     OwnTikkaGame,
-    <Feedback />,
+    <Feedback reset={reset} />,
     <Thankyou />,
   ];
   return components[step];
