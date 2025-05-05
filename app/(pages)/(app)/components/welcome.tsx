@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Welcome = ({ next }) => {
+const Welcome = ({ next, setUserData }) => {
   return (
     <div
       className="flex flex-col justify-center items-center border-transparent h-dvh px-12"
@@ -38,25 +38,34 @@ const Welcome = ({ next }) => {
           A world within a world… Messages from a time forgotten… Wish you well
           on this journey, friend!
         </p>
-        <div className="flex justify-between pb-2 border-b border-[#223100]">
+        <form
+          onSubmit={(e: any) => {
+            e.preventDefault();
+            const name = e.target.name.value;
+            setUserData((prev) => ({ ...prev, name }));
+            next();
+          }}
+          className="flex justify-between pb-2 border-b border-[#223100]"
+        >
           <input
             className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
             placeholder="Enter your name to begin"
             type="text"
+            name="name"
+            required
           />
-          <Image
-            src="/icons/arrow-forward.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-5"
-            onClick={() => {
-              next();
-            }}
-          />
-        </div>
+          <button type="submit" className="w-5 h-5">
+            <Image
+              src="/icons/arrow-forward.svg"
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt="Submit"
+              className="w-full h-full"
+            />
+          </button>
+        </form>
       </div>
     </div>
   );

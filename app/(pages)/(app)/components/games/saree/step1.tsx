@@ -2,10 +2,10 @@ import React from "react";
 import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 
-const SareeStep1 = ({ step, next, prev, reset }) => {
+const SareeStep1 = ({ step, next, prev, reset, setUserData }) => {
   return (
     <>
-      <Menu reset={reset} />
+      <Menu reset={reset} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />
     </>
   );

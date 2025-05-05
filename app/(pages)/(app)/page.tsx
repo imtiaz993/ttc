@@ -43,6 +43,7 @@ import Thankyou from "./components/thankyou";
 
 export default function Home() {
   const [step, setStep] = useState(0);
+  const [userData, setUserData] = useState({});
   const next = () => {
     setStep((prev) => prev + 1);
   };
@@ -54,57 +55,225 @@ export default function Home() {
   };
 
   const ScratchGame = [
-    <ScratchStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <ScratchStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <ScratchStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <ScratchResult step={step} next={next} prev={prev} reset={reset} />,
+    <ScratchStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ScratchStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ScratchStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ScratchResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const SareeGame = [
-    <SareeStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <SareeStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <SareeStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <SareeResult step={step} next={next} prev={prev} reset={reset} />,
+    <SareeStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SareeStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SareeStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SareeResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const SpotTikka = [
-    <SpotTikkaStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <SpotTikkaStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <SpotTikkaStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <SpotTikkaResult step={step} next={next} prev={prev} reset={reset} />,
+    <SpotTikkaStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SpotTikkaStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SpotTikkaStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <SpotTikkaResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const WordsGame = [
-    <WordsStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <WordsStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <WordsStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <WordsResult step={step} next={next} prev={prev} reset={reset} />,
+    <WordsStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <WordsStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <WordsStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <WordsResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const PuzzleGame = [
-    <PuzzleStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <PuzzleStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <PuzzleStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <PuzzleResult step={step} next={next} prev={prev} reset={reset} />,
+    <PuzzleStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <PuzzleStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <PuzzleStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <PuzzleResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const ChamberGame = [
-    <ChamberStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <ChamberStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <ChamberStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <ChamberResult step={step} next={next} prev={prev} reset={reset} />,
+    <ChamberStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ChamberStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ChamberStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <ChamberResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const OwnTikkaGame = [
-    <OwnTikkaStep1 step={step} next={next} prev={prev} reset={reset} />,
-    <OwnTikkaStep2 step={step} next={next} prev={prev} reset={reset} />,
-    <OwnTikkaStep3 step={step} next={next} prev={prev} reset={reset} />,
-    <OwnTikkaResult step={step} next={next} prev={prev} reset={reset} />,
+    <OwnTikkaStep1
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <OwnTikkaStep2
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <OwnTikkaStep3
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
+    <OwnTikkaResult
+      step={step}
+      next={next}
+      prev={prev}
+      reset={reset}
+      setUserData={setUserData}
+    />,
   ];
 
   const components = [
     <Overlay next={next} />,
-    <Welcome next={next} />,
+    <Welcome next={next} setUserData={setUserData} />,
     ...ScratchGame,
     ...SareeGame,
     SpotTikka,
@@ -112,7 +281,7 @@ export default function Home() {
     PuzzleGame,
     ChamberGame,
     OwnTikkaGame,
-    <Feedback reset={reset} />,
+    <Feedback reset={reset} setUserData={setUserData} />,
     <Thankyou />,
   ];
   return components[step];

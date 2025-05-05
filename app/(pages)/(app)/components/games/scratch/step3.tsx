@@ -3,10 +3,10 @@ import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 import Image from "next/image";
 
-const ScratchStep3 = ({ step, next, prev, reset }) => {
+const ScratchStep3 = ({ step, next, prev, reset, setUserData }) => {
   return (
     <>
-      <Menu reset={reset} />
+      <Menu reset={reset} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <Image
