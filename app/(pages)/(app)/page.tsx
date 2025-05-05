@@ -44,10 +44,10 @@ import Thankyou from "./components/thankyou";
 export default function Home() {
   const [step, setStep] = useState(0);
   const [userData, setUserData] = useState({
-    name:"",
-    sound:true,
-    char:"",
-    tooltip:false
+    name: "",
+    sound: true,
+    char: "char1",
+    tooltip: false,
   });
   const next = () => {
     setStep((prev) => prev + 1);

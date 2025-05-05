@@ -73,7 +73,9 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                   height={0}
                   width={0}
                   alt=""
-                  className="w-[75px] cursor-pointer"
+                  className={`w-[75px] cursor-pointer rounded-lg ${
+                    userData.char == "char1" ? "border-2 border-black" : ""
+                  }`}
                   onClick={() => {
                     setUserData((prev) => ({ ...prev, char: "char1" }));
                   }}
@@ -85,7 +87,9 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                   height={0}
                   width={0}
                   alt=""
-                  className="w-[75px] cursor-pointer"
+                  className={`w-[75px] cursor-pointer rounded-lg ${
+                    userData.char == "char2" ? "border-2 border-black" : ""
+                  }`}
                   onClick={() => {
                     setUserData((prev) => ({ ...prev, char: "char2" }));
                   }}
@@ -97,7 +101,9 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                   height={0}
                   width={0}
                   alt=""
-                  className="w-[75px] cursor-pointer"
+                  className={`w-[75px] cursor-pointer rounded-lg ${
+                    userData.char == "char3" ? "border-2 border-black" : ""
+                  }`}
                   onClick={() => {
                     setUserData((prev) => ({ ...prev, char: "char3" }));
                   }}
@@ -109,7 +115,9 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                   height={0}
                   width={0}
                   alt=""
-                  className="w-[75px] cursor-pointer"
+                  className={`w-[75px] cursor-pointer rounded-lg ${
+                    userData.char == "char4" ? "border-2 border-black" : ""
+                  }`}
                   onClick={() => {
                     setUserData((prev) => ({ ...prev, char: "char4" }));
                   }}
@@ -169,7 +177,7 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                       setUserData({
                         name: "",
                         sound: true,
-                        char: "",
+                        char: "char1",
                         tooltip: false,
                       });
                     }}
