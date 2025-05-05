@@ -71,6 +71,9 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                   width={0}
                   alt=""
                   className="w-[75px] cursor-pointer"
+                  onClick={() => {
+                    setUserData((prev) => ({ ...prev, char: "char1" }));
+                  }}
                 />
                 <Image
                   src="/images/char2.png"
@@ -80,6 +83,9 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                   width={0}
                   alt=""
                   className="w-[75px] cursor-pointer"
+                  onClick={() => {
+                    setUserData((prev) => ({ ...prev, char: "char2" }));
+                  }}
                 />
                 <Image
                   src="/images/char3.png"
@@ -89,6 +95,9 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                   width={0}
                   alt=""
                   className="w-[75px] cursor-pointer"
+                  onClick={() => {
+                    setUserData((prev) => ({ ...prev, char: "char3" }));
+                  }}
                 />
                 <Image
                   src="/images/char4.png"
@@ -98,6 +107,9 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                   width={0}
                   alt=""
                   className="w-[75px] cursor-pointer"
+                  onClick={() => {
+                    setUserData((prev) => ({ ...prev, char: "char4" }));
+                  }}
                 />
               </div>
               <div>
@@ -127,7 +139,7 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                     alt=""
                     className="w-6 cursor-pointer"
                     onClick={() => {
-                      setSound(!sound);
+                      setUserData((prev) => ({ ...prev, sound: !prev.sound }));
                     }}
                   />
                 </div>
@@ -145,6 +157,7 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                     className="w-6 cursor-pointer"
                     onClick={() => {
                       reset();
+                      setUserData(null);
                     }}
                   />
                 </div>
