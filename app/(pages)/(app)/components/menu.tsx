@@ -148,7 +148,7 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                 <div className="pb-2.5 mb-10 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
                   <Image
-                    src={userData?.sound ? "/icons/volume-white.svg" : ""}
+                    src={userData?.sound ? "/icons/volume-white.svg" : "/icons/muted.svg"}
                     priority={true}
                     sizes="100vw"
                     height={0}
