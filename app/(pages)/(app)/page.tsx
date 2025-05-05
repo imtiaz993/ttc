@@ -73,6 +73,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <ScratchStep3
@@ -80,6 +81,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <ScratchResult
@@ -87,6 +89,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];

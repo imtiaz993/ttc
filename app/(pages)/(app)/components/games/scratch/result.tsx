@@ -4,13 +4,13 @@ import Failure from "./failure";
 import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 
-const ScratchResult = ({ step, next, prev, reset, setUserData }) => {
+const ScratchResult = ({ step, next, prev, reset, userData, setUserData }) => {
   const success = true;
   return (
     <>
-      <Menu reset={reset} setUserData={setUserData} />
+      <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />{" "}
-      {!success ? <Success /> : <Failure />}
+      {!success ? <Success /> : <Failure next={next} prev={prev} />}
     </>
   );
 };
