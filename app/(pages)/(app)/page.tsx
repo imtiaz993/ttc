@@ -43,7 +43,12 @@ import Thankyou from "./components/thankyou";
 
 export default function Home() {
   const [step, setStep] = useState(0);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    name:"",
+    sound:true,
+    char:"",
+    tooltip:false
+  });
   const next = () => {
     setStep((prev) => prev + 1);
   };
@@ -60,6 +65,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <ScratchStep2

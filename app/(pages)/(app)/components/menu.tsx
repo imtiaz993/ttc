@@ -1,9 +1,12 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const Menu = ({ isOpen = false, reset, setUserData }) => {
+const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
   const [open, setOpen] = useState(isOpen);
   const [sound, setSound] = useState(true);
+  const [tooltips, setTooltips] = useState(true);
+  console.log(userData?.sound);
+
   return (
     <div>
       {!open && (
@@ -118,20 +121,26 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                 </p>
                 <div className="pb-2.5 mb-2.5 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Tooltips</p>
-                  <Image
-                    src="/icons/toggle.svg"
-                    priority={true}
-                    sizes="100vw"
-                    height={0}
-                    width={0}
-                    alt=""
-                    className="w-6 cursor-pointer"
-                  />
+                  <div
+                    className="w-5 h-2.5 flex items-center rounded-full cursor-pointer bg-[#FFF8E7]"
+                    onClick={() => {
+                      setUserData((prev) => ({
+                        ...prev,
+                        tooltip: !prev.tooltip,
+                      }));
+                    }}
+                  >
+                    <div
+                      className={`bg-[#641D1D] w-2 h-2 rounded-full shadow-md transform transition-transform duration-300 ${
+                        userData.tooltip ? "translate-x-3" : "translate-x-0"
+                      }`}
+                    />
+                  </div>
                 </div>
                 <div className="pb-2.5 mb-10 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
                   <Image
-                    src={sound ? "/icons/volume-white.svg" : ""}
+                    src={userData?.sound ? "/icons/volume-white.svg" : ""}
                     priority={true}
                     sizes="100vw"
                     height={0}
@@ -157,7 +166,12 @@ const Menu = ({ isOpen = false, reset, setUserData }) => {
                     className="w-6 cursor-pointer"
                     onClick={() => {
                       reset();
-                      setUserData(null);
+                      setUserData({
+                        name: "",
+                        sound: true,
+                        char: "",
+                        tooltip: false,
+                      });
                     }}
                   />
                 </div>
