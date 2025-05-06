@@ -4,11 +4,11 @@ import React from "react";
 const GameStepper = ({ step, next, prev }) => {
   const steps = [
     { step: 2, icon: "/images/game1.png" },
-    { step: 5, icon: "/images/game2.png" },
-    { step: 8, icon: "/images/game3.png" },
-    { step: 11, icon: "/images/game4.png" },
-    { step: 14, icon: "/images/game5.png" },
-    { step: 17, icon: "/images/game6.png" },
+    { step: 6, icon: "/images/game2.png" },
+    { step: 10, icon: "/images/game3.png" },
+    { step: 14, icon: "/images/game4.png" },
+    { step: 18, icon: "/images/game5.png" },
+    { step: 22, icon: "/images/game6.png" },
   ];
 
   return (

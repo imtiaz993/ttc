@@ -2,10 +2,10 @@ import React from "react";
 import Menu from "./menu";
 import Image from "next/image";
 
-const Feedback = ({ reset, setUserData }) => {
+const Feedback = ({ reset, userData, setUserData }) => {
   return (
     <>
-      <Menu reset={reset} setUserData={setUserData} />
+      <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <Image
           src="/images/char1.png"

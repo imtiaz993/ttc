@@ -12,7 +12,7 @@ const ScratchStep2 = ({ step, next, prev, reset, userData, setUserData }) => {
         <div className="w-full flex justify-between items-start mb-4">
           <div>
             <Image
-              src="/images/char1.png"
+              src={`/images/${userData.char}.png`}
               priority={true}
               sizes="100vw"
               height={0}

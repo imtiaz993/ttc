@@ -100,6 +100,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SareeStep2
@@ -107,6 +108,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SareeStep3
@@ -114,6 +116,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SareeResult
@@ -121,6 +124,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -131,6 +135,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SpotTikkaStep2
@@ -138,6 +143,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SpotTikkaStep3
@@ -145,6 +151,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <SpotTikkaResult
@@ -152,6 +159,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -162,6 +170,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <WordsStep2
@@ -169,6 +178,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <WordsStep3
@@ -176,6 +186,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <WordsResult
@@ -183,6 +194,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -290,7 +302,7 @@ export default function Home() {
     PuzzleGame,
     ChamberGame,
     OwnTikkaGame,
-    <Feedback reset={reset} setUserData={setUserData} />,
+    <Feedback reset={reset} userData={userData} setUserData={setUserData} />,
     <Thankyou />,
   ];
   return components[step];

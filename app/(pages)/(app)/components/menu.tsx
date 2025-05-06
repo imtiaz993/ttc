@@ -3,9 +3,6 @@ import React, { useState } from "react";
 
 const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
   const [open, setOpen] = useState(isOpen);
-  const [sound, setSound] = useState(true);
-  const [tooltips, setTooltips] = useState(true);
-  console.log(userData?.sound);
 
   return (
     <div>
@@ -140,7 +137,9 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                   >
                     <div
                       className={`bg-[#641D1D] w-2 h-2 rounded-full shadow-md transform transition-transform duration-300 ${
-                        userData.tooltip ? "translate-x-3" : "translate-x-0"
+                        userData.tooltip
+                          ? "translate-x-[11px]"
+                          : "translate-x-[1px]"
                       }`}
                     />
                   </div>
@@ -148,7 +147,11 @@ const Menu = ({ isOpen = false, reset, userData = null, setUserData }) => {
                 <div className="pb-2.5 mb-10 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
                   <Image
-                    src={userData?.sound ? "/icons/volume-white.svg" : "/icons/muted.svg"}
+                    src={
+                      userData?.sound
+                        ? "/icons/volume-white.svg"
+                        : "/icons/muted.svg"
+                    }
                     priority={true}
                     sizes="100vw"
                     height={0}
