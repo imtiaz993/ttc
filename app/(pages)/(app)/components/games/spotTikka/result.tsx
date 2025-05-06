@@ -12,12 +12,12 @@ const SpotTikkaResult = ({
   userData,
   setUserData,
 }) => {
-  const success = true;
+  const success = false;
   return (
     <>
       <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />{" "}
-      {!success ? <Success /> : <Failure />}
+      {success ? <Success /> : <Failure next={next} prev={prev} />}
     </>
   );
 };

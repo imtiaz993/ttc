@@ -10,7 +10,7 @@ const ScratchResult = ({ step, next, prev, reset, userData, setUserData }) => {
     <>
       <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />{" "}
-      {!success ? <Success /> : <Failure next={next} prev={prev} />}
+      {success ? <Success /> : <Failure next={next} prev={prev} />}
     </>
   );
 };

@@ -9,7 +9,7 @@ const ScratchStep2 = ({ step, next, prev, reset, userData, setUserData }) => {
       <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-        <div className="w-full flex justify-between items-start mb-4">
+        <div className="w-full flex items-start mb-4">
           <div>
             <Image
               src={`/images/${userData.char}.png`}
@@ -22,7 +22,7 @@ const ScratchStep2 = ({ step, next, prev, reset, userData, setUserData }) => {
             />
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
-          <p className="ml-4 font-medium">
+          <p className="ml-4 font-medium w-[cacl(100%-46px)]">
             Phew! Glad I have a smartphone to help me solve ancient mysteries.
           </p>
         </div>
@@ -47,7 +47,7 @@ const ScratchStep2 = ({ step, next, prev, reset, userData, setUserData }) => {
           />
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4">
-          <div className="w-full flex justify-between items-start mb-4">
+          <div className="w-full flex items-start mb-2">
             <Image
               src="/icons/zoom-in.svg"
               priority={true}

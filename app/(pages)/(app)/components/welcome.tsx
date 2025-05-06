@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Welcome = ({ next, setUserData }) => {
+const Welcome = ({ next, setUserData = (prev: any) => {} }) => {
   return (
     <div
       className="flex flex-col justify-center items-center border-transparent h-dvh px-12"

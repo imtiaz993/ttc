@@ -205,6 +205,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <PuzzleStep2
@@ -212,6 +213,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <PuzzleStep3
@@ -219,6 +221,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <PuzzleResult
@@ -226,6 +229,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -297,11 +301,11 @@ export default function Home() {
     <Welcome next={next} setUserData={setUserData} />,
     ...ScratchGame,
     ...SareeGame,
-    SpotTikka,
-    WordsGame,
-    PuzzleGame,
-    ChamberGame,
-    OwnTikkaGame,
+    ...SpotTikka,
+    ...WordsGame,
+    ...PuzzleGame,
+    ...ChamberGame,
+    ...OwnTikkaGame,
     <Feedback reset={reset} userData={userData} setUserData={setUserData} />,
     <Thankyou />,
   ];

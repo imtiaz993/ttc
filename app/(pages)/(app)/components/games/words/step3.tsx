@@ -4,10 +4,10 @@ import GameStepper from "../../gameStepper";
 
 const WordsStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
   return (
-    <div>
+    <>
       <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />
-    </div>
+    </>
   );
 };
 
