@@ -20,7 +20,7 @@ const Failure = ({ next, prev }) => {
           onClick={() => {
             next();
           }}
-          className="border border-black bg-transparent font-semibold flex justify-center py-3 w-full"
+          className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
         >
           <Image
             src="/icons/skip.svg"
@@ -38,7 +38,7 @@ const Failure = ({ next, prev }) => {
             prev();
             prev();
           }}
-          className="text-[#FFF8E7] font-semibold flex justify-center bg-black border border-black py-3 w-full"
+          className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
           <Image
             src="/icons/refresh.svg"
