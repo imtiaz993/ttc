@@ -7,7 +7,7 @@ const GameStepper = ({ step, next, prev }) => {
     { step: 6, icon: "/images/game2.png" },
     { step: 10, icon: "/images/game3.png" },
     { step: 14, icon: "/images/game4.png" },
-    { step: 18, icon: "/images/game5.png" },
+    { step: 16, icon: "/images/game5.png" },
     { step: 22, icon: "/images/game6.png" },
   ];
 

@@ -20,23 +20,18 @@ import SpotTikkaResult from "./components/games/spotTikka/result";
 
 import WordsStep1 from "./components/games/words/step1";
 import WordsStep2 from "./components/games/words/step2";
-import WordsStep3 from "./components/games/words/step3";
-import WordsResult from "./components/games/words/result";
 
 import PuzzleStep1 from "./components/games/puzzle/step1";
 import PuzzleStep2 from "./components/games/puzzle/step2";
 import PuzzleStep3 from "./components/games/puzzle/step3";
 import PuzzleResult from "./components/games/puzzle/result";
-
-import ChamberStep1 from "./components/games/chamber/step1";
-import ChamberStep2 from "./components/games/chamber/step2";
-import ChamberStep3 from "./components/games/chamber/step3";
-import ChamberResult from "./components/games/chamber/result";
+import PuzzleStep5 from "./components/games/puzzle/step5";
+import PuzzleStep6 from "./components/games/puzzle/step6";
 
 import OwnTikkaStep1 from "./components/games/ownTikka/step1";
 import OwnTikkaStep2 from "./components/games/ownTikka/step2";
 import OwnTikkaStep3 from "./components/games/ownTikka/step3";
-import OwnTikkaResult from "./components/games/ownTikka/result";
+import OwnTikkaStep4 from "./components/games/ownTikka/step4";
 
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
@@ -181,22 +176,6 @@ export default function Home() {
       userData={userData}
       setUserData={setUserData}
     />,
-    <WordsStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <WordsResult
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
   ];
 
   const PuzzleGame = [
@@ -232,35 +211,20 @@ export default function Home() {
       userData={userData}
       setUserData={setUserData}
     />,
-  ];
-
-  const ChamberGame = [
-    <ChamberStep1
+    <PuzzleStep5
       step={step}
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
-    <ChamberStep2
+    <PuzzleStep6
       step={step}
       next={next}
       prev={prev}
       reset={reset}
-      setUserData={setUserData}
-    />,
-    <ChamberStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      setUserData={setUserData}
-    />,
-    <ChamberResult
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -271,6 +235,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <OwnTikkaStep2
@@ -278,6 +243,7 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
     <OwnTikkaStep3
@@ -285,13 +251,15 @@ export default function Home() {
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
-    <OwnTikkaResult
+    <OwnTikkaStep4
       step={step}
       next={next}
       prev={prev}
       reset={reset}
+      userData={userData}
       setUserData={setUserData}
     />,
   ];
@@ -304,7 +272,6 @@ export default function Home() {
     ...SpotTikka,
     ...WordsGame,
     ...PuzzleGame,
-    ...ChamberGame,
     ...OwnTikkaGame,
     <Feedback reset={reset} userData={userData} setUserData={setUserData} />,
     <Thankyou />,

@@ -45,6 +45,34 @@ const PuzzleStep2 = ({ step, next, prev, reset, userData, setUserData }) => {
           </div>
         </div>
       )}
+      <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
+        <div>
+          <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5">
+            TIMER <span className="text-xl font-medium">00:15</span>
+          </h1>
+          <div className="w-44 h-64 border border-dashed border-black">
+            <div className="grid grid-cols-2 grid-rows-3 h-full gap-0">
+              <div className="border-r border-b border-dashed border-black"></div>
+              <div className="border-b border-dashed border-black"></div>
+              <div className="border-r border-b border-dashed border-black"></div>
+              <div className="border-b border-dashed border-black"></div>
+              <div className="border-r border-dashed border-black"></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center mt-11 w-full">
+          <Image
+            src="/images/puzzle.png"
+            priority={true}
+            sizes="100vw"
+            height={0}
+            width={0}
+            alt=""
+            className="w-2/3"
+          />
+        </div>
+      </div>
     </>
   );
 };

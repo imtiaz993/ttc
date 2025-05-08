@@ -2,13 +2,13 @@ import React from "react";
 import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 
-const ChamberStep1 = ({ step, next, prev, reset, setUserData }) => {
+const OwnTikkaStep4 = ({ step, next, prev, reset, userData, setUserData }) => {
   return (
     <>
-      <Menu reset={reset} setUserData={setUserData} />
+      <Menu reset={reset} userData={userData} setUserData={setUserData} />
       <GameStepper step={step} next={next} prev={prev} />
     </>
   );
 };
 
-export default ChamberStep1;
+export default OwnTikkaStep4;
