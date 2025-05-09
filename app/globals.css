@@ -9,26 +9,46 @@
   font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif !important;
 }
 
-@keyframes sway {
+@keyframes sway1 {
   0% {
     transform: translateX(0);
   }
   25% {
-    transform: translateX(10px);
+    transform: translateX(3px);
   }
   50% {
     transform: translateX(0);
   }
   75% {
-    transform: translateX(-10px);
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes sway2 {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(3px);
   }
   100% {
     transform: translateX(0);
   }
 }
 
-.animate-sway {
-  animation: sway 3s infinite linear;
+.animate-sway1 {
+  animation: sway1 2s infinite linear;
+}
+.animate-sway2 {
+  animation: sway2 2s infinite linear;
 }
 
 @keyframes fadeIn {
