@@ -99,11 +99,50 @@ const OwnTikkaStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
           </div>
         </div>
       )}
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-        <div className="w-60 h-80 border border-black mb-16">
-          <p className="text-xs font-semibold text-center flex justify-center items-center h-full max-w-[140px] mx-auto">
-            Let’s begin by selecting a background
-          </p>
+      <div
+        className={`h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]`}
+      >
+        <div
+          className="w-60 h-80 mb-16 relative"
+          style={{
+            backgroundImage: selectedOptions.Background
+              ? `url(${selectedOptions.Background})`
+              : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: selectedOptions.Border
+              ? "25px solid transparent"
+              : !selectedOptions.Background &&
+                !selectedOptions.Border &&
+                !selectedOptions.Elements
+              ? "1px solid black"
+              : "",
+            borderImage: selectedOptions.Border
+              ? `url(${selectedOptions.Border} 20 stretch`
+              : "none",
+          }}
+        >
+          {selectedOptions.Background ||
+          selectedOptions.Border ||
+          selectedOptions.Elements ? (
+            <>
+              {selectedOptions.Elements && (
+                <Image
+                  src={selectedOptions.Elements}
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt="Selected Element"
+                  className="w-24 h-24 object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                />
+              )}
+            </>
+          ) : (
+            <p className="text-xs font-semibold text-center flex justify-center items-center h-full max-w-[140px] mx-auto">
+              Let’s begin by selecting a background
+            </p>
+          )}
         </div>
         <div className="px-4 w-full absolute bottom-24 ">
           <div className="w-full flex gap-3 flex-row justify-between items-center flex-nowrap overflow-x-auto scrollbar-thin scrollbar-thumb-[#FDD931] scrollbar-track-gray-200">

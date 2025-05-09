@@ -37,7 +37,7 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 
 export default function Home() {
-  const [step, setStep] = useState(24);
+  const [step, setStep] = useState(0);
   const [userData, setUserData] = useState({
     name: "",
     sound: true,
