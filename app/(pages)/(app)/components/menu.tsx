@@ -7,6 +7,12 @@ const Menu = ({
   userData = null,
   setUserData,
   toggleMute = (isMuted) => {},
+  isGameOptions = false,
+  isUndoDisabled = false,
+  showSkip = true,
+  handleUndo = () => {},
+  handleSkip = () => {},
+  handleInfo = () => {},
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -20,31 +26,74 @@ const Menu = ({
 
   return (
     <div>
-      {!open && (
-        <div className="fixed top-5 right-4 left-4 flex justify-between">
-          <Image
-            src={userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"}
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
-          />
-          <Image
-            src="/icons/menu.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-6 cursor-pointer"
-            onClick={() => {
-              setOpen(true);
-            }}
-          />
-        </div>
-      )}
+      {!open &&
+        (isGameOptions ? (
+          <div className="fixed top-5 right-4 left-4 flex justify-between">
+            <div>
+              {showSkip && (
+                <p className="text-sm font-medium" onClick={handleSkip}>
+                  SKIP
+                </p>
+              )}
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <Image
+                src={
+                  isUndoDisabled
+                    ? "/icons/undo-disabled.svg"
+                    : "/icons/undo.svg"
+                }
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-6 cursor-pointer"
+                onClick={() => {
+                  if (!isUndoDisabled) {
+                    handleUndo();
+                  }
+                }}
+              />
+              <Image
+                src="/icons/info.svg"
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-6 cursor-pointer"
+                onClick={handleInfo}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="fixed top-5 right-4 left-4 flex justify-between">
+            <Image
+              src={
+                userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"
+              }
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt=""
+              className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
+            />
+            <Image
+              src="/icons/menu.svg"
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt=""
+              className="w-6 cursor-pointer"
+              onClick={() => {
+                setOpen(true);
+              }}
+            />
+          </div>
+        ))}
       <div
         className={`fixed z-50 inset-0 transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
