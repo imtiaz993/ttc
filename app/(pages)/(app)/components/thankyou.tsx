@@ -11,31 +11,44 @@ const Thankyou = () => {
       }}
     >
       <div className="px-10">
-        <p className="text-[#D02E01] text-4xl font-bold mb-14 text-center">
+        <p className="text-[#D02E01] text-4xl font-bold mb-10 text-center">
           Thanks for visiting!
         </p>
       </div>
-      <Image
-        src="/images/welcome-divider.png"
-        priority={true}
-        sizes="100vw"
-        height={0}
-        width={0}
-        alt=""
-        className="w-full"
-      />
-      <div className="w-full px-5">
-        <div className="mt-12">
+      <div className="w-full px-7">
+        <div className="flex justify-center">
+          <Image
+            src="/icons/bofa.svg"
+            priority={true}
+            sizes="100vw"
+            height={0}
+            width={0}
+            alt=""
+            className="w-full"
+          />
+        </div>
+        <p className="text-center text-[#D02E01] text-sm mt-3">
+          Supported by the Bank of America
+        </p>
+        <p className="text-center text-[#D02E01] text-sm mt-5">
+          All images courtesy of the Museum of Art & Photography (MAP)
+          Collection, Bengaluru.
+        </p>
+        <div className="mt-5">
           <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#D02E01]">An initiative by</p>
-            <p className="text-[#D02E01] font-medium">MAP Bengaluru</p>
+            <p className="text-sm text-[#D02E01]">Concept</p>
+            <p className="text-[#D02E01] font-semibold">MAP Bengaluru</p>
           </div>
           <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#D02E01]">UI UX by</p>
-            <p className="text-[#D02E01] font-medium">Sensory+</p>
+            <p className="text-sm text-[#D02E01]">Photography</p>
+            <p className="text-[#D02E01] font-semibold">MAP Bengaluru</p>
           </div>
-          <div className="flex justify-between items-center mb-16">
-            <p className="text-sm text-[#D02E01]">Developed by</p>
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-sm text-[#D02E01]">UI UX</p>
+            <p className="text-[#D02E01] font-semibold">Sensory+</p>
+          </div>
+          <div className="flex justify-between items-center mb-5">
+            <p className="text-sm text-[#D02E01]">Development</p>
             <p className="text-[#D02E01] font-semibold">United Monks</p>
           </div>
         </div>

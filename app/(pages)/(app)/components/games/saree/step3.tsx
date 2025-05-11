@@ -5,6 +5,7 @@ import Image from "next/image";
 
 const SareeStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
   const [overlay, setOverlay] = useState(true);
+  const [selectedColor, setSelectedColor] = useState([]);
   return (
     <>
       <Menu reset={reset} userData={userData} setUserData={setUserData} />
@@ -58,7 +59,11 @@ const SareeStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
         />
         <div className="mt-12 flex justify-center items-center">
           <div
-            className={`rounded-full w-8 h-8 border border-dashed border-black`}
+            className={`rounded-full w-8 h-8 ${
+              selectedColor[0]
+                ? `${selectedColor[0]}`
+                : "border border-dashed border-black "
+            }`}
           ></div>
           <div className="mx-3">
             <Image
@@ -72,13 +77,45 @@ const SareeStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
             />
           </div>
           <div
-            className={`rounded-full w-8 h-8 border border-dashed border-black`}
+            className={`rounded-full w-8 h-8  ${
+              selectedColor[1]
+                ? `${selectedColor[1]}`
+                : "border border-dashed border-black"
+            }`}
           ></div>
         </div>
         <div className="mt-10 flex justify-center items-center gap-6">
-          <div className="w-[60px] h-[60px] bg-[#EA5B7C] rounded-full"></div>
-          <div className="w-[60px] h-[60px] bg-[#F6D44C] rounded-full"></div>
-          <div className="w-[60px] h-[60px] bg-[#71B0DC] rounded-full"></div>
+          {["bg-[#EA5B7C]", "bg-[#F6D44C]", "bg-[#71B0DC]"].map((i, index) => (
+            <div
+              key={index}
+              className={`flex justify-center items-center w-[60px] h-[60px] ${i} rounded-full`}
+              onClick={() => {
+                if (selectedColor.includes(i)) {
+                  setSelectedColor(
+                    selectedColor.filter((color) => color !== i)
+                  );
+                } else {
+                  if (selectedColor.length == 0) {
+                    setSelectedColor([i, ""]);
+                  } else {
+                    setSelectedColor([selectedColor[0], i]);
+                  }
+                }
+              }}
+            >
+              {selectedColor.includes(i) && (
+                <Image
+                  src="/icons/check-white.svg"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-6"
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </>

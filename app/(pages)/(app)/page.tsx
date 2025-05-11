@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Overlay from "./components/overlay";
 import Welcome from "./components/welcome";
 
@@ -24,9 +24,8 @@ import WordsStep2 from "./components/games/words/step2";
 import PuzzleStep1 from "./components/games/puzzle/step1";
 import PuzzleStep2 from "./components/games/puzzle/step2";
 import PuzzleStep3 from "./components/games/puzzle/step3";
-import PuzzleResult from "./components/games/puzzle/result";
+import PuzzleStep4 from "./components/games/puzzle/step4";
 import PuzzleStep5 from "./components/games/puzzle/step5";
-import PuzzleStep6 from "./components/games/puzzle/step6";
 
 import OwnTikkaStep1 from "./components/games/ownTikka/step1";
 import OwnTikkaStep2 from "./components/games/ownTikka/step2";
@@ -37,6 +36,7 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 
 export default function Home() {
+  const bgMusicRef = useRef(null);
   const [step, setStep] = useState(0);
   const [userData, setUserData] = useState({
     name: "",
@@ -54,6 +54,21 @@ export default function Home() {
     setStep(0);
   };
 
+  useEffect(() => {
+    bgMusicRef.current = new Audio("/audio/music.mp3");
+    bgMusicRef.current.loop = true;
+  }, []);
+
+  const playMusic = () => {
+    bgMusicRef.current?.play();
+  };
+
+  const toggleMute = (isMuted) => {
+    if (bgMusicRef.current) {
+      bgMusicRef.current.muted = isMuted;
+    }
+  };
+
   const ScratchGame = [
     <ScratchStep1
       step={step}
@@ -62,6 +77,7 @@ export default function Home() {
       reset={reset}
       userData={userData}
       setUserData={setUserData}
+      toggleMute={toggleMute}
     />,
     <ScratchStep2
       step={step}
@@ -203,7 +219,7 @@ export default function Home() {
       userData={userData}
       setUserData={setUserData}
     />,
-    <PuzzleResult
+    <PuzzleStep4
       step={step}
       next={next}
       prev={prev}
@@ -212,14 +228,6 @@ export default function Home() {
       setUserData={setUserData}
     />,
     <PuzzleStep5
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <PuzzleStep6
       step={step}
       next={next}
       prev={prev}
@@ -266,14 +274,19 @@ export default function Home() {
 
   const components = [
     <Overlay next={next} />,
-    <Welcome next={next} setUserData={setUserData} />,
+    <Welcome next={next} setUserData={setUserData} playMusic={playMusic} />,
     ...ScratchGame,
     ...SareeGame,
     ...SpotTikka,
     ...WordsGame,
     ...PuzzleGame,
     ...OwnTikkaGame,
-    <Feedback reset={reset} userData={userData} setUserData={setUserData} />,
+    <Feedback
+      reset={reset}
+      next={next}
+      userData={userData}
+      setUserData={setUserData}
+    />,
     <Thankyou />,
   ];
   return components[step];

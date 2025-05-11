@@ -3,7 +3,15 @@ import React from "react";
 import Menu from "../../menu";
 import GameStepper from "../../gameStepper";
 
-const ScratchStep1 = ({ step, next, prev, reset, userData, setUserData }) => {
+const ScratchStep1 = ({
+  step,
+  next,
+  prev,
+  reset,
+  userData,
+  setUserData,
+  toggleMute,
+}) => {
   return (
     <>
       <Menu
@@ -11,6 +19,7 @@ const ScratchStep1 = ({ step, next, prev, reset, userData, setUserData }) => {
         isOpen={true}
         userData={userData}
         setUserData={setUserData}
+        toggleMute={toggleMute}
       />
       <GameStepper step={step} next={next} prev={prev} />
       <div

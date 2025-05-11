@@ -110,16 +110,7 @@ const OwnTikkaStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
               : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            border: selectedOptions.Border
-              ? "25px solid transparent"
-              : !selectedOptions.Background &&
-                !selectedOptions.Border &&
-                !selectedOptions.Elements
-              ? "1px solid black"
-              : "",
-            borderImage: selectedOptions.Border
-              ? `url(${selectedOptions.Border} 20 stretch`
-              : "none",
+            border: "1px solid black",
           }}
         >
           {selectedOptions.Background ||
@@ -137,6 +128,20 @@ const OwnTikkaStep3 = ({ step, next, prev, reset, userData, setUserData }) => {
                   className="w-24 h-24 object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
                 />
               )}
+              {selectedOptions.Border && (
+                <Image
+                  src={selectedOptions.Border}
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt="Selected Element"
+                  className="w-full h-full object-cover absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
+                />
+              )}
+              <p className="text-[10px] font-semibold absolute bottom-1 z-40 flex justify-center w-full">
+                {selectedOptions.Text}
+              </p>
             </>
           ) : (
             <p className="text-xs font-semibold text-center flex justify-center items-center h-full max-w-[140px] mx-auto">

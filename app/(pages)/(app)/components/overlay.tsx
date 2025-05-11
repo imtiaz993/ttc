@@ -6,7 +6,14 @@ const Overlay = ({ next }) => {
     <div>
       <div className="fixed inset-0 bg-[#00000040] z-10"></div>
       <Welcome next={next} />
-      <div className="fixed z-20 right-0 left-0 bottom-0 bg-[#FDD931]">
+      <div
+        className="fixed z-20 right-0 left-0 bottom-0"
+        style={{
+          backgroundImage: "url('/images/overlay-yellow.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "round",
+        }}
+      >
         <div
           onClick={() => {
             next();

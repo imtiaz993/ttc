@@ -1,6 +1,10 @@
 import Image from "next/image";
 
-const Welcome = ({ next, setUserData = (prev: any) => {} }) => {
+const Welcome = ({
+  next,
+  setUserData = (prev: any) => {},
+  playMusic = () => {},
+}) => {
   return (
     <div
       className="flex flex-col justify-center items-center border-transparent h-dvh px-12"
@@ -41,6 +45,7 @@ const Welcome = ({ next, setUserData = (prev: any) => {} }) => {
         <form
           onSubmit={(e: any) => {
             e.preventDefault();
+            playMusic();
             const name = e.target.name.value;
             setUserData((prev) => ({ ...prev, name }));
             next();
