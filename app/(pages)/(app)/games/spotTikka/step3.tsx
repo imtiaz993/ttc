@@ -13,7 +13,7 @@ const SpotTikkaStep3 = () => {
   const handleVerifying = () => {
     setTimeout(() => {
       next();
-    }, 1000);
+    }, 2000);
   };
 
   useEffect(() => {

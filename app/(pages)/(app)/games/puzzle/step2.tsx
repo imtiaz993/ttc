@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const PuzzleStep2 = () => {
   const [overlay, setOverlay] = useState(true);
+
+  const dispatch = useDispatch();
+
+  const next = () => dispatch(nextStep());
+
+  const handleComplete = () => {
+    setTimeout(() => {
+      next();
+    }, 2000);
+  };
+
+  useEffect(() => {
+    handleComplete();
+  }, []);
+
   return (
     <>
       <Menu isGameOptions={true} />

@@ -15,7 +15,7 @@ const GameStepper = ({
     { step: 10, icon: "/images/game3.png" },
     { step: 14, icon: "/images/game4.png" },
     { step: 16, icon: "/images/game5.png" },
-    { step: 22, icon: "/images/game6.png" },
+    { step: 21, icon: "/images/game6.png" },
   ];
 
   const dispatch = useDispatch();

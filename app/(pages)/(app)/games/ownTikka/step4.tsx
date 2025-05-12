@@ -2,10 +2,14 @@ import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const OwnTikkaStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
+  const dispatch = useDispatch();
+  const next = () => dispatch(nextStep());
+
   return (
     <>
       <Menu />
@@ -49,6 +53,9 @@ const OwnTikkaStep4 = () => {
               width={0}
               alt=""
               className="w-6 mr-2"
+              onClick={() => {
+                next();
+              }}
             />
             Download
           </button>
@@ -61,6 +68,9 @@ const OwnTikkaStep4 = () => {
               width={0}
               alt=""
               className="w-6 mr-2"
+              onClick={() => {
+                next();
+              }}
             />
             Share
           </button>

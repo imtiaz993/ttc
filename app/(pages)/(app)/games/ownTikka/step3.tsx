@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
@@ -12,6 +14,24 @@ const OwnTikkaStep3 = () => {
     Elements: "",
     Text: "",
   });
+
+  const dispatch = useDispatch();
+  const next = () => dispatch(nextStep());
+  const handleComplete = () => {
+    next();
+  };
+
+  useEffect(() => {
+    if (
+      selectedOptions.Background &&
+      selectedOptions.Border &&
+      selectedOptions.Elements &&
+      selectedOptions.Text
+    ) {
+      handleComplete();
+    }
+  }, [selectedOptions]);
+
   const menu = [
     {
       menu: "Background",
