@@ -1,292 +1,114 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Overlay from "./components/overlay";
 import Welcome from "./components/welcome";
 
-import ScratchStep1 from "./components/games/scratch/step1";
-import ScratchStep2 from "./components/games/scratch/step2";
-import ScratchStep3 from "./components/games/scratch/step3";
-import ScratchResult from "./components/games/scratch/result";
+import ScratchStep1 from "./games/scratch/step1";
+import ScratchStep2 from "./games/scratch/step2";
+import ScratchStep3 from "./games/scratch/step3";
+import ScratchResult from "./games/scratch/result";
 
-import SareeStep1 from "./components/games/saree/step1";
-import SareeStep2 from "./components/games/saree/step2";
-import SareeStep3 from "./components/games/saree/step3";
-import SareeResult from "./components/games/saree/result";
+import SareeStep1 from "./games/saree/step1";
+import SareeStep2 from "./games/saree/step2";
+import SareeStep3 from "./games/saree/step3";
+import SareeResult from "./games/saree/result";
 
-import SpotTikkaStep1 from "./components/games/spotTikka/step1";
-import SpotTikkaStep2 from "./components/games/spotTikka/step2";
-import SpotTikkaStep3 from "./components/games/spotTikka/step3";
-import SpotTikkaResult from "./components/games/spotTikka/result";
+import SpotTikkaStep1 from "./games/spotTikka/step1";
+import SpotTikkaStep2 from "./games/spotTikka/step2";
+import SpotTikkaStep3 from "./games/spotTikka/step3";
+import SpotTikkaResult from "./games/spotTikka/result";
 
-import WordsStep1 from "./components/games/words/step1";
-import WordsStep2 from "./components/games/words/step2";
+import WordsStep1 from "./games/words/step1";
+import WordsStep2 from "./games/words/step2";
 
-import PuzzleStep1 from "./components/games/puzzle/step1";
-import PuzzleStep2 from "./components/games/puzzle/step2";
-import PuzzleStep3 from "./components/games/puzzle/step3";
-import PuzzleStep4 from "./components/games/puzzle/step4";
-import PuzzleStep5 from "./components/games/puzzle/step5";
+import PuzzleStep1 from "./games/puzzle/step1";
+import PuzzleStep2 from "./games/puzzle/step2";
+import PuzzleStep3 from "./games/puzzle/step3";
+import PuzzleStep4 from "./games/puzzle/step4";
+import PuzzleStep5 from "./games/puzzle/step5";
 
-import OwnTikkaStep1 from "./components/games/ownTikka/step1";
-import OwnTikkaStep2 from "./components/games/ownTikka/step2";
-import OwnTikkaStep3 from "./components/games/ownTikka/step3";
-import OwnTikkaStep4 from "./components/games/ownTikka/step4";
+import OwnTikkaStep1 from "./games/ownTikka/step1";
+import OwnTikkaStep2 from "./games/ownTikka/step2";
+import OwnTikkaStep3 from "./games/ownTikka/step3";
+import OwnTikkaStep4 from "./games/ownTikka/step4";
 
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMute } from "../../redux/slices/userSlice";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const step = useSelector((state: any) => state.navigation.step);
+  const isMuted = useSelector((state: any) => state.user.isMuted);
+  const handleToggleMute = (data) => dispatch(toggleMute(data));
   const bgMusicRef = useRef(null);
-  const [step, setStep] = useState(0);
-  const [userData, setUserData] = useState({
-    name: "",
-    sound: true,
-    char: "char1",
-    tooltip: false,
-  });
-  const next = () => {
-    setStep((prev) => prev + 1);
-  };
-  const prev = () => {
-    setStep((prev) => prev - 1);
-  };
-  const reset = () => {
-    setStep(0);
-  };
 
   useEffect(() => {
     bgMusicRef.current = new Audio("/audio/music.mp3");
     bgMusicRef.current.loop = true;
+    bgMusicRef.current.muted = isMuted;
+    handleToggleMute(false);
   }, []);
 
   const playMusic = () => {
     bgMusicRef.current?.play();
   };
 
-  const toggleMute = (isMuted) => {
+  useEffect(() => {
     if (bgMusicRef.current) {
       bgMusicRef.current.muted = isMuted;
     }
-  };
+  }, [isMuted]);
 
   const ScratchGame = [
-    <ScratchStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-      toggleMute={toggleMute}
-    />,
-    <ScratchStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <ScratchStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <ScratchResult
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <ScratchStep1 />,
+    <ScratchStep2 />,
+    <ScratchStep3 />,
+    <ScratchResult />,
   ];
 
   const SareeGame = [
-    <SareeStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SareeStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SareeStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SareeResult
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <SareeStep1 />,
+    <SareeStep2 />,
+    <SareeStep3 />,
+    <SareeResult />,
   ];
 
   const SpotTikka = [
-    <SpotTikkaStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SpotTikkaStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SpotTikkaStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <SpotTikkaResult
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <SpotTikkaStep1 />,
+    <SpotTikkaStep2 />,
+    <SpotTikkaStep3 />,
+    <SpotTikkaResult />,
   ];
 
-  const WordsGame = [
-    <WordsStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <WordsStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-  ];
+  const WordsGame = [<WordsStep1 />, <WordsStep2 />];
 
   const PuzzleGame = [
-    <PuzzleStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <PuzzleStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <PuzzleStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <PuzzleStep4
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <PuzzleStep5
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <PuzzleStep1 />,
+    <PuzzleStep2 />,
+    <PuzzleStep3 />,
+    <PuzzleStep4 />,
+    <PuzzleStep5 />,
   ];
 
   const OwnTikkaGame = [
-    <OwnTikkaStep1
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <OwnTikkaStep2
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <OwnTikkaStep3
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    <OwnTikkaStep4
-      step={step}
-      next={next}
-      prev={prev}
-      reset={reset}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <OwnTikkaStep1 />,
+    <OwnTikkaStep2 />,
+    <OwnTikkaStep3 />,
+    <OwnTikkaStep4 />,
   ];
 
   const components = [
-    <Overlay next={next} />,
-    <Welcome next={next} setUserData={setUserData} playMusic={playMusic} />,
+    <Overlay />,
+    <Welcome playMusic={playMusic} />,
     ...ScratchGame,
     ...SareeGame,
     ...SpotTikka,
     ...WordsGame,
     ...PuzzleGame,
     ...OwnTikkaGame,
-    <Feedback
-      reset={reset}
-      next={next}
-      userData={userData}
-      setUserData={setUserData}
-    />,
+    <Feedback />,
     <Thankyou />,
   ];
   return components[step];

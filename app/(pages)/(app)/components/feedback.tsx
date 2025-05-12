@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import Menu from "./menu";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep } from "../../../redux/slices/navigationSlice";
 
-const Feedback = ({ reset, userData, setUserData, next }) => {
+const Feedback = () => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.user.userData);
+
+  const next = () => dispatch(nextStep());
+
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -42,7 +49,7 @@ const Feedback = ({ reset, userData, setUserData, next }) => {
 
   return (
     <>
-      <Menu reset={reset} userData={userData} setUserData={setUserData} />
+      <Menu />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <Image
           src={`/images/${userData.char}.png`}

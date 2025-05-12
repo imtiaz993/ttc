@@ -1,28 +1,30 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep, resetStep } from "../../../redux/slices/navigationSlice";
+import { setUserData, toggleMute } from "../../../redux/slices/userSlice";
 
 const Menu = ({
   isOpen = false,
-  reset,
-  userData = null,
-  setUserData,
-  toggleMute = (isMuted) => {},
   isGameOptions = false,
   isUndoDisabled = false,
   showSkip = true,
   handleUndo = () => {},
-  handleSkip = () => {},
   handleInfo = () => {},
 }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.user.userData);
+
+  const next = () => dispatch(nextStep());
+  const reset = () => dispatch(resetStep());
+  const updateUserData = (data) => dispatch(setUserData(data));
+  const handleToggleMute = (data) => dispatch(toggleMute(data));
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setOpen(isOpen);
   }, []);
-
-  useEffect(() => {
-    toggleMute(!userData.sound);
-  }, [userData.sound]);
 
   return (
     <div>
@@ -31,7 +33,7 @@ const Menu = ({
           <div className="fixed top-5 right-4 left-4 flex justify-between">
             <div>
               {showSkip && (
-                <p className="text-sm font-medium" onClick={handleSkip}>
+                <p className="text-sm font-medium" onClick={next}>
                   SKIP
                 </p>
               )}
@@ -56,7 +58,7 @@ const Menu = ({
                 }}
               />
               <Image
-                src="/icons/info.svg"
+                src="/icons/info-black.svg"
                 priority={true}
                 sizes="100vw"
                 height={0}
@@ -80,18 +82,31 @@ const Menu = ({
               alt=""
               className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
             />
-            <Image
-              src="/icons/menu.svg"
-              priority={true}
-              sizes="100vw"
-              height={0}
-              width={0}
-              alt=""
-              className="w-6 cursor-pointer"
-              onClick={() => {
-                setOpen(true);
-              }}
-            />
+
+            <div className="flex items-center justify-between gap-4">
+              {/* <Image
+                src="/icons/info-black.svg"
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-6 cursor-pointer"
+              /> */}
+
+              <Image
+                src="/icons/menu.svg"
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-6 cursor-pointer"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              />
+            </div>
           </div>
         ))}
       <div
@@ -141,10 +156,10 @@ const Menu = ({
                     alt=""
                     className="w-[75px] cursor-pointer object-cover rounded-full"
                     onClick={() => {
-                      setUserData((prev) => ({
-                        ...prev,
+                      updateUserData({
+                        ...userData,
                         char: `char${index + 1}`,
-                      }));
+                      });
                     }}
                   />
                 ))}
@@ -167,7 +182,7 @@ const Menu = ({
                       userData.sound ? "w-6" : "w-5"
                     } cursor-pointer`}
                     onClick={() => {
-                      setUserData((prev) => ({ ...prev, sound: !prev.sound }));
+                      handleToggleMute(userData.sound);
                     }}
                   />
                 </div>
@@ -185,7 +200,7 @@ const Menu = ({
                     className="w-6 cursor-pointer"
                     onClick={() => {
                       reset();
-                      setUserData({
+                      updateUserData({
                         name: "",
                         sound: true,
                         char: "char1",

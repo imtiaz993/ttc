@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
 
-const GameStepper = ({ step, next, prev }) => {
+const GameStepper = () => {
   const steps = [
     { step: 2, icon: "/images/game1.png" },
     { step: 6, icon: "/images/game2.png" },
@@ -10,6 +12,12 @@ const GameStepper = ({ step, next, prev }) => {
     { step: 16, icon: "/images/game5.png" },
     { step: 22, icon: "/images/game6.png" },
   ];
+
+  const dispatch = useDispatch();
+  const step = useSelector((state: any) => state.navigation.step);
+
+  const next = () => dispatch(nextStep());
+  const prev = () => dispatch(prevStep());
 
   return (
     <div className="px-4 fixed bottom-5 left-0 right-0 z-20">

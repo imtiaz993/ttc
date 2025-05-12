@@ -1,9 +1,7 @@
+"use client";
+import { Provider } from "react-redux";
 import "./globals.css";
-
-export const metadata = {
-  title: "TTC",
-  description: "",
-};
+import { store } from "./redux/store";
 
 export default function RootLayout({ children }) {
   return (
@@ -15,7 +13,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-dvh max-h-dvh overflow-hidden">
-        <div className="sm:hidden h-dvh">{children}</div>
+        <div className="sm:hidden h-dvh">
+          <Provider store={store}>{children}</Provider>
+        </div>
         <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100">
           <div className="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white max-w-md">
             <svg

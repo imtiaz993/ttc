@@ -1,10 +1,14 @@
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { nextStep } from "../../../redux/slices/navigationSlice";
+import { setUserData } from "../../../redux/slices/userSlice";
 
-const Welcome = ({
-  next,
-  setUserData = (prev: any) => {},
-  playMusic = () => {},
-}) => {
+const Welcome = ({ playMusic = () => {} }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state.user.userData);
+  const next = () => dispatch(nextStep());
+  const updateUserData = (data) => dispatch(setUserData(data));
+
   return (
     <div
       className="flex flex-col justify-center items-center border-transparent h-dvh px-12"
@@ -47,7 +51,7 @@ const Welcome = ({
             e.preventDefault();
             playMusic();
             const name = e.target.name.value;
-            setUserData((prev) => ({ ...prev, name }));
+            updateUserData({ ...userData, name });
             next();
           }}
           className="flex justify-between pb-2 border-b border-[#223100]"

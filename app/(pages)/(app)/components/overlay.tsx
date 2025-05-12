@@ -1,11 +1,16 @@
 import Image from "next/image";
 import Welcome from "./welcome";
+import { nextStep } from "../../../redux/slices/navigationSlice";
+import { useDispatch } from "react-redux";
 
-const Overlay = ({ next }) => {
+const Overlay = () => {
+  const dispatch = useDispatch();
+
+  const next = () => dispatch(nextStep());
   return (
     <div>
       <div className="fixed inset-0 bg-[#00000040] z-10"></div>
-      <Welcome next={next} />
+      <Welcome />
       <div
         className="fixed z-20 right-0 left-0 bottom-0"
         style={{
