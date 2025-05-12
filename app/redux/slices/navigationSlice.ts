@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const navigationSlice = createSlice({
   name: "navigation",
   initialState: {
-    step:16,
+    step:0,
   },
   reducers: {
     nextStep: (state) => {
