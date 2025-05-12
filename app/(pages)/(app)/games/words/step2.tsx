@@ -1,58 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
+const wordsInitialData = [
+  {
+    id: 1,
+    word: "Quality",
+    isCustom: false,
+  },
+  {
+    id: 2,
+    word: "Royalty",
+    isCustom: false,
+  },
+  {
+    id: 3,
+    word: "Nature",
+    isCustom: false,
+  },
+  {
+    id: 4,
+    word: "Affordability",
+    isCustom: false,
+  },
+  {
+    id: 5,
+    word: "Originality",
+    isCustom: false,
+  },
+  {
+    id: 6,
+    word: "Fashion",
+    isCustom: false,
+  },
+  {
+    id: 7,
+    word: "Durability",
+    isCustom: false,
+  },
+  {
+    id: 8,
+    word: "Strength",
+    isCustom: false,
+  },
+];
+
 const WordsStep2 = () => {
   const [overlay, setOverlay] = useState(true);
   const [word, setWord] = useState("");
-  const [words, setWords] = useState([
-    {
-      id: 1,
-      word: "Quality",
-      isCustom: false,
-    },
-    {
-      id: 2,
-      word: "Royalty",
-      isCustom: false,
-    },
-    {
-      id: 3,
-      word: "Nature",
-      isCustom: false,
-    },
-    {
-      id: 4,
-      word: "Affordability",
-      isCustom: false,
-    },
-    {
-      id: 5,
-      word: "Originality",
-      isCustom: false,
-    },
-    {
-      id: 6,
-      word: "Fashion",
-      isCustom: false,
-    },
-    {
-      id: 7,
-      word: "Durability",
-      isCustom: false,
-    },
-    {
-      id: 8,
-      word: "Strength",
-      isCustom: false,
-    },
-  ]);
+  const [undoDisabled, setUndoDisabled] = useState(false);
+  const [words, setWords] = useState(wordsInitialData);
   const [selectedWords, setSelectedWords] = useState([]);
 
+  useEffect(() => {
+    if (selectedWords.length || words.length > wordsInitialData.length) {
+      setUndoDisabled(false);
+    } else {
+      setUndoDisabled(true);
+    }
+  }, [selectedWords, words]);
   return (
     <>
-      <Menu isGameOptions={true} />
+      <Menu
+        isGameOptions={true}
+        handleInfo={() => {
+          setOverlay(true);
+        }}
+        isUndoDisabled={undoDisabled}
+        handleUndo={() => {
+          setSelectedWords([]);
+          setWords(wordsInitialData);
+        }}
+      />
       <GameStepper />
       {overlay && (
         <div>

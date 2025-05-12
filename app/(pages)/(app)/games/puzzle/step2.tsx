@@ -7,6 +7,7 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const PuzzleStep2 = () => {
   const [overlay, setOverlay] = useState(true);
+  const [undoDisabled, setUndoDisabled] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,7 +25,14 @@ const PuzzleStep2 = () => {
 
   return (
     <>
-      <Menu isGameOptions={true} />
+      <Menu
+        isGameOptions={true}
+        handleInfo={() => {
+          setOverlay(true);
+        }}
+        isUndoDisabled={undoDisabled}
+        handleUndo={() => {}}
+      />
       <GameStepper showNext={false} showPrev={false} />
       {overlay && (
         <div>

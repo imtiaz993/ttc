@@ -28,7 +28,9 @@ const OwnTikkaStep3 = () => {
       selectedOptions.Elements &&
       selectedOptions.Text
     ) {
-      handleComplete();
+      setTimeout(() => {
+        handleComplete();
+      }, 1000);
     }
   }, [selectedOptions]);
 
@@ -80,7 +82,12 @@ const OwnTikkaStep3 = () => {
   ];
   return (
     <>
-      <Menu showInfo={true} />
+      <Menu
+        showInfo={true}
+        handleInfo={() => {
+          setOverlay(true);
+        }}
+      />
       <GameStepper showPrev={false} showNext={false} />
       {overlay && (
         <div>

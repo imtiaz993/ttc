@@ -6,7 +6,7 @@ import GameStepper from "../../components/gameStepper";
 const ScratchStep1 = () => {
   return (
     <>
-      <Menu />
+      <Menu isOpen={true} />
       <GameStepper showPrev={false} />
       <div
         style={{

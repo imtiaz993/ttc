@@ -8,19 +8,36 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 const SareeStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedColor, setSelectedColor] = useState([]);
+  const [undoDisabled, setUndoDisabled] = useState(false);
   const dispatch = useDispatch();
 
   const next = () => dispatch(nextStep());
 
   useEffect(() => {
     if (selectedColor[0] && selectedColor[1]) {
-      next();
+      setTimeout(() => {
+        next();
+      }, 1000);
+    }
+    if (selectedColor[0] || selectedColor[1]) {
+      setUndoDisabled(false);
+    } else {
+      setUndoDisabled(true);
     }
   }, [selectedColor]);
 
   return (
     <>
-      <Menu isGameOptions={true} />
+      <Menu
+        isGameOptions={true}
+        handleInfo={() => {
+          setOverlay(true);
+        }}
+        isUndoDisabled={undoDisabled}
+        handleUndo={() => {
+          setSelectedColor([]);
+        }}
+      />
       <GameStepper showNext={false} showPrev={false} />
       {overlay && (
         <div>

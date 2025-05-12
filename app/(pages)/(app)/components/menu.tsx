@@ -94,6 +94,7 @@ const Menu = ({
                   width={0}
                   alt=""
                   className="w-6 cursor-pointer"
+                  onClick={handleInfo}
                 />
               )}
               <Image
@@ -112,8 +113,8 @@ const Menu = ({
           </div>
         ))}
       <div
-        className={`fixed z-50 inset-0 transition-transform duration-500 ease-in-out ${
-          open ? "translate-x-0" : "-translate-x-full"
+        className={`fixed z-50 top-0 bottom-0 right-0 w-full transition-transform duration-500 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
         style={{
           backgroundImage: "url('/images/menu-overlay.png')",
@@ -123,7 +124,7 @@ const Menu = ({
       >
         <div className="pt-5 px-4 flex flex-col justify-start h-full">
           <div>
-            <div className=" flex justify-between">
+            <div className="flex justify-between">
               <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
               <Image
                 src="/icons/close.svg"
