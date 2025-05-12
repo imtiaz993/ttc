@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const SpotTikkaStep3 = () => {
+  const dispatch = useDispatch();
+
+  const next = () => dispatch(nextStep());
+
+  const handleVerifying = () => {
+    setTimeout(() => {
+      next();
+    }, 1000);
+  };
+
+  useEffect(() => {
+    handleVerifying();
+  }, []);
+
   return (
     <>
       <Menu />
-      <GameStepper />
+      <GameStepper showNext={false} showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <Image
           src="/images/verifying.gif"

@@ -9,6 +9,7 @@ const Menu = ({
   isGameOptions = false,
   isUndoDisabled = false,
   showSkip = true,
+  showInfo = false,
   handleUndo = () => {},
   handleInfo = () => {},
 }) => {
@@ -84,16 +85,17 @@ const Menu = ({
             />
 
             <div className="flex items-center justify-between gap-4">
-              {/* <Image
-                src="/icons/info-black.svg"
-                priority={true}
-                sizes="100vw"
-                height={0}
-                width={0}
-                alt=""
-                className="w-6 cursor-pointer"
-              /> */}
-
+              {showInfo && (
+                <Image
+                  src="/icons/info-black.svg"
+                  priority={true}
+                  sizes="100vw"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-6 cursor-pointer"
+                />
+              )}
               <Image
                 src="/icons/menu.svg"
                 priority={true}

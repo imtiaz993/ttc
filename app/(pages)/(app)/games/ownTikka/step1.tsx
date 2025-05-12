@@ -7,7 +7,7 @@ const OwnTikkaStep1 = () => {
   return (
     <>
       <Menu />
-      <GameStepper />
+      <GameStepper showPrev={false} />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",

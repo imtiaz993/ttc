@@ -7,8 +7,8 @@ const PuzzleStep2 = () => {
   const [overlay, setOverlay] = useState(true);
   return (
     <>
-      <Menu />
-      <GameStepper />
+      <Menu isGameOptions={true} />
+      <GameStepper showNext={false} showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>

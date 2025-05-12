@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 
 const SareeResult = () => {
   const userData = useSelector((state: any) => state.user.userData);
-  const success = false;
+  const success = true;
   return (
     <>
       <Menu />
-      <GameStepper />{" "}
+      <GameStepper showNext={success} showPrev={false} />{" "}
       {success ? <Success userData={userData} /> : <Failure />}
     </>
   );

@@ -52,7 +52,7 @@ const WordsStep2 = () => {
 
   return (
     <>
-      <Menu />
+      <Menu isGameOptions={true} />
       <GameStepper />
       {overlay && (
         <div>

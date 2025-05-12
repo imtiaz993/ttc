@@ -8,10 +8,10 @@ import { useDispatch } from "react-redux";
 const PuzzleStep3 = () => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
-  
+
   const [overlay, setOverlay] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [isGameOptions, setIsGameOptions] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,13 +22,14 @@ const PuzzleStep3 = () => {
   useEffect(() => {
     setTimeout(() => {
       setSuccess(true);
+      setIsGameOptions(false);
     }, 1000);
   }, []);
 
   return (
     <>
-      <Menu />
-      <GameStepper />
+      <Menu isGameOptions={isGameOptions} />
+      <GameStepper showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>

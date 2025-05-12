@@ -15,11 +15,8 @@ const navigationSlice = createSlice({
     resetStep: (state) => {
       state.step = 0;
     },
-    setStep: (state, action) => {
-      state.step = action.payload;
-    },
   },
 });
 
-export const { nextStep, prevStep, resetStep, setStep } = navigationSlice.actions;
+export const { nextStep, prevStep, resetStep } = navigationSlice.actions;
 export default navigationSlice.reducer;

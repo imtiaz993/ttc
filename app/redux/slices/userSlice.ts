@@ -19,11 +19,8 @@ const userSlice = createSlice({
       state.isMuted = action.payload;
       state.userData.sound = !action.payload;
     },
-    playMusic: (state) => {
-      // Handled in component due to Audio API
-    },
   },
 });
 
-export const { setUserData, toggleMute, playMusic } = userSlice.actions;
+export const { setUserData, toggleMute } = userSlice.actions;
 export default userSlice.reducer;

@@ -6,10 +6,13 @@ import { useSelector } from "react-redux";
 
 const ScratchStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
+  const handleCameraClick = () => {
+    console.log("Camera Clicked!");
+  };
   return (
     <>
       <Menu />
-      <GameStepper />
+      <GameStepper showCamera={true} onCameraClick={handleCameraClick} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <div className="w-full flex items-start mb-4">
           <div>

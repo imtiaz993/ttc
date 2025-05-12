@@ -5,11 +5,11 @@ import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
 const SpotTikkaResult = () => {
-  const success = false;
+  const success = true;
   return (
     <>
       <Menu />
-      <GameStepper />{" "}
+      <GameStepper showNext={success} showPrev={false} />{" "}
       {success ? <Success /> : <Failure />}
     </>
   );

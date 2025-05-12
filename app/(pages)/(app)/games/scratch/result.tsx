@@ -6,10 +6,11 @@ import GameStepper from "../../components/gameStepper";
 
 const ScratchResult = () => {
   const success = true;
+
   return (
     <>
       <Menu />
-      <GameStepper />{" "}
+      <GameStepper showNext={success} showPrev={false} />{" "}
       {success ? <Success /> : <Failure />}
     </>
   );

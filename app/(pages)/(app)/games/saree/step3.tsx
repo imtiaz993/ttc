@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const SareeStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedColor, setSelectedColor] = useState([]);
+  const dispatch = useDispatch();
+
+  const next = () => dispatch(nextStep());
+
+  useEffect(() => {
+    if (selectedColor[0] && selectedColor[1]) {
+      next();
+    }
+  }, [selectedColor]);
+
   return (
     <>
-      <Menu />
-      <GameStepper />
+      <Menu isGameOptions={true} />
+      <GameStepper showNext={false} showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
