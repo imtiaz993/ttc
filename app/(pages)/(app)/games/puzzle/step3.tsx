@@ -11,7 +11,24 @@ const PuzzleStep3 = () => {
 
   const [overlay, setOverlay] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [completionTime, setCompletionTime] = useState<any>({
+    display: "",
+  });
   const [isGameOptions, setIsGameOptions] = useState(true);
+
+  const getStoredTime = (storageKey) => {
+    const stored = localStorage.getItem(storageKey);
+    return stored
+      ? JSON.parse(stored)
+      : { minutes: 0, seconds: 0, display: "00 minutes 00 seconds" };
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedTime = getStoredTime("puzzle-time");
+      setCompletionTime(storedTime);
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -77,7 +94,9 @@ const PuzzleStep3 = () => {
           <p className="text-xs font-medium mt-5">
             Great job! You finished the puzzle in{" "}
           </p>
-          <p className="text-xl font-medium mt-2 mb-6">01 minute 22 seconds!</p>
+          <p className="text-xl font-medium mt-2 mb-6">
+            {completionTime?.display}
+          </p>
           <div className="flex justify-center items-center w-full">
             <Image
               src="/images/completed-puzzle.png"
@@ -94,7 +113,11 @@ const PuzzleStep3 = () => {
       {!success && (
         <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
           <h1 className="text-sm font-medium flex justify-center items-center gap-5">
-            TIMER <span className="text-xl font-medium">01:22</span>
+            TIMER{" "}
+            <span className="text-xl font-medium">
+              {completionTime?.minutes?.toString()?.padStart(2, "0")}:
+              {completionTime?.seconds?.toString()?.padStart(2, "0")}
+            </span>
           </h1>
           <div className="flex justify-center items-center mt-3 w-full">
             <Image

@@ -12,6 +12,7 @@ const Menu = ({
   showInfo = false,
   handleUndo = () => {},
   handleInfo = () => {},
+  handleSkip = () => {},
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -34,7 +35,13 @@ const Menu = ({
           <div className="fixed top-5 right-4 left-4 flex justify-between">
             <div>
               {showSkip && (
-                <p className="text-sm font-medium" onClick={next}>
+                <p
+                  className="text-sm font-medium"
+                  onClick={() => {
+                    handleSkip();
+                    next();
+                  }}
+                >
                   SKIP
                 </p>
               )}

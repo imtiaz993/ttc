@@ -2,25 +2,37 @@ import React, { useEffect, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const PuzzleStep2 = () => {
   const [overlay, setOverlay] = useState(true);
+  const [seconds, setSeconds] = useState(0);
   const [undoDisabled, setUndoDisabled] = useState(false);
 
-  const dispatch = useDispatch();
+  const formatTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return {
+      minutes,
+      seconds: secs,
+      display: `${minutes.toString().padStart(2, "0")} minute${
+        minutes !== 1 ? "s" : ""
+      } ${secs.toString().padStart(2, "0")} second${secs !== 1 ? "s" : ""}`,
+    };
+  };
 
-  const next = () => dispatch(nextStep());
-
-  const handleComplete = () => {
-    setTimeout(() => {
-      next();
-    }, 2000);
+  const stopTimer = () => {
+    const formattedTime = formatTime(seconds);
+    localStorage.setItem("puzzle-time", JSON.stringify(formattedTime));
+    return formattedTime;
   };
 
   useEffect(() => {
-    handleComplete();
+    const startTime = Date.now();
+    const interval = setInterval(() => {
+      setSeconds(Math.floor((Date.now() - startTime) / 1000));
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -32,6 +44,9 @@ const PuzzleStep2 = () => {
         }}
         isUndoDisabled={undoDisabled}
         handleUndo={() => {}}
+        handleSkip={() => {
+          stopTimer();
+        }}
       />
       <GameStepper showNext={false} showPrev={false} />
       {overlay && (
@@ -73,7 +88,13 @@ const PuzzleStep2 = () => {
       <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
         <div>
           <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5">
-            TIMER <span className="text-xl font-medium">00:15</span>
+            TIMER{" "}
+            <span className="text-xl font-medium">
+              {Math.floor(seconds / 60)
+                .toString()
+                .padStart(2, "0")}
+              :{(seconds % 60)?.toString()?.padStart(2, "0")}
+            </span>
           </h1>
           <div className="w-44 h-64 border border-dashed border-black">
             <div className="grid grid-cols-2 grid-rows-3 h-full gap-0">
