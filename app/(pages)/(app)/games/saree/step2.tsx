@@ -26,12 +26,9 @@ const SareeStep2 = () => {
           </div>
           <div className="ml-4 w-[calc(100%-46px-16px)]">
             <p className="font-medium">
-              Overlapping different colours to make almost any colour I can
-              imagine? This does sound quite magical!
-            </p>
-            <p className="font-medium">
-              Chromolithography layers primary colours which mix to create
-              secondary colours.
+              Ah, I see! First we have the black and white drawing on the metal
+              plate. Then by overlapping colours, I can create the colourful
+              ticket of the lion and lioness!
             </p>
           </div>
         </div>
@@ -45,25 +42,6 @@ const SareeStep2 = () => {
             alt=""
             className="w-11/12 mx-auto"
           />
-        </div>
-        <div className="w-full">
-          <p className="text-sm font-medium mb-4">
-            You’ll be assigned one colour out of these
-          </p>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <div className="w-6 h-6 rounded-full bg-[#EA865B] mr-2"></div>
-              <p className="font-semibold">Orange</p>
-            </div>
-            <div className="flex items-center">
-              <div className="w-6 h-6 rounded-full bg-[#67B85E] mr-2"></div>
-              <p className="font-semibold">Green</p>
-            </div>
-            <div className="flex items-center">
-              <div className="w-6 h-6 rounded-full bg-[#9F71DC] mr-2"></div>
-              <p className="font-semibold">Purple</p>
-            </div>
-          </div>
         </div>
       </div>
     </>

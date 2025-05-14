@@ -10,26 +10,39 @@ const PuzzleStep4 = () => {
     <>
       <Menu />
       <GameStepper showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-        <div className="w-full flex items-start mb-6">
-          <div>
+      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+        <div>
+          <div className="w-full flex items-start mb-6">
+            <div>
+              <Image
+                src={`/images/${userData.char}.png`}
+                priority={true}
+                sizes="100vw"
+                height={0}
+                width={0}
+                alt=""
+                className="w-11 rounded-lg"
+              />
+              <p className="mt-1 text-xs font-medium text-center">You</p>
+            </div>
+            <p className="ml-4 font-medium w-[cacl(100%-46px)]">
+              Wow! A wall of modern wonders - some oddly familiar, some utterly
+              bizarre
+            </p>
+          </div>
+          <div className="w-full flex justify-center mt-6">
             <Image
-              src={`/images/${userData.char}.png`}
+              src="/images/three-arts.png"
               priority={true}
               sizes="100vw"
               height={0}
               width={0}
               alt=""
-              className="w-11 rounded-lg"
+              className="w-11/12"
             />
-            <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
-          <p className="ml-4 font-medium w-[cacl(100%-46px)]">
-            Wow! A wall of modern wonders - some oddly familiar, some utterly
-            bizarre
-          </p>
         </div>
-        <div className="bg-[#FDD931] rounded py-3 px-4 w-full">
+        <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-10">
           <div className="w-full flex items-center mb-2">
             <Image
               src="/icons/zoom-in.svg"

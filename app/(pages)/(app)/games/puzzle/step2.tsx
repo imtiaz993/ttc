@@ -64,7 +64,7 @@ const PuzzleStep2 = () => {
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                Solve the puzzle!
+                Piece together
               </p>
               <Image
                 src="/icons/close-black.svg"
@@ -80,7 +80,7 @@ const PuzzleStep2 = () => {
               />
             </div>
             <p className="mt-2 text-xs">
-              Drag these pieces and put them together to reveal the tika
+              Arrange the pieces to form the complete picture.
             </p>
           </div>
         </div>

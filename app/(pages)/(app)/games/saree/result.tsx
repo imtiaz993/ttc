@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const SareeResult = () => {
   const userData = useSelector((state: any) => state.user.userData);
-  const success = true;
+  const success = false;
   return (
     <>
       <Menu />

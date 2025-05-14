@@ -25,12 +25,11 @@ const OwnTikkaStep2 = () => {
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
           <p className="ml-4 font-medium w-[cacl(100%-46px)]">
-            ‘Tikas’- A legacy of 200 years of advertising that has influenced
-            everything from newspapers and tv ads to social media ! Simply
-            fascinating.
+            Tickets - A legacy of 200 years of advertising! I wonder how much
+            they have  influenced newspapers, television commercials, even
+            social media… 
             <br />
-            <br />
-            Oh! How I’d love to try and make my own!
+            <br />I wish I could try my hand at making a ticket!
           </p>
         </div>
       </div>

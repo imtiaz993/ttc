@@ -75,6 +75,17 @@ const Welcome = ({ playMusic = () => {} }) => {
             />
           </button>
         </form>
+        <div className="flex justify-center mt-6">
+          <Image
+            src="/icons/map.svg"
+            priority={true}
+            sizes="100vw"
+            height={0}
+            width={0}
+            alt=""
+            className="w-16"
+          />
+        </div>
       </div>
     </div>
   );

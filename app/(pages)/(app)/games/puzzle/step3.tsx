@@ -81,23 +81,16 @@ const PuzzleStep3 = () => {
         </div>
       )}
       {success && (
-        <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-          <Image
-            src="/images/success.gif"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-36"
-          />
-          <p className="text-xs font-medium mt-5">
-            Great job! You finished the puzzle in{" "}
-          </p>
-          <p className="text-xl font-medium mt-2 mb-6">
-            {completionTime?.display}
-          </p>
-          <div className="flex justify-center items-center w-full">
+        <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
+          <div>
+            <p className="text-xs font-medium mt-5">
+              Great job! You finished the puzzle in{" "}
+            </p>
+            <p className="text-xl font-medium mt-2 mb-6">
+              {completionTime?.display}
+            </p>
+          </div>
+          <div className="flex justify-center items-center w-full relative">
             <Image
               src="/images/completed-puzzle.png"
               priority={true}
@@ -107,7 +100,17 @@ const PuzzleStep3 = () => {
               alt=""
               className="w-48"
             />
+            <Image
+              src="/images/success.gif"
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt=""
+              className="w-36 absolute"
+            />
           </div>
+          <div></div>
         </div>
       )}
       {!success && (

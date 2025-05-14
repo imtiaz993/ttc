@@ -78,9 +78,9 @@ const WordsStep2 = () => {
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
-            <div className="w-full flex justify-between items-start mb-2">
+            <div className="w-full flex justify-between items-center mb-2">
               <Image
-                src="/icons/question-mark.svg"
+                src="/icons/psychology.svg"
                 priority={true}
                 sizes="100vw"
                 height={0}
@@ -191,6 +191,14 @@ const WordsStep2 = () => {
               className="w-6"
               onClick={() => {
                 if (word) {
+                  setSelectedWords([
+                    ...selectedWords,
+                    {
+                      id: words.length + 1,
+                      word: word,
+                      isCustom: true,
+                    },
+                  ]);
                   setWords([
                     ...words,
                     {

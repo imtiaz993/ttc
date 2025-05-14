@@ -31,10 +31,10 @@ const PuzzleStep1 = () => {
           </div>
         </div>
         <p className="text-sm mb-6">
-          My brother cut up my newest tika for his craft project! He makes me so
-          mad at times!
+          My brother cut up my newest ticket when playing with his pair of
+          scissors!
           <br />
-          Oh I do hope I can put it together again!
+          He makes me so mad at times!
         </p>
         <div className="flex justify-center items-center">
           <Image

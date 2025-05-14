@@ -8,7 +8,7 @@ const Failure = () => {
   const next = () => dispatch(nextStep());
   const prev = () => dispatch(prevStep());
   return (
-    <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+    <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
       <Image
         src="/images/failure.gif"
         priority={true}

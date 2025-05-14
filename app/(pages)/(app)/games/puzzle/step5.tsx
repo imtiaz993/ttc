@@ -31,24 +31,24 @@ const PuzzleStep5 = () => {
         <div className="relative w-full">
           <div
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
-            className="absolute left-2 -top-14 w-[152px] py-3 px-4 bg-[#FDD931] rounded-lg text-xs fade-in opacity-0"
+            className="absolute left-2 -top-14 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
           >
             What are all these tickets trying to say?
           </div>
           <div
-            className="absolute left-8 -bottom-10 w-[152px] py-3 px-4 bg-[#FDD931] rounded-lg text-xs fade-in opacity-0"
+            className="absolute left-8 -bottom-12 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
             style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
           >
             How did they survive all these centuries?
           </div>
           <div
-            className="absolute -right-2 top-28 w-[150px] py-3 px-4 bg-[#FDD931] rounded-lg text-xs fade-in opacity-0"
+            className="absolute -right-2 top-28 w-[150px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
             style={{ animationDelay: "1s", animationFillMode: "forwards" }}
           >
             Take a small pause to reflect..
           </div>
           <div
-            className="absolute -right-2 -bottom-28 w-[150px] py-3 px-4 bg-[#FDD931] rounded-lg text-xs fade-in opacity-0"
+            className="absolute -right-2 -bottom-28 w-[150px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
             style={{ animationDelay: "2s", animationFillMode: "forwards" }}
           >
             Who were they meant to attract?

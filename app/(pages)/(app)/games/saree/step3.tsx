@@ -8,6 +8,7 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 const SareeStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedColor, setSelectedColor] = useState([]);
+  const [finalColor, setFinalColor] = useState("");
   const [undoDisabled, setUndoDisabled] = useState(false);
   const dispatch = useDispatch();
 
@@ -15,9 +16,29 @@ const SareeStep3 = () => {
 
   useEffect(() => {
     if (selectedColor[0] && selectedColor[1]) {
+      if (
+        selectedColor.includes("bg-[#EA5B7C]") &&
+        selectedColor.includes("bg-[#F6D44C]")
+      ) {
+        setFinalColor("bg-[#FA9439]");
+      } else if (
+        selectedColor.includes("bg-[#F6D44C]") &&
+        selectedColor.includes("bg-[#71B0DC]")
+      ) {
+        setFinalColor("bg-[#78CC87]");
+      } else if (
+        selectedColor.includes("bg-[#EA5B7C]") &&
+        selectedColor.includes("bg-[#71B0DC]")
+      ) {
+        setFinalColor("bg-[#937DC5]");
+      }
+
       setTimeout(() => {
         next();
-      }, 1000);
+      }, 2000);
+    }
+    if (selectedColor.length < 2) {
+      setFinalColor("");
     }
     if (selectedColor[0] || selectedColor[1]) {
       setUndoDisabled(false);
@@ -54,7 +75,7 @@ const SareeStep3 = () => {
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                Colour the saree purple
+                Mix it Up!
               </p>
               <Image
                 src="/icons/close-black.svg"
@@ -70,13 +91,16 @@ const SareeStep3 = () => {
               />
             </div>
             <p className="mt-2 text-xs">
-              Drag and drop the correct combination of colours to make her saree
-              purple
+              Select the two colours that make up Orange
             </p>
           </div>
         </div>
       )}
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+        <p className="text-xs mb-3">
+          Select the two colours that make up{" "}
+          <span className="font-semibold">Orange</span>
+        </p>
         <Image
           src="/images/saree.png"
           priority={true}
@@ -86,7 +110,7 @@ const SareeStep3 = () => {
           alt=""
           className="w-4/5"
         />
-        <div className="mt-12 flex justify-center items-center">
+        <div className="w-full mt-12 flex justify-center items-center">
           <div
             className={`rounded-full w-8 h-8 ${
               selectedColor[0]
@@ -112,37 +136,59 @@ const SareeStep3 = () => {
                 : "border border-dashed border-black"
             }`}
           ></div>
+          <div className="mx-3">
+            <Image
+              src="/icons/equal.svg"
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt=""
+              className="w-6"
+            />
+          </div>
+          <div
+            className={`rounded-full w-8 h-8  ${
+              finalColor ? `${finalColor}` : "border border-dashed border-black"
+            }`}
+          ></div>
         </div>
         <div className="mt-10 flex justify-center items-center gap-6">
-          {["bg-[#EA5B7C]", "bg-[#F6D44C]", "bg-[#71B0DC]"].map((i, index) => (
-            <div
-              key={index}
-              className={`flex justify-center items-center w-[60px] h-[60px] ${i} rounded-full`}
-              onClick={() => {
-                if (selectedColor.includes(i)) {
-                  setSelectedColor(
-                    selectedColor.filter((color) => color !== i)
-                  );
-                } else {
-                  if (selectedColor.length == 0) {
-                    setSelectedColor([i, ""]);
+          {[
+            { color: "bg-[#EA5B7C]", name: "Red" },
+            { color: "bg-[#F6D44C]", name: "Yellow" },
+            { color: "bg-[#71B0DC]", name: "Blue" },
+          ].map((i, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div
+                className={`flex justify-center items-center w-[60px] h-[60px] ${i.color} rounded-full`}
+                onClick={() => {
+                  if (selectedColor.includes(i.color)) {
+                    setSelectedColor(
+                      selectedColor.filter((color) => color !== i.color)
+                    );
                   } else {
-                    setSelectedColor([selectedColor[0], i]);
+                    if (selectedColor.length == 0) {
+                      setSelectedColor([i.color, ""]);
+                    } else {
+                      setSelectedColor([selectedColor[0], i.color]);
+                    }
                   }
-                }
-              }}
-            >
-              {selectedColor.includes(i) && (
-                <Image
-                  src="/icons/check-white.svg"
-                  priority={true}
-                  sizes="100vw"
-                  height={0}
-                  width={0}
-                  alt=""
-                  className="w-6"
-                />
-              )}
+                }}
+              >
+                {selectedColor.includes(i.color) && (
+                  <Image
+                    src="/icons/check-white.svg"
+                    priority={true}
+                    sizes="100vw"
+                    height={0}
+                    width={0}
+                    alt=""
+                    className="w-6"
+                  />
+                )}
+              </div>
+                <p className="font-semibold mt-2">{i.name}</p>
             </div>
           ))}
         </div>

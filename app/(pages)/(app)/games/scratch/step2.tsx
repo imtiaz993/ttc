@@ -67,7 +67,9 @@ const ScratchStep2 = () => {
               around you
             </p>
           </div>
-          <p className="mt-2 text-xs">Swipe to begin scanning</p>
+          <p className="mt-2 text-xs">
+            Now take a picture of it to see what you discover next!
+          </p>
         </div>
       </div>
     </>

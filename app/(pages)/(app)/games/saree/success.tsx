@@ -24,7 +24,16 @@ const Success = ({ userData }) => {
           </p>
         </div>
       </div>
-      <div className="mt-6">
+      <div className="relative">
+        <Image
+          src="/images/saree.png"
+          priority={true}
+          sizes="100vw"
+          height={0}
+          width={0}
+          alt=""
+          className="w-52"
+        />
         <Image
           src="/images/success.gif"
           priority={true}
@@ -32,18 +41,10 @@ const Success = ({ userData }) => {
           height={0}
           width={0}
           alt=""
-          className="w-36"
+          className="w-36 absolute top-16 left-8"
         />
       </div>
-      <Image
-        src="/images/saree.png"
-        priority={true}
-        sizes="100vw"
-        height={0}
-        width={0}
-        alt=""
-        className="w-52"
-      />
+      <div></div>
     </div>
   );
 };

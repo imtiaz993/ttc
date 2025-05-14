@@ -77,7 +77,7 @@ const OwnTikkaStep3 = () => {
       menu: "Text",
       iconWhite: "/icons/text-white.svg",
       iconBlack: "/icons/text-black.svg",
-      options: ["MAP BENGALURU", "ಎಂ ಎ ಪಿ ಬೆಂಗಳೂರು"],
+      options: ["MAP, BENGALURU.", "ಎಂ ಎ ಪಿ ಬೆಂಗಳೂರು"],
     },
   ];
   return (
@@ -104,7 +104,7 @@ const OwnTikkaStep3 = () => {
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                Create your own Tika
+                Create your own Ticket
               </p>
               <Image
                 src="/icons/close-black.svg"
@@ -120,7 +120,7 @@ const OwnTikkaStep3 = () => {
               />
             </div>
             <p className="mt-2 text-xs">
-              Use backgrounds,borders, characters and more from tikas all around
+              Use backgrounds,borders, characters and more from ticket all around
               you to design your unique tika and leave a Chaap on the world!
             </p>
           </div>

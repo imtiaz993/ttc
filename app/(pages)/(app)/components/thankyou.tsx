@@ -11,10 +11,23 @@ const Thankyou = () => {
       }}
     >
       <div className="px-10">
-        <p className="text-[#D02E01] text-4xl font-bold mb-10 text-center">
+        <p className="text-[#D02E01] text-sm font-medium mb-2 text-center">
           Thanks for visiting!
         </p>
       </div>
+      <Image
+        src="/icons/logo.svg"
+        priority={true}
+        sizes="100vw"
+        height={0}
+        width={0}
+        alt=""
+        className="w-24 mb-6"
+      />
+      <p className="text-center text-[#D02E01] text-[11px] mb-3 px-10">
+        This exhibition and digital experience have been supported by the Bank
+        of America
+      </p>
       <div className="w-full px-7">
         <div className="flex justify-center">
           <Image
@@ -27,59 +40,76 @@ const Thankyou = () => {
             className="w-full"
           />
         </div>
-        <p className="text-center text-[#D02E01] text-sm mt-3">
-          Supported by the Bank of America
-        </p>
-        <p className="text-center text-[#D02E01] text-sm mt-5">
+
+        <p className="text-center text-[#D02E01] text-[11px] mt-5">
           All images courtesy of the Museum of Art & Photography (MAP)
-          Collection, Bengaluru.
+          Collection, Bengaluru
         </p>
         <div className="mt-5">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#D02E01]">Concept</p>
-            <p className="text-[#D02E01] font-semibold">MAP Bengaluru</p>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">Concept</p>
+            <p className="text-[#D02E01] font-semibold text-[11px]">
+              Shyamli Singbal
+            </p>
           </div>
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#D02E01]">Photography</p>
-            <p className="text-[#D02E01] font-semibold">MAP Bengaluru</p>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">
+              Narrative Design & Scripting
+            </p>
+            <p className="text-[#D02E01] text-[11px] font-semibold">
+              Hina Siddiqui
+            </p>
           </div>
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-[#D02E01]">UI UX</p>
-            <p className="text-[#D02E01] font-semibold">Sensory+</p>
+          <div className="flex justify-between items-strat mb-3">
+            <p className="text-[11px] text-[#D02E01]">Creative Asset Design</p>
+            <p className="text-[#D02E01] font-semibold text-right text-[11px]">
+              Alexis Fu, Kusuma S,
+              <br /> Cibal Prems
+            </p>
           </div>
-          <div className="flex justify-between items-center mb-5">
-            <p className="text-sm text-[#D02E01]">Development</p>
-            <p className="text-[#D02E01] font-semibold">United Monks</p>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">Design Consultant</p>
+            <p className="text-[#D02E01] font-semibold text-[11px]">
+              Nilay Gomkale
+            </p>
           </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <Image
-            src="/icons/social1.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-7"
-          />
-          <Image
-            src="/icons/insta.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-7"
-          />
-          <Image
-            src="/icons/x.svg"
-            priority={true}
-            sizes="100vw"
-            height={0}
-            width={0}
-            alt=""
-            className="w-7"
-          />
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">Digitization</p>
+            <p className="text-[#D02E01] font-semibold text-right text-[11px]">
+              Bela Bahirat, Ramesha N S
+            </p>
+          </div>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">Tech Support</p>
+            <p className="text-[#D02E01] font-semibold text-[11px]">
+              Mohammad Imran
+            </p>
+          </div>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">Development</p>
+            <p className="text-[#D02E01] font-semibold text-[11px]">
+              United Monks
+            </p>
+          </div>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-[11px] text-[#D02E01]">
+              UI & UX Design & Animation
+            </p>
+            <p className="text-[#D02E01] font-semibold text-[11px]">
+              Sensoryplus
+            </p>
+          </div>
+          <div className="flex justify-center mt-6">
+            <Image
+              src="/icons/map.svg"
+              priority={true}
+              sizes="100vw"
+              height={0}
+              width={0}
+              alt=""
+              className="w-16"
+            />
+          </div>
         </div>
       </div>
     </div>

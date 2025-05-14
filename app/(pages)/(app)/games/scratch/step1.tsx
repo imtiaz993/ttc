@@ -17,7 +17,7 @@ const ScratchStep1 = () => {
         className="h-full pt-16 px-4 flex flex-col justify-start items-center"
       >
         <div className="w-full flex justify-between items-start mb-4">
-          <p>7th April, 1886</p>
+          <p>30th March, 1886</p>
           <div>
             <Image
               src="/images/ajji.png"
@@ -28,13 +28,15 @@ const ScratchStep1 = () => {
               alt=""
               className="w-11 rounded-lg"
             />
-            <p className="mt-1 text-xs font-medium text-center">Ajji</p>
+            <p className="mt-1 text-xs font-medium text-center">Kamla</p>
           </div>
         </div>
         <p className="text-sm mb-6">
-          Last evening we had one of Papa’s merchant friends over for dinner. He
-          brought us the loveliest fabric from Calcutta! But what caught my eye
-          was not the fabric itself, but this strange label stuck on it.
+          Dearest diary, 
+          <br />
+          Last evening we had one of Papa’s merchant friends over. He brought us
+          the loveliest fabric from Calcutta! But what caught my eye was not the
+          fabric, but this unusual label stuck on it. 
           <br />
           Can’t wait to show it to my closest friend Selma.Her family’s in the
           textile business after all!
