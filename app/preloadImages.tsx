@@ -1,3 +1,7 @@
+
+
+
+
 const PreloadImages = () => {
   const images = [
     "/images/bg-1.png",
@@ -58,7 +62,6 @@ const PreloadImages = () => {
     "/images/welcome-divider.png",
     "/images/welcome-frame.png",
     "/images/yellow-bg.png",
-
     "/icons/arrow-forward-disable.svg",
     "/icons/arrow-forward.svg",
     "/icons/backgroud-white.svg",

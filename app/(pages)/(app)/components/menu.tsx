@@ -47,18 +47,18 @@ const Menu = ({
               )}
             </div>
             <div className="flex items-center justify-between gap-4">
-              <Image
+              <img
                 src={
                   isUndoDisabled
                     ? "/icons/undo-disabled.svg"
                     : "/icons/undo.svg"
                 }
-                priority={true}
-                fetchPriority="high"
+               
+                
                 decoding="sync"
-                sizes="100vw"
-                height={0}
-                width={0}
+                
+                
+                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -67,14 +67,14 @@ const Menu = ({
                   }
                 }}
               />
-              <Image
+              <img
                 src="/icons/info-black.svg"
-                priority={true}
-                fetchPriority="high"
+               
+                
                 decoding="sync"
-                sizes="100vw"
-                height={0}
-                width={0}
+                
+                
+                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={handleInfo}
@@ -83,43 +83,43 @@ const Menu = ({
           </div>
         ) : (
           <div className="fixed top-5 right-4 left-4 flex justify-between">
-            <Image
+            <img
               src={
                 userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"
               }
-              priority={true}
-              fetchPriority="high"
+             
+              
               decoding="sync"
-              sizes="100vw"
-              height={0}
-              width={0}
+              
+              
+              
               alt=""
               className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
             />
 
             <div className="flex items-center justify-between gap-4">
               {showInfo && (
-                <Image
+                <img
                   src="/icons/info-black.svg"
-                  priority={true}
-                  fetchPriority="high"
+                 
+                  
                   decoding="sync"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                  
+                  
+                  
                   alt=""
                   className="w-6 cursor-pointer"
                   onClick={handleInfo}
                 />
               )}
-              <Image
+              <img
                 src="/icons/menu.svg"
-                priority={true}
-                fetchPriority="high"
+               
+                
                 decoding="sync"
-                sizes="100vw"
-                height={0}
-                width={0}
+                
+                
+                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -143,14 +143,14 @@ const Menu = ({
           <div>
             <div className="flex justify-between">
               <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
-              <Image
+              <img
                 src="/icons/close.svg"
-                priority={true}
-                fetchPriority="high"
+               
+                
                 decoding="sync"
-                sizes="100vw"
-                height={0}
-                width={0}
+                
+                
+                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -164,15 +164,15 @@ const Menu = ({
               </p>
               <div className="flex justify-between gap-5 mb-10">
                 {Array.from({ length: 4 }).map((_, index) => (
-                  <Image
+                  <img
                     key={index}
                     src={
                       userData.char == `char${index + 1}`
                         ? `/images/char${index + 1}.png`
                         : `/images/char${index + 1}-inactive.png`
                     }
-                    priority={true}
-                    fetchPriority="high"
+                   
+                    
                     height={75}
                     width={75}
                     decoding="sync"
@@ -190,18 +190,18 @@ const Menu = ({
               <div>
                 <div className="pb-2.5 mb-3 h-9 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
-                  <Image
+                  <img
                     src={
                       userData?.sound
                         ? "/icons/volume-white.svg"
                         : "/icons/mute.svg"
                     }
-                    priority={true}
-                    fetchPriority="high"
+                   
+                    
                     decoding="sync"
-                    sizes="100vw"
-                    height={0}
-                    width={0}
+                    
+                    
+                    
                     alt=""
                     className={`${
                       userData.sound ? "w-6" : "w-5"
@@ -215,14 +215,14 @@ const Menu = ({
                   <p className="text-[#FFF8E7] font-medium">
                     Restart the adventure
                   </p>
-                  <Image
+                  <img
                     src="/icons/refresh.svg"
-                    priority={true}
-                    fetchPriority="high"
+                   
+                    
                     decoding="sync"
-                    sizes="100vw"
-                    height={0}
-                    width={0}
+                    
+                    
+                    
                     alt=""
                     className="w-6 cursor-pointer"
                     onClick={() => {

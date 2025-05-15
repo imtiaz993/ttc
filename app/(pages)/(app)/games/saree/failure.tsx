@@ -9,13 +9,13 @@ const Failure = () => {
   const prev = () => dispatch(prevStep());
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-      <Image
+      <img
         src="/images/failure.gif"
-        priority={true}
-fetchPriority="high"
-        sizes="100vw"
-        height={0}
-        width={0}
+       
+
+        
+        
+        
         alt=""
         className="w-28"
       />
@@ -29,13 +29,13 @@ fetchPriority="high"
         <p className="text-xs text-center"> Would you like to try again?</p>
       </div>
       <div>
-        <Image
+        <img
           src="/images/saree.png"
-          priority={true}
-fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+
+          
+          
+          
           alt=""
           className="w-52"
         />
@@ -47,13 +47,13 @@ fetchPriority="high"
           }}
           className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
         >
-          <Image
+          <img
             src="/icons/skip.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-6 mr-2"
           />
@@ -66,13 +66,13 @@ fetchPriority="high"
           }}
           className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
-          <Image
+          <img
             src="/icons/refresh.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-6 mr-2"
           />

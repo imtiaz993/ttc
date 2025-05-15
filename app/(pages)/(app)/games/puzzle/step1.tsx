@@ -18,13 +18,13 @@ const PuzzleStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>9th June, 1886</p>
           <div>
-            <Image
+            <img
               src="/images/ajji.png"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -38,13 +38,13 @@ fetchPriority="high"
           He makes me so mad at times!
         </p>
         <div className="flex justify-center items-center">
-          <Image
+          <img
             src="/images/puzzle.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-72"
           />

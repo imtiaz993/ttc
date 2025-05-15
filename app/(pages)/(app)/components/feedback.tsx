@@ -47,25 +47,25 @@ const Feedback = () => {
     <>
       <Menu />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-        <Image
+        <img
           src={`/images/${userData.char}.png`}
-          priority={true}
-fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+
+          
+          
+          
           alt=""
           className="w-20 rounded-lg"
         />
         <div className="mt-6 w-full">
           <div className="w-full flex items-center mb-2">
-            <Image
+            <img
               src="/icons/emoji.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6"
             />
@@ -93,14 +93,14 @@ fetchPriority="high"
                 type="submit"
                 className="w-5 h-5"
               >
-                <Image
+                <img
                   src="/icons/arrow-forward.svg"
                   // arrow-forward-disable.svg
-                  priority={true}
-fetchPriority="high"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                 
+
+                  
+                  
+                  
                   alt=""
                   className="w-5"
                 />
@@ -143,13 +143,13 @@ fetchPriority="high"
           {formSubmitted && (
             <div className="fixed inset-0 flex justify-center items-center">
               <div className="mt-5 bg-[#202F00] rounded-full py-1.5 px-3 flex items-center w-fit">
-                <Image
+                <img
                   src="/icons/info.svg"
-                  priority={true}
-fetchPriority="high"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                 
+
+                  
+                  
+                  
                   alt=""
                   className="w-6"
                 />

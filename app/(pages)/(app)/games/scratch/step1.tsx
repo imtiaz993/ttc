@@ -19,13 +19,13 @@ const ScratchStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>30th March, 1886</p>
           <div>
-            <Image
+            <img
               src="/images/ajji.png"
-              priority={true}
-              fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+              
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -43,13 +43,13 @@ const ScratchStep1 = () => {
           textile business after all!
         </p>
         <div className="flex justify-center items-center mb-32">
-          <Image
+          <img
             src="/images/scratch-card.png"
-            priority={true}
-            fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+            
+            
+            
+            
             alt=""
             className="w-60"
           />

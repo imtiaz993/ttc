@@ -20,13 +20,13 @@ const WordsStep1 = () => {
           <div className="w-full flex justify-between items-start mb-4">
             <p>6th May, 1886</p>
             <div>
-              <Image
+              <img
                 src="/images/ajji.png"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -42,13 +42,13 @@ fetchPriority="high"
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <Image
+          <img
             src="/images/graham-bombay.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-52"
           />

@@ -94,26 +94,26 @@ const OwnTikkaStep3 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-start mb-2">
-              <Image
+              <img
                 src="/icons/mouse.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Create your own Ticket
               </p>
-              <Image
+              <img
                 src="/icons/close-black.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -147,25 +147,25 @@ fetchPriority="high"
           selectedOptions.Elements ? (
             <>
               {selectedOptions.Elements && (
-                <Image
+                <img
                   src={selectedOptions.Elements}
-                  priority={true}
-fetchPriority="high"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                 
+
+                  
+                  
+                  
                   alt="Selected Element"
                   className="w-24 h-24 object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
                 />
               )}
               {selectedOptions.Border && (
-                <Image
+                <img
                   src={selectedOptions.Border}
-                  priority={true}
-fetchPriority="high"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                 
+
+                  
+                  
+                  
                   alt="Selected Element"
                   className="w-full h-full object-cover absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
                 />
@@ -204,24 +204,24 @@ fetchPriority="high"
                 ) : (
                   <div key={index} className="relative flex-shrink-0 w-20">
                     {selectedOptions[selectedMenu] == option && (
-                      <Image
+                      <img
                         src="/icons/selected.svg"
-                        priority={true}
-fetchPriority="high"
-                        sizes="100vw"
-                        height={0}
-                        width={0}
+                       
+
+                        
+                        
+                        
                         alt=""
                         className=" w-10 h-10 absolute translate-x-1/2 translate-y-1/2"
                       />
                     )}
-                    <Image
+                    <img
                       src={option}
-                      priority={true}
-fetchPriority="high"
-                      sizes="100vw"
-                      height={0}
-                      width={0}
+                     
+
+                      
+                      
+                      
                       alt=""
                       className="w-20 h-[100px] object-contain"
                       onClick={() => {
@@ -248,15 +248,15 @@ fetchPriority="high"
                     : "bg-transparent text-black"
                 }`}
               >
-                <Image
+                <img
                   src={
                     menu.menu === selectedMenu ? menu.iconWhite : menu.iconBlack
                   }
-                  priority={true}
-fetchPriority="high"
-                  sizes="100vw"
-                  height={0}
-                  width={0}
+                 
+
+                  
+                  
+                  
                   alt=""
                   className="w-6"
                 />

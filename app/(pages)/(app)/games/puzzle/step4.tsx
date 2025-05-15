@@ -14,13 +14,13 @@ const PuzzleStep4 = () => {
         <div>
           <div className="w-full flex items-start mb-6">
             <div>
-              <Image
+              <img
                 src={`/images/${userData.char}.png`}
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -32,13 +32,13 @@ fetchPriority="high"
             </p>
           </div>
           <div className="w-full flex justify-center mt-6">
-            <Image
+            <img
               src="/images/three-arts.png"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11/12"
             />
@@ -46,13 +46,13 @@ fetchPriority="high"
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-10">
           <div className="w-full flex items-center mb-2">
-            <Image
+            <img
               src="/icons/zoom-in.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6"
             />

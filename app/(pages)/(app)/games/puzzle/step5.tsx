@@ -13,13 +13,13 @@ const PuzzleStep5 = () => {
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
         <div className="w-full flex items-start mb-6">
           <div>
-            <Image
+            <img
               src={`/images/${userData.char}.png`}
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -55,13 +55,13 @@ fetchPriority="high"
             Who were they meant to attract?
           </div>
           <div className="flex justify-center items-center">
-            <Image
+            <img
               src="/images/manchester.png"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-48"
             />

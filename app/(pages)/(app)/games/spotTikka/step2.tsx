@@ -14,13 +14,13 @@ const SpotTikkaStep2 = () => {
         <div className="w-full">
           <div className="w-full flex items-start mb-6">
             <div>
-              <Image
+              <img
                 src={`/images/${userData.char}.png`}
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -32,13 +32,13 @@ fetchPriority="high"
           </div>
           <div className="bg-[#FDD931] w-full rounded py-3 px-4">
             <div className="w-full flex items-center mb-2">
-              <Image
+              <img
                 src="/icons/zoom-in.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
               />
@@ -52,13 +52,13 @@ fetchPriority="high"
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <Image
+          <img
             src="/images/spot-tikka.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-52"
           />

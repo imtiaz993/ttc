@@ -54,26 +54,26 @@ const PuzzleStep2 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <Image
+              <img
                 src="/icons/question-mark.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Piece together
               </p>
-              <Image
+              <img
                 src="/icons/close-black.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -110,13 +110,13 @@ fetchPriority="high"
           </div>
         </div>
         <div className="flex justify-center items-center mt-11 w-full">
-          <Image
+          <img
             src="/images/puzzle.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-2/3"
           />

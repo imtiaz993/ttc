@@ -15,13 +15,13 @@ const Thankyou = () => {
           Thanks for visiting!
         </p>
       </div>
-      <Image
+      <img
         src="/icons/logo.svg"
-        priority={true}
-fetchPriority="high"
-        sizes="100vw"
-        height={0}
-        width={0}
+       
+
+        
+        
+        
         alt=""
         className="w-24 mb-6"
       />
@@ -31,13 +31,13 @@ fetchPriority="high"
       </p>
       <div className="w-full px-7">
         <div className="flex justify-center">
-          <Image
+          <img
             src="/icons/bofa.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-full"
           />
@@ -102,13 +102,13 @@ fetchPriority="high"
             </p>
           </div>
           <div className="flex justify-center mt-6">
-            <Image
+            <img
               src="/icons/map.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-16"
             />

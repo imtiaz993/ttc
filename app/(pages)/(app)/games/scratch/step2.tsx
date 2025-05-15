@@ -16,13 +16,13 @@ const ScratchStep2 = () => {
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <div className="w-full flex items-start mb-4">
           <div>
-            <Image
+            <img
               src={`/images/${userData.char}.png`}
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -33,39 +33,39 @@ fetchPriority="high"
           </p>
         </div>
         <div className="mt-10 mb-6 relative">
-          <Image
+          <img
             src="/images/camera.gif"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
+           
+
+            
             decoding="sync"
-            height={0}
-            width={0}
+            
+            
             alt=""
             className="w-64 relative z-20"
           />
-          <Image
+          <img
             src="/images/camera-scanning-art.png"
-            priority={true}
-fetchPriority="high"
+           
+
 decoding="sync"
-            sizes="100vw"
-            height={0}
-            width={0}
+            
+            
+            
             alt=""
             className="w-28 absolute top-[52px] left-[70px] z-10"
           />
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4">
           <div className="w-full flex items-start mb-2">
-            <Image
+            <img
               src="/icons/zoom-in.svg"
-              priority={true}
-fetchPriority="high"
+             
+
 decoding="sync"
-              sizes="100vw"
-              height={0}
-              width={0}
+              
+              
+              
               alt=""
               className="w-6"
             />

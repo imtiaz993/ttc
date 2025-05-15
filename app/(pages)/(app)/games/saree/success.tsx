@@ -6,13 +6,13 @@ const Success = ({ userData }) => {
     <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
       <div className="w-full flex justify-between items-start">
         <div>
-          <Image
+          <img
             src={`/images/${userData.char}.png`}
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-11 rounded-lg"
           />
@@ -26,23 +26,23 @@ fetchPriority="high"
         </div>
       </div>
       <div className="relative">
-        <Image
+        <img
           src="/images/saree.png"
-          priority={true}
-fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+
+          
+          
+          
           alt=""
           className="w-52"
         />
-        <Image
+        <img
           src="/images/success.gif"
-          priority={true}
-fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+
+          
+          
+          
           alt=""
           className="w-36 absolute top-16 left-8"
         />

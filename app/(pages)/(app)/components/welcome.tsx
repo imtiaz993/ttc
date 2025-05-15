@@ -22,24 +22,24 @@ const Welcome = ({ playMusic = () => {} }) => {
         <p className="text-[#D02E01] text-sm font-medium mb-3 text-center">
           Welcome to
         </p>
-        <Image
+        <img
           src="/icons/logo.svg"
-          priority={true}
-          fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+          
+          
+          
+          
           alt=""
           className="w-60 mb-14"
         />
       </div>
-      <Image
+      <img
         src="/images/welcome-divider.png"
-        priority={true}
-        fetchPriority="high"
-        sizes="100vw"
-        height={0}
-        width={0}
+       
+        
+        
+        
+        
         alt=""
         className="w-full"
       />
@@ -67,26 +67,26 @@ const Welcome = ({ playMusic = () => {} }) => {
             required
           />
           <button type="submit" className="w-5 h-5">
-            <Image
+            <img
               src="/icons/arrow-forward.svg"
-              priority={true}
-              fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+              
+              
+              
+              
               alt="Submit"
               className="w-full h-full"
             />
           </button>
         </form>
         <div className="flex justify-center mt-6">
-          <Image
+          <img
             src="/icons/map.svg"
-            priority={true}
-            fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+            
+            
+            
+            
             alt=""
             className="w-16"
           />

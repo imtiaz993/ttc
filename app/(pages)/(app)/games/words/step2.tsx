@@ -79,26 +79,26 @@ const WordsStep2 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <Image
+              <img
                 src="/icons/psychology.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Why choose a warrior to advertise cotton cloth?
               </p>
-              <Image
+              <img
                 src="/icons/close-black.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -115,13 +115,13 @@ fetchPriority="high"
       )}
       <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
         <div className="flex justify-center items-center">
-          <Image
+          <img
             src="/images/graham-bombay.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-36"
           />
@@ -147,17 +147,17 @@ fetchPriority="high"
                 }`}
               >
                 {i.isCustom && (
-                  <Image
+                  <img
                     src={
                       selectedWords.find((word) => word.id === i.id)
                         ? "/icons/close.svg"
                         : "/icons/close-black.svg"
                     }
-                    priority={true}
-fetchPriority="high"
-                    sizes="100vw"
-                    height={0}
-                    width={0}
+                   
+
+                    
+                    
+                    
                     alt=""
                     className="w-5"
                     onClick={(e) => {
@@ -185,13 +185,13 @@ fetchPriority="high"
               placeholder="Any more that come to mind? Add them here"
               className="outline-none placeholder:text-[#00000040] text-sm font-semibold bg-transparent w-full"
             />
-            <Image
+            <img
               src="/icons/plus.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6"
               onClick={() => {

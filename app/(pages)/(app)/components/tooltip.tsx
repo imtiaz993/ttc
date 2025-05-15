@@ -5,13 +5,13 @@ const Tooltip = () => {
   return (
     <div className="flex justify-center items-center">
       <div className="mt-5 bg-[#202F00] rounded-full py-1.5 px-3 flex items-center w-fit">
-        <Image
+        <img
           src="/icons/info.svg"
-          priority={true}
-fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
+         
+
+          
+          
+          
           alt=""
           className="w-6"
         />

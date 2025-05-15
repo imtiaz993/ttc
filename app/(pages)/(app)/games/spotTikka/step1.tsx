@@ -19,13 +19,13 @@ const SpotTikkaStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>30th April, 1886</p>
           <div>
-            <Image
+            <img
               src="/images/ajji.png"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -40,13 +40,13 @@ fetchPriority="high"
           were. Alas, this one just got ripped apart by my clumsy efforts!
         </p>
         <div className="flex justify-center items-center">
-          <Image
+          <img
             src="/images/spot-tikka.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-52"
           />

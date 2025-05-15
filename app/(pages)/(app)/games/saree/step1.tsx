@@ -12,13 +12,13 @@ const SareeStep1 = () => {
         <div>
           <div className="w-full flex justify-between items-start mb-4">
             <div>
-              <Image
+              <img
                 src="/images/selma.png"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -57,13 +57,13 @@ fetchPriority="high"
         <div className="mt-5">
           <div className="bg-[#FDD931] rounded py-3 px-4">
             <div className="w-full flex justify-between items-start mb-2">
-              <Image
+              <img
                 src="/icons/sound.svg"
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt=""
                 className="w-6"
               />

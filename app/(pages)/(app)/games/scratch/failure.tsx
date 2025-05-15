@@ -9,14 +9,14 @@ const Failure = () => {
   const prev = () => dispatch(prevStep());
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
-      <Image
+      <img
         src="/images/failure.gif"
-        priority={true}
-fetchPriority="high"
+       
+
 decoding="sync"
-        sizes="100vw"
-        height={0}
-        width={0}
+        
+        
+        
         alt=""
         className="w-20"
       />
@@ -29,13 +29,13 @@ decoding="sync"
           }}
           className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
         >
-          <Image
+          <img
             src="/icons/skip.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-6 mr-2"
           />
@@ -48,13 +48,13 @@ fetchPriority="high"
           }}
           className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
-          <Image
+          <img
             src="/icons/refresh.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-6 mr-2"
           />

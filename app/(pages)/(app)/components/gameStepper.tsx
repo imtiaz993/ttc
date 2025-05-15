@@ -29,13 +29,13 @@ const GameStepper = ({
       <div className="mb-5 flex justify-between items-center h-[25px]">
         <div>
           {showPrev && (
-            <Image
+            <img
               src="/icons/swipe-arrow-dark.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-4"
               onClick={() => {
@@ -46,26 +46,26 @@ fetchPriority="high"
         </div>
         <div className="flex items-center">
           {showCamera && (
-            <Image
+            <img
               src="/icons/camera.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6 mr-2"
               onClick={onCameraClick}
             />
           )}
           {showNext && (
-            <Image
+            <img
               src="/icons/swipe-arrow-dark.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-4 rotate-180"
               onClick={() => {
@@ -85,13 +85,13 @@ fetchPriority="high"
                 step === item.step ? "border-4 border-[#FFC107]" : ""
               }`}
             >
-              <Image
+              <img
                 src={item.icon}
-                priority={true}
-fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
+               
+
+                
+                
+                
                 alt={`Step ${index + 1}`}
                 className="w-full h-full object-cover cursor-pointer"
               />

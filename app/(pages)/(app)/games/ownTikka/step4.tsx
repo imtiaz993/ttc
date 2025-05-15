@@ -16,26 +16,26 @@ const OwnTikkaStep4 = () => {
       <GameStepper showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <div className="flex justify-center items-center mb-16">
-          <Image
+          <img
             src="/images/own-tikka-final.png"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-80"
           />
         </div>
         <div className="w-full flex items-start mb-10">
           <div>
-            <Image
+            <img
               src={`/images/${userData.char}.png`}
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -47,13 +47,13 @@ fetchPriority="high"
         </div>
         <div className="w-full grid grid-cols-2 gap-4">
           <button className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full">
-            <Image
+            <img
               src="/icons/download.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6 mr-2"
               onClick={() => {
@@ -63,13 +63,13 @@ fetchPriority="high"
             Download
           </button>
           <button className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full">
-            <Image
+            <img
               src="/icons/share.svg"
-              priority={true}
-fetchPriority="high"
-              sizes="100vw"
-              height={0}
-              width={0}
+             
+
+              
+              
+              
               alt=""
               className="w-6 mr-2"
               onClick={() => {

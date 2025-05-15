@@ -25,26 +25,26 @@ const Overlay = () => {
           }}
           className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between"
         >
-          <Image
+          <img
             src="/icons/swipe-arrow.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-4 animate-sway1"
           />
           <p className="mx-1.5 text-[#FFF8E7] text-xs text-center">
             swipe to navigate
           </p>
-          <Image
+          <img
             src="/icons/swipe-arrow-forward.svg"
-            priority={true}
-fetchPriority="high"
-            sizes="100vw"
-            height={0}
-            width={0}
+           
+
+            
+            
+            
             alt=""
             className="w-4 animate-sway2"
           />
