@@ -29,6 +29,7 @@ const PreloadImages = () => {
     "/images/char3-inactive.png",
     "/images/char4.png",
     "/images/char4-inactive.png",
+    "/images/yellow-bg.png",
   ];
   return (
     <div>
