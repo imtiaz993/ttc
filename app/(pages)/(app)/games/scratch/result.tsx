@@ -10,7 +10,7 @@ const ScratchResult = () => {
   return (
     <>
       <Menu />
-      <GameStepper showNext={false} showPrev={false} />{" "}
+      <GameStepper showPrev={false} />{" "}
       {success ? <Success /> : <Failure />}
     </>
   );
