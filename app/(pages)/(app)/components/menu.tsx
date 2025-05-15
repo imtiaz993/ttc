@@ -153,18 +153,13 @@ const Menu = ({
               </p>
               <div className="flex justify-between gap-5 mb-10">
                 {Array.from({ length: 4 }).map((_, index) => (
-                  <Image
+                  <img
                     key={index}
                     src={
                       userData.char == `char${index + 1}`
                         ? `/images/char${index + 1}.png`
                         : `/images/char${index + 1}-inactive.png`
                     }
-                    priority={true}
-                    fetchPriority="high"
-                    sizes="100vw"
-                    height={0}
-                    width={0}
                     alt=""
                     className="w-[75px] cursor-pointer object-cover rounded-full"
                     onClick={() => {
