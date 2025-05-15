@@ -31,6 +31,7 @@ const ScratchStep3 = () => {
           src="/images/verifying.gif"
           priority={true}
 fetchPriority="high"
+decoding="sync"
           sizes="100vw"
           height={0}
           width={0}

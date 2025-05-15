@@ -13,6 +13,7 @@ const Failure = () => {
         src="/images/failure.gif"
         priority={true}
 fetchPriority="high"
+decoding="sync"
         sizes="100vw"
         height={0}
         width={0}
