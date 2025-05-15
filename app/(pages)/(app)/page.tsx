@@ -36,6 +36,8 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMute } from "../../redux/slices/userSlice";
+import volume from "/icons/volume-white.svg";
+import mute from "/icons/mute.svg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,7 +64,7 @@ export default function Home() {
   }, [isMuted]);
 
   const ScratchGame = [
-    <ScratchStep1 />,
+    <ScratchStep1 volume={volume} mute={mute} />,
     <ScratchStep2 />,
     <ScratchStep3 />,
     <ScratchResult />,

@@ -13,6 +13,8 @@ const Menu = ({
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
+  volume = "/icons/volume.svg",
+  mute = "/icons/volume.svg",
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -47,12 +49,17 @@ const Menu = ({
               )}
             </div>
             <div className="flex items-center justify-between gap-4">
-              <img
+              <Image
                 src={
                   isUndoDisabled
                     ? "/icons/undo-disabled.svg"
                     : "/icons/undo.svg"
                 }
+                priority={true}
+                fetchPriority="high"
+                sizes="100vw"
+                height={0}
+                width={0}
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -153,13 +160,18 @@ const Menu = ({
               </p>
               <div className="flex justify-between gap-5 mb-10">
                 {Array.from({ length: 4 }).map((_, index) => (
-                  <img
+                  <Image
                     key={index}
                     src={
                       userData.char == `char${index + 1}`
                         ? `/images/char${index + 1}.png`
                         : `/images/char${index + 1}-inactive.png`
                     }
+                    priority={true}
+                    fetchPriority="high"
+                    sizes="100vw"
+                    height={0}
+                    width={0}
                     alt=""
                     className="w-[75px] cursor-pointer object-cover rounded-full"
                     onClick={() => {
@@ -175,11 +187,7 @@ const Menu = ({
                 <div className="pb-2.5 mb-3 h-9 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
                   <Image
-                    src={
-                      userData?.sound
-                        ? "/icons/volume-white.svg"
-                        : "/icons/mute.svg"
-                    }
+                    src={userData?.sound ? volume : mute}
                     priority={true}
                     fetchPriority="high"
                     sizes="100vw"

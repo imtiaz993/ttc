@@ -3,10 +3,10 @@ import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
-const ScratchStep1 = () => {
+const ScratchStep1 = ({ volume, mute }) => {
   return (
     <>
-      <Menu isOpen={true} />
+      <Menu isOpen={true} volume={volume} mute={mute}  />
       <GameStepper showPrev={false} />
       <div
         style={{
@@ -22,7 +22,7 @@ const ScratchStep1 = () => {
             <Image
               src="/images/ajji.png"
               priority={true}
-fetchPriority="high"
+              fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -46,7 +46,7 @@ fetchPriority="high"
           <Image
             src="/images/scratch-card.png"
             priority={true}
-fetchPriority="high"
+            fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
