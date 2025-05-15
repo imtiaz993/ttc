@@ -13,8 +13,6 @@ const Menu = ({
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
-  volume = "/icons/volume.svg",
-  mute = "/icons/volume.svg",
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -169,11 +167,10 @@ const Menu = ({
                     }
                     priority={true}
                     fetchPriority="high"
-                    sizes="100vw"
-                    height={0}
-                    width={0}
+                    height={75}
+                    width={75}
                     alt=""
-                    className="w-[75px] cursor-pointer object-cover rounded-full"
+                    className="cursor-pointer object-cover rounded-full"
                     onClick={() => {
                       updateUserData({
                         ...userData,
@@ -187,7 +184,11 @@ const Menu = ({
                 <div className="pb-2.5 mb-3 h-9 flex justify-between items-center border-b border-[#FFFFFF1A]">
                   <p className="text-[#FFF8E7] font-medium">Sound</p>
                   <Image
-                    src={userData?.sound ? volume : mute}
+                    src={
+                      userData?.sound
+                        ? "/icons/volume-white.svg"
+                        : "/icons/mute.svg"
+                    }
                     priority={true}
                     fetchPriority="high"
                     sizes="100vw"

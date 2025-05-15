@@ -3,10 +3,10 @@ import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
-const ScratchStep1 = ({ volume, mute }) => {
+const ScratchStep1 = () => {
   return (
     <>
-      <Menu isOpen={true} volume={volume} mute={mute}  />
+      <Menu isOpen={true} />
       <GameStepper showPrev={false} />
       <div
         style={{
