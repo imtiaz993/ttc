@@ -5,26 +5,6 @@ import { store } from "./redux/store";
 import { useEffect } from "react";
 
 export default function RootLayout({ children }) {
-
-  useEffect(() => {
-    const preloadImages = [
-      '/images/char1.png',
-      '/images/char1-inactive.png',
-      '/images/char2.png',
-      '/images/char2-inactive.png',
-      '/images/char3.png',
-      '/images/char3-inactive.png',
-      '/images/char4.png',
-      '/images/char4-inactive.png',
-    ];
-  
-    preloadImages.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
-  
   return (
     <html lang="en">
       <head>
@@ -32,6 +12,10 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
+        <link rel="preload" as="image" href="/images/char1.png" />
+        <link rel="preload" as="image" href="/images/char1-inactive.png" />
+        <link rel="preload" as="image" href="/images/char1.png" />
+        <link rel="preload" as="image" href="/images/char1-inactive.png" />
       </head>
       <body className="min-h-dvh max-h-dvh overflow-hidden">
         <div className="sm:hidden h-dvh">
