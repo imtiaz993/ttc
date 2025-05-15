@@ -28,6 +28,7 @@ const Overlay = () => {
           <Image
             src="/icons/swipe-arrow.svg"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
@@ -40,6 +41,7 @@ const Overlay = () => {
           <Image
             src="/icons/swipe-arrow-forward.svg"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

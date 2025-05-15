@@ -32,6 +32,7 @@ const GameStepper = ({
             <Image
               src="/icons/swipe-arrow-dark.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -48,6 +49,7 @@ const GameStepper = ({
             <Image
               src="/icons/camera.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -60,6 +62,7 @@ const GameStepper = ({
             <Image
               src="/icons/swipe-arrow-dark.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -85,6 +88,7 @@ const GameStepper = ({
               <Image
                 src={item.icon}
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}

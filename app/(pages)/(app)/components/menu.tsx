@@ -54,6 +54,7 @@ const Menu = ({
                     : "/icons/undo.svg"
                 }
                 priority={true}
+                fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -68,6 +69,7 @@ const Menu = ({
               <Image
                 src="/icons/info-black.svg"
                 priority={true}
+                fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -84,6 +86,7 @@ const Menu = ({
                 userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"
               }
               priority={true}
+              fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -96,6 +99,7 @@ const Menu = ({
                 <Image
                   src="/icons/info-black.svg"
                   priority={true}
+                  fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}
@@ -107,6 +111,7 @@ const Menu = ({
               <Image
                 src="/icons/menu.svg"
                 priority={true}
+                fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -136,6 +141,7 @@ const Menu = ({
               <Image
                 src="/icons/close.svg"
                 priority={true}
+                fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -160,6 +166,7 @@ const Menu = ({
                         : `/images/char${index + 1}-inactive.png`
                     }
                     priority={true}
+                    fetchPriority="high"
                     sizes="100vw"
                     height={0}
                     width={0}
@@ -184,6 +191,7 @@ const Menu = ({
                         : "/icons/mute.svg"
                     }
                     priority={true}
+                    fetchPriority="high"
                     sizes="100vw"
                     height={0}
                     width={0}
@@ -203,6 +211,7 @@ const Menu = ({
                   <Image
                     src="/icons/refresh.svg"
                     priority={true}
+                    fetchPriority="high"
                     sizes="100vw"
                     height={0}
                     width={0}

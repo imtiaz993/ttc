@@ -18,6 +18,7 @@ const Thankyou = () => {
       <Image
         src="/icons/logo.svg"
         priority={true}
+fetchPriority="high"
         sizes="100vw"
         height={0}
         width={0}
@@ -33,6 +34,7 @@ const Thankyou = () => {
           <Image
             src="/icons/bofa.svg"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
@@ -103,6 +105,7 @@ const Thankyou = () => {
             <Image
               src="/icons/map.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}

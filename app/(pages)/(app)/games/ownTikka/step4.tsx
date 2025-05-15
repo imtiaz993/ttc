@@ -19,6 +19,7 @@ const OwnTikkaStep4 = () => {
           <Image
             src="/images/own-tikka-final.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
@@ -31,6 +32,7 @@ const OwnTikkaStep4 = () => {
             <Image
               src={`/images/${userData.char}.png`}
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -48,6 +50,7 @@ const OwnTikkaStep4 = () => {
             <Image
               src="/icons/download.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -63,6 +66,7 @@ const OwnTikkaStep4 = () => {
             <Image
               src="/icons/share.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}

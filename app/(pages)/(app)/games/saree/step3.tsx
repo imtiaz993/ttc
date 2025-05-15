@@ -68,6 +68,7 @@ const SareeStep3 = () => {
               <Image
                 src="/icons/paint.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -80,6 +81,7 @@ const SareeStep3 = () => {
               <Image
                 src="/icons/close-black.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -104,6 +106,7 @@ const SareeStep3 = () => {
         <Image
           src="/images/saree.png"
           priority={true}
+fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}
@@ -122,6 +125,7 @@ const SareeStep3 = () => {
             <Image
               src="/icons/plus.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -140,6 +144,7 @@ const SareeStep3 = () => {
             <Image
               src="/icons/equal.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -180,6 +185,7 @@ const SareeStep3 = () => {
                   <Image
                     src="/icons/check-white.svg"
                     priority={true}
+fetchPriority="high"
                     sizes="100vw"
                     height={0}
                     width={0}

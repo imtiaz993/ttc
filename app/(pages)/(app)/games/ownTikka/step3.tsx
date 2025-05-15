@@ -97,6 +97,7 @@ const OwnTikkaStep3 = () => {
               <Image
                 src="/icons/mouse.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -109,6 +110,7 @@ const OwnTikkaStep3 = () => {
               <Image
                 src="/icons/close-black.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -148,6 +150,7 @@ const OwnTikkaStep3 = () => {
                 <Image
                   src={selectedOptions.Elements}
                   priority={true}
+fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}
@@ -159,6 +162,7 @@ const OwnTikkaStep3 = () => {
                 <Image
                   src={selectedOptions.Border}
                   priority={true}
+fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}
@@ -203,6 +207,7 @@ const OwnTikkaStep3 = () => {
                       <Image
                         src="/icons/selected.svg"
                         priority={true}
+fetchPriority="high"
                         sizes="100vw"
                         height={0}
                         width={0}
@@ -213,6 +218,7 @@ const OwnTikkaStep3 = () => {
                     <Image
                       src={option}
                       priority={true}
+fetchPriority="high"
                       sizes="100vw"
                       height={0}
                       width={0}
@@ -247,6 +253,7 @@ const OwnTikkaStep3 = () => {
                     menu.menu === selectedMenu ? menu.iconWhite : menu.iconBlack
                   }
                   priority={true}
+fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}

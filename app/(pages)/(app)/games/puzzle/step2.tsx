@@ -57,6 +57,7 @@ const PuzzleStep2 = () => {
               <Image
                 src="/icons/question-mark.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -69,6 +70,7 @@ const PuzzleStep2 = () => {
               <Image
                 src="/icons/close-black.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -111,6 +113,7 @@ const PuzzleStep2 = () => {
           <Image
             src="/images/puzzle.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

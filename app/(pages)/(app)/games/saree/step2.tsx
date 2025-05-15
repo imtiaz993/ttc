@@ -16,6 +16,7 @@ const SareeStep2 = () => {
             <Image
               src={`/images/${userData.char}.png`}
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -36,6 +37,7 @@ const SareeStep2 = () => {
           <Image
             src="/images/color-pallets.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

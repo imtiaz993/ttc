@@ -23,6 +23,7 @@ const WordsStep1 = () => {
               <Image
                 src="/images/ajji.png"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -44,6 +45,7 @@ const WordsStep1 = () => {
           <Image
             src="/images/graham-bombay.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

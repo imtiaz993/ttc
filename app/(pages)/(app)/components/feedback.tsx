@@ -50,6 +50,7 @@ const Feedback = () => {
         <Image
           src={`/images/${userData.char}.png`}
           priority={true}
+fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}
@@ -61,6 +62,7 @@ const Feedback = () => {
             <Image
               src="/icons/emoji.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -95,6 +97,7 @@ const Feedback = () => {
                   src="/icons/arrow-forward.svg"
                   // arrow-forward-disable.svg
                   priority={true}
+fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}
@@ -143,6 +146,7 @@ const Feedback = () => {
                 <Image
                   src="/icons/info.svg"
                   priority={true}
+fetchPriority="high"
                   sizes="100vw"
                   height={0}
                   width={0}

@@ -25,6 +25,7 @@ const Welcome = ({ playMusic = () => {} }) => {
         <Image
           src="/icons/logo.svg"
           priority={true}
+          fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}
@@ -35,6 +36,7 @@ const Welcome = ({ playMusic = () => {} }) => {
       <Image
         src="/images/welcome-divider.png"
         priority={true}
+        fetchPriority="high"
         sizes="100vw"
         height={0}
         width={0}
@@ -61,12 +63,14 @@ const Welcome = ({ playMusic = () => {} }) => {
             placeholder="Enter your name to begin"
             type="text"
             name="name"
+            autoComplete="off"
             required
           />
           <button type="submit" className="w-5 h-5">
             <Image
               src="/icons/arrow-forward.svg"
               priority={true}
+              fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -79,6 +83,7 @@ const Welcome = ({ playMusic = () => {} }) => {
           <Image
             src="/icons/map.svg"
             priority={true}
+            fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

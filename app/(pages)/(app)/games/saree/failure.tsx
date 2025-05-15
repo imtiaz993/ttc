@@ -12,6 +12,7 @@ const Failure = () => {
       <Image
         src="/images/failure.gif"
         priority={true}
+fetchPriority="high"
         sizes="100vw"
         height={0}
         width={0}
@@ -31,6 +32,7 @@ const Failure = () => {
         <Image
           src="/images/saree.png"
           priority={true}
+fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}
@@ -48,6 +50,7 @@ const Failure = () => {
           <Image
             src="/icons/skip.svg"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
@@ -66,6 +69,7 @@ const Failure = () => {
           <Image
             src="/icons/refresh.svg"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

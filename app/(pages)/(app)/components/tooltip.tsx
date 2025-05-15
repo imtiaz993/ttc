@@ -8,6 +8,7 @@ const Tooltip = () => {
         <Image
           src="/icons/info.svg"
           priority={true}
+fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}

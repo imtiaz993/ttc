@@ -7,6 +7,7 @@ const Success = () => {
       <Image
         src="/images/success.gif"
         priority={true}
+fetchPriority="high"
         sizes="100vw"
         height={0}
         width={0}

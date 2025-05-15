@@ -30,6 +30,7 @@ const ScratchStep3 = () => {
         <Image
           src="/images/verifying.gif"
           priority={true}
+fetchPriority="high"
           sizes="100vw"
           height={0}
           width={0}

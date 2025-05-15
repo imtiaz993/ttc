@@ -15,6 +15,7 @@ const SareeStep1 = () => {
               <Image
                 src="/images/selma.png"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -59,6 +60,7 @@ const SareeStep1 = () => {
               <Image
                 src="/icons/sound.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}

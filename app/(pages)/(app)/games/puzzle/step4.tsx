@@ -17,6 +17,7 @@ const PuzzleStep4 = () => {
               <Image
                 src={`/images/${userData.char}.png`}
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -34,6 +35,7 @@ const PuzzleStep4 = () => {
             <Image
               src="/images/three-arts.png"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -47,6 +49,7 @@ const PuzzleStep4 = () => {
             <Image
               src="/icons/zoom-in.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}

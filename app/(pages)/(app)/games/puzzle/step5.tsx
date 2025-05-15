@@ -16,6 +16,7 @@ const PuzzleStep5 = () => {
             <Image
               src={`/images/${userData.char}.png`}
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -57,6 +58,7 @@ const PuzzleStep5 = () => {
             <Image
               src="/images/manchester.png"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}

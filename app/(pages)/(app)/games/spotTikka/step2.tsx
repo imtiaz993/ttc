@@ -17,6 +17,7 @@ const SpotTikkaStep2 = () => {
               <Image
                 src={`/images/${userData.char}.png`}
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -34,6 +35,7 @@ const SpotTikkaStep2 = () => {
               <Image
                 src="/icons/zoom-in.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -53,6 +55,7 @@ const SpotTikkaStep2 = () => {
           <Image
             src="/images/spot-tikka.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

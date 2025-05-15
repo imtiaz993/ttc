@@ -82,6 +82,7 @@ const WordsStep2 = () => {
               <Image
                 src="/icons/psychology.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -94,6 +95,7 @@ const WordsStep2 = () => {
               <Image
                 src="/icons/close-black.svg"
                 priority={true}
+fetchPriority="high"
                 sizes="100vw"
                 height={0}
                 width={0}
@@ -116,6 +118,7 @@ const WordsStep2 = () => {
           <Image
             src="/images/graham-bombay.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}
@@ -151,6 +154,7 @@ const WordsStep2 = () => {
                         : "/icons/close-black.svg"
                     }
                     priority={true}
+fetchPriority="high"
                     sizes="100vw"
                     height={0}
                     width={0}
@@ -184,6 +188,7 @@ const WordsStep2 = () => {
             <Image
               src="/icons/plus.svg"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}

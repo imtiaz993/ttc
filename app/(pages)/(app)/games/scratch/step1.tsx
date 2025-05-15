@@ -22,6 +22,7 @@ const ScratchStep1 = () => {
             <Image
               src="/images/ajji.png"
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
@@ -45,6 +46,7 @@ const ScratchStep1 = () => {
           <Image
             src="/images/scratch-card.png"
             priority={true}
+fetchPriority="high"
             sizes="100vw"
             height={0}
             width={0}

@@ -16,6 +16,7 @@ const OwnTikkaStep2 = () => {
             <Image
               src={`/images/${userData.char}.png`}
               priority={true}
+fetchPriority="high"
               sizes="100vw"
               height={0}
               width={0}
