@@ -2,7 +2,7 @@
 import { Provider } from "react-redux";
 import "./globals.css";
 import { store } from "./redux/store";
-import { useEffect } from "react";
+import PreloadImages from "./preloadImages";
 
 export default function RootLayout({ children }) {
   return (
@@ -12,14 +12,13 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
-        <link rel="preload" as="image" href="/images/char1.png" />
-        <link rel="preload" as="image" href="/images/char1-inactive.png" />
-        <link rel="preload" as="image" href="/images/char1.png" />
-        <link rel="preload" as="image" href="/images/char1-inactive.png" />
       </head>
       <body className="min-h-dvh max-h-dvh overflow-hidden">
-        <div className="sm:hidden h-dvh">
-          <Provider store={store}>{children}</Provider>
+        <div className="sm:hidden h-dvh overflow-hidden">
+          <div className="h-dvh">
+            <Provider store={store}>{children}</Provider>
+          </div>
+          <PreloadImages />
         </div>
         <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100">
           <div className="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white max-w-md">
