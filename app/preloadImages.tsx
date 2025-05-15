@@ -34,16 +34,7 @@ const PreloadImages = () => {
   return (
     <div>
       {images.map((i) => (
-        <Image
-          src={i}
-          priority={true}
-          fetchPriority="high"
-          sizes="100vw"
-          height={0}
-          width={0}
-          alt=""
-          className="w-6 cursor-pointer"
-        />
+        <img src={i} alt="" className="w-6 cursor-pointer" />
       ))}
     </div>
   );
