@@ -30,6 +30,7 @@ const PreloadImages = () => {
     "/images/char4.png",
     "/images/char4-inactive.png",
     "/images/yellow-bg.png",
+    "/images/menu-overlay.png"
   ];
   return (
     <div>
