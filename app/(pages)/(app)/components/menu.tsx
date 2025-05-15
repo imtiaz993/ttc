@@ -47,17 +47,12 @@ const Menu = ({
               )}
             </div>
             <div className="flex items-center justify-between gap-4">
-              <Image
+              <img
                 src={
                   isUndoDisabled
                     ? "/icons/undo-disabled.svg"
                     : "/icons/undo.svg"
                 }
-                priority={true}
-                fetchPriority="high"
-                sizes="100vw"
-                height={0}
-                width={0}
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
