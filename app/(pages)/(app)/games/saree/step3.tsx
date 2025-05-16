@@ -42,8 +42,8 @@ const SareeStep3 = () => {
         setSareePath("/images/saree-orange.png");
         setFinalColor("bg-[#FA9439]");
         setTimeout(() => {
-          // setState("result");
-        }, 1000);
+          setState("result");
+        }, 1500);
       } else if (
         selectedColor.includes("bg-[#F6D44C]") &&
         selectedColor.includes("bg-[#71B0DC]")
@@ -51,8 +51,8 @@ const SareeStep3 = () => {
         setSareePath("/images/saree-green.png");
         setFinalColor("bg-[#78CC87]");
         setTimeout(() => {
-          // setState("result");
-        }, 1000);
+          setState("result");
+        }, 1500);
       } else if (
         selectedColor.includes("bg-[#EA5B7C]") &&
         selectedColor.includes("bg-[#71B0DC]")
@@ -60,8 +60,8 @@ const SareeStep3 = () => {
         setSareePath("/images/saree-purple.png");
         setFinalColor("bg-[#937DC5]");
         setTimeout(() => {
-          // setState("result");
-        }, 1000);
+          setState("result");
+        }, 1500);
       }
     }
     if (selectedColor.length < 2) {
