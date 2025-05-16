@@ -79,14 +79,7 @@ const Welcome = ({ playMusic = () => {} }) => {
                   dragPosition === 0 ? "transform 0.3s ease-out" : "none",
               }}
             >
-              <div
-                onClick={() => {
-                  setOverlay(false);
-                  setDisabled(false);
-                  hideOverlay();
-                }}
-                className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between"
-              >
+              <div className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between">
                 <img
                   src="/icons/swipe-arrow.svg"
                   alt=""
