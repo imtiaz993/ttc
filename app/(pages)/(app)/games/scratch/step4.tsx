@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const ScratchStep4 = () => {

@@ -1,8 +1,8 @@
+import { useSelector } from "react-redux";
 import Success from "./success";
 import Failure from "./failure";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import { useSelector } from "react-redux";
 
 const SareeResult = () => {
   const userData = useSelector((state: any) => state.user.userData);
