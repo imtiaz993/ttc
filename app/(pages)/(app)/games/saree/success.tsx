@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
-const Success = ({ userData }) => {
+const Success = ({ userData, sareePath }) => {
   const dispatch = useDispatch();
 
   const next = () => dispatch(nextStep());
@@ -31,7 +31,7 @@ const Success = ({ userData }) => {
         </div>
       </div>
       <div className="relative">
-        <img src="/images/saree.png" alt="" className="w-52" />
+        <img src={sareePath} alt="" className="w-52" />
         <img
           src="/images/success.gif"
           alt=""
