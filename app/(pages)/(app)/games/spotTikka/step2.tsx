@@ -10,17 +10,12 @@ const SpotTikkaStep2 = () => {
     <>
       <Menu />
       <GameStepper />
-      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
         <div className="w-full">
           <div className="w-full flex items-start mb-6">
             <div>
               <img
                 src={`/images/${userData.char}.png`}
-               
-
-                
-                
-                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -32,16 +27,7 @@ const SpotTikkaStep2 = () => {
           </div>
           <div className="bg-[#FDD931] w-full rounded py-3 px-4">
             <div className="w-full flex items-center mb-2">
-              <img
-                src="/icons/zoom-in.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
+              <img src="/icons/zoom-in.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Spot this tika in the gallery
               </p>
@@ -51,17 +37,8 @@ const SpotTikkaStep2 = () => {
             </p>
           </div>
         </div>
-        <div className="flex justify-center items-center">
-          <img
-            src="/images/spot-tikka.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-52"
-          />
+        <div className="flex justify-center items-center mt-24">
+          <img src="/images/spot-tikka.png" alt="" className="w-52" />
         </div>
       </div>
     </>

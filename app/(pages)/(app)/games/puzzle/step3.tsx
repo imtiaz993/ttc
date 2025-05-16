@@ -73,7 +73,7 @@ const PuzzleStep3 = () => {
         </div>
       )}
       {success && (
-        <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
+        <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
           <div>
             <p className="text-xs font-medium mt-5">
               Great job! You finished the puzzle in{" "}
@@ -86,7 +86,7 @@ const PuzzleStep3 = () => {
             <img src="/images/completed-puzzle.png" alt="" className="w-48" />
             <img src="/images/success.gif" alt="" className="w-36 absolute" />
           </div>
-          <div></div>
+          <div className="min-h-20 w-full"></div>
         </div>
       )}
       {!success && (
