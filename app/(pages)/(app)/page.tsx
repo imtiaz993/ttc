@@ -16,8 +16,6 @@ import SareeResult from "./games/saree/result";
 
 import SpotTikkaStep1 from "./games/spotTikka/step1";
 import SpotTikkaStep2 from "./games/spotTikka/step2";
-import SpotTikkaStep3 from "./games/spotTikka/step3";
-import SpotTikkaResult from "./games/spotTikka/result";
 
 import WordsStep1 from "./games/words/step1";
 import WordsStep2 from "./games/words/step2";

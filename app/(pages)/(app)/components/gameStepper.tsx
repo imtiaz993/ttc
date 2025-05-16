@@ -10,11 +10,11 @@ const GameStepper = ({
 }) => {
   const steps = [
     { step: [2], icon: "/images/game1.png" },
-    { step: [5, 6], icon: "/images/game2.png" },
-    { step: [9, 10], icon: "/images/game3.png" },
-    { step: [13, 14], icon: "/images/game4.png" },
-    { step: [18, 19], icon: "/images/game5.png" },
-    { step: [24, 25], icon: "/images/game6.png" },
+    { step: [4], icon: "/images/game2.png" },
+    { step: [7, 8], icon: "/images/game3.png" },
+    { step: [10], icon: "/images/game4.png" },
+    { step: [14,15], icon: "/images/game5.png" },
+    { step: [20, 21], icon: "/images/game6.png" },
   ];
 
   const dispatch = useDispatch();
@@ -31,57 +31,51 @@ const GameStepper = ({
         value = 8;
         break;
       case 4:
-        value = 12;
-        break;
-      case 5:
-      case 6:
         value = 20;
         break;
-      case 7:
+      case 5:
         value = 28;
         break;
-      case 8:
+      case 6:
         value = 32;
         break;
-      case 9:
-      case 10:
+      case 7:
+      case 8:
         value = 40;
         break;
-      case 11:
-      case 12:
+      case 9:
         value = 48;
         break;
-      case 13:
-      case 14:
+      case 10:
         value = 60;
         break;
-      case 15:
+      case 11:
         value = 64;
         break;
-      case 16:
+      case 12:
         value = 68;
         break;
-      case 17:
+      case 13:
         value = 71;
         break;
-      case 18:
-      case 19:
+      case 14:
+      case 15:
         value = 78;
         break;
-      case 20:
+      case 16:
         value = 82;
         break;
-      case 21:
+      case 17:
         value = 85;
         break;
-      case 22:
+      case 18:
         value = 88;
         break;
-      case 23:
+      case 19:
         value = 91;
         break;
-      case 24:
-      case 25:
+      case 20:
+      case 21:
         value = 100;
         break;
 
