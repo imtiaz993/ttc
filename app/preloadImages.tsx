@@ -105,7 +105,7 @@ const PreloadImages = () => {
   ];
 
   return (
-    <div>
+    <div className="h-0 overflow-hidden">
       {images.map((i) => (
         <img src={i} alt="" className="w-6 cursor-pointer" />
       ))}

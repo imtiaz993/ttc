@@ -2,11 +2,13 @@ import Image from "next/image";
 import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
+import { useSelector } from "react-redux";
 
 const ScratchStep1 = () => {
+  const userData = useSelector((state: any) => state.user.userData);
   return (
     <>
-      <Menu isOpen={true} />
+      <Menu isOpen={userData.menu} />
       <GameStepper iswhite />
       <div
         style={{

@@ -1,8 +1,11 @@
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, resetStep } from "../../../redux/slices/navigationSlice";
-import { setUserData, toggleMute } from "../../../redux/slices/userSlice";
+import {
+  setUserData,
+  toggleMute,
+  closeMenu,
+} from "../../../redux/slices/userSlice";
 
 const Menu = ({
   isOpen = false,
@@ -19,6 +22,7 @@ const Menu = ({
 
   const next = () => dispatch(nextStep());
   const reset = () => dispatch(resetStep());
+  const closeDrawer = () => dispatch(closeMenu());
   const updateUserData = (data) => dispatch(setUserData(data));
   const handleToggleMute = (data) => dispatch(toggleMute(data));
 
@@ -53,12 +57,7 @@ const Menu = ({
                     ? "/icons/undo-disabled.svg"
                     : "/icons/undo.svg"
                 }
-               
-                
                 decoding="sync"
-                
-                
-                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -69,12 +68,7 @@ const Menu = ({
               />
               <img
                 src="/icons/info-black.svg"
-               
-                
                 decoding="sync"
-                
-                
-                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={handleInfo}
@@ -87,12 +81,7 @@ const Menu = ({
               src={
                 userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"
               }
-             
-              
               decoding="sync"
-              
-              
-              
               alt=""
               className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
             />
@@ -101,12 +90,7 @@ const Menu = ({
               {showInfo && (
                 <img
                   src="/icons/info-black.svg"
-                 
-                  
                   decoding="sync"
-                  
-                  
-                  
                   alt=""
                   className="w-6 cursor-pointer"
                   onClick={handleInfo}
@@ -114,12 +98,7 @@ const Menu = ({
               )}
               <img
                 src="/icons/menu.svg"
-               
-                
                 decoding="sync"
-                
-                
-                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
@@ -145,16 +124,12 @@ const Menu = ({
               <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
               <img
                 src="/icons/close.svg"
-               
-                
                 decoding="sync"
-                
-                
-                
                 alt=""
                 className="w-6 cursor-pointer"
                 onClick={() => {
                   setOpen(false);
+                  closeDrawer()
                 }}
               />
             </div>
@@ -171,8 +146,6 @@ const Menu = ({
                         ? `/images/char${index + 1}.png`
                         : `/images/char${index + 1}-inactive.png`
                     }
-                   
-                    
                     height={75}
                     width={75}
                     decoding="sync"
@@ -196,12 +169,7 @@ const Menu = ({
                         ? "/icons/volume-white.svg"
                         : "/icons/mute.svg"
                     }
-                   
-                    
                     decoding="sync"
-                    
-                    
-                    
                     alt=""
                     className={`${
                       userData.sound ? "w-6" : "w-5"
@@ -217,12 +185,7 @@ const Menu = ({
                   </p>
                   <img
                     src="/icons/refresh.svg"
-                   
-                    
                     decoding="sync"
-                    
-                    
-                    
                     alt=""
                     className="w-6 cursor-pointer"
                     onClick={() => {

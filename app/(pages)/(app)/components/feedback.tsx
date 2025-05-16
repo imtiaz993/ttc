@@ -49,26 +49,12 @@ const Feedback = () => {
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <img
           src={`/images/${userData.char}.png`}
-         
-
-          
-          
-          
           alt=""
           className="w-20 rounded-lg"
         />
         <div className="mt-6 w-full">
           <div className="w-full flex items-center mb-2">
-            <img
-              src="/icons/emoji.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
+            <img src="/icons/emoji.svg" alt="" className="w-6" />
             <p className="font-semibold ml-2">
               Hope you enjoyed this little journey back in time! 
             </p>
@@ -96,11 +82,7 @@ const Feedback = () => {
                 <img
                   src="/icons/arrow-forward.svg"
                   // arrow-forward-disable.svg
-                 
 
-                  
-                  
-                  
                   alt=""
                   className="w-5"
                 />
@@ -143,16 +125,7 @@ const Feedback = () => {
           {formSubmitted && (
             <div className="fixed inset-0 flex justify-center items-center">
               <div className="mt-5 bg-[#202F00] rounded-full py-1.5 px-3 flex items-center w-fit">
-                <img
-                  src="/icons/info.svg"
-                 
-
-                  
-                  
-                  
-                  alt=""
-                  className="w-6"
-                />
+                <img src="/icons/info.svg" alt="" className="w-6" />
                 <p className="ml-2 text-xs text-[#FFF8E7]">
                   Submitted successfully!
                 </p>

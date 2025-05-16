@@ -8,6 +8,7 @@ const userSlice = createSlice({
       sound: false,
       char: "char1",
       tooltip: false,
+      menu: true,
     },
     isMuted: false,
   },
@@ -19,8 +20,11 @@ const userSlice = createSlice({
       state.isMuted = action.payload;
       state.userData.sound = !action.payload;
     },
+    closeMenu: (state) => {
+      state.userData.menu = false;
+    },
   },
 });
 
-export const { setUserData, toggleMute } = userSlice.actions;
+export const { setUserData, toggleMute, closeMenu } = userSlice.actions;
 export default userSlice.reducer;

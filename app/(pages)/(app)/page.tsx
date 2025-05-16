@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-import Overlay from "./components/overlay";
 import Welcome from "./components/welcome";
 
 import ScratchStep1 from "./games/scratch/step1";
@@ -102,7 +101,6 @@ export default function Home() {
   ];
 
   const components = [
-    <Overlay />,
     <Welcome playMusic={playMusic} />,
     ...ScratchGame,
     ...SareeGame,
@@ -113,5 +111,5 @@ export default function Home() {
     <Feedback />,
     <Thankyou />,
   ];
-  return components[step];
+  return components[step - 1];
 }

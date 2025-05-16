@@ -15,32 +15,14 @@ const Thankyou = () => {
           Thanks for visiting!
         </p>
       </div>
-      <img
-        src="/icons/logo.svg"
-       
-
-        
-        
-        
-        alt=""
-        className="w-24 mb-6"
-      />
+      <img src="/icons/logo.svg" alt="" className="w-24 mb-6" />
       <p className="text-center text-[#D02E01] text-[11px] mb-3 px-10">
         This exhibition and digital experience have been supported by the Bank
         of America
       </p>
       <div className="w-full px-7">
         <div className="flex justify-center">
-          <img
-            src="/icons/bofa.svg"
-           
-
-            
-            
-            
-            alt=""
-            className="w-full"
-          />
+          <img src="/icons/bofa.svg" alt="" className="w-full" />
         </div>
 
         <p className="text-center text-[#D02E01] text-[11px] mt-5">
@@ -102,16 +84,7 @@ const Thankyou = () => {
             </p>
           </div>
           <div className="flex justify-center mt-6">
-            <img
-              src="/icons/map.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-16"
-            />
+            <img src="/icons/map.svg" alt="" className="w-16" />
           </div>
         </div>
       </div>
