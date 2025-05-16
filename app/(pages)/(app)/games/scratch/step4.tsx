@@ -24,7 +24,7 @@ const ScratchStep4 = () => {
     <>
       <Menu />
       <GameStepper showNext={false} showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
         <img
           src="/images/verifying.gif"
           decoding="sync"

@@ -9,6 +9,7 @@ const userSlice = createSlice({
       char: "char1",
       tooltip: false,
       menu: true,
+      overlay: true,
     },
     isMuted: false,
   },
@@ -23,8 +24,12 @@ const userSlice = createSlice({
     closeMenu: (state) => {
       state.userData.menu = false;
     },
+    closeOverlay: (state) => {
+      state.userData.overlay = false;
+    },
   },
 });
 
-export const { setUserData, toggleMute, closeMenu } = userSlice.actions;
+export const { setUserData, toggleMute, closeMenu, closeOverlay } =
+  userSlice.actions;
 export default userSlice.reducer;

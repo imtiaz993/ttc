@@ -9,15 +9,6 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 const SpotTikkaResult = () => {
   const success = true;
 
-  const dispatch = useDispatch();
-
-  const next = () => dispatch(nextStep());
-
-  useEffect(() => {
-    setTimeout(() => {
-      next();
-    }, 3000);
-  }, []);
 
   return (
     <>

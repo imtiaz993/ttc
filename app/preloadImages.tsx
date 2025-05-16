@@ -1,5 +1,6 @@
 const PreloadImages = () => {
   const images = [
+    "/images/ajji.png",
     "/images/bg-1.png",
     "/images/bg-2.png",
     "/images/bg-3.png",

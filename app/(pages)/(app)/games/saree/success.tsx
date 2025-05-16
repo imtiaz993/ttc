@@ -1,18 +1,24 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const Success = ({ userData }) => {
+  const dispatch = useDispatch();
+
+  const next = () => dispatch(nextStep());
+
+  useEffect(() => {
+    setTimeout(() => {
+      next();
+    }, 3000);
+  }, []);
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
       <div className="w-full flex justify-between items-start">
         <div>
           <img
             src={`/images/${userData.char}.png`}
-           
-
-            
-            
-            
             alt=""
             className="w-11 rounded-lg"
           />
@@ -26,23 +32,9 @@ const Success = ({ userData }) => {
         </div>
       </div>
       <div className="relative">
-        <img
-          src="/images/saree.png"
-         
-
-          
-          
-          
-          alt=""
-          className="w-52"
-        />
+        <img src="/images/saree.png" alt="" className="w-52" />
         <img
           src="/images/success.gif"
-         
-
-          
-          
-          
           alt=""
           className="w-36 absolute top-16 left-8"
         />

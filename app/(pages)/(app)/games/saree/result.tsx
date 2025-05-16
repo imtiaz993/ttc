@@ -10,15 +10,7 @@ const SareeResult = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const success = false;
 
-  const dispatch = useDispatch();
 
-  const next = () => dispatch(nextStep());
-
-  useEffect(() => {
-    setTimeout(() => {
-      next();
-    }, 3000);
-  }, []);
 
   return (
     <>

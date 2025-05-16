@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep } from "../../../redux/slices/navigationSlice";
-import { setUserData } from "../../../redux/slices/userSlice";
+import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
 import { useEffect, useState } from "react";
 
 const Welcome = ({ playMusic = () => {} }) => {
@@ -9,13 +9,21 @@ const Welcome = ({ playMusic = () => {} }) => {
   const [disabled, setDisabled] = useState(true);
   const userData = useSelector((state: any) => state.user.userData);
   const next = () => dispatch(nextStep());
+  const hideOverlay = () => dispatch(closeOverlay());
+
   const updateUserData = (data) => dispatch(setUserData(data));
 
   useEffect(() => {
     setTimeout(() => {
-      setOverlay(true);
-      setDisabled(false);
+      if (userData.overlay) {
+        setOverlay(true);
+      } else {
+        setDisabled(false);
+      }
     }, 2000);
+    if (!userData.overlay) {
+      setDisabled(false);
+    }
   }, []);
 
   return (
@@ -34,6 +42,8 @@ const Welcome = ({ playMusic = () => {} }) => {
             <div
               onClick={() => {
                 setOverlay(false);
+                setDisabled(false);
+                hideOverlay();
               }}
               className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between"
             >
