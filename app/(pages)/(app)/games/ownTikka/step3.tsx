@@ -123,9 +123,14 @@ const OwnTikkaStep3 = () => {
             backgroundImage: selectedOptions.Background
               ? `url(${selectedOptions.Background})`
               : "none",
-            backgroundSize: "cover",
+            backgroundSize: "contain",
             backgroundPosition: "center",
-            border: "1px solid black",
+            border:
+              selectedOptions.Background ||
+              selectedOptions.Border ||
+              selectedOptions.Elements
+                ? ""
+                : "1px solid black",
           }}
         >
           {selectedOptions.Background ||

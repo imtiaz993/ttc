@@ -101,6 +101,7 @@ const PreloadImages = () => {
     "/icons/toggle.svg",
     "/icons/undo-disabled.svg",
     "/icons/undo.svg",
+    "/icons/union.svg",
     "/icons/volume-white.svg",
     "/icons/volume.svg",
     "/icons/x.svg",

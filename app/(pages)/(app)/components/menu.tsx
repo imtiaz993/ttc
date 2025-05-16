@@ -137,7 +137,7 @@ const Menu = ({
               <p className="text-[#FFF8E7] font-medium mb-2.5">
                 On this adventure. I’d like to be
               </p>
-              <div className="flex justify-between gap-5 mb-10">
+              <div className="flex justify-between gap-4 mb-10">
                 {Array.from({ length: 4 }).map((_, index) => (
                   <img
                     key={index}

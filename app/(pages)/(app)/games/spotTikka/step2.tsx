@@ -83,7 +83,7 @@ const SpotTikkaStep2 = () => {
                 Skip
               </button>
               <button
-                onClick={handleSkip}
+                onClick={handleCameraClick}
                 className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
               >
                 <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />
@@ -113,7 +113,7 @@ const SpotTikkaStep2 = () => {
                   />
                   <p className="mt-1 text-xs font-medium text-center">You</p>
                 </div>
-                <p className="ml-4 font-medium text-left w-[cacl(100%-46px)]">
+                <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
                   &lt;text copy&gt;
                 </p>
               </div>
