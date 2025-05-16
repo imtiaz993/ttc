@@ -30,7 +30,7 @@ const OwnTikkaStep3 = () => {
     ) {
       setTimeout(() => {
         handleComplete();
-      }, 1000);
+      }, 2000);
     }
   }, [selectedOptions]);
 
@@ -94,26 +94,12 @@ const OwnTikkaStep3 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-start mb-2">
-              <img
-                src="/icons/mouse.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
+              <img src="/icons/mouse.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Create your own Ticket
               </p>
               <img
                 src="/icons/close-black.svg"
-               
-
-                
-                
-                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -122,8 +108,9 @@ const OwnTikkaStep3 = () => {
               />
             </div>
             <p className="mt-2 text-xs">
-              Use backgrounds,borders, characters and more from ticket all around
-              you to design your unique tika and leave a Chaap on the world!
+              Use backgrounds,borders, characters and more from ticket all
+              around you to design your unique tika and leave a Chaap on the
+              world!
             </p>
           </div>
         </div>
@@ -149,11 +136,6 @@ const OwnTikkaStep3 = () => {
               {selectedOptions.Elements && (
                 <img
                   src={selectedOptions.Elements}
-                 
-
-                  
-                  
-                  
                   alt="Selected Element"
                   className="w-24 h-24 object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
                 />
@@ -161,11 +143,6 @@ const OwnTikkaStep3 = () => {
               {selectedOptions.Border && (
                 <img
                   src={selectedOptions.Border}
-                 
-
-                  
-                  
-                  
                   alt="Selected Element"
                   className="w-full h-full object-cover absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
                 />
@@ -206,22 +183,12 @@ const OwnTikkaStep3 = () => {
                     {selectedOptions[selectedMenu] == option && (
                       <img
                         src="/icons/selected.svg"
-                       
-
-                        
-                        
-                        
                         alt=""
                         className=" w-10 h-10 absolute translate-x-1/2 translate-y-1/2"
                       />
                     )}
                     <img
                       src={option}
-                     
-
-                      
-                      
-                      
                       alt=""
                       className="w-20 h-[100px] object-contain"
                       onClick={() => {
@@ -252,11 +219,6 @@ const OwnTikkaStep3 = () => {
                   src={
                     menu.menu === selectedMenu ? menu.iconWhite : menu.iconBlack
                   }
-                 
-
-                  
-                  
-                  
                   alt=""
                   className="w-6"
                 />

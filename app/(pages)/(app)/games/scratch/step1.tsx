@@ -7,7 +7,7 @@ const ScratchStep1 = () => {
   return (
     <>
       <Menu isOpen={true} />
-      <GameStepper iswhite showPrev={false} />
+      <GameStepper iswhite />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",
@@ -19,16 +19,7 @@ const ScratchStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>30th March, 1886</p>
           <div>
-            <img
-              src="/images/ajji.png"
-             
-              
-              
-              
-              
-              alt=""
-              className="w-11 rounded-lg"
-            />
+            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center">Kamla</p>
           </div>
         </div>
@@ -43,16 +34,7 @@ const ScratchStep1 = () => {
           textile business after all!
         </p>
         <div className="flex justify-center items-center mb-32">
-          <img
-            src="/images/scratch-card.png"
-           
-            
-            
-            
-            
-            alt=""
-            className="w-60"
-          />
+          <img src="/images/scratch-card.png" alt="" className="w-60" />
         </div>
       </div>
     </>

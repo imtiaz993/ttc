@@ -9,17 +9,12 @@ const PuzzleStep5 = () => {
   return (
     <>
       <Menu />
-      <GameStepper showPrev={true} />
+      <GameStepper showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
         <div className="w-full flex items-start mb-6">
           <div>
             <img
               src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -55,16 +50,7 @@ const PuzzleStep5 = () => {
             Who were they meant to attract?
           </div>
           <div className="flex justify-center items-center">
-            <img
-              src="/images/manchester.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-48"
-            />
+            <img src="/images/manchester.png" alt="" className="w-48" />
           </div>
         </div>
         <div className="h-28"></div>

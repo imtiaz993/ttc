@@ -9,16 +9,7 @@ const Failure = () => {
   const prev = () => dispatch(prevStep());
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
-      <img
-        src="/images/failure-2.gif"
-       
-
-        
-        
-        
-        alt=""
-        className="w-28"
-      />
+      <img src="/images/failure-2.gif" alt="" className="w-28" />
       <p className="text-xs font-semibold mt-6">Oops! Not quite.</p>
       <p className="text-xs mt-2">How about we have another go?</p>
       <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-16">
@@ -28,16 +19,7 @@ const Failure = () => {
           }}
           className="border border-black bg-transparent font-semibold flex justify-center py-3 w-full"
         >
-          <img
-            src="/icons/skip.svg"
-           
-
-            
-            
-            
-            alt=""
-            className="w-6 mr-2"
-          />
+          <img src="/icons/skip.svg" alt="" className="w-6 mr-2" />
           Skip
         </button>
         <button
@@ -47,16 +29,7 @@ const Failure = () => {
           }}
           className="text-[#FFF8E7] font-semibold flex justify-center bg-black border border-black py-3 w-full"
         >
-          <img
-            src="/icons/refresh.svg"
-           
-
-            
-            
-            
-            alt=""
-            className="w-6 mr-2"
-          />
+          <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />
           Try Again
         </button>
       </div>

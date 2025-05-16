@@ -46,22 +46,13 @@ const PuzzleStep3 = () => {
   return (
     <>
       <Menu isGameOptions={isGameOptions} />
-      <GameStepper showPrev={false} />
+      <GameStepper showNext={!overlay} showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <img
-                src="/icons/question-mark.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
+              <img src="/icons/question-mark.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Find the tika
               </p>
@@ -92,26 +83,8 @@ const PuzzleStep3 = () => {
             </p>
           </div>
           <div className="flex justify-center items-center w-full relative">
-            <img
-              src="/images/completed-puzzle.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-48"
-            />
-            <img
-              src="/images/success.gif"
-             
-
-              
-              
-              
-              alt=""
-              className="w-36 absolute"
-            />
+            <img src="/images/completed-puzzle.png" alt="" className="w-48" />
+            <img src="/images/success.gif" alt="" className="w-36 absolute" />
           </div>
           <div></div>
         </div>
@@ -126,16 +99,7 @@ const PuzzleStep3 = () => {
             </span>
           </h1>
           <div className="flex justify-center items-center mt-3 w-full">
-            <img
-              src="/images/completed-puzzle.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-64"
-            />
+            <img src="/images/completed-puzzle.png" alt="" className="w-64" />
           </div>
         </div>
       )}

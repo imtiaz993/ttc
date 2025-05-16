@@ -7,7 +7,7 @@ const SpotTikkaStep1 = () => {
   return (
     <>
       <Menu />
-      <GameStepper iswhite showPrev={false} />
+      <GameStepper iswhite />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",

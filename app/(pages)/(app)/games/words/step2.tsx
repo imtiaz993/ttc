@@ -73,32 +73,18 @@ const WordsStep2 = () => {
           setWords(wordsInitialData);
         }}
       />
-      <GameStepper />
+      <GameStepper showPrev={selectedWords.length > 0} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <img
-                src="/icons/psychology.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
+              <img src="/icons/psychology.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Why choose a warrior to advertise cotton cloth?
               </p>
               <img
                 src="/icons/close-black.svg"
-               
-
-                
-                
-                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -115,16 +101,7 @@ const WordsStep2 = () => {
       )}
       <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
         <div className="flex justify-center items-center">
-          <img
-            src="/images/graham-bombay.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-36"
-          />
+          <img src="/images/graham-bombay.png" alt="" className="w-36" />
         </div>
         <div className="w-full mt-6">
           <div className="flex flex-wrap gap-4 max-h-64 overflow-auto">
@@ -153,11 +130,6 @@ const WordsStep2 = () => {
                         ? "/icons/close.svg"
                         : "/icons/close-black.svg"
                     }
-                   
-
-                    
-                    
-                    
                     alt=""
                     className="w-5"
                     onClick={(e) => {
@@ -187,11 +159,6 @@ const WordsStep2 = () => {
             />
             <img
               src="/icons/plus.svg"
-             
-
-              
-              
-              
               alt=""
               className="w-6"
               onClick={() => {

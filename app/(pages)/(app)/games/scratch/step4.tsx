@@ -13,19 +13,17 @@ const ScratchStep4 = () => {
   const handleVerifying = () => {
     setTimeout(() => {
       next();
-    }, 2000);
+    }, 3000);
   };
 
-  // useEffect(() => {
-  //   console.log("TEST");
-
-  //   handleVerifying();
-  // }, []);
+  useEffect(() => {
+    handleVerifying();
+  }, []);
 
   return (
     <>
       <Menu />
-      <GameStepper showNext={true} showPrev={false} />
+      <GameStepper showNext={false} showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
         <img
           src="/images/verifying.gif"
