@@ -25,7 +25,7 @@ const OwnTikkaStep4 = () => {
             />
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
-          <p className="ml-4 font-medium w-[cacl(100%-46px)]">
+          <p className="ml-4 font-medium w-[calc(100%-44px)]">
             Look at that! I just made my first Tika. I should save it.
           </p>
         </div>

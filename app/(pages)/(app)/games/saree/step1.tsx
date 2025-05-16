@@ -10,7 +10,7 @@ const SareeStep1 = () => {
         <div>
           <div className="w-full flex justify-between items-start mb-4">
             <div>
-              <img src="/images/selma.png" alt="" className="w-11 rounded-lg" />
+              <img src="/images/selma.png" alt="" className="w-11 rounded-full bg-[#EA865B] border border-black" />
               <p className="mt-1 text-xs font-medium text-center">Selma</p>
             </div>
             <p className="text-right">

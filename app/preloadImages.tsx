@@ -1,6 +1,6 @@
 const PreloadImages = () => {
   const images = [
-    "/images/ajji.png",
+    "/images/kamla.png",
     "/images/bg-1.png",
     "/images/bg-2.png",
     "/images/bg-3.png",
@@ -101,6 +101,7 @@ const PreloadImages = () => {
     "/icons/toggle.svg",
     "/icons/undo-disabled.svg",
     "/icons/undo.svg",
+    "/icons/union.svg",
     "/icons/volume-white.svg",
     "/icons/volume.svg",
     "/icons/x.svg",

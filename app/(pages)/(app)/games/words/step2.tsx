@@ -116,7 +116,7 @@ const WordsStep2 = () => {
                     setSelectedWords([...selectedWords, i]);
                   }
                 }}
-                className={` rounded p-3 text-sm font-semibold flex items-center gap-2 ${
+                className={`flex-1 max-w-[calc(50%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 ${
                   selectedWords.find((word) => word.id === i.id)
                     ? "bg-[#2D6A42] text-white border border-[#2D6A42]"
                     : "bg-transparent text-black border border-black"
