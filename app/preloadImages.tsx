@@ -1,5 +1,12 @@
 const PreloadImages = () => {
   const images = [
+    "/images/saree-blue.png",
+    "/images/saree-green.png",
+    "/images/saree-orange.png",
+    "/images/saree-purple.png",
+    "/images/saree-red.png",
+    "/images/saree-white.png",
+    "/images/saree-yellow.png",
     "/images/kamla.png",
     "/images/bg-1.png",
     "/images/bg-2.png",
@@ -49,7 +56,6 @@ const PreloadImages = () => {
     "/images/own-tikka-final.png",
     "/images/own-tikka.png",
     "/images/puzzle.png",
-    "/images/saree.png",
     "/images/scratch-card.png",
     "/images/scratched-image.jpeg",
     "/images/scratch-card-2.png",
