@@ -55,7 +55,7 @@ const PreloadImages = () => {
     "/images/overlay-yellow.png",
     "/images/own-tikka-final.png",
     "/images/own-tikka.png",
-    "/images/puzzle.png",
+    "/icons/puzzle.svg",
     "/images/scratch-card.png",
     "/images/scratched-image.jpeg",
     "/images/scratch-card-2.png",
