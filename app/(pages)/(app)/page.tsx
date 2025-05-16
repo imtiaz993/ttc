@@ -6,6 +6,7 @@ import Welcome from "./components/welcome";
 import ScratchStep1 from "./games/scratch/step1";
 import ScratchStep2 from "./games/scratch/step2";
 import ScratchStep3 from "./games/scratch/step3";
+import ScratchStep4 from "./games/scratch/step4";
 import ScratchResult from "./games/scratch/result";
 
 import SareeStep1 from "./games/saree/step1";
@@ -65,6 +66,7 @@ export default function Home() {
     <ScratchStep1 />,
     <ScratchStep2 />,
     <ScratchStep3 />,
+    <ScratchStep4 />,
     <ScratchResult />,
   ];
 

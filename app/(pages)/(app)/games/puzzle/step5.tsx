@@ -9,7 +9,7 @@ const PuzzleStep5 = () => {
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
+      <GameStepper showPrev={true} />
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
         <div className="w-full flex items-start mb-6">
           <div>

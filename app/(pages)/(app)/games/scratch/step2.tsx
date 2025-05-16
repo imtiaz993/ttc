@@ -1,82 +1,39 @@
 import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const ScratchStep2 = () => {
-  const userData = useSelector((state: any) => state.user.userData);
-  const handleCameraClick = () => {
-    console.log("Camera Clicked!");
-  };
   return (
     <>
       <Menu />
-      <GameStepper showCamera={true} onCameraClick={handleCameraClick} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-        <div className="w-full flex items-start mb-4">
+      <GameStepper iswhite showPrev={false} />
+      <div
+        style={{
+          backgroundImage: "url('/images/yellow-bg.png')",
+          backgroundSize: "cover",
+          backgroundRepeat: "round",
+        }}
+        className="h-full pt-16 px-4 flex flex-col justify-start items-center"
+      >
+        <div className="w-full flex justify-between items-start mb-4">
+          <p>7th April, 1886</p>
           <div>
-            <img
-              src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
-              alt=""
-              className="w-11 rounded-lg"
-            />
-            <p className="mt-1 text-xs font-medium text-center">You</p>
+            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
+            <p className="mt-1 text-xs font-medium text-center">Kamla</p>
           </div>
-          <p className="ml-4 font-medium w-[cacl(100%-46px)]">
-            Phew! Glad I have a smartphone to help me solve ancient mysteries.
-          </p>
         </div>
-        <div className="mt-10 mb-6 relative">
-          <img
-            src="/images/camera.gif"
-           
-
-            
-            decoding="sync"
-            
-            
-            alt=""
-            className="w-64 relative z-20"
-          />
-          <img
-            src="/images/camera-scanning-art.png"
-           
-
-decoding="sync"
-            
-            
-            
-            alt=""
-            className="w-28 absolute top-[52px] left-[70px] z-10"
-          />
-        </div>
-        <div className="bg-[#FDD931] rounded py-3 px-4">
-          <div className="w-full flex items-start mb-2">
-            <img
-              src="/icons/zoom-in.svg"
-             
-
-decoding="sync"
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
-            <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-              Find this colorful image of a lion & lioness within a glass case
-              around you
-            </p>
-          </div>
-          <p className="mt-2 text-xs">
-            Now take a picture of it to see what you discover next!
-          </p>
+        <p className="text-sm mb-6">
+          Selma says this unusual picture is called a “Ticket”. She did however
+          mention how she had heard her dad refer to them as “chaaps” or “tikas”
+          too on some occasions.
+          <br />
+          They are meant to be advertisements just like the ones in newspapers.
+          Except, these don’t sell us Coca-Cola or Pears soap! 
+          <br />
+          But I wonder.. how are they so colourful?
+        </p>
+        <div className="flex justify-center items-center mb-32">
+          <img src="/images/scratch-card-2.png" alt="" className="w-60" />
         </div>
       </div>
     </>

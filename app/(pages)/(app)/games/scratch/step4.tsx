@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
-const SpotTikkaStep3 = () => {
+const ScratchStep4 = () => {
   const dispatch = useDispatch();
 
   const next = () => dispatch(nextStep());
@@ -17,6 +17,8 @@ const SpotTikkaStep3 = () => {
   };
 
   // useEffect(() => {
+  //   console.log("TEST");
+
   //   handleVerifying();
   // }, []);
 
@@ -27,11 +29,7 @@ const SpotTikkaStep3 = () => {
       <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
         <img
           src="/images/verifying.gif"
-         
-
-          
-          
-          
+          decoding="sync"
           alt=""
           className="w-40"
         />
@@ -41,4 +39,4 @@ const SpotTikkaStep3 = () => {
   );
 };
 
-export default SpotTikkaStep3;
+export default ScratchStep4;

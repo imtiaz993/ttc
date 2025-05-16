@@ -1,7 +1,3 @@
-
-
-
-
 const PreloadImages = () => {
   const images = [
     "/images/bg-1.png",
@@ -54,6 +50,7 @@ const PreloadImages = () => {
     "/images/puzzle.png",
     "/images/saree.png",
     "/images/scratch-card.png",
+    "/images/scratch-card-2.png",
     "/images/selma.png",
     "/images/spot-tikka.png",
     "/images/success.gif",
