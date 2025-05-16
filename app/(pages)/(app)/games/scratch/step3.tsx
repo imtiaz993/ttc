@@ -121,18 +121,20 @@ const ScratchStep2 = () => {
                 Have another go before these big cats disappear into the wild!
               </p>
             </div>
-            <div className="w-full flex gap-3 mt-auto">
+            <div className="w-full grid grid-cols-2 gap-4 mt-auto">
               <button
-                className="flex-1 py-4 border border-black rounded-sm flex items-center justify-center"
                 onClick={handleSkip}
+                className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
               >
-                <span className="mr-2">⏭</span> Skip
+                <img src="/icons/skip.svg" alt="" className="w-6 mr-2" />
+                Skip
               </button>
               <button
-                className="flex-1 py-4 bg-black text-white rounded-sm flex items-center justify-center"
-                onClick={handleCameraClick}
+                onClick={handleSkip}
+                className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
               >
-                <span className="mr-2">↻</span> Try Again
+                <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />
+                Try Again
               </button>
             </div>
           </div>
