@@ -38,7 +38,7 @@ const OwnTikkaStep3 = () => {
       menu: "Background",
       iconWhite: "/icons/backgroud-white.svg",
       iconBlack: "/icons/background-black.svg",
-      options: ["/images/bg-1.png", "/images/bg-2.png", "/images/bg-3.png"],
+      options: ["/images/bg-1.jpg", "/images/bg-2.jpg", "/images/bg-3.jpg"],
     },
     {
       menu: "Border",

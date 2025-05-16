@@ -20,7 +20,7 @@ const Thankyou = () => {
       </p>
       <div className="w-full px-7">
         <div className="flex justify-center">
-          <img src="/icons/bofa.svg" alt="" className="w-full" />
+          <img src="/icons/bofa-bank.svg" alt="" className="w-full h-20" />
         </div>
 
         <p className="text-center text-[#D02E01] text-[11px] mt-5">

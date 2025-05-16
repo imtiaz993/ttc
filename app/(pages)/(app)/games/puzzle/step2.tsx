@@ -95,7 +95,7 @@ const PuzzleStep2 = () => {
           </div>
         </div>
         <div className="flex justify-center items-center mt-11 w-full">
-          <img src="/images/puzzle.png" alt="" className="w-2/3" />
+          <img src="/icons/puzzle.svg" alt="" className="w-2/3" />
         </div>
       </div>
     </>
