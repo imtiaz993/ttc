@@ -1,6 +1,3 @@
-import Image from "next/image";
-import React from "react";
-
 const Tooltip = () => {
   return (
     <div className="flex justify-center items-center">

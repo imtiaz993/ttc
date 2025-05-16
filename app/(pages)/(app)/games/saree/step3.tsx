@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const SareeStep3 = () => {
@@ -65,26 +64,12 @@ const SareeStep3 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <img
-                src="/icons/paint.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
+              <img src="/icons/paint.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
                 Mix it Up!
               </p>
               <img
                 src="/icons/close-black.svg"
-               
-
-                
-                
-                
                 alt=""
                 className="w-6"
                 onClick={() => {
@@ -103,16 +88,7 @@ const SareeStep3 = () => {
           Select the two colours that make up{" "}
           <span className="font-semibold">Orange</span>
         </p>
-        <img
-          src="/images/saree.png"
-         
-
-          
-          
-          
-          alt=""
-          className="w-4/5"
-        />
+        <img src="/images/saree.png" alt="" className="w-4/5" />
         <div className="w-full mt-12 flex justify-center items-center">
           <div
             className={`rounded-full w-8 h-8 ${
@@ -122,16 +98,7 @@ const SareeStep3 = () => {
             }`}
           ></div>
           <div className="mx-3">
-            <img
-              src="/icons/plus.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
+            <img src="/icons/plus.svg" alt="" className="w-6" />
           </div>
           <div
             className={`rounded-full w-8 h-8  ${
@@ -141,16 +108,7 @@ const SareeStep3 = () => {
             }`}
           ></div>
           <div className="mx-3">
-            <img
-              src="/icons/equal.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
+            <img src="/icons/equal.svg" alt="" className="w-6" />
           </div>
           <div
             className={`rounded-full w-8 h-8  ${
@@ -182,19 +140,10 @@ const SareeStep3 = () => {
                 }}
               >
                 {selectedColor.includes(i.color) && (
-                  <img
-                    src="/icons/check-white.svg"
-                   
-
-                    
-                    
-                    
-                    alt=""
-                    className="w-6"
-                  />
+                  <img src="/icons/check-white.svg" alt="" className="w-6" />
                 )}
               </div>
-                <p className="font-semibold mt-2">{i.name}</p>
+              <p className="font-semibold mt-2">{i.name}</p>
             </div>
           ))}
         </div>

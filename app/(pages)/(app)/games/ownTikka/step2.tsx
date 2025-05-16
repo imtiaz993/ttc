@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const OwnTikkaStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -15,11 +13,6 @@ const OwnTikkaStep2 = () => {
           <div>
             <img
               src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
               alt=""
               className="w-11 rounded-lg"
             />

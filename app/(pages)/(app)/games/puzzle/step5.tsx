@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const PuzzleStep5 = () => {
   const userData = useSelector((state: any) => state.user.userData);

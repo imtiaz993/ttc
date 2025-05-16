@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMute } from "../../redux/slices/userSlice";
+
 import Welcome from "./components/welcome";
 
 import ScratchStep1 from "./games/scratch/step1";
 import ScratchStep2 from "./games/scratch/step2";
 import ScratchStep3 from "./games/scratch/step3";
-import ScratchStep4 from "./games/scratch/step4";
-import ScratchResult from "./games/scratch/result";
 
 import SareeStep1 from "./games/saree/step1";
 import SareeStep2 from "./games/saree/step2";
@@ -34,8 +35,6 @@ import OwnTikkaStep4 from "./games/ownTikka/step4";
 
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleMute } from "../../redux/slices/userSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -64,9 +63,7 @@ export default function Home() {
   const ScratchGame = [
     <ScratchStep1 />,
     <ScratchStep2 />,
-    // <ScratchStep3 />,
-    // <ScratchStep4 />,
-    // <ScratchResult />,
+    <ScratchStep3 />,
   ];
 
   const SareeGame = [
@@ -79,8 +76,6 @@ export default function Home() {
   const SpotTikka = [
     <SpotTikkaStep1 />,
     <SpotTikkaStep2 />,
-    // <SpotTikkaStep3 />,
-    // <SpotTikkaResult />,
   ];
 
   const WordsGame = [<WordsStep1 />, <WordsStep2 />];

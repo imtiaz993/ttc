@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, resetStep } from "../../../redux/slices/navigationSlice";
 import {
@@ -129,7 +129,7 @@ const Menu = ({
                 className="w-6 cursor-pointer"
                 onClick={() => {
                   setOpen(false);
-                  closeDrawer()
+                  closeDrawer();
                 }}
               />
             </div>

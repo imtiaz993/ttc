@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const PuzzleStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -16,11 +14,6 @@ const PuzzleStep4 = () => {
             <div>
               <img
                 src={`/images/${userData.char}.png`}
-               
-
-                
-                
-                
                 alt=""
                 className="w-11 rounded-lg"
               />
@@ -32,30 +25,12 @@ const PuzzleStep4 = () => {
             </p>
           </div>
           <div className="w-full flex justify-center mt-6">
-            <img
-              src="/images/three-arts.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-11/12"
-            />
+            <img src="/images/three-arts.png" alt="" className="w-11/12" />
           </div>
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-10">
           <div className="w-full flex items-center mb-2">
-            <img
-              src="/icons/zoom-in.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
+            <img src="/icons/zoom-in.svg" alt="" className="w-6" />
             <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
               A secret chamber calls you…
             </p>

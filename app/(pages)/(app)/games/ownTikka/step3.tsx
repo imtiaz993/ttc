@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const OwnTikkaStep3 = () => {

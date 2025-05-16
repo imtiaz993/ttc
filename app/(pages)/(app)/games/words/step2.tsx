@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
