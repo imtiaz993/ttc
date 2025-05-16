@@ -17,7 +17,7 @@ const PuzzleStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>9th June, 1886</p>
           <div>
-            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
+            <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center">Ajji</p>
           </div>
         </div>
