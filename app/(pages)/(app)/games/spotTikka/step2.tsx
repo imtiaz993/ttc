@@ -31,7 +31,7 @@ const SpotTikkaStep2 = () => {
 
   const renderVerificationStatus = () => {
     switch (verificationStatus) {
-      case "failusre":
+      case "verifying":
         return (
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
             <div className="w-full">
@@ -47,7 +47,7 @@ const SpotTikkaStep2 = () => {
             </div>
           </div>
         );
-      case "failusre":
+      case "success":
         return (
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
             <div className="w-full">
