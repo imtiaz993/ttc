@@ -42,11 +42,10 @@ const SpotTikkaStep1 = () => {
         <div className="flex justify-center items-center">
           <img
             src="/images/spot-tikka.png"
-           
 
-            
-            
-            
+
+
+
             alt=""
             className="w-52"
           />

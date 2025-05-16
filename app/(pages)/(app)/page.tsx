@@ -64,9 +64,9 @@ export default function Home() {
   const ScratchGame = [
     <ScratchStep1 />,
     <ScratchStep2 />,
-    <ScratchStep3 />,
-    <ScratchStep4 />,
-    <ScratchResult />,
+    // <ScratchStep3 />,
+    // <ScratchStep4 />,
+    // <ScratchResult />,
   ];
 
   const SareeGame = [
@@ -79,8 +79,8 @@ export default function Home() {
   const SpotTikka = [
     <SpotTikkaStep1 />,
     <SpotTikkaStep2 />,
-    <SpotTikkaStep3 />,
-    <SpotTikkaResult />,
+    // <SpotTikkaStep3 />,
+    // <SpotTikkaResult />,
   ];
 
   const WordsGame = [<WordsStep1 />, <WordsStep2 />];
