@@ -8,8 +8,6 @@ import Welcome from "./components/welcome";
 import ScratchStep1 from "./games/scratch/step1";
 import ScratchStep2 from "./games/scratch/step2";
 import ScratchStep3 from "./games/scratch/step3";
-import ScratchStep4 from "./games/scratch/step4";
-import ScratchResult from "./games/scratch/result";
 
 import SareeStep1 from "./games/saree/step1";
 import SareeStep2 from "./games/saree/step2";
@@ -18,8 +16,6 @@ import SareeResult from "./games/saree/result";
 
 import SpotTikkaStep1 from "./games/spotTikka/step1";
 import SpotTikkaStep2 from "./games/spotTikka/step2";
-import SpotTikkaStep3 from "./games/spotTikka/step3";
-import SpotTikkaResult from "./games/spotTikka/result";
 
 import WordsStep1 from "./games/words/step1";
 import WordsStep2 from "./games/words/step2";
@@ -66,8 +62,6 @@ export default function Home() {
     <ScratchStep1 />,
     <ScratchStep2 />,
     <ScratchStep3 />,
-    <ScratchStep4 />,
-    <ScratchResult />,
   ];
 
   const SareeGame = [
@@ -80,8 +74,6 @@ export default function Home() {
   const SpotTikka = [
     <SpotTikkaStep1 />,
     <SpotTikkaStep2 />,
-    <SpotTikkaStep3 />,
-    <SpotTikkaResult />,
   ];
 
   const WordsGame = [<WordsStep1 />, <WordsStep2 />];
