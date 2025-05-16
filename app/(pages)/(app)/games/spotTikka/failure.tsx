@@ -8,7 +8,7 @@ const Failure = () => {
   const next = () => dispatch(nextStep());
   const prev = () => dispatch(prevStep());
   return (
-    <div className="h-full pt-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
+    <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
       <img src="/images/failure-2.gif" alt="" className="w-28" />
       <p className="text-xs font-semibold mt-6">Oops! Not quite.</p>
       <p className="text-xs mt-2">How about we have another go?</p>
