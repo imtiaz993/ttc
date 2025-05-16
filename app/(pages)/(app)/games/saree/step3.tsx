@@ -8,6 +8,7 @@ import Failure from "./failure";
 const SareeStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const [overlay, setOverlay] = useState(true);
+  const [sareePath, setSareePath] = useState("/images/saree-white.png");
   const [state, setState] = useState("initial");
   const [selectedColor, setSelectedColor] = useState([]);
   const [finalColor, setFinalColor] = useState("");
@@ -20,41 +21,59 @@ const SareeStep3 = () => {
   ];
 
   useEffect(() => {
+    if (selectedColor[0] || selectedColor[1]) {
+      if (selectedColor[0] == "bg-[#EA5B7C]") {
+        setSareePath("/images/saree-red.png");
+      } else if (selectedColor[0] == "bg-[#F6D44C]") {
+        setSareePath("/images/saree-yellow.png");
+      } else if (selectedColor[0] == "bg-[#71B0DC]") {
+        setSareePath("/images/saree-blue.png");
+      }
+      setUndoDisabled(false);
+    } else {
+      setSareePath("/images/saree-white.png");
+      setUndoDisabled(true);
+    }
     if (selectedColor[0] && selectedColor[1]) {
       if (
         selectedColor.includes("bg-[#EA5B7C]") &&
         selectedColor.includes("bg-[#F6D44C]")
       ) {
+        setSareePath("/images/saree-orange.png");
         setFinalColor("bg-[#FA9439]");
-        setState("result");
+        setTimeout(() => {
+          // setState("result");
+        }, 1000);
       } else if (
         selectedColor.includes("bg-[#F6D44C]") &&
         selectedColor.includes("bg-[#71B0DC]")
       ) {
+        setSareePath("/images/saree-green.png");
         setFinalColor("bg-[#78CC87]");
-        setState("result");
+        setTimeout(() => {
+          // setState("result");
+        }, 1000);
       } else if (
         selectedColor.includes("bg-[#EA5B7C]") &&
         selectedColor.includes("bg-[#71B0DC]")
       ) {
+        setSareePath("/images/saree-purple.png");
         setFinalColor("bg-[#937DC5]");
-        setState("result");
+        setTimeout(() => {
+          // setState("result");
+        }, 1000);
       }
     }
     if (selectedColor.length < 2) {
       setFinalColor("");
-    }
-    if (selectedColor[0] || selectedColor[1]) {
-      setUndoDisabled(false);
-    } else {
-      setUndoDisabled(true);
     }
   }, [selectedColor]);
 
   const undo = () => {
     setSelectedColor([]);
     setRandomColor();
-    setState("initial")
+    setState("initial");
+    setSareePath("/images/saree-white.png");
   };
 
   const setRandomColor = () => {
@@ -108,7 +127,7 @@ const SareeStep3 = () => {
               Select the two colours that make up{" "}
               <span className="font-semibold">{resultColor?.name}</span>
             </p>
-            <img src="/images/saree.png" alt="" className="w-4/5" />
+            <img src={sareePath} alt="" className="w-4/5" />
             <div className="w-full mt-12 flex justify-center items-center">
               <div
                 className={`rounded-full w-8 h-8 ${
@@ -148,15 +167,21 @@ const SareeStep3 = () => {
                   <div
                     className={`flex justify-center items-center w-[60px] h-[60px] ${i.color} rounded-full`}
                     onClick={() => {
-                      if (selectedColor.includes(i.color)) {
-                        setSelectedColor(
-                          selectedColor.filter((color) => color !== i.color)
-                        );
-                      } else {
-                        if (selectedColor.length == 0) {
-                          setSelectedColor([i.color, ""]);
+                      if (!selectedColor[0] || !selectedColor[1]) {
+                        if (selectedColor.includes(i.color)) {
+                          setSelectedColor(
+                            selectedColor.filter((color) => color !== i.color)
+                          );
                         } else {
-                          setSelectedColor([selectedColor[0], i.color]);
+                          if (selectedColor.length == 0) {
+                            setSelectedColor([i.color, ""]);
+                          } else {
+                            if (selectedColor[0] == "") {
+                              setSelectedColor([i.color, ""]);
+                            } else {
+                              setSelectedColor([selectedColor[0], i.color]);
+                            }
+                          }
                         }
                       }
                     }}

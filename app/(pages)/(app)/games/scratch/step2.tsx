@@ -6,7 +6,7 @@ const ScratchStep2 = () => {
   return (
     <>
       <Menu />
-      <GameStepper />
+      <GameStepper iswhite />
       <ScratchCard />
     </>
   );
