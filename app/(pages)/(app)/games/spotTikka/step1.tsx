@@ -1,7 +1,5 @@
-import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
 
 const SpotTikkaStep1 = () => {
   return (
@@ -19,16 +17,7 @@ const SpotTikkaStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>30th April, 1886</p>
           <div>
-            <img
-              src="/images/ajji.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-11 rounded-lg"
-            />
+            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center">Ajji</p>
           </div>
         </div>
@@ -40,16 +29,7 @@ const SpotTikkaStep1 = () => {
           were. Alas, this one just got ripped apart by my clumsy efforts!
         </p>
         <div className="flex justify-center items-center">
-          <img
-            src="/images/spot-tikka.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-52"
-          />
+          <img src="/images/spot-tikka.png" alt="" className="w-52" />
         </div>
       </div>
     </>

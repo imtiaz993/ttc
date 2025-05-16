@@ -1,5 +1,3 @@
-import Image from "next/image";
-import React from "react";
 import { useDispatch } from "react-redux";
 import { nextStep, prevStep } from "../../../../redux/slices/navigationSlice";
 
@@ -9,17 +7,7 @@ const Failure = () => {
   const prev = () => dispatch(prevStep());
   return (
     <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
-      <img
-        src="/images/failure.gif"
-       
-
-decoding="sync"
-        
-        
-        
-        alt=""
-        className="w-20"
-      />
+      <img src="/images/failure.gif" decoding="sync" alt="" className="w-20" />
       <p className="text-xs font-semibold mt-6">Oops! Not quite.</p>
       <p className="text-xs mt-2">How about we have another go?</p>
       <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-16">
@@ -29,16 +17,7 @@ decoding="sync"
           }}
           className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
         >
-          <img
-            src="/icons/skip.svg"
-           
-
-            
-            
-            
-            alt=""
-            className="w-6 mr-2"
-          />
+          <img src="/icons/skip.svg" alt="" className="w-6 mr-2" />
           Skip
         </button>
         <button
@@ -48,16 +27,7 @@ decoding="sync"
           }}
           className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
-          <img
-            src="/icons/refresh.svg"
-           
-
-            
-            
-            
-            alt=""
-            className="w-6 mr-2"
-          />
+          <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />
           Try Again
         </button>
       </div>

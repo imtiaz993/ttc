@@ -1,7 +1,5 @@
-import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 
 const SareeStep2 = () => {
@@ -15,11 +13,6 @@ const SareeStep2 = () => {
           <div>
             <img
               src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -36,11 +29,6 @@ const SareeStep2 = () => {
         <div className="mt-10 mb-10 w-full">
           <img
             src="/images/color-pallets.png"
-           
-
-            
-            
-            
             alt=""
             className="w-11/12 mx-auto"
           />

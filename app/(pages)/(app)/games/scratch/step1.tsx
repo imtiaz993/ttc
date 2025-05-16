@@ -1,5 +1,3 @@
-import Image from "next/image";
-import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import { useSelector } from "react-redux";

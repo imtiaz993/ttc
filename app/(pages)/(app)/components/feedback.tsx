@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import Menu from "./menu";
-import Image from "next/image";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Menu from "./menu";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 
 const Feedback = () => {

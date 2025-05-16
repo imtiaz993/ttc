@@ -1,5 +1,3 @@
-import Image from "next/image";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
 

@@ -1,5 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMute } from "../../redux/slices/userSlice";
+
 import Welcome from "./components/welcome";
 
 import ScratchStep1 from "./games/scratch/step1";
@@ -34,8 +37,6 @@ import OwnTikkaStep4 from "./games/ownTikka/step4";
 
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleMute } from "../../redux/slices/userSlice";
 
 export default function Home() {
   const dispatch = useDispatch();

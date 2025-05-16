@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 

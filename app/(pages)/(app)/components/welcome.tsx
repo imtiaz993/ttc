@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
-import { useEffect, useState } from "react";
 
 const Welcome = ({ playMusic = () => {} }) => {
   const dispatch = useDispatch();

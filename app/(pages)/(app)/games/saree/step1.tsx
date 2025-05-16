@@ -1,7 +1,5 @@
-import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
 
 const SareeStep1 = () => {
   return (

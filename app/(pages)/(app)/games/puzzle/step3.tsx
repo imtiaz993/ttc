@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import { useDispatch } from "react-redux";
 
