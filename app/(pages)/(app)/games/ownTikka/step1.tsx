@@ -17,16 +17,7 @@ const OwnTikkaStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>8th August, 1886</p>
           <div>
-            <img
-              src="/images/ajji.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-11 rounded-lg"
-            />
+            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center">Ajji</p>
           </div>
         </div>
@@ -38,16 +29,7 @@ const OwnTikkaStep1 = () => {
           some fanciful dreamer yet to be born!
         </p>
         <div className="flex justify-center items-center mb-32">
-          <img
-            src="/images/own-tikka.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-52"
-          />
+          <img src="/images/own-tikka.png" alt="" className="w-52" />
         </div>
       </div>
     </>

@@ -13,11 +13,6 @@ const OwnTikkaStep2 = () => {
           <div>
             <img
               src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
               alt=""
               className="w-11 rounded-lg"
             />

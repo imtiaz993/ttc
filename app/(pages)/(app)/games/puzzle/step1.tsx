@@ -5,7 +5,7 @@ const PuzzleStep1 = () => {
   return (
     <>
       <Menu />
-      <GameStepper iswhite/>
+      <GameStepper iswhite />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",
@@ -17,16 +17,7 @@ const PuzzleStep1 = () => {
         <div className="w-full flex justify-between items-start mb-4">
           <p>9th June, 1886</p>
           <div>
-            <img
-              src="/images/ajji.png"
-             
-
-              
-              
-              
-              alt=""
-              className="w-11 rounded-lg"
-            />
+            <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center">Ajji</p>
           </div>
         </div>
@@ -37,16 +28,7 @@ const PuzzleStep1 = () => {
           He makes me so mad at times!
         </p>
         <div className="flex justify-center items-center">
-          <img
-            src="/images/puzzle.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-72"
-          />
+          <img src="/images/puzzle.png" alt="" className="w-72" />
         </div>
       </div>
     </>
