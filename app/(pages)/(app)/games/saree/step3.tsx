@@ -201,13 +201,14 @@ const SareeStep3 = () => {
           </div>
         </>
       ) : finalColor === resultColor.color ? (
-        <Success userData={userData} />
+        <Success userData={userData} sareePath={sareePath} />
       ) : (
         <Failure
           finalColor={finalColor}
           resultColor={resultColor}
           results={results}
           undo={undo}
+          sareePath={sareePath}
         />
       )}
     </>

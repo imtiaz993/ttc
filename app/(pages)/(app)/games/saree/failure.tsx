@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 
-const Failure = ({ finalColor, resultColor, results, undo }) => {
+const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
   return (
@@ -18,7 +18,7 @@ const Failure = ({ finalColor, resultColor, results, undo }) => {
         <p className="text-xs text-center"> Would you like to try again?</p>
       </div>
       <div>
-        <img src="/images/saree.png" alt="" className="w-52" />
+        <img src={sareePath} alt="" className="w-52" />
       </div>
       <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-16">
         <button
