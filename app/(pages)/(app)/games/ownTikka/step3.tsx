@@ -45,7 +45,7 @@ const OwnTikkaStep3 = () => {
       iconWhite: "/icons/border-white.svg",
       iconBlack: "/icons/border-black.svg",
       options: [
-        "/images/border-1_11zon.jpg",
+        "/images/border-1.png",
         "/images/border-2.png",
         "/images/border-3.png",
         "/images/border-4.png",
