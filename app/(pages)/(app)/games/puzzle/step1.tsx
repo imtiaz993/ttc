@@ -6,7 +6,7 @@ const PuzzleStep1 = () => {
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
+      <GameStepper iswhite showPrev={false} />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",

@@ -7,7 +7,7 @@ const ScratchStep1 = () => {
   return (
     <>
       <Menu isOpen={true} />
-      <GameStepper showPrev={false} />
+      <GameStepper iswhite showPrev={false} />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",

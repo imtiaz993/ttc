@@ -7,7 +7,7 @@ const WordsStep1 = () => {
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
+      <GameStepper iswhite showPrev={false} />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",
@@ -20,16 +20,7 @@ const WordsStep1 = () => {
           <div className="w-full flex justify-between items-start mb-4">
             <p>6th May, 1886</p>
             <div>
-              <img
-                src="/images/ajji.png"
-               
-
-                
-                
-                
-                alt=""
-                className="w-11 rounded-lg"
-              />
+              <img src="/images/ajji.png" alt="" className="w-11 rounded-lg" />
               <p className="mt-1 text-xs font-medium text-center">Ajji</p>
             </div>
           </div>
@@ -42,16 +33,7 @@ const WordsStep1 = () => {
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <img
-            src="/images/graham-bombay.png"
-           
-
-            
-            
-            
-            alt=""
-            className="w-52"
-          />
+          <img src="/images/graham-bombay.png" alt="" className="w-52" />
         </div>
       </div>
     </>

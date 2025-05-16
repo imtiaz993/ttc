@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
 
 const GameStepper = ({
+  iswhite = false,
   showCamera = false,
   showNext = true,
   showPrev = true,
@@ -11,11 +12,11 @@ const GameStepper = ({
 }) => {
   const steps = [
     { step: 2, icon: "/images/game1.png" },
-    { step: 6, icon: "/images/game2.png" },
-    { step: 10, icon: "/images/game3.png" },
-    { step: 14, icon: "/images/game4.png" },
-    { step: 16, icon: "/images/game5.png" },
-    { step: 21, icon: "/images/game6.png" },
+    { step: 4, icon: "/images/game2.png" },
+    { step: 8, icon: "/images/game3.png" },
+    { step: 12, icon: "/images/game4.png" },
+    { step: 17, icon: "/images/game5.png" },
+    { step: 23, icon: "/images/game6.png" },
   ];
 
   const dispatch = useDispatch();
@@ -31,11 +32,6 @@ const GameStepper = ({
           {showPrev && (
             <img
               src="/icons/swipe-arrow-dark.svg"
-             
-
-              
-              
-              
               alt=""
               className="w-4"
               onClick={() => {
@@ -48,11 +44,6 @@ const GameStepper = ({
           {showCamera && (
             <img
               src="/icons/camera.svg"
-             
-
-              
-              
-              
               alt=""
               className="w-6 mr-2"
               onClick={onCameraClick}
@@ -61,11 +52,6 @@ const GameStepper = ({
           {showNext && (
             <img
               src="/icons/swipe-arrow-dark.svg"
-             
-
-              
-              
-              
               alt=""
               className="w-4 rotate-180"
               onClick={() => {
@@ -76,22 +62,25 @@ const GameStepper = ({
         </div>
       </div>
       <div className="relative">
-        <div className="absolute w-full h-0.5 bg-black"></div>
+        <div
+          className={`absolute w-full h-0.5 ${
+            iswhite ? "bg-[#FFFFFF40]" : "bg-[#00000040]"
+          } `}
+        ></div>
         <div className="flex items-center justify-between absolute left-0 right-0 bottom-0 top-0 z-10">
           {steps.map((item, index) => (
             <div
               key={index}
               className={`w-5 h-5 rounded-full overflow-hidden  ${
-                step === item.step ? "border-4 border-[#FFC107]" : ""
+                step === item.step
+                  ? "border-4 border-[#243200]"
+                  : step > item.step
+                  ? "border border-[#243200]"
+                  : "border border-[#FFFFFF]"
               }`}
             >
               <img
                 src={item.icon}
-               
-
-                
-                
-                
                 alt={`Step ${index + 1}`}
                 className="w-full h-full object-cover cursor-pointer"
               />
