@@ -5,7 +5,7 @@ const ScratchCard = () => {
   const canvasRef = useRef(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [selectedImage, setSelectedImage] = useState(
-    "/images/scratched-image.jpeg"
+    "/images/scratched-image.png"
   );
   const isDrawing = useRef(false);
 
@@ -167,12 +167,6 @@ const ScratchCard = () => {
             <canvas
               ref={canvasRef}
               className="absolute top-0 left-0 w-60 h-full touch-none"
-              style={{
-                cursor:
-                  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><text y='32' font-size='32'>👆</text></svg>\"), auto",
-                mixBlendMode: "multiply",
-                backdropFilter: "blur(1px)",
-              }}
             />
           )}
         </div>

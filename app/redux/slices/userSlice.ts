@@ -10,6 +10,8 @@ const userSlice = createSlice({
       tooltip: false,
       menu: true,
       overlay: true,
+      email: "",
+      feedback: "",
     },
     isMuted: false,
   },
