@@ -254,6 +254,13 @@ const PuzzleStep2 = () => {
       return monitor.subscribeToStateChange(handleDragStateChange);
     }
   }, []);
+
+    useEffect(() => {
+        if(isCompleted) {
+            next();
+        }
+    }, [isCompleted]);
+
   const handleDrop = (pieceId, zoneId) => {
     const dropPiece = pieces.find((p) => p.id === pieceId);
     const dropZone = pieces.find((p) => p.id === zoneId);
@@ -291,10 +298,6 @@ const PuzzleStep2 = () => {
           navigator.vibrate([100, 30, 100]);
         }
       }
-            const isPuzzleCorrect = pieces.every(piece => updated[piece.id] === piece.id);
-            if (isCompleted) {
-                setTimeout(() => next(), 500);
-            }
       return updated;
     });
   };
