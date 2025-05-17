@@ -165,7 +165,7 @@ const DropZone = ({ id, left, top, onDrop, hasPiece, pieceSize }) => {
     }),
   });
   // Enhanced visual feedback for drop zones
-  const dropZoneStyle:any = {
+  const dropZoneStyle: any = {
     position: "absolute",
     left,
     top,
@@ -347,6 +347,7 @@ const PuzzleStep2 = () => {
         handleUndo={handleUndo}
         handleSkip={() => {
           stopTimer();
+          next()
         }}
       />
       <GameStepper showNext={false} showPrev={false} />
@@ -361,7 +362,7 @@ const PuzzleStep2 = () => {
                 className="w-6"
               />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-48px)]">
-                Solve the puzzle!
+                Piece together
               </p>
               <img
                 src="/icons/close-black.svg"
@@ -371,8 +372,7 @@ const PuzzleStep2 = () => {
               />
             </div>
             <p className="text-xs leading-relaxed">
-              Drag the puzzle pieces into the correct positions to complete the
-              image. You can undo moves, and the timer tracks how long it takes!
+              Arrange the pieces to form the complete picture.
             </p>
           </div>
         </div>
