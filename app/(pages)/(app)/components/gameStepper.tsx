@@ -20,7 +20,6 @@ const GameStepper = ({
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
-  console.log(step);
 
   const next = () => dispatch(nextStep());
   const prev = () => dispatch(prevStep());

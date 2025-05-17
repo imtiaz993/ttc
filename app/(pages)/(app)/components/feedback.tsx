@@ -2,30 +2,42 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "./menu";
 import { nextStep } from "../../../redux/slices/navigationSlice";
+import {setUserData} from "../../../redux/slices/userSlice";
 
 const Feedback = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
+  const updateUserData = (data) => dispatch(setUserData(data));
 
   const next = () => dispatch(nextStep());
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  async function imageToFileObject(imagePath) {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+    const fileName = imagePath.split('/').pop();
+    return new File([blob], fileName, { type: blob.type });
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const feedback = e.target.feedback.value;
+    const formData = new FormData();
+    const file = await imageToFileObject(`/images/${userData.char}.png`);
+    formData.append('avatar',file)
+    formData.append('email',e.target.email.value)
+    formData.append('feedback',e.target.feedback.value)
+    formData.append('userName',userData.name);
+
 
     try {
       // Mock API call
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos",
+        "https://ttc-master-be.onrender.com/api/users",
         {
           method: "POST",
-          body: JSON.stringify({
-            email,
-            feedback,
-          }),
+          body: formData,
         }
       );
 
@@ -70,6 +82,12 @@ const Feedback = () => {
                 placeholder="Enter your email"
                 type="email"
                 name="email"
+                onChange={(e) => {
+                  updateUserData({
+                    ...userData,
+                    email: e.target.value,
+                  });
+                }}
                 required
               />
 
