@@ -97,14 +97,6 @@ const SpotTikkaStep2 = () => {
           <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
             <div className="w-full">
               <div className="w-full flex items-start mb-6">
-                <input
-                  type="file"
-                  accept="image/*"
-                  capture="environment"
-                  ref={fileInputRef}
-                  onChange={handleImageCapture}
-                  className="hidden"
-                />
                 <div>
                   <img
                     src={`/images/${userData.char}.png`}
@@ -200,6 +192,15 @@ const SpotTikkaStep2 = () => {
         showPrev={verificationStatus === "initial"}
         showCamera={verificationStatus === "initial"}
         onCameraClick={handleCameraClick}
+        reduceProgress={verificationStatus == "initial" ? 8 : 0}
+      />
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        ref={fileInputRef}
+        onChange={handleImageCapture}
+        className="hidden"
       />
       {renderVerificationStatus()}
     </>
