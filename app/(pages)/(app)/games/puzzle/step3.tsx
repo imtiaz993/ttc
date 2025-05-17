@@ -51,22 +51,29 @@ const PuzzleStep3 = () => {
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
             <div className="w-full flex justify-between items-center mb-2">
-              <img src="/icons/question-mark.svg" alt="" className="w-6" />
-              <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                Find the tika
-              </p>
+              <div className="flex items-center">
+                <img src="/icons/question-mark.svg" alt="" className="w-6" />
+                <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
+                  Find the tika
+                </p>
+              </div>
 
               <p
-                className="text-sm font-medium"
+                className="text-sm font-medium flex items-center gap-1"
                 onClick={() => {
                   next();
                 }}
               >
                 CONTINUE
+                <img
+                  src="/icons/forward-dark.svg"
+                  alt=""
+                  className="w-[18px]"
+                />
               </p>
             </div>
             <p className="mt-2 text-xs">
-              Walk ahead to spot this tika in the gallery.
+              Walk ahead to spot this ticket in the exhibition
             </p>
           </div>
         </div>
