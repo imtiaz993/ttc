@@ -7,13 +7,14 @@ const GameStepper = ({
   showNext = true,
   showPrev = true,
   onCameraClick = () => {},
+  reduceProgress = 0,
 }) => {
   const steps = [
     { step: [2], icon: "/images/game1.png" },
     { step: [4], icon: "/images/game2.png" },
     { step: [7], icon: "/images/game3.png" },
     { step: [9], icon: "/images/game4.png" },
-    { step: [13,14], icon: "/images/game5.png" },
+    { step: [13, 14], icon: "/images/game5.png" },
     { step: [19, 20], icon: "/images/game6.png" },
   ];
 
@@ -81,7 +82,7 @@ const GameStepper = ({
       default:
         break;
     }
-    return value;
+    return value - reduceProgress;
   };
 
   return (
@@ -128,7 +129,8 @@ const GameStepper = ({
         ></div>
         {step > 2 && (
           <>
-            {!steps.find((i) => i.step.includes(step)) && (
+            {(!steps.find((i) => i.step.includes(step)) ||
+              reduceProgress !== 0) && (
               <div
                 className={`absolute -bottom-[7px] w-3 h-3 rounded-full bg-[#243200]`}
                 style={{
@@ -150,7 +152,7 @@ const GameStepper = ({
             <div
               key={index}
               className={`w-5 h-5 rounded-full overflow-hidden  ${
-                item.step.includes(step)
+                item.step.includes(step) && reduceProgress == 0
                   ? "border-4 border-[#243200]"
                   : step > item.step[item.step.length - 1]
                   ? "border border-[#243200]"

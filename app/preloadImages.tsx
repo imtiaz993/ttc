@@ -90,7 +90,7 @@ const PreloadImages = () => {
     "/icons/info.svg",
     "/icons/insta.svg",
     "/icons/logo.svg",
-    "/icons/map.svg",
+    "/icons/map-logo.svg",
     "/icons/menu.svg",
     "/icons/mouse.svg",
     "/icons/mute-black.svg",
