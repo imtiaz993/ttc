@@ -41,7 +41,7 @@ const Welcome = ({ playMusic = () => {} }) => {
 
   const handleDragEnd = (e) => {
     const screenWidth = window.innerWidth;
-    if (dragPosition < -screenWidth * 0.5 || dragPosition > screenWidth * 0.5) {
+    if (dragPosition < -screenWidth * 0.25 || dragPosition > screenWidth * 0.25) {
       setOverlay(false);
       setDisabled(false);
       hideOverlay();
@@ -65,8 +65,6 @@ const Welcome = ({ playMusic = () => {} }) => {
               transition:
                 dragPosition === 0 ? "transform 0.3s ease-out" : "none",
             }}
-            onMouseDown={handleDragStart}
-            onTouchStart={handleDragStart}
           >
             <div
               className="fixed z-20 right-0 left-0 bottom-0"
@@ -78,6 +76,8 @@ const Welcome = ({ playMusic = () => {} }) => {
                 transition:
                   dragPosition === 0 ? "transform 0.3s ease-out" : "none",
               }}
+              onMouseDown={handleDragStart}
+              onTouchStart={handleDragStart}
             >
               <div className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between">
                 <img

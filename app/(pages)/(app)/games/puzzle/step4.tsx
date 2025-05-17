@@ -24,8 +24,16 @@ const PuzzleStep4 = () => {
               bizarre
             </p>
           </div>
-          <div className="w-full flex justify-center mt-6">
-            <img src="/images/three-arts.png" alt="" className="w-11/12" />
+          <div className="w-full flex justify-between items-start mt-6">
+            <img
+              src="/images/wonder1.png"
+              alt=""
+              className="w-28 relative top-8"
+            />
+            <img src="/images/wonder2.png" alt="" className="w-32 relative" />
+          </div>
+          <div className="flex justify-center mt-12">
+            <img src="/images/wonder3.png" alt="" className="w-28" />
           </div>
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-10">
