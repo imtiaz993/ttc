@@ -192,7 +192,7 @@ const Menu = ({
                       reset();
                       updateUserData({
                         name: "",
-                        sound: true,
+                        sound: userData.sound,
                         char: "char1",
                         tooltip: false,
                       });

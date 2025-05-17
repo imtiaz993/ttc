@@ -142,14 +142,6 @@ const ScratchStep2 = () => {
       default:
         return (
           <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-            <input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              ref={fileInputRef}
-              onChange={handleImageCapture}
-              className="hidden"
-            />
             <div className="w-full flex items-start mb-4">
               <div>
                 <img
@@ -215,6 +207,15 @@ const ScratchStep2 = () => {
         showPrev={verificationStatus === "initial"}
         showCamera={verificationStatus === "initial"}
         onCameraClick={handleCameraClick}
+        reduceProgress={verificationStatus == "initial" ? 8 : 0}
+      />
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        ref={fileInputRef}
+        onChange={handleImageCapture}
+        className="hidden"
       />
       {renderVerificationStatus()}
     </>

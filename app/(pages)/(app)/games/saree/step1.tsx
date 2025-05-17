@@ -45,7 +45,7 @@ const SareeStep1 = () => {
         </div>
         <div className="mt-5">
           <div className="bg-[#FDD931] rounded py-3 px-4">
-            <div className="w-full flex justify-between items-start mb-2">
+            <div className="w-full flex justify-between items-center mb-2">
               <img src="/icons/sound.svg" alt="" className="w-6" />
               <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
                 Chromolithography
