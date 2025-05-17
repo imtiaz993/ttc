@@ -100,7 +100,7 @@ const WordsStep2 = () => {
       )}
       <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
         <div className="flex justify-center items-center">
-          <img src="/images/graham-bombay.png" alt="" className="w-36" />
+          <img src="/images/graham-bombay.png" alt="" className="w-44" />
         </div>
         <div className="w-full mt-6">
           <div className="flex flex-wrap gap-4 max-h-64 overflow-auto">

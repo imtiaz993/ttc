@@ -41,7 +41,10 @@ const Welcome = ({ playMusic = () => {} }) => {
 
   const handleDragEnd = (e) => {
     const screenWidth = window.innerWidth;
-    if (dragPosition < -screenWidth * 0.25 || dragPosition > screenWidth * 0.25) {
+    if (
+      dragPosition < -screenWidth * 0.25 ||
+      dragPosition > screenWidth * 0.25
+    ) {
       setOverlay(false);
       setDisabled(false);
       hideOverlay();
@@ -115,8 +118,10 @@ const Welcome = ({ playMusic = () => {} }) => {
         <img src="/images/welcome-divider.png" alt="" className="w-full" />
         <div className="mt-7 px-10">
           <p className="text-[#D02E01] text-sm mb-6 text-center max-w-60">
-            A world within a world… Messages from a time forgotten… Wish you
-            well on this journey, friend!
+            A world within a world…
+            <br /> Messages from a time forgotten…
+            <br /> Wish you well on this journey,
+            <br /> friend!
           </p>
           <form
             onSubmit={(e: any) => {
@@ -148,7 +153,7 @@ const Welcome = ({ playMusic = () => {} }) => {
             </button>
           </form>
           <div className="flex justify-center mt-6">
-            <img src="/icons/map-logo.svg" alt="" className="w-16" />
+            <img src="/images/map-logo.png" alt="" className="w-16" />
           </div>
         </div>
       </div>

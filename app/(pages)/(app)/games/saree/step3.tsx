@@ -117,7 +117,8 @@ const SareeStep3 = () => {
                   />
                 </div>
                 <p className="mt-2 text-xs">
-                  Select the two colours that make up
+                  Select the two colours that make up{" "}
+                  <span className="font-semibold">{resultColor?.name}</span>
                 </p>
               </div>
             </div>
