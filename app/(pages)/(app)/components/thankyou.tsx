@@ -82,7 +82,7 @@ const Thankyou = () => {
             </p>
           </div>
           <div className="flex justify-center mt-6">
-            <img src="/icons/map-logo.svg" alt="" className="w-16" />
+            <img src="/images/map-logo.png" alt="" className="w-16" />
           </div>
         </div>
       </div>
