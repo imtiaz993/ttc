@@ -12,6 +12,7 @@ const userSlice = createSlice({
       overlay: true,
       email: "",
       feedback: "",
+      createdTika: ""
     },
     isMuted: false,
   },

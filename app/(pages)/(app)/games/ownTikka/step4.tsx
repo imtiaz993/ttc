@@ -8,13 +8,47 @@ const OwnTikkaStep4 = () => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
 
+  const downloadImage = () => {
+    const link = document.createElement("a");
+    link.href = userData.createdTika;
+    link.download = "my-tika.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => {
+      next();
+    }, 2000);
+  };
+
+  const shareImage = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "My Tika",
+          text: "Check out this Tika I created!",
+          url: userData.createdTika, // URL string
+        });
+        setTimeout(() => {
+          next();
+        }, 2000);
+      } catch (error) {
+        alert("Error sharing: " + error.message);
+      }
+    } else {
+      alert("Sharing not supported on this device.");
+    }
+  };
+
+
+
+
   return (
     <>
       <Menu />
       <GameStepper showNext={false} showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
         <div className="flex justify-center items-center mb-16">
-          <img src="/images/own-tikka-final.png" alt="" className="w-80" />
+          <img src={userData.createdTika} alt="" className="w-80" />
         </div>
         <div className="w-full flex items-start mb-10">
           <div>
@@ -32,7 +66,7 @@ const OwnTikkaStep4 = () => {
         <div className="w-full grid grid-cols-2 gap-4">
           <button
             onClick={() => {
-              next();
+              downloadImage();
             }}
             className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
           >
@@ -41,7 +75,7 @@ const OwnTikkaStep4 = () => {
           </button>
           <button
             onClick={() => {
-              next();
+              shareImage()
             }}
             className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
           >

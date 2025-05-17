@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import html2canvas from "html2canvas";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import {setUserData} from "../../../../redux/slices/userSlice";
 
 const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState("Background");
+  const userData = useSelector((state: any) => state.user.userData);
+  const updateUserData = (data) => dispatch(setUserData(data));
   const [selectedOptions, setSelectedOptions] = useState({
     Background: "",
     Border: "",
@@ -16,7 +20,21 @@ const OwnTikkaStep3 = () => {
 
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
-  const handleComplete = () => {
+
+  const saveCreatedTika = async () => {
+    const element = document.getElementById("ticket-container");
+    if (!element) return;
+
+    const canvas = await html2canvas(element);
+    const blobUrl = canvas.toDataURL("image/png");
+    updateUserData({
+      ...userData,
+      createdTika: blobUrl,
+    });
+  }
+
+  const handleComplete = async () => {
+    await saveCreatedTika();
     next();
   };
 
@@ -118,6 +136,7 @@ const OwnTikkaStep3 = () => {
         className={`h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]`}
       >
         <div
+            id="ticket-container"
           className="w-60 h-80 mb-16 relative"
           style={{
             backgroundImage: selectedOptions.Background
