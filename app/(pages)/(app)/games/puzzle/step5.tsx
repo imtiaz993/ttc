@@ -26,12 +26,12 @@ const PuzzleStep5 = () => {
           <div>
             <div
               style={{ animationDelay: "1s", animationFillMode: "forwards" }}
-              className="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] absolute left-2 -top-14 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
+              className="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] absolute left-0 -top-12  w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
             >
               What are all these tickets trying to say?
             </div>
             <img
-              className="absolute left-[134px] -top-[4px] fade-in2 opacity-0"
+              className="absolute left-[126px] top-1 fade-in2 opacity-0"
               src="/icons/union.svg"
               alt=""
               style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
@@ -40,13 +40,13 @@ const PuzzleStep5 = () => {
 
           <div>
             <div
-              className="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] absolute left-8 -bottom-12 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
+              className="shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] absolute left-8 -bottom-11 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
               style={{ animationDelay: "2s", animationFillMode: "forwards" }}
             >
               How did they survive all these centuries?
             </div>
             <img
-              className="absolute left-[158px] top-[289px] fade-in2 opacity-0"
+              className="absolute left-[35px] top-[233px] fade-in2 opacity-0 rotate-180"
               src="/icons/union.svg"
               alt=""
               style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
@@ -75,14 +75,14 @@ const PuzzleStep5 = () => {
               Who were they meant to attract?
             </div>
             <img
-              className="absolute  -right-[8px] top-[352px] fade-in2 opacity-0"
+              className="absolute  right-[112px] top-[301px] rotate-180 fade-in2 opacity-0"
               src="/icons/union.svg"
               alt=""
               style={{ animationDelay: "4.5s", animationFillMode: "forwards" }}
             />
           </div>
           <div className="flex justify-center items-center">
-            <img src="/images/manchester.png" alt="" className="w-48" />
+            <img src="/images/manchester.png" alt="" className="w-52" />
           </div>
         </div>
         <div className="h-28"></div>
