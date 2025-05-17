@@ -5,7 +5,6 @@ import ScratchCard from "../../components/scratchCard";
 
 const ScratchStep1 = () => {
   const userData = useSelector((state: any) => state.user.userData);
-  console.log("userData", userData);
   return (
     <>
       <Menu isOpen={userData.menu} />

@@ -19,7 +19,7 @@ const PuzzleStep4 = () => {
               />
               <p className="mt-1 text-xs font-medium text-center">You</p>
             </div>
-            <p className="ml-4 font-medium w-[cacl(100%-46px)]">
+            <p className="ml-4 font-medium w-[calc(100%-44px)]">
               Wow! A wall of modern wonders - some oddly familiar, some utterly
               bizarre
             </p>

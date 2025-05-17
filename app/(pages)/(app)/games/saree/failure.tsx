@@ -1,10 +1,9 @@
 import { useDispatch } from "react-redux";
-import { nextStep, prevStep } from "../../../../redux/slices/navigationSlice";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
-const Failure = () => {
+const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
-  const prev = () => dispatch(prevStep());
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
       <img src="/images/failure.gif" alt="" className="w-28" />
@@ -13,12 +12,13 @@ const Failure = () => {
           Oops! Not quite.
         </p>
         <p className="text-xs text-center">
-          You just created &lt; wrong colour &gt; instead of purple.
+          You just created {results?.find((i) => i.color == finalColor)?.name}{" "}
+          instead of {resultColor.name}.
         </p>
         <p className="text-xs text-center"> Would you like to try again?</p>
       </div>
       <div>
-        <img src="/images/saree.png" alt="" className="w-52" />
+        <img src={sareePath} alt="" className="w-52" />
       </div>
       <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-16">
         <button
@@ -31,10 +31,7 @@ const Failure = () => {
           Skip
         </button>
         <button
-          onClick={() => {
-            prev();
-            prev();
-          }}
+          onClick={undo}
           className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
           <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />
