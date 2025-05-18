@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useRef, useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import Lottie from "react-lottie";
