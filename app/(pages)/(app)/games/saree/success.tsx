@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import successAnimation from "../../../animation/Correct Case.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("../../components/animation"), {
+  ssr: false,
+});
 
 const Success = ({ userData, sareePath }) => {
   const dispatch = useDispatch();
@@ -13,7 +19,7 @@ const Success = ({ userData, sareePath }) => {
     }, 3000);
   }, []);
   return (
-    <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+    <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
       <div className="w-full flex justify-between items-start">
         <div>
           <img
@@ -32,11 +38,9 @@ const Success = ({ userData, sareePath }) => {
       </div>
       <div className="relative">
         <img src={sareePath} alt="" className="w-52" />
-        <img
-          src="/images/success.gif"
-          alt=""
-          className="w-36 absolute top-16 left-8"
-        />
+        <div className="w-36 absolute top-16 left-8">
+          <Animation animation={successAnimation} height={144} width={144} />
+        </div>
       </div>
       <div></div>
     </div>

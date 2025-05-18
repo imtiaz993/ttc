@@ -16,13 +16,13 @@ const WordsStep1 = () => {
       >
         <div className="w-full">
           <div className="w-full flex justify-between items-start mb-4">
-            <p>6th May, 1886</p>
+            <p className="font-playwriteDEGrund">6th May, 1886</p>
             <div>
               <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-              <p className="mt-1 text-xs font-medium text-center">Ajji</p>
+              <p className="mt-1 text-xs font-medium text-center font-manrope">Ajji</p>
             </div>
           </div>
-          <p className="text-sm mb-6">
+          <p className="text-sm mb-6 font-playwriteDEGrund">
             Now I see that tickets can be inspired by almost anything - from
             famous artworks to photographs to architecture and even mangoes!
             <br />

@@ -2,30 +2,42 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "./menu";
 import { nextStep } from "../../../redux/slices/navigationSlice";
+import { setUserData } from "../../../redux/slices/userSlice";
 
 const Feedback = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
+  const [submitting, setIsSubmitting] = useState(false);
+  const updateUserData = (data) => dispatch(setUserData(data));
 
   const next = () => dispatch(nextStep());
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  async function imageToFileObject(imagePath) {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+    const fileName = imagePath.split("/").pop();
+    return new File([blob], fileName, { type: blob.type });
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const feedback = e.target.feedback.value;
+    setIsSubmitting(true);
+    const formData = new FormData();
+    const file = await imageToFileObject(`/images/${userData.char}.png`);
+    formData.append("avatar", file);
+    formData.append("email", e.target.email.value);
+    formData.append("feedback", e.target.feedback.value);
+    formData.append("userName", userData.name);
 
     try {
       // Mock API call
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos",
+        "https://ttc-master-be.onrender.com/api/users",
         {
           method: "POST",
-          body: JSON.stringify({
-            email,
-            feedback,
-          }),
+          body: formData,
         }
       );
 
@@ -45,7 +57,7 @@ const Feedback = () => {
   return (
     <>
       <Menu />
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
         <img
           src={`/images/${userData.char}.png`}
           alt=""
@@ -70,14 +82,16 @@ const Feedback = () => {
                 placeholder="Enter your email"
                 type="email"
                 name="email"
+                onChange={(e) => {
+                  updateUserData({
+                    ...userData,
+                    email: e.target.value,
+                  });
+                }}
                 required
               />
 
-              <button
-                disabled={formSubmitted}
-                type="submit"
-                className="w-5 h-5"
-              >
+              <button disabled={submitting} type="submit" className="w-5 h-5">
                 <img
                   src="/icons/arrow-forward.svg"
                   // arrow-forward-disable.svg
@@ -98,21 +112,23 @@ const Feedback = () => {
             <div className="flex flex-col justify-center items-center">
               <label className=" text-xs flex justify-center items-center max-w-[240px] mb-6">
                 <input
-                  className="mr-2 w-5 h-5 -mt-1"
+                  className="mr-2 w-[18px] h-[18px] -mt-1"
                   name="policy"
                   required
                   type="checkbox"
                 />
-                Receiving communication from MAP via Email and WhatsApp.
+                <span className="w-[calc(100%-20px)]">
+                  Receiving communication from MAP via Email and WhatsApp.
+                </span>
               </label>
               <label className=" text-xs flex justify-center items-center max-w-[240px]">
                 <input
-                  className="mr-2 w-5 h-5 -mt-1"
+                  className="mr-2 w-[18px] h-[18px] -mt-1"
                   name="policy"
                   required
                   type="checkbox"
                 />
-                <span>
+                <span className="w-[calc(100%-20px)]">
                   Having my data stored as per MAP’s{" "}
                   <span className="underline whitespace-nowrap">
                     Privacy Policy

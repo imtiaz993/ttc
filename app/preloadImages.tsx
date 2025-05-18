@@ -18,7 +18,6 @@ const PreloadImages = () => {
     "/images/border-5.png",
     "/images/border-6.png",
     "/images/camera-scanning-art.png",
-    "/images/camera.gif",
     "/images/char1-inactive.png",
     "/images/char1.png",
     "/images/char2-inactive.png",
@@ -41,8 +40,6 @@ const PreloadImages = () => {
     "/images/element-10.png",
     "/images/element-11.png",
     "/images/element-12.png",
-    "/images/failure-2.gif",
-    "/images/failure.gif",
     "/images/game1.png",
     "/images/game2.png",
     "/images/game3.png",
@@ -57,16 +54,14 @@ const PreloadImages = () => {
     "/images/own-tikka.png",
     "/icons/puzzle.svg",
     "/images/scratch-card.png",
-    "/images/scratched-image.jpeg",
+    "/images/scratched-image.png",
     "/images/scratch-card-2.png",
     "/images/selma.png",
     "/images/spot-tikka.png",
     "/images/spot-tikka.jpeg",
-    "/images/success.gif",
     "/images/wonder1.png",
     "/images/wonder2.png",
     "/images/wonder3.png",
-    "/images/verifying.gif",
     "/images/welcome-divider.png",
     "/images/welcome-frame.png",
     "/images/yellow-bg.png",
@@ -119,8 +114,8 @@ const PreloadImages = () => {
 
   return (
     <div className="h-0 overflow-hidden">
-      {images.map((i) => (
-        <img src={i} alt="" className="w-6 cursor-pointer" />
+      {images.map((i, index) => (
+        <img key={index} src={i} alt="" className="w-6 cursor-pointer" />
       ))}
     </div>
   );

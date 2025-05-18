@@ -76,7 +76,7 @@ const WordsStep2 = () => {
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
+          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
               <img src="/icons/psychology.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
@@ -98,7 +98,7 @@ const WordsStep2 = () => {
           </div>
         </div>
       )}
-      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
         <div className="flex justify-center items-center">
           <img src="/images/graham-bombay.png" alt="" className="w-44" />
         </div>

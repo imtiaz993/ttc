@@ -15,9 +15,11 @@ const SareeStep1 = () => {
                 alt=""
                 className="w-11 rounded-full bg-[#EA865B] border border-black"
               />
-              <p className="mt-1 text-xs font-medium text-center">Selma</p>
+              <p className="mt-1 text-xs font-medium text-center font-manrope">
+                Selma
+              </p>
             </div>
-            <p className="text-right">
+            <p className="text-right font-playwriteDEGrund">
               111 Arthur Road,
               <br />
               Bombay,
@@ -31,7 +33,7 @@ const SareeStep1 = () => {
             <p className="text-sm">
               <p className="mt-4"> Dearest Kamla, </p>
             </p>
-            <p className="text-sm mb-6">
+            <p className="text-sm mb-6 font-playwriteDEGrund">
               <p className="mb-2">
                 Papa says tikas are printed in their thousands using this ultra
                 modern  technique called Chromolithography
@@ -49,7 +51,7 @@ const SareeStep1 = () => {
         </div>
         <div className="mt-5">
           <div className="bg-[#FDD931] rounded py-3 px-4">
-            <div className="w-full flex justify-between items-center mb-2">
+            <div className="w-full flex justify-between items-center mb-2 font-manrope">
               <img src="/icons/sound.svg" alt="" className="w-6" />
               <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)] underline">
                 Chromolithography

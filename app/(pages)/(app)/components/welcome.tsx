@@ -88,7 +88,7 @@ const Welcome = ({ playMusic = () => {} }) => {
                   alt=""
                   className="w-4 animate-sway1"
                 />
-                <p className="mx-1.5 text-[#FFF8E7] text-xs text-center">
+                <p className="mx-1.5 text-[#FFF8E7] text-xs text-center font-Manrope">
                   swipe to navigate
                 </p>
                 <img
@@ -110,14 +110,14 @@ const Welcome = ({ playMusic = () => {} }) => {
         }}
       >
         <div className="px-10">
-          <p className="text-[#D02E01] text-sm font-medium mb-3 text-center">
+          <p className="text-[#D02E01] text-sm font-medium mb-3 text-center font-manrope">
             Welcome to
           </p>
           <img src="/icons/logo.svg" alt="" className="w-60 mb-14" />
         </div>
         <img src="/images/welcome-divider.png" alt="" className="w-full" />
-        <div className="mt-7 px-10">
-          <p className="text-[#D02E01] text-sm mb-6 text-center max-w-60">
+        <div className="mt-7 px-5">
+          <p className="text-[#D02E01] text-sm mb-6 text-center font-playwriteDEGrund">
             A world within a world…
             <br /> Messages from a time forgotten…
             <br /> Wish you well on this journey,
@@ -136,7 +136,7 @@ const Welcome = ({ playMusic = () => {} }) => {
             }`}
           >
             <input
-              className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
+              className="text-[#202F00] text-sm font-lora outline-none placeholder:text-[#202F00] w-full bg-transparent"
               placeholder="Enter your name to begin"
               type="text"
               name="name"

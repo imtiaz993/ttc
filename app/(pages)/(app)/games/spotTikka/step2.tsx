@@ -5,6 +5,14 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import successAnimation from "../../../animation/Correct Case.json";
+import failureAnimation from "../../../animation/IR Try again.json";
+import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("../../components/animation"), {
+  ssr: false,
+});
 
 const SpotTikkaStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -33,14 +41,13 @@ const SpotTikkaStep2 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="mt-10 mb-6 flex flex-col items-center">
-                <img
-                  src="/images/verifying.gif"
+                <Animation
+                  animation={verifyingAnimation}
                   height={154}
                   width={154}
-                  alt=""
                 />
                 <p className="font-medium mt-7">Verifying your picture...</p>
               </div>
@@ -49,14 +56,13 @@ const SpotTikkaStep2 = () => {
         );
       case "success":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="flex flex-col items-center">
-                <img
-                  src="/images/success.gif"
-                  height={137}
-                  width={137}
-                  alt=""
+                <Animation
+                  animation={successAnimation}
+                  height={154}
+                  width={154}
                 />
                 <p className="font-medium mt-7">Great job!</p>
                 <p className="text-center mt-2">
@@ -68,9 +74,9 @@ const SpotTikkaStep2 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
             <div className="flex flex-col items-center">
-              <img src="/images/failure.gif" height={81} width={81} alt="" />
+              <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
               <p className="text-center mt-2">How about we have another go?</p>
             </div>
@@ -94,7 +100,7 @@ const SpotTikkaStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="w-full flex items-start mb-6">
                 <div>
@@ -150,7 +156,7 @@ const SpotTikkaStep2 = () => {
         formData.append("image2", localImageFile, "local-image.jpg");
 
         const response = await axios.post(
-          "http://localhost:8080/api/compare-images",
+          "https://ttc-master-be.onrender.com/api/compare-images",
           formData,
           {
             headers: {
