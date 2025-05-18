@@ -15,7 +15,6 @@ const PuzzleStep3 = () => {
   const next = () => dispatch(nextStep());
 
   const [overlay, setOverlay] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [completionTime, setCompletionTime] = useState<any>({
     display: "",
   });
@@ -38,14 +37,7 @@ const PuzzleStep3 = () => {
   useEffect(() => {
     setTimeout(() => {
       setOverlay(true);
-    }, 3000);
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSuccess(true);
-      setIsGameOptions(false);
-    }, 1000);
+    }, 2000);
   }, []);
 
   return (
@@ -84,43 +76,23 @@ const PuzzleStep3 = () => {
           </div>
         </div>
       )}
-      {success && (
-        <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
-          <div>
-            <p className="text-xs font-medium mt-5">
-              Great job! You finished the puzzle in{" "}
-            </p>
-            <p className="text-xl font-medium mt-2 mb-6 font-lora">
-              {completionTime?.display}
-            </p>
-          </div>
-          <div className="flex justify-center items-center w-full relative">
-            <img src="/images/completed-puzzle.png" alt="" className="w-48" />
-            <div className="absolute">
-              <Animation
-                animation={successAnimation}
-                height={144}
-                width={144}
-              />
-            </div>
-          </div>
-          <div className="min-h-20 w-full"></div>
+      <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+        <div>
+          <p className="text-xs font-medium mt-5">
+            Great job! You finished the puzzle in{" "}
+          </p>
+          <p className="text-xl font-medium mt-2 mb-6 font-lora">
+            {completionTime?.display}
+          </p>
         </div>
-      )}
-      {!success && (
-        <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope">
-          <h1 className="text-sm font-medium flex justify-center items-center gap-5">
-            TIMER{" "}
-            <span className="text-xl font-medium font-lora">
-              {completionTime?.minutes?.toString()?.padStart(2, "0")}:
-              {completionTime?.seconds?.toString()?.padStart(2, "0")}
-            </span>
-          </h1>
-          <div className="flex justify-center items-center mt-3 w-full">
-            <img src="/images/completed-puzzle.png" alt="" className="w-64" />
+        <div className="flex justify-center items-center w-full relative">
+          <img src="/images/completed-puzzle.png" alt="" className="w-48" />
+          <div className="absolute">
+            <Animation animation={successAnimation} height={144} width={144} />
           </div>
         </div>
-      )}
+        <div className="min-h-20 w-full"></div>
+      </div>
     </>
   );
 };
