@@ -12,6 +12,12 @@ import {
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 // Custom backend configuration with optimized touch handling
+declare global {
+  interface Window {
+    __REACT_DND_CONTEXT__?: any;
+  }
+}
+
 const HTML5toTouch = {
   backends: [
     {
@@ -347,7 +353,7 @@ const PuzzleStep2 = () => {
         handleUndo={handleUndo}
         handleSkip={() => {
           stopTimer();
-          next()
+          next();
         }}
       />
       <GameStepper showNext={false} showPrev={false} />

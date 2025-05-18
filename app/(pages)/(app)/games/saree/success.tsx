@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import Lottie from "react-lottie";
+import successAnimation from "../../../animation/Correct Case.json";
 
 const Success = ({ userData, sareePath }) => {
   const dispatch = useDispatch();
@@ -32,11 +34,20 @@ const Success = ({ userData, sareePath }) => {
       </div>
       <div className="relative">
         <img src={sareePath} alt="" className="w-52" />
-        <img
-          src="/images/success.gif"
-          alt=""
-          className="w-36 absolute top-16 left-8"
-        />
+        <div className="w-36 absolute top-16 left-8">
+          <Lottie
+            options={{
+              loop: true,
+              autoplay: true,
+              animationData: successAnimation,
+              rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice",
+              },
+            }}
+            height={144}
+            width={144}
+          />
+        </div>
       </div>
       <div></div>
     </div>

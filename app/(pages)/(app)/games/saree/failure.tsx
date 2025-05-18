@@ -1,12 +1,25 @@
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import Lottie from "react-lottie";
+import failureAnimation from "../../../animation/IR Try again.json";
 
 const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
-      <img src="/images/failure.gif" alt="" className="w-28" />
+      <Lottie
+        options={{
+          loop: true,
+          autoplay: true,
+          animationData: failureAnimation,
+          rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+          },
+        }}
+        height={112}
+        width={112}
+      />
       <div className="my-6">
         <p className="font-semibold text-xs mb-2 text-center">
           Oops! Not quite.

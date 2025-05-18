@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import confetti from "canvas-confetti";
+import Lottie from "react-lottie";
+import scratchAnimation from "../../animation/Scratch Card.json";
 
-const ScratchCard = () => {
+const ScratchCard = ({ isRevealed, setIsRevealed }) => {
   const canvasRef = useRef(null);
-  const [isRevealed, setIsRevealed] = useState(false);
+
+  const [showAnimation, setShowAnimation] = useState(true);
   const [selectedImage, setSelectedImage] = useState(
     "/images/scratched-image.png"
   );
@@ -134,6 +137,12 @@ const ScratchCard = () => {
     };
   }, [selectedImage, isRevealed]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 2000);
+  }, []);
+
   return (
     <div
       className="h-full pt-16 px-4 flex flex-col justify-start items-center"
@@ -144,21 +153,21 @@ const ScratchCard = () => {
       }}
     >
       <div className="w-full flex justify-between items-start mb-4">
-        <p>7th April, 1886</p>
+        <p>30th March, 1886</p>
         <div>
           <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
           <p className="mt-1 text-xs font-medium text-center">Kamla</p>
         </div>
       </div>
       <p className="text-sm mb-6">
-        Selma says this unusual picture is called a “Ticket”. She did however
-        mention how she had heard her dad refer to them as “chaaps” or “tikas”
-        too on some occasions.
+        Dearest diary, 
         <br />
-        They are meant to be advertisements just like the ones in newspapers.
-        Except, these don’t sell us Coca-Cola or Pears soap! 
+        Last evening we had one of Papa’s merchant friends over. He brought us
+        the loveliest fabric from Calcutta! But what caught my eye was not the
+        fabric, but this unusual label stuck on it. 
         <br />
-        But I wonder.. how are they so colourful?
+        Can’t wait to show it to my closest friend Selma.Her family’s in the
+        textile business after all!
       </p>
       <div className="flex justify-center items-center mb-32">
         <div className="relative w-60 aspect-square">
@@ -168,6 +177,22 @@ const ScratchCard = () => {
               ref={canvasRef}
               className="absolute top-0 left-0 w-60 h-full touch-none"
             />
+          )}
+          {showAnimation && (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Lottie
+                options={{
+                  loop: false,
+                  autoplay: true,
+                  animationData: scratchAnimation,
+                  rendererSettings: {
+                    preserveAspectRatio: "xMidYMid slice",
+                  },
+                }}
+                height={137}
+                width={137}
+              />
+            </div>
           )}
         </div>
       </div>
