@@ -3,8 +3,12 @@ import { useDispatch } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
-import Lottie from "react-lottie";
 import successAnimation from "../../../animation/Correct Case.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("../../components/animation"), {
+  ssr: false,
+});
 
 const PuzzleStep3 = () => {
   const dispatch = useDispatch();
@@ -93,15 +97,8 @@ const PuzzleStep3 = () => {
           <div className="flex justify-center items-center w-full relative">
             <img src="/images/completed-puzzle.png" alt="" className="w-48" />
             <div className="absolute">
-              <Lottie
-                options={{
-                  loop: true,
-                  autoplay: true,
-                  animationData: successAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
+              <Animation
+                animation={successAnimation}
                 height={144}
                 width={144}
               />

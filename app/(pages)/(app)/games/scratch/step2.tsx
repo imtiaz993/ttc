@@ -4,11 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
-import Lottie from "react-lottie";
 import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
 import scanningAnimation from "../../../animation/Image Scan.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("../../components/animation"), {
+  ssr: false,
+});
 
 const ScratchStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -88,15 +92,8 @@ const ScratchStep2 = () => {
         return (
           <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col justify-center items-center">
-              <Lottie
-                options={{
-                  loop: true,
-                  autoplay: true,
-                  animationData: verifyingAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
+              <Animation
+                animation={verifyingAnimation}
                 height={154}
                 width={154}
               />
@@ -108,15 +105,8 @@ const ScratchStep2 = () => {
         return (
           <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center">
-              <Lottie
-                options={{
-                  loop: true,
-                  autoplay: true,
-                  animationData: successAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
+              <Animation
+                animation={successAnimation}
                 height={137}
                 width={137}
               />
@@ -131,18 +121,7 @@ const ScratchStep2 = () => {
         return (
           <div className="h-full pt-16 pb-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
-              <Lottie
-                options={{
-                  loop: true,
-                  autoplay: true,
-                  animationData: failureAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
-                height={81}
-                width={81}
-              />
+              <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
               <p className="text-center mt-2">
                 Have another go before these big cats disappear into the wild!
@@ -187,15 +166,8 @@ const ScratchStep2 = () => {
             </div>
             <div className="mt-10 mb-6 relative" onClick={handleCameraClick}>
               <div className="relative z-20">
-                <Lottie
-                  options={{
-                    loop: true,
-                    autoplay: true,
-                    animationData: scanningAnimation,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
-                  }}
+                <Animation
+                  animation={scanningAnimation}
                   height={256}
                   width={256}
                 />

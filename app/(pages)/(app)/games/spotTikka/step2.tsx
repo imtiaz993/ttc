@@ -5,10 +5,14 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
-import Lottie from "react-lottie";
 import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("../../components/animation"), {
+  ssr: false,
+});
 
 const SpotTikkaStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -40,15 +44,8 @@ const SpotTikkaStep2 = () => {
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="mt-10 mb-6 flex flex-col items-center">
-                <Lottie
-                  options={{
-                    loop: true,
-                    autoplay: true,
-                    animationData: verifyingAnimation,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
-                  }}
+                <Animation
+                  animation={verifyingAnimation}
                   height={154}
                   width={154}
                 />
@@ -62,19 +59,11 @@ const SpotTikkaStep2 = () => {
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="flex flex-col items-center">
-                <Lottie
-                  options={{
-                    loop: true,
-                    autoplay: true,
-                    animationData: successAnimation,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
-                  }}
+                <Animation
+                  animation={successAnimation}
                   height={154}
                   width={154}
                 />
-
                 <p className="font-medium mt-7">Great job!</p>
                 <p className="text-center mt-2">
                   You got it right in the first go
@@ -87,18 +76,7 @@ const SpotTikkaStep2 = () => {
         return (
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
             <div className="flex flex-col items-center">
-              <Lottie
-                options={{
-                  loop: true,
-                  autoplay: true,
-                  animationData: failureAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
-                height={81}
-                width={81}
-              />
+              <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
               <p className="text-center mt-2">How about we have another go?</p>
             </div>

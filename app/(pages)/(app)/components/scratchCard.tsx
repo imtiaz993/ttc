@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import confetti from "canvas-confetti";
-import Lottie from "react-lottie";
 import scratchAnimation from "../../animation/Scratch Card.json";
+import dynamic from "next/dynamic";
+
+const Animation = dynamic(() => import("./animation"), { ssr: false });
 
 const ScratchCard = ({ isRevealed, setIsRevealed }) => {
   const canvasRef = useRef(null);
@@ -197,15 +199,9 @@ const ScratchCard = ({ isRevealed, setIsRevealed }) => {
           )}
           {showAnimation && (
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Lottie
-                options={{
-                  loop: false,
-                  autoplay: true,
-                  animationData: scratchAnimation,
-                  rendererSettings: {
-                    preserveAspectRatio: "xMidYMid slice",
-                  },
-                }}
+              <Animation
+                animation={scratchAnimation}
+                loop={false}
                 height={137}
                 width={137}
               />
