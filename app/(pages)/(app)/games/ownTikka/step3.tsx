@@ -22,18 +22,17 @@ const OwnTikkaStep3 = () => {
   const next = () => dispatch(nextStep());
 
   const saveCreatedTika = async () => {
-    if (typeof window == "undefined") {
-      return;
-    }
-    const element = document.getElementById("ticket-container");
-    if (!element) return;
+    if (typeof window != "undefined") {
+      const element = document.getElementById("ticket-container");
+      if (!element) return;
 
-    const canvas = await html2canvas(element);
-    const blobUrl = canvas.toDataURL("image/png");
-    updateUserData({
-      ...userData,
-      createdTika: blobUrl,
-    });
+      const canvas = await html2canvas(element);
+      const blobUrl = canvas.toDataURL("image/png");
+      updateUserData({
+        ...userData,
+        createdTika: blobUrl,
+      });
+    }
   };
 
   const handleComplete = async () => {
