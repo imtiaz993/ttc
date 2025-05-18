@@ -22,6 +22,9 @@ const OwnTikkaStep3 = () => {
   const next = () => dispatch(nextStep());
 
   const saveCreatedTika = async () => {
+    if (typeof window == "undefined") {
+      return;
+    }
     const element = document.getElementById("ticket-container");
     if (!element) return;
 
