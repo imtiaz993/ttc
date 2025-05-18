@@ -5,8 +5,8 @@ import { toggleMute } from "../../redux/slices/userSlice";
 
 import Welcome from "./components/welcome";
 
-// import ScratchStep1 from "./games/scratch/step1";
-// import ScratchStep2 from "./games/scratch/step2";
+import ScratchStep1 from "./games/scratch/step1";
+import ScratchStep2 from "./games/scratch/step2";
 
 // import SareeStep1 from "./games/saree/step1";
 // import SareeStep2 from "./games/saree/step2";
@@ -84,7 +84,7 @@ export default function Home() {
     }
   }, [isMuted]);
 
-  // const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
+  const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
 
   // const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
@@ -109,7 +109,7 @@ export default function Home() {
 
   const components = [
     <Welcome playMusic={playMusic} />,
-    // ...ScratchGame,
+    ...ScratchGame,
     // ...SareeGame,
     // ...SpotTikka,
     // ...WordsGame,
