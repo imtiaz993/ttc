@@ -128,7 +128,7 @@ const SareeStep3 = () => {
               Select the two colours that make up{" "}
               <span className="font-semibold">{resultColor?.name}</span>
             </p>
-            <img src={sareePath} alt="" className="w-4/5" />
+            <img src={sareePath} alt="" className="w-64" />
             <div className="w-full mt-12 flex justify-center items-center">
               <div
                 className={`rounded-full w-8 h-8 ${
