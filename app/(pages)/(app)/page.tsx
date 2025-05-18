@@ -11,9 +11,9 @@ const ScratchStep2 = dynamic(() => import("./games/scratch/step2"), {
   ssr: false,
 });
 
-// import SareeStep1 from "./games/saree/step1";
-// import SareeStep2 from "./games/saree/step2";
-// import SareeStep3 from "./games/saree/step3";
+import SareeStep1 from "./games/saree/step1";
+import SareeStep2 from "./games/saree/step2";
+import SareeStep3 from "./games/saree/step3";
 
 // import SpotTikkaStep1 from "./games/spotTikka/step1";
 // import SpotTikkaStep2 from "./games/spotTikka/step2";
@@ -89,7 +89,7 @@ export default function Home() {
 
   const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
 
-  // const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
+  const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
   // const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
 
@@ -113,7 +113,7 @@ export default function Home() {
   const components = [
     <Welcome playMusic={playMusic} />,
     ...ScratchGame,
-    // ...SareeGame,
+    ...SareeGame,
     // ...SpotTikka,
     // ...WordsGame,
     // ...PuzzleGame,
