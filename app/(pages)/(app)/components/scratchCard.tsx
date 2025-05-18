@@ -13,7 +13,13 @@ const ScratchCard = ({ isRevealed, setIsRevealed }) => {
   const isDrawing = useRef(false);
 
   useEffect(() => {
-    if (!canvasRef.current || !selectedImage || isRevealed) return;
+    if (
+      !canvasRef.current ||
+      !selectedImage ||
+      isRevealed ||
+      typeof window == "undefined"
+    )
+      return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
