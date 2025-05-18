@@ -40,14 +40,42 @@ export default function Home() {
   const bgMusicRef = useRef(null);
 
   useEffect(() => {
-    bgMusicRef.current = new Audio("/audio/music.mp3");
-    bgMusicRef.current.loop = true;
+    const audioFiles = ["/audio/Music 1.mp3", "/audio/Music 2.mp3"];
+    let currentIndex = 0;
+
+    bgMusicRef.current = new Audio(audioFiles[currentIndex]);
+    bgMusicRef.current.loop = false; // Disable loop for sequential play
     bgMusicRef.current.muted = isMuted;
+
+    const playNext = () => {
+      currentIndex++;
+      if (currentIndex < audioFiles.length) {
+        bgMusicRef.current.src = audioFiles[currentIndex];
+        bgMusicRef.current
+          .play()
+          .catch((error) => console.error("Play failed:", error));
+      }
+    };
+
+    bgMusicRef.current.addEventListener("ended", playNext);
+
     handleToggleMute(false);
+
+    return () => {
+      if (bgMusicRef.current) {
+        bgMusicRef.current.pause();
+        bgMusicRef.current.removeEventListener("ended", playNext);
+        bgMusicRef.current = null;
+      }
+    };
   }, []);
 
   const playMusic = () => {
-    bgMusicRef.current?.play();
+    if (bgMusicRef.current) {
+      bgMusicRef.current
+        .play()
+        .catch((error) => console.error("Play failed:", error));
+    }
   };
 
   useEffect(() => {
