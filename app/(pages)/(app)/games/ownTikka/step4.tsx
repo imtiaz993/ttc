@@ -46,7 +46,7 @@ const OwnTikkaStep4 = () => {
     <>
       <Menu />
       <GameStepper showNext={false} showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
         <div className="flex justify-center items-center mb-16">
           <img src={userData.createdTika} alt="" className="w-80" />
         </div>

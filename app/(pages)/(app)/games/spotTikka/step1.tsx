@@ -14,14 +14,14 @@ const SpotTikkaStep1 = () => {
         }}
         className="h-full pt-16 px-4 flex flex-col justify-start items-center"
       >
-        <div className="w-full flex justify-between items-start mb-4">
-          <p>30th April, 1886</p>
+        <div className="w-full flex justify-between items-start mb-4 ">
+          <p className="font-playwriteDEGrund">30th April, 1886</p>
           <div>
             <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-            <p className="mt-1 text-xs font-medium text-center">Ajji</p>
+            <p className="mt-1 text-xs font-medium text-center font-manrope">Ajji</p>
           </div>
         </div>
-        <p className="text-sm mb-10">
+        <p className="text-sm mb-10 font-playwriteDEGrund">
           From the extraordinary to the everyday, tikas ran a range of design.
           What imaginations their creators must have!
           <br />

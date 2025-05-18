@@ -2,11 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@font-face {
+  font-family: "lora";
+  src: url("../public/fonts/Lora-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "lora";
+  src: url("../public/fonts/Lora-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "lora";
+  src: url("../public/fonts/Lora-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "lora";
+  src: url("../public/fonts/Lora-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "manrope";
+  src: url("../public/fonts/Manrope-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("../public/fonts/Manrope-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("../public/fonts/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("../public/fonts/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "manrope";
+  src: url("../public/fonts/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "playwriteDEGrund";
+  src: url("../public/fonts/PlaywriteDEGrund-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "playwriteDEGrund";
+  src: url("../public/fonts/PlaywriteDEGrund-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 
 * {
-  font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 input[type="text"] {

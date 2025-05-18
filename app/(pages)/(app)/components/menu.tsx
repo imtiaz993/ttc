@@ -33,7 +33,7 @@ const Menu = ({
   }, []);
 
   return (
-    <div>
+    <div className="font-manrope">
       {!open &&
         (isGameOptions ? (
           <div className="fixed top-5 right-4 left-4 flex justify-between">

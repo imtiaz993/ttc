@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           </div>
           <PreloadImages />
         </div>
-        <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100">
+        <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100 font-manrope">
           <div className="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white max-w-md">
             <svg
               className="w-16 h-16 text-blue-500 mb-4"

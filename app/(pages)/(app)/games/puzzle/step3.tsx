@@ -51,7 +51,7 @@ const PuzzleStep3 = () => {
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
+          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
               <div className="flex items-center">
                 <img src="/icons/question-mark.svg" alt="" className="w-6" />
@@ -81,12 +81,12 @@ const PuzzleStep3 = () => {
         </div>
       )}
       {success && (
-        <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
+        <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
           <div>
             <p className="text-xs font-medium mt-5">
               Great job! You finished the puzzle in{" "}
             </p>
-            <p className="text-xl font-medium mt-2 mb-6">
+            <p className="text-xl font-medium mt-2 mb-6 font-lora">
               {completionTime?.display}
             </p>
           </div>
@@ -111,10 +111,10 @@ const PuzzleStep3 = () => {
         </div>
       )}
       {!success && (
-        <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
+        <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope">
           <h1 className="text-sm font-medium flex justify-center items-center gap-5">
             TIMER{" "}
-            <span className="text-xl font-medium">
+            <span className="text-xl font-medium font-lora">
               {completionTime?.minutes?.toString()?.padStart(2, "0")}:
               {completionTime?.seconds?.toString()?.padStart(2, "0")}
             </span>

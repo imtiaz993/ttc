@@ -7,7 +7,7 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
   return (
-    <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+    <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
       <Lottie
         options={{
           loop: true,

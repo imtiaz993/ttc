@@ -360,7 +360,7 @@ const PuzzleStep2 = () => {
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
               <img
                 src="/icons/question-mark.svg"
@@ -385,9 +385,9 @@ const PuzzleStep2 = () => {
       )}
       <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
         <div>
-          <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5">
+          <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5 font-manrope">
             TIMER
-            <span className="text-xl font-medium">
+            <span className="text-xl font-medium font-lora">
               {Math.floor(seconds / 60)
                 .toString()
                 .padStart(2, "0")}

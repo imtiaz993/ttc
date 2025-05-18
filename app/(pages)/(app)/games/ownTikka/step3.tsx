@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
-import {setUserData} from "../../../../redux/slices/userSlice";
+import { setUserData } from "../../../../redux/slices/userSlice";
 
 const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
@@ -31,7 +31,7 @@ const OwnTikkaStep3 = () => {
       ...userData,
       createdTika: blobUrl,
     });
-  }
+  };
 
   const handleComplete = async () => {
     await saveCreatedTika();
@@ -109,7 +109,7 @@ const OwnTikkaStep3 = () => {
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2">
+          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-start mb-2">
               <img src="/icons/mouse.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
@@ -133,10 +133,10 @@ const OwnTikkaStep3 = () => {
         </div>
       )}
       <div
-        className={`h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]`}
+        className={`h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope`}
       >
         <div
-            id="ticket-container"
+          id="ticket-container"
           className="w-60 h-80 mb-16 relative"
           style={{
             backgroundImage: selectedOptions.Background

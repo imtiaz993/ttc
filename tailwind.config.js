@@ -7,7 +7,13 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lora: ["lora", "serif"],
+        manrope: ["manrope", "sans-serif"],
+        playwriteDEGrund: ["playwriteDEGrund", "cursive"],
+      },
+    },
   },
   plugins: [],
 };

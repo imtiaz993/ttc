@@ -86,7 +86,7 @@ const ScratchStep2 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col justify-center items-center">
               <Lottie
                 options={{
@@ -106,7 +106,7 @@ const ScratchStep2 = () => {
         );
       case "success":
         return (
-          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center">
               <Lottie
                 options={{
@@ -129,7 +129,7 @@ const ScratchStep2 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 pb-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 pb-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
               <Lottie
                 options={{
@@ -168,7 +168,7 @@ const ScratchStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full flex items-start mb-4">
               <div>
                 <img

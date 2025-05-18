@@ -8,7 +8,7 @@ const PuzzleStep4 = () => {
     <>
       <Menu />
       <GameStepper showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
         <div>
           <div className="w-full flex items-start mb-6">
             <div>

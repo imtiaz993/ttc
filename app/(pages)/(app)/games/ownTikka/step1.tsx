@@ -15,13 +15,15 @@ const OwnTikkaStep1 = () => {
         className="h-full pt-16 px-4 flex flex-col justify-start items-center"
       >
         <div className="w-full flex justify-between items-start mb-4">
-          <p>8th August, 1886</p>
+          <p className="font-playwriteDEGrund">8th August, 1886</p>
           <div>
             <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-            <p className="mt-1 text-xs font-medium text-center">Ajji</p>
+            <p className="mt-1 text-xs font-medium text-center font-manrope">
+              Ajji
+            </p>
           </div>
         </div>
-        <p className="text-sm mb-6">
+        <p className="text-sm mb-6 font-playwriteDEGrund">
           My collection grows as I  almost every tika I come across.
           <br />
           Mumma says its all just junk, but I am sure, centuries from now, my

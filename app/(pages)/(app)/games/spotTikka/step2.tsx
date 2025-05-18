@@ -37,7 +37,7 @@ const SpotTikkaStep2 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="mt-10 mb-6 flex flex-col items-center">
                 <Lottie
@@ -59,7 +59,7 @@ const SpotTikkaStep2 = () => {
         );
       case "success":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="flex flex-col items-center">
                 <Lottie
@@ -85,7 +85,7 @@ const SpotTikkaStep2 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
             <div className="flex flex-col items-center">
               <Lottie
                 options={{
@@ -122,7 +122,7 @@ const SpotTikkaStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+          <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full">
               <div className="w-full flex items-start mb-6">
                 <div>
