@@ -135,7 +135,7 @@ const OwnTikkaStep3 = () => {
         </div>
       )}
       <div
-        className={`h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope`}
+        className={`h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope`}
       >
         <div
           id="ticket-container"
@@ -182,7 +182,7 @@ const OwnTikkaStep3 = () => {
             </p>
           )}
         </div>
-        <div className="px-4 w-full absolute bottom-24 ">
+        <div className="px-4 w-full absolute bottom-12">
           <div className="w-full flex gap-3 flex-row justify-between items-center flex-nowrap overflow-x-auto scrollbar-thin scrollbar-thumb-[#FDD931] scrollbar-track-gray-200">
             {menu
               .find((menu) => menu.menu == selectedMenu)
@@ -227,7 +227,7 @@ const OwnTikkaStep3 = () => {
                 )
               )}
           </div>
-          <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-5">
+          <div className="mt-5 grid grid-cols-2 gap-4">
             {menu.map((menu, index) => (
               <div
                 key={index}
