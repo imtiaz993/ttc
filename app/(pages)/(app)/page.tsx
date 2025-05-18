@@ -109,12 +109,12 @@ export default function Home() {
 
   const components = [
     <Welcome playMusic={playMusic} />,
-    ...ScratchGame,
-    ...SareeGame,
+    // ...ScratchGame,
+    // ...SareeGame,
     // ...SpotTikka,
     // ...WordsGame,
     // ...PuzzleGame,
-    ...OwnTikkaGame,
+    // ...OwnTikkaGame,
     <Feedback />,
     <Thankyou />,
   ];
