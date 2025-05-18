@@ -196,7 +196,7 @@ const PuzzleStep2 = () => {
   const [moveHistory, setMoveHistory] = useState([]);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const pieceSize = 100;
+  const pieceSize = 80;
   const gridSize = 3;
   const [placedPieces, setPlacedPieces] = useState({});
   const [timer, setTimer] = useState(15);
@@ -243,15 +243,15 @@ const PuzzleStep2 = () => {
     };
   });
   const initialLayout = [
-    { id: "piece-0", top: 70, left: 80 },
-    { id: "piece-1", top: 140, left: 160 },
-    { id: "piece-2", top: 160, left: 0 },
-    { id: "piece-3", top: 30, left: 185 },
-    { id: "piece-4", top: 100, left: 230 },
-    { id: "piece-5", top: 40, left: -30 },
-    { id: "piece-6", top: 0, left: 20 },
-    { id: "piece-7", top: -5, left: 210 },
-    { id: "piece-8", top: 5, left: 100 },
+    { id: "piece-0", top: 60, left: 70 },
+    { id: "piece-1", top: 120, left: 135 },
+    { id: "piece-2", top: 130, left: 0 },
+    { id: "piece-3", top: 30, left: 155 },
+    { id: "piece-4", top: 80, left: 195 },
+    { id: "piece-5", top: 30, left: -20 },
+    { id: "piece-6", top: 0, left: 10 },
+    { id: "piece-7", top: -5, left: 180 },
+    { id: "piece-8", top: 5, left: 80 },
   ];
   useEffect(() => {
     let interval = null;
@@ -400,7 +400,6 @@ const PuzzleStep2 = () => {
               style={{
                 backgroundColor: "#FAF7E8",
                 minHeight: "100vh",
-                padding: "10px",
               }}
             >
               {/* Custom drag layer for visible drag preview */}
