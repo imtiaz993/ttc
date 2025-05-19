@@ -63,11 +63,6 @@ const Welcome = ({ playMusic = () => {} }) => {
             onMouseUp={handleDragEnd}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            style={{
-              transform: `translateX(${dragPosition}px)`,
-              transition:
-                dragPosition === 0 ? "transform 0.3s ease-out" : "none",
-            }}
           >
             <div
               className="fixed z-20 right-0 left-0 bottom-0"
@@ -75,9 +70,6 @@ const Welcome = ({ playMusic = () => {} }) => {
                 backgroundImage: "url('/images/overlay-yellow.png')",
                 backgroundSize: "contain",
                 backgroundRepeat: "round",
-                transform: `translateX(${dragPosition}px)`,
-                transition:
-                  dragPosition === 0 ? "transform 0.3s ease-out" : "none",
               }}
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
