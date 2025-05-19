@@ -5,10 +5,10 @@ import dynamic from "next/dynamic";
 
 const Animation = dynamic(() => import("./animation"), { ssr: false });
 
-const ScratchCard = ({ isRevealed, setIsRevealed }) => {
+const ScratchCard = ({ isRevealed, setIsRevealed, animation }) => {
   const canvasRef = useRef(null);
 
-  const [showAnimation, setShowAnimation] = useState(true);
+  const [showAnimation, setShowAnimation] = useState(animation);
   const [selectedImage, setSelectedImage] = useState(
     "/images/scratched-image.png"
   );
@@ -153,6 +153,10 @@ const ScratchCard = ({ isRevealed, setIsRevealed }) => {
       };
     }
   }, [selectedImage, isRevealed]);
+
+  useEffect(() => {
+    setShowAnimation(animation);
+  }, [animation]);
 
   useEffect(() => {
     setTimeout(() => {

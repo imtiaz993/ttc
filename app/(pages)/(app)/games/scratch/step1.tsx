@@ -10,8 +10,12 @@ const ScratchStep1 = () => {
   return (
     <>
       <Menu isOpen={userData.menu} />
-      <GameStepper iswhite  />
-      <ScratchCard isRevealed={isRevealed} setIsRevealed={setIsRevealed} />
+      <GameStepper iswhite />
+      <ScratchCard
+        isRevealed={isRevealed}
+        setIsRevealed={setIsRevealed}
+        animation={!userData.menu}
+      />
     </>
   );
 };

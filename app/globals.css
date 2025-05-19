@@ -75,7 +75,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-input[type="text"] {
+input {
   font-size: 16px;
 }
 
