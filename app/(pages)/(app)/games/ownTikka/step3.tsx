@@ -124,8 +124,8 @@ const OwnTikkaStep3 = () => {
       <GameStepper showPrev={false} showNext={false} />
       {overlay && (
         <div>
-          <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
+          <div className="fixed inset-0 bg-[#00000040] z-50"></div>
+          <div className="fixed z-[99] h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-start mb-2">
               <img src="/icons/mouse.svg" alt="" className="w-6" />
               <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">

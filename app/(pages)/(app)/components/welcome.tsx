@@ -58,7 +58,7 @@ const Welcome = ({ playMusic = () => {} }) => {
       {overlay && (
         <>
           <div
-            className="fixed inset-0 bg-[#00000040] z-10"
+            className="fixed inset-0 bg-[#00000040] z-20"
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onTouchMove={handleDragMove}
@@ -101,22 +101,27 @@ const Welcome = ({ playMusic = () => {} }) => {
           </div>
         </>
       )}
-      <div
-        className="flex flex-col justify-center items-center border-transparent h-dvh px-12"
-        style={{
-          backgroundImage: "url('/images/welcome-frame.png')",
-          backgroundSize: "contain",
-          backgroundRepeat: "round",
-        }}
-      >
-        <div className="px-10">
+      <div className="relative flex flex-col justify-center items-center border-transparent h-dvh px-12">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-fill z-0"
+          src="/videos/welcome-video.mp4"
+        />
+        <div className="relative z-10 px-10">
           <p className="text-[#D02E01] text-sm font-medium mb-3 text-center font-manrope">
             Welcome to
           </p>
           <img src="/icons/logo.svg" alt="" className="w-60 mb-14" />
         </div>
-        <img src="/images/welcome-divider.png" alt="" className="w-full" />
-        <div className="mt-7 px-5">
+        <img
+          src="/images/welcome-divider.png"
+          alt=""
+          className="relative z-10 w-full"
+        />
+        <div className="relative z-10 mt-7 px-5">
           <p className="text-[#D02E01] text-sm mb-6 text-center font-playwriteDEGrund">
             A world within a world…
             <br /> Messages from a time forgotten…
@@ -153,7 +158,11 @@ const Welcome = ({ playMusic = () => {} }) => {
             </button>
           </form>
           <div className="flex justify-center mt-6">
-            <img src="/images/map-logo.png" alt="" className="w-16" />
+            <img
+              src="/images/map-logo.png"
+              alt=""
+              className="relative z-10 w-16"
+            />
           </div>
         </div>
       </div>
