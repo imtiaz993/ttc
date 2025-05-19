@@ -51,18 +51,14 @@ const OwnTikkaStep3 = () => {
       selectedOptions.Text
     ) {
       setShowTextInput(true);
-      setTimeout(() => {
-        if (textInputRef.current) {
-          textInputRef.current.focus(); // Auto-focus to open keyboard
-        }
-      }, 100); // Small delay to ensure DOM is updated
     }
   }, [selectedOptions]);
 
-  const handleTextSubmit = () => {
-    setShowTextInput(false);
-    handleComplete();
-  };
+  useEffect(() => {
+    if (textInputRef.current) {
+      textInputRef.current.focus(); // Auto-focus to open keyboard
+    }
+  }, [showTextInput]);
 
   const menu = [
     {
