@@ -103,7 +103,7 @@ const Feedback = () => {
             </div>
             <div className="flex justify-between pb-2 border-b border-[#223100] my-6">
               <textarea
-                className="text-[#202F00] text-base outline-none placeholder:text-[#202F00] w-full bg-transparent"
+                className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
                 placeholder="What would you like MAP to do next?"
                 name="feedback"
                 required
