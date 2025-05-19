@@ -23,7 +23,7 @@ const Welcome = ({ playMusic = () => {} }) => {
       } else {
         setDisabled(false);
       }
-    }, 1000);
+    }, 500);
     if (!userData.overlay) {
       setDisabled(false);
     }
