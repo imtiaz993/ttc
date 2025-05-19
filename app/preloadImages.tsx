@@ -68,6 +68,7 @@ const PreloadImages = () => {
     "/icons/arrow-forward-disable.svg",
     "/icons/arrow-forward.svg",
     "/icons/backgroud-white.svg",
+    "/icons/cloud.svg",
     "/icons/background-black.svg",
     "/icons/bofa-bank.svg",
     "/icons/border-black.svg",
