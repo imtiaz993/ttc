@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import Menu from "../../components/menu";
@@ -11,6 +11,8 @@ const OwnTikkaStep3 = () => {
   const [selectedMenu, setSelectedMenu] = useState("Background");
   const userData = useSelector((state: any) => state.user.userData);
   const updateUserData = (data) => dispatch(setUserData(data));
+  const [showTextInput, setShowTextInput] = useState(false);
+  const [customText, setCustomText] = useState("");
   const [selectedOptions, setSelectedOptions] = useState({
     Background: "",
     Border: "",
@@ -20,6 +22,7 @@ const OwnTikkaStep3 = () => {
 
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
+  const textInputRef = useRef(null);
 
   const saveCreatedTika = async () => {
     if (typeof window != "undefined") {
@@ -38,6 +41,27 @@ const OwnTikkaStep3 = () => {
   const handleComplete = async () => {
     await saveCreatedTika();
     next();
+  };
+
+  useEffect(() => {
+    if (
+      selectedOptions.Background &&
+      selectedOptions.Border &&
+      selectedOptions.Elements &&
+      selectedOptions.Text
+    ) {
+      setShowTextInput(true);
+      setTimeout(() => {
+        if (textInputRef.current) {
+          textInputRef.current.focus(); // Auto-focus to open keyboard
+        }
+      }, 100); // Small delay to ensure DOM is updated
+    }
+  }, [selectedOptions]);
+
+  const handleTextSubmit = () => {
+    setShowTextInput(false);
+    handleComplete();
   };
 
   const menu = [
@@ -166,7 +190,22 @@ const OwnTikkaStep3 = () => {
                   className="w-full h-full object-cover absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
                 />
               )}
-              <p className="text-[10px] font-semibold absolute bottom-1 z-40 flex justify-center w-full">
+              <p className="text-[10px] font-semibold text-center uppercase absolute top-1 z-40 flex justify-center w-full">
+                {customText}
+              </p>
+              {showTextInput && (
+                <input
+                  ref={textInputRef}
+                  type="text"
+                  value={customText}
+                  maxLength={16}
+                  onChange={(e) => setCustomText(e.target.value)}
+                  placeholder=""
+                  className="text-[10px] font-semibold outline-none text-center uppercase absolute top-1 z-40 flex justify-center w-full bg-transparent placeholder:text-black"
+                  autoFocus
+                />
+              )}
+              <p className="text-[10px] font-semibold absolute bottom-1.5 z-40 flex justify-center w-full">
                 {selectedOptions.Text}
               </p>
             </>
