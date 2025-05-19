@@ -75,7 +75,13 @@
   -webkit-font-smoothing: antialiased;
 }
 
-input {
+input[type="text"] {
+  font-size: 16px;
+}
+input[type="email"] {
+  font-size: 16px;
+}
+textarea {
   font-size: 16px;
 }
 
