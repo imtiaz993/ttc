@@ -117,6 +117,14 @@ const PreloadImages = () => {
       {images.map((i, index) => (
         <img key={index} src={i} alt="" className="w-6 cursor-pointer" />
       ))}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-11/12 mx-auto"
+        src="/videos/color-animation.mp4"
+      />
     </div>
   );
 };
