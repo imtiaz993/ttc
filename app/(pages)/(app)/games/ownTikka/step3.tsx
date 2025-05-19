@@ -40,19 +40,6 @@ const OwnTikkaStep3 = () => {
     next();
   };
 
-  useEffect(() => {
-    if (
-      selectedOptions.Background &&
-      selectedOptions.Border &&
-      selectedOptions.Elements &&
-      selectedOptions.Text
-    ) {
-      setTimeout(() => {
-        handleComplete();
-      }, 2000);
-    }
-  }, [selectedOptions]);
-
   const menu = [
     {
       menu: "Background",
@@ -103,6 +90,13 @@ const OwnTikkaStep3 = () => {
     <>
       <Menu
         showInfo={true}
+        showFinish={Boolean(
+          selectedOptions.Background &&
+            selectedOptions.Border &&
+            selectedOptions.Elements &&
+            selectedOptions.Text
+        )}
+        handleFinish={handleComplete}
         handleInfo={() => {
           setOverlay(true);
         }}
