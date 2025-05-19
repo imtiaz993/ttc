@@ -9,6 +9,7 @@ const Welcome = ({ playMusic = () => {} }) => {
   const [disabled, setDisabled] = useState(true);
   const [dragStartX, setDragStartX] = useState(0);
   const [dragPosition, setDragPosition] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
   const userData = useSelector((state: any) => state.user.userData);
   const next = () => dispatch(nextStep());
   const hideOverlay = () => dispatch(closeOverlay());
@@ -45,9 +46,13 @@ const Welcome = ({ playMusic = () => {} }) => {
       dragPosition < -screenWidth * 0.25 ||
       dragPosition > screenWidth * 0.25
     ) {
-      setOverlay(false);
-      setDisabled(false);
-      hideOverlay();
+      setFadeOut(true); // Trigger fade-out animation
+      setTimeout(() => {
+        setOverlay(false);
+        setDisabled(false);
+        hideOverlay();
+        setFadeOut(false); // Reset fadeOut state
+      }, 300); // Match the transition duration
     }
     setDragStartX(0);
     setDragPosition(0);
@@ -63,6 +68,10 @@ const Welcome = ({ playMusic = () => {} }) => {
             onMouseUp={handleDragEnd}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
+            style={{
+              opacity: fadeOut ? 0 : 1,
+              transition: "opacity 0.3s ease-out",
+            }}
           >
             <div
               className="fixed z-20 right-0 left-0 bottom-0"
@@ -70,6 +79,8 @@ const Welcome = ({ playMusic = () => {} }) => {
                 backgroundImage: "url('/images/overlay-yellow.png')",
                 backgroundSize: "contain",
                 backgroundRepeat: "round",
+                opacity: fadeOut ? 0 : 1,
+                transition: "opacity 1s ease-out",
               }}
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
