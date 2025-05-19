@@ -27,10 +27,13 @@ const SareeStep2 = () => {
           </div>
         </div>
         <div className="mt-10 mb-10 w-full">
-          <img
-            src="/images/color-pallets.png"
-            alt=""
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-11/12 mx-auto"
+            src="/videos/color-animation.mp4"
           />
         </div>
       </div>
