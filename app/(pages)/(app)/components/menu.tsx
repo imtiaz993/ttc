@@ -13,9 +13,11 @@ const Menu = ({
   isUndoDisabled = false,
   showSkip = true,
   showInfo = false,
+  showFinish = false,
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
+  handleFinish = () => {},
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -96,15 +98,24 @@ const Menu = ({
                   onClick={handleInfo}
                 />
               )}
-              <img
-                src="/icons/menu.svg"
-                decoding="sync"
-                alt=""
-                className="w-6 cursor-pointer"
-                onClick={() => {
-                  setOpen(true);
-                }}
-              />
+              {showFinish ? (
+                <p
+                  className="text-sm font-manrope font-medium"
+                  onClick={handleFinish}
+                >
+                  FINISH
+                </p>
+              ) : (
+                <img
+                  src="/icons/menu.svg"
+                  decoding="sync"
+                  alt=""
+                  className="w-6 cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                />
+              )}
             </div>
           </div>
         ))}
