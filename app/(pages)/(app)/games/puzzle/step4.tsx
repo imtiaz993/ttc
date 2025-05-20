@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const PuzzleStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -10,52 +8,37 @@ const PuzzleStep4 = () => {
     <>
       <Menu />
       <GameStepper showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
         <div>
-          <div className="w-full flex items-start mb-6">
+          <div className="w-full flex items-start">
             <div>
               <img
                 src={`/images/${userData.char}.png`}
-               
-
-                
-                
-                
                 alt=""
                 className="w-11 rounded-lg"
               />
               <p className="mt-1 text-xs font-medium text-center">You</p>
             </div>
-            <p className="ml-4 font-medium w-[cacl(100%-46px)]">
+            <p className="ml-4 font-medium w-[calc(100%-44px)]">
               Wow! A wall of modern wonders - some oddly familiar, some utterly
               bizarre
             </p>
           </div>
-          <div className="w-full flex justify-center mt-6">
+          <div className="w-full flex justify-between items-start mt-6">
             <img
-              src="/images/three-arts.png"
-             
-
-              
-              
-              
+              src="/images/wonder1.png"
               alt=""
-              className="w-11/12"
+              className="w-28 relative top-8"
             />
+            <img src="/images/wonder2.png" alt="" className="w-32 relative" />
+          </div>
+          <div className="flex justify-center mt-10">
+            <img src="/images/wonder3.png" alt="" className="w-28" />
           </div>
         </div>
-        <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-10">
+        <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-7">
           <div className="w-full flex items-center mb-2">
-            <img
-              src="/icons/zoom-in.svg"
-             
-
-              
-              
-              
-              alt=""
-              className="w-6"
-            />
+            <img src="/icons/zoom-in.svg" alt="" className="w-6" />
             <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
               A secret chamber calls you…
             </p>

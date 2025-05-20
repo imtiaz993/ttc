@@ -1,6 +1,13 @@
 const PreloadImages = () => {
   const images = [
-    "/images/ajji.png",
+    "/images/saree-blue.png",
+    "/images/saree-green.png",
+    "/images/saree-orange.png",
+    "/images/saree-purple.png",
+    "/images/saree-red.png",
+    "/images/saree-white.png",
+    "/images/saree-yellow.png",
+    "/images/kamla.png",
     "/images/bg-1.png",
     "/images/bg-2.png",
     "/images/bg-3.png",
@@ -11,7 +18,6 @@ const PreloadImages = () => {
     "/images/border-5.png",
     "/images/border-6.png",
     "/images/camera-scanning-art.png",
-    "/images/camera.gif",
     "/images/char1-inactive.png",
     "/images/char1.png",
     "/images/char2-inactive.png",
@@ -34,8 +40,6 @@ const PreloadImages = () => {
     "/images/element-10.png",
     "/images/element-11.png",
     "/images/element-12.png",
-    "/images/failure-2.gif",
-    "/images/failure.gif",
     "/images/game1.png",
     "/images/game2.png",
     "/images/game3.png",
@@ -48,23 +52,25 @@ const PreloadImages = () => {
     "/images/overlay-yellow.png",
     "/images/own-tikka-final.png",
     "/images/own-tikka.png",
-    "/images/puzzle.png",
-    "/images/saree.png",
+    "/icons/puzzle.svg",
     "/images/scratch-card.png",
+    "/images/scratched-image.png",
     "/images/scratch-card-2.png",
     "/images/selma.png",
     "/images/spot-tikka.png",
-    "/images/success.gif",
-    "/images/three-arts.png",
-    "/images/verifying.gif",
+    "/images/spot-tikka.jpeg",
+    "/images/wonder1.png",
+    "/images/wonder2.png",
+    "/images/wonder3.png",
     "/images/welcome-divider.png",
     "/images/welcome-frame.png",
     "/images/yellow-bg.png",
     "/icons/arrow-forward-disable.svg",
     "/icons/arrow-forward.svg",
     "/icons/backgroud-white.svg",
+    "/icons/cloud.svg",
     "/icons/background-black.svg",
-    "/icons/bofa.svg",
+    "/icons/bofa-bank.svg",
     "/icons/border-black.svg",
     "/icons/border-white.svg",
     "/icons/bulb-black.svg",
@@ -80,7 +86,7 @@ const PreloadImages = () => {
     "/icons/info.svg",
     "/icons/insta.svg",
     "/icons/logo.svg",
-    "/icons/map.svg",
+    "/images/map-logo.png",
     "/icons/menu.svg",
     "/icons/mouse.svg",
     "/icons/mute-black.svg",
@@ -93,12 +99,14 @@ const PreloadImages = () => {
     "/icons/sound.svg",
     "/icons/swipe-arrow-dark.svg",
     "/icons/swipe-arrow-forward.svg",
+    "/icons/forward-dark.svg",
     "/icons/swipe-arrow.svg",
     "/icons/text-black.svg",
     "/icons/text-white.svg",
     "/icons/toggle.svg",
     "/icons/undo-disabled.svg",
     "/icons/undo.svg",
+    "/icons/union.svg",
     "/icons/volume-white.svg",
     "/icons/volume.svg",
     "/icons/x.svg",
@@ -107,9 +115,17 @@ const PreloadImages = () => {
 
   return (
     <div className="h-0 overflow-hidden">
-      {images.map((i) => (
-        <img src={i} alt="" className="w-6 cursor-pointer" />
+      {images.map((i, index) => (
+        <img key={index} src={i} alt="" className="w-6 cursor-pointer" />
       ))}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-11/12 mx-auto"
+        src="/videos/color-animation.mp4"
+      />
     </div>
   );
 };

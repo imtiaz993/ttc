@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const PuzzleStep5 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -10,7 +8,7 @@ const PuzzleStep5 = () => {
     <>
       <Menu />
       <GameStepper showPrev={false} />
-      <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex items-start mb-6">
           <div>
             <img
@@ -26,31 +24,43 @@ const PuzzleStep5 = () => {
         </div>
         <div className="relative w-full">
           <div
-            style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
-            className="absolute left-2 -top-14 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
-          >
-            What are all these tickets trying to say?
-          </div>
-          <div
-            className="absolute left-8 -bottom-12 w-[152px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
-            style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
-          >
-            How did they survive all these centuries?
-          </div>
-          <div
-            className="absolute -right-2 top-28 w-[150px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
+            className="w-[154px] absolute left-0 -top-12 fade-in opacity-0"
             style={{ animationDelay: "1s", animationFillMode: "forwards" }}
           >
-            Take a small pause to reflect..
+            <p className="py-3 px-4 text-xs absolute text-white z-10">
+              What are all these tickets trying to say?
+            </p>
+            <img className="relative" src="/icons/cloud.svg" alt="" />
           </div>
           <div
-            className="absolute -right-2 -bottom-28 w-[150px] py-3 px-4 bg-[#243200] text-white rounded-lg text-xs fade-in bg-opacity-50 opacity-0"
+            className="w-[154px] absolute left-8 -bottom-11 fade-in opacity-0"
+            style={{ animationDelay: "3s", animationFillMode: "forwards" }}
+          >
+            <p className="py-3 px-4 text-xs absolute bottom-0 text-white z-10">
+              How did they survive all these centuries?
+            </p>
+            <img className="relative rotate-180" src="/icons/cloud.svg" alt="" />
+          </div>
+          <div
+            className="w-[154px] absolute -right-2 top-28 fade-in opacity-0"
             style={{ animationDelay: "2s", animationFillMode: "forwards" }}
           >
-            Who were they meant to attract?
+            <p className="py-3 px-4 text-xs absolute text-white z-10">
+              Take a small pause to reflect..
+            </p>
+            <img className="relative" src="/icons/cloud.svg" alt="" />
+          </div>
+          <div
+            className="w-[154px] absolute -right-2 -bottom-28 fade-in opacity-0"
+            style={{ animationDelay: "4s", animationFillMode: "forwards" }}
+          >
+            <p className="py-3 px-4 bottom-0 text-xs absolute text-white z-10">
+              Who were they meant to attract?
+            </p>
+            <img className="relative rotate-180" src="/icons/cloud.svg" alt="" />
           </div>
           <div className="flex justify-center items-center">
-            <img src="/images/manchester.png" alt="" className="w-48" />
+            <img src="/images/manchester.png" alt="" className="w-52" />
           </div>
         </div>
         <div className="h-28"></div>

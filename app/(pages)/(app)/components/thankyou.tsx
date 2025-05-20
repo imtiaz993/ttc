@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const Thankyou = () => {
   return (
     <div
@@ -10,26 +8,26 @@ const Thankyou = () => {
         backgroundRepeat: "round",
       }}
     >
-      <div className="px-10">
-        <p className="text-[#D02E01] text-sm font-medium mb-2 text-center">
+      <div className="px-9">
+        <p className="text-[#D02E01] text-sm font-medium mb-2 text-center font-lora">
           Thanks for visiting!
         </p>
       </div>
       <img src="/icons/logo.svg" alt="" className="w-24 mb-6" />
-      <p className="text-center text-[#D02E01] text-[11px] mb-3 px-10">
+      <p className="text-center text-[#D02E01] text-[11px] mb-3 px-9 font-manrope">
         This exhibition and digital experience have been supported by the Bank
         of America
       </p>
       <div className="w-full px-7">
         <div className="flex justify-center">
-          <img src="/icons/bofa.svg" alt="" className="w-full" />
+          <img src="/icons/bofa-bank.svg" alt="" className="w-full" />
         </div>
 
-        <p className="text-center text-[#D02E01] text-[11px] mt-5">
+        <p className="text-center text-[#D02E01] text-[11px] mt-5 font-manrope">
           All images courtesy of the Museum of Art & Photography (MAP)
           Collection, Bengaluru
         </p>
-        <div className="mt-5">
+        <div className="mt-5 font-manrope">
           <div className="flex justify-between items-center mb-3">
             <p className="text-[11px] text-[#D02E01]">Concept</p>
             <p className="text-[#D02E01] font-semibold text-[11px]">
@@ -84,7 +82,7 @@ const Thankyou = () => {
             </p>
           </div>
           <div className="flex justify-center mt-6">
-            <img src="/icons/map.svg" alt="" className="w-16" />
+            <img src="/images/map-logo.png" alt="" className="w-16" />
           </div>
         </div>
       </div>

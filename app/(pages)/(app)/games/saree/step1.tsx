@@ -1,7 +1,5 @@
-import React from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
 
 const SareeStep1 = () => {
   return (
@@ -14,17 +12,14 @@ const SareeStep1 = () => {
             <div>
               <img
                 src="/images/selma.png"
-               
-
-                
-                
-                
                 alt=""
-                className="w-11 rounded-lg"
+                className="w-11 rounded-full bg-[#EA865B] border border-black"
               />
-              <p className="mt-1 text-xs font-medium text-center">Selma</p>
+              <p className="mt-1 text-xs font-medium text-center font-manrope">
+                Selma
+              </p>
             </div>
-            <p className="text-right">
+            <p className="text-right font-playwriteDEGrund">
               111 Arthur Road,
               <br />
               Bombay,
@@ -38,7 +33,7 @@ const SareeStep1 = () => {
             <p className="text-sm">
               <p className="mt-4"> Dearest Kamla, </p>
             </p>
-            <p className="text-sm mb-6">
+            <p className="text-sm mb-6 font-playwriteDEGrund">
               <p className="mb-2">
                 Papa says tikas are printed in their thousands using this ultra
                 modern  technique called Chromolithography
@@ -47,7 +42,7 @@ const SareeStep1 = () => {
               layer by layer. Some Frenchman invented it to make playing cards! 
               <br />
               <br />
-              Doesn’t it sound so magical?! <br />
+              Sounds like magic, doesn’t it? <br />
               <br />
               Much love, <br />
               Selma <br />
@@ -56,18 +51,9 @@ const SareeStep1 = () => {
         </div>
         <div className="mt-5">
           <div className="bg-[#FDD931] rounded py-3 px-4">
-            <div className="w-full flex justify-between items-start mb-2">
-              <img
-                src="/icons/sound.svg"
-               
-
-                
-                
-                
-                alt=""
-                className="w-6"
-              />
-              <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
+            <div className="w-full flex justify-between items-center mb-2 font-manrope">
+              <img src="/icons/sound.svg" alt="" className="w-6" />
+              <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)] underline">
                 Chromolithography
               </p>
             </div>

@@ -1,5 +1,3 @@
-import Image from "next/image";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
 
@@ -9,19 +7,19 @@ const GameStepper = ({
   showNext = true,
   showPrev = true,
   onCameraClick = () => {},
+  reduceProgress = 0,
 }) => {
   const steps = [
     { step: [2], icon: "/images/game1.png" },
-    { step: [5, 6], icon: "/images/game2.png" },
-    { step: [9, 10], icon: "/images/game3.png" },
-    { step: [13, 14], icon: "/images/game4.png" },
-    { step: [18, 19], icon: "/images/game5.png" },
-    { step: [24, 25], icon: "/images/game6.png" },
+    { step: [3], icon: "/images/game2.png" },
+    { step: [6], icon: "/images/game3.png" },
+    { step: [8], icon: "/images/game4.png" },
+    { step: [12, 13], icon: "/images/game5.png" },
+    { step: [18, 19], icon: "/images/game6.png" },
   ];
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
-  console.log(step);
 
   const next = () => dispatch(nextStep());
   const prev = () => dispatch(prevStep());
@@ -30,67 +28,57 @@ const GameStepper = ({
     let value = 0;
     switch (step) {
       case 3:
-        value = 8;
-        break;
-      case 4:
-        value = 12;
-        break;
-      case 5:
-      case 6:
         value = 20;
         break;
-      case 7:
+      case 4:
         value = 28;
         break;
-      case 8:
+      case 5:
         value = 32;
         break;
-      case 9:
-      case 10:
+      case 6:
         value = 40;
         break;
-      case 11:
-      case 12:
+      case 7:
         value = 48;
         break;
-      case 13:
-      case 14:
+      case 8:
         value = 60;
         break;
-      case 15:
+      case 9:
         value = 64;
         break;
-      case 16:
+      case 10:
         value = 68;
         break;
-      case 17:
+      case 11:
         value = 71;
+        break;
+      case 12:
+      case 13:
+        value = 78;
+        break;
+      case 14:
+        value = 82;
+        break;
+      case 15:
+        value = 85;
+        break;
+      case 16:
+        value = 88;
+        break;
+      case 17:
+        value = 91;
         break;
       case 18:
       case 19:
-        value = 78;
-        break;
-      case 20:
-        value = 82;
-        break;
-      case 21:
-        value = 85;
-        break;
-      case 22:
-        value = 88;
-        break;
-      case 23:
-        value = 91;
-        break;
-      case 24:
-      case 25:
         value = 100;
         break;
 
       default:
         break;
     }
-    return value;
+    return value - reduceProgress;
   };
 
   return (
@@ -137,7 +125,8 @@ const GameStepper = ({
         ></div>
         {step > 2 && (
           <>
-            {!steps.find((i) => i.step.includes(step)) && (
+            {(!steps.find((i) => i.step.includes(step)) ||
+              reduceProgress !== 0) && (
               <div
                 className={`absolute -bottom-[7px] w-3 h-3 rounded-full bg-[#243200]`}
                 style={{
@@ -159,7 +148,7 @@ const GameStepper = ({
             <div
               key={index}
               className={`w-5 h-5 rounded-full overflow-hidden  ${
-                item.step.includes(step)
+                item.step.includes(step) && reduceProgress == 0
                   ? "border-4 border-[#243200]"
                   : step > item.step[item.step.length - 1]
                   ? "border border-[#243200]"

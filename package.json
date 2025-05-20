@@ -10,10 +10,20 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.1",
+    "axios": "^1.9.0",
+    "canvas-confetti": "^1.9.3",
+    "html2canvas": "^1.4.1",
+    "lottie-web": "^5.12.2",
     "next": "14.0.1",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dnd-multi-backend": "^9.0.0",
+    "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "^18.2.0",
-    "react-redux": "^9.2.0"
+    "react-lottie": "^1.2.10",
+    "react-redux": "^9.2.0",
+    "react-rnd": "^10.5.2"
   },
   "devDependencies": {
     "@types/node": "20.9.0",

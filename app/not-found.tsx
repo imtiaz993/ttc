@@ -6,7 +6,7 @@ const NotFound = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col justify-center items-center h-dvh bg-gradient-to-b from-gray-100 to-gray-200">
+    <div className="flex flex-col justify-center items-center h-dvh bg-gradient-to-b from-gray-100 to-gray-200 font-manrope">
       <svg
         className="w-24 h-24 text-red-500 mb-6 animate-pulse"
         fill="none"

@@ -1,8 +1,6 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
-import Image from "next/image";
-import { useSelector } from "react-redux";
 
 const SareeStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -10,16 +8,11 @@ const SareeStep2 = () => {
     <>
       <Menu />
       <GameStepper />
-      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7]">
+      <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex justify-between items-start">
           <div>
             <img
               src={`/images/${userData.char}.png`}
-             
-
-              
-              
-              
               alt=""
               className="w-11 rounded-lg"
             />
@@ -34,15 +27,13 @@ const SareeStep2 = () => {
           </div>
         </div>
         <div className="mt-10 mb-10 w-full">
-          <img
-            src="/images/color-pallets.png"
-           
-
-            
-            
-            
-            alt=""
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-11/12 mx-auto"
+            src="/videos/color-animation.mp4"
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, resetStep } from "../../../redux/slices/navigationSlice";
 import {
@@ -13,9 +13,11 @@ const Menu = ({
   isUndoDisabled = false,
   showSkip = true,
   showInfo = false,
+  showFinish = false,
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
+  handleFinish = () => {},
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -33,7 +35,7 @@ const Menu = ({
   }, []);
 
   return (
-    <div>
+    <div className="font-manrope">
       {!open &&
         (isGameOptions ? (
           <div className="fixed top-5 right-4 left-4 flex justify-between">
@@ -96,15 +98,24 @@ const Menu = ({
                   onClick={handleInfo}
                 />
               )}
-              <img
-                src="/icons/menu.svg"
-                decoding="sync"
-                alt=""
-                className="w-6 cursor-pointer"
-                onClick={() => {
-                  setOpen(true);
-                }}
-              />
+              {showFinish ? (
+                <p
+                  className="text-sm font-manrope font-medium"
+                  onClick={handleFinish}
+                >
+                  FINISH
+                </p>
+              ) : (
+                <img
+                  src="/icons/menu.svg"
+                  decoding="sync"
+                  alt=""
+                  className="w-6 cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                />
+              )}
             </div>
           </div>
         ))}
@@ -129,7 +140,7 @@ const Menu = ({
                 className="w-6 cursor-pointer"
                 onClick={() => {
                   setOpen(false);
-                  closeDrawer()
+                  closeDrawer();
                 }}
               />
             </div>
@@ -137,7 +148,7 @@ const Menu = ({
               <p className="text-[#FFF8E7] font-medium mb-2.5">
                 On this adventure. I’d like to be
               </p>
-              <div className="flex justify-between gap-5 mb-10">
+              <div className="flex justify-between gap-4 mb-10">
                 {Array.from({ length: 4 }).map((_, index) => (
                   <img
                     key={index}
@@ -192,7 +203,7 @@ const Menu = ({
                       reset();
                       updateUserData({
                         name: "",
-                        sound: true,
+                        sound: userData.sound,
                         char: "char1",
                         tooltip: false,
                       });
