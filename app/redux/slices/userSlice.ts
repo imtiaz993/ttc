@@ -34,5 +34,5 @@ const userSlice = createSlice({
 });
 
 export const { setUserData, toggleMute, closeMenu, closeOverlay } =
-  userSlice.actions;
+    userSlice.actions;
 export default userSlice.reducer;

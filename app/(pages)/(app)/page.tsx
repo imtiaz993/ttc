@@ -33,90 +33,90 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const step = useSelector((state: any) => state.navigation.step);
-  const isMuted = useSelector((state: any) => state.user.isMuted);
-  const handleToggleMute = (data) => dispatch(toggleMute(data));
-  const bgMusicRef = useRef(null);
+    const dispatch = useDispatch();
+    const step = useSelector((state: any) => state.navigation.step);
+    const isMuted = useSelector((state: any) => state.user.isMuted);
+    const handleToggleMute = (data) => dispatch(toggleMute(data));
+    const bgMusicRef = useRef(null);
 
-  useEffect(() => {
-    const audioFiles = ["/audio/Music 1.mp3", "/audio/Music 2.mp3"];
-    let currentIndex = 0;
+    useEffect(() => {
+        const audioFiles = ["/audio/Music 1.mp3", "/audio/Music 2.mp3"];
+        let currentIndex = 0;
 
-    bgMusicRef.current = new Audio(audioFiles[currentIndex]);
-    bgMusicRef.current.loop = false; // Disable loop for sequential play
-    bgMusicRef.current.muted = isMuted;
+        bgMusicRef.current = new Audio(audioFiles[currentIndex]);
+        bgMusicRef.current.loop = false; // Disable loop for sequential play
+        bgMusicRef.current.muted = isMuted;
 
-    const playNext = () => {
-      currentIndex++;
-      if (currentIndex < audioFiles.length) {
-        bgMusicRef.current.src = audioFiles[currentIndex];
-        bgMusicRef.current
-          .play()
-          .catch((error) => console.error("Play failed:", error));
-      }
+        const playNext = () => {
+            currentIndex++;
+            if (currentIndex < audioFiles.length) {
+                bgMusicRef.current.src = audioFiles[currentIndex];
+                bgMusicRef.current
+                    .play()
+                    .catch((error) => console.error("Play failed:", error));
+            }
+        };
+
+        bgMusicRef.current.addEventListener("ended", playNext);
+
+        handleToggleMute(false);
+
+        return () => {
+            if (bgMusicRef.current) {
+                bgMusicRef.current.pause();
+                bgMusicRef.current.removeEventListener("ended", playNext);
+                bgMusicRef.current = null;
+            }
+        };
+    }, []);
+
+    const playMusic = () => {
+        if (bgMusicRef.current) {
+            bgMusicRef.current
+                .play()
+                .catch((error) => console.error("Play failed:", error));
+        }
     };
 
-    bgMusicRef.current.addEventListener("ended", playNext);
+    useEffect(() => {
+        if (bgMusicRef.current) {
+            bgMusicRef.current.muted = isMuted;
+        }
+    }, [isMuted]);
 
-    handleToggleMute(false);
+    const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
 
-    return () => {
-      if (bgMusicRef.current) {
-        bgMusicRef.current.pause();
-        bgMusicRef.current.removeEventListener("ended", playNext);
-        bgMusicRef.current = null;
-      }
-    };
-  }, []);
+    const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
-  const playMusic = () => {
-    if (bgMusicRef.current) {
-      bgMusicRef.current
-        .play()
-        .catch((error) => console.error("Play failed:", error));
-    }
-  };
+    const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
 
-  useEffect(() => {
-    if (bgMusicRef.current) {
-      bgMusicRef.current.muted = isMuted;
-    }
-  }, [isMuted]);
+    const WordsGame = [<WordsStep1 />, <WordsStep2 />];
 
-  const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
+    const PuzzleGame = [
+        <PuzzleStep1 />,
+        <PuzzleStep2 />,
+        <PuzzleStep3 />,
+        <PuzzleStep4 />,
+        <PuzzleStep5 />,
+    ];
 
-  const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
+    const OwnTikkaGame = [
+        <OwnTikkaStep1 />,
+        <OwnTikkaStep2 />,
+        <OwnTikkaStep3 />,
+        <OwnTikkaStep4 />,
+    ];
 
-  const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
-
-  const WordsGame = [<WordsStep1 />, <WordsStep2 />];
-
-  const PuzzleGame = [
-    <PuzzleStep1 />,
-    <PuzzleStep2 />,
-    <PuzzleStep3 />,
-    <PuzzleStep4 />,
-    <PuzzleStep5 />,
-  ];
-
-  const OwnTikkaGame = [
-    <OwnTikkaStep1 />,
-    <OwnTikkaStep2 />,
-    <OwnTikkaStep3 />,
-    <OwnTikkaStep4 />,
-  ];
-
-  const components = [
-    <Welcome playMusic={playMusic} />,
-    ...ScratchGame,
-    ...SareeGame,
-    ...SpotTikka,
-    ...WordsGame,
-    ...PuzzleGame,
-    ...OwnTikkaGame,
-    <Feedback />,
-    <Thankyou />,
-  ];
-  return components[step - 1];
+    const components = [
+        <Welcome playMusic={playMusic} />,
+        ...ScratchGame,
+        ...SareeGame,
+        ...SpotTikka,
+        ...WordsGame,
+        ...PuzzleGame,
+        ...OwnTikkaGame,
+        <Feedback />,
+        <Thankyou />,
+    ];
+    return components[step - 1];
 }

@@ -139,3 +139,10 @@ textarea {
 .fade-in {
   animation: fadeIn 1s ease-in-out forwards;
 }
+
+#ticket-container {
+  width: 288px;  /* w-72 = 18rem = 288px */
+  height: 384px; /* height to maintain aspect ratio */
+  /* or use aspect-ratio: 3/4; */
+  aspect-ratio: 3 / 4;
+}
