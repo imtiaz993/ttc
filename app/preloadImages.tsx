@@ -68,6 +68,7 @@ const PreloadImages = () => {
     "/icons/arrow-forward-disable.svg",
     "/icons/arrow-forward.svg",
     "/icons/backgroud-white.svg",
+    "/icons/cloud.svg",
     "/icons/background-black.svg",
     "/icons/bofa-bank.svg",
     "/icons/border-black.svg",
@@ -113,19 +114,19 @@ const PreloadImages = () => {
   ];
 
   return (
-    <div className="h-0 overflow-hidden">
-      {images.map((i, index) => (
-        <img key={index} src={i} alt="" className="w-6 cursor-pointer" />
-      ))}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-11/12 mx-auto"
-        src="/videos/color-animation.mp4"
-      />
-    </div>
+      <div className="h-0 overflow-hidden">
+        {images.map((i, index) => (
+            <img key={index} src={i} alt="" className="w-6 cursor-pointer" />
+        ))}
+        <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-11/12 mx-auto"
+            src="/videos/color-animation.mp4"
+        />
+      </div>
   );
 };
 
