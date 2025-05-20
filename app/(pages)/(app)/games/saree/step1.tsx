@@ -1,7 +1,43 @@
+import { useEffect, useRef, useState } from "react";
 import Menu from "../../components/menu";
 import GameStepper from "../../components/gameStepper";
 
 const SareeStep1 = () => {
+  const [playSound, setPlaySound] = useState(false);
+  const bgMusicRef = useRef(null);
+
+  useEffect(() => {
+    bgMusicRef.current = new Audio("/audio/chromo.mp3");
+    bgMusicRef.current.loop = false;
+
+    bgMusicRef.current.addEventListener("ended", () => {
+      setPlaySound(false);
+    });
+
+    return () => {
+      if (bgMusicRef.current) {
+        bgMusicRef.current.pause();
+        bgMusicRef.current = null;
+      }
+    };
+  }, []);
+
+  const playMusic = () => {
+    if (bgMusicRef.current) {
+      bgMusicRef.current
+        .play()
+        .catch((error) => console.error("Play failed:", error));
+    }
+  };
+
+  useEffect(() => {
+    if (playSound) {
+      playMusic();
+    } else {
+      bgMusicRef.current.pause();
+    }
+  }, [playSound]);
+
   return (
     <>
       <Menu />
@@ -52,8 +88,19 @@ const SareeStep1 = () => {
         <div className="mt-5">
           <div className="bg-[#FDD931] rounded py-3 px-4">
             <div className="w-full flex justify-between items-center mb-2 font-manrope">
-              <img src="/icons/sound.svg" alt="" className="w-6" />
-              <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)] underline">
+              <img
+                src={playSound ? "/icons/pause.svg" : "/icons/sound.svg"}
+                alt=""
+                className="w-6"
+                onClick={() => {
+                  setPlaySound(!playSound);
+                }}
+              />
+              <p
+                className={`ml-2 text-sm font-semibold w-[calc(100%-24px)] ${
+                  playSound ? "underline" : ""
+                }`}
+              >
                 Chromolithography
               </p>
             </div>

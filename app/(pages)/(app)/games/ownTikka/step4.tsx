@@ -20,16 +20,24 @@ const OwnTikkaStep4 = () => {
     }, 2000);
   };
 
-  const shareImage = () => {
-    const imageUrl = userData.createdTika;
-    const text = encodeURIComponent(`Check out this Tika I created! ${imageUrl}`);
-    const whatsappUrl = `https://wa.me/?text=${text}`;
-
-    window.open(whatsappUrl, "_blank");
+  const shareImage = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "My Tika",
+          text: "Check out this Tika I created!",
+          url: userData.createdTika, // URL string
+        });
+        setTimeout(() => {
+          next();
+        }, 2000);
+      } catch (error) {
+        alert("Error sharing: " + error.message);
+      }
+    } else {
+      alert("Sharing not supported on this device.");
+    }
   };
-
-
-
 
   return (
     <>
@@ -37,21 +45,15 @@ const OwnTikkaStep4 = () => {
       <GameStepper showNext={false} showPrev={false} />
       <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="flex justify-center items-center mb-5">
-          <img
-              src={userData.createdTika}
-              alt=""
-              className="object-contain w-72"
-              style={{width: '288px', height: '384px'}}
-          />
+          <img src={userData.createdTika} alt="" className="w-72" />
         </div>
-
         <div>
           <div className="w-full flex items-start mb-10">
             <div>
               <img
-                  src={`/images/${userData.char}.png`}
-                  alt=""
-                  className="w-11 rounded-lg"
+                src={`/images/${userData.char}.png`}
+                alt=""
+                className="w-11 rounded-lg"
               />
               <p className="mt-1 text-xs font-medium text-center">You</p>
             </div>
@@ -61,21 +63,21 @@ const OwnTikkaStep4 = () => {
           </div>
           <div className="w-full grid grid-cols-2 gap-4">
             <button
-                onClick={() => {
-                  downloadImage();
-                }}
-                className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
+              onClick={() => {
+                downloadImage();
+              }}
+              className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
             >
-              <img src="/icons/download.svg" alt="" className="w-6 mr-2"/>
+              <img src="/icons/download.svg" alt="" className="w-6 mr-2" />
               Download
             </button>
             <button
-                onClick={() => {
-                  shareImage();
-                }}
-                className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
+              onClick={() => {
+                shareImage();
+              }}
+              className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
             >
-              <img src="/icons/share.svg" alt="" className="w-6 mr-2"/>
+              <img src="/icons/share.svg" alt="" className="w-6 mr-2" />
               Share
             </button>
           </div>
