@@ -70,19 +70,12 @@
   font-weight: 400;
   font-style: normal;
 }
+html {
+  -webkit-text-size-adjust: 100%;
+}
 
 * {
   -webkit-font-smoothing: antialiased;
-}
-
-input[type="text"] {
-  font-size: 16px;
-}
-input[type="email"] {
-  font-size: 16px;
-}
-textarea {
-  font-size: 16px;
 }
 
 @keyframes sway1 {
