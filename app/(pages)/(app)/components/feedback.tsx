@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import Menu from "./menu";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 import { setUserData } from "../../../redux/slices/userSlice";
@@ -7,32 +9,45 @@ import { setUserData } from "../../../redux/slices/userSlice";
 const Feedback = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitting, setIsSubmitting] = useState(false);
-  const updateUserData = (data) => dispatch(setUserData(data));
 
+  const updateUserData = (data) => dispatch(setUserData(data));
   const next = () => dispatch(nextStep());
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  async function imageToFileObject(imagePath) {
+  const imageToFileObject = async (imagePath) => {
     const response = await fetch(imagePath);
     const blob = await response.blob();
     const fileName = imagePath.split("/").pop();
     return new File([blob], fileName, { type: blob.type });
-  }
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    feedback: Yup.string().required("Feedback is required"),
+    policy1: Yup.boolean().oneOf([true], "Required"),
+    policy2: Yup.boolean().oneOf([true], "Required"),
+  });
+
+  const initialValues = {
+    email: userData?.email || "",
+    feedback: "",
+    policy1: false,
+    policy2: false,
+  };
+
+  const handleSubmit = async (values) => {
     setIsSubmitting(true);
+
     const formData = new FormData();
     const file = await imageToFileObject(`/images/${userData.char}.png`);
+
     formData.append("avatar", file);
-    formData.append("email", e.target.email.value);
-    formData.append("feedback", e.target.feedback.value);
+    formData.append("email", values.email);
+    formData.append("feedback", values.feedback);
     formData.append("userName", userData.name);
 
     try {
-      // Mock API call
       const response = await fetch(
         "https://ttc-master-be.onrender.com/api/users",
         {
@@ -43,14 +58,14 @@ const Feedback = () => {
 
       if (response.ok) {
         setFormSubmitted(true);
-        setTimeout(() => {
-          next();
-        }, 3000);
+        setTimeout(() => next(), 3000);
       } else {
-        console.error("Mock API call failed");
+        console.error("Submission failed");
       }
     } catch (error) {
-      console.error("Error during mock API call:", error);
+      console.error("Error submitting form:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -63,6 +78,7 @@ const Feedback = () => {
           alt=""
           className="w-20 rounded-lg"
         />
+
         <div className="mt-6 w-full">
           <div className="w-full flex items-center mb-2">
             <img src="/icons/emoji.svg" alt="" className="w-6" />
@@ -75,68 +91,100 @@ const Feedback = () => {
             art, only at the Museum of Art & Photography, Bangalore. 
           </p>
 
-          <form onSubmit={handleSubmit}>
-            <div className="flex justify-between pb-2 border-b border-[#223100] my-6">
-              <input
-                className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
-                placeholder="Enter your email"
-                type="email"
-                name="email"
-                onChange={(e) => {
-                  updateUserData({
-                    ...userData,
-                    email: e.target.value,
-                  });
-                }}
-                required
-              />
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ handleChange, values }) => (
+              <Form>
+                <div className=" my-6">
+                  <div className="flex justify-between pb-2 border-b border-[#223100]">
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
+                      onChange={(e) => {
+                        handleChange(e);
+                        updateUserData({ ...userData, email: e.target.value });
+                      }}
+                    />
+                    <button
+                      disabled={submitting}
+                      type="submit"
+                      className="w-5 h-5"
+                    >
+                      <img
+                        src="/icons/arrow-forward.svg"
+                        alt=""
+                        className="w-5"
+                      />
+                    </button>
+                  </div>
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-red-500 text-xs mt-1"
+                  />
+                </div>
 
-              <button disabled={submitting} type="submit" className="w-5 h-5">
-                <img
-                  src="/icons/arrow-forward.svg"
-                  // arrow-forward-disable.svg
+                <div className=" my-6">
+                  <div className="flex justify-between pb-2 border-b border-[#223100]">
+                    <Field
+                      as="textarea"
+                      name="feedback"
+                      placeholder="What would you like MAP to do next?"
+                      className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
+                    />
+                  </div>
+                  <ErrorMessage
+                    name="feedback"
+                    component="div"
+                    className="text-red-500 text-xs mt-1"
+                  />
+                </div>
 
-                  alt=""
-                  className="w-5"
-                />
-              </button>
-            </div>
-            <div className="flex justify-between pb-2 border-b border-[#223100] my-6">
-              <textarea
-                className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
-                placeholder="What would you like MAP to do next?"
-                name="feedback"
-                required
-              />
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <label className=" text-xs flex justify-center items-center max-w-[240px] mb-6">
-                <input
-                  className="mr-2 w-[18px] h-[18px] -mt-1"
-                  name="policy"
-                  required
-                  type="checkbox"
-                />
-                <span className="w-[calc(100%-20px)]">
-                  Receiving communication from MAP via Email and WhatsApp.
-                </span>
-              </label>
-              <label className=" text-xs flex justify-center items-center max-w-[240px]">
-                <input
-                  className="mr-2 w-[18px] h-[18px] -mt-1"
-                  name="policy"
-                  required
-                  type="checkbox"
-                />
-                <span className="w-[calc(100%-20px)]">
-                  Having my data stored as per MAP’s{" "}
-                  <span className="underline whitespace-nowrap">
-                    Privacy Policy
-                  </span>
-                </span>
-              </label>
-            </div>
-          </form>
+                <div className="flex flex-col justify-center items-center">
+                  <label className="text-xs flex justify-center items-center max-w-[240px]">
+                    <Field
+                      type="checkbox"
+                      name="policy1"
+                      className="mr-2 w-[18px] h-[18px] -mt-1"
+                    />
+                    <span className="w-[calc(100%-20px)]">
+                      Receiving communication from MAP via Email and WhatsApp.
+                    </span>
+                  </label>
+                  <ErrorMessage
+                    name="policy1"
+                    component="div"
+                    className="text-red-500 text-xs w-full max-w-[240px]"
+                  />
+
+                  <label className="text-xs flex justify-center items-center max-w-[240px] mt-6">
+                    <Field
+                      type="checkbox"
+                      name="policy2"
+                      className="mr-2 w-[18px] h-[18px] -mt-1"
+                    />
+                    <span className="w-[calc(100%-20px)]">
+                      Having my data stored as per MAP’s{" "}
+                      <span className="underline whitespace-nowrap">
+                        Privacy Policy
+                      </span>
+                    </span>
+                  </label>
+                  <ErrorMessage
+                    name="policy2"
+                    component="div"
+                    className="text-red-500 text-xs w-full max-w-[240px]"
+                  />
+                </div>
+              </Form>
+            )}
+          </Formik>
+
           {formSubmitted && (
             <div className="fixed inset-0 flex justify-center items-center">
               <div className="mt-5 bg-[#202F00] rounded-full py-1.5 px-3 flex items-center w-fit">
