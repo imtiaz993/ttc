@@ -37,7 +37,9 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
           Skip
         </button>
         <button
-          onClick={undo}
+          onClick={() => {
+            undo(finalColor);
+          }}
           className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
         >
           <img src="/icons/refresh.svg" alt="" className="w-6 mr-2" />

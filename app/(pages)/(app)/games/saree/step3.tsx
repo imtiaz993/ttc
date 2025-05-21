@@ -71,7 +71,6 @@ const SareeStep3 = () => {
 
   const undo = () => {
     setSelectedColor([]);
-    setRandomColor();
     setState("initial");
     setSareePath("/images/saree-white.png");
   };
