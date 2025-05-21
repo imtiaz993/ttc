@@ -8,7 +8,6 @@ import { setUserData } from "../../../../redux/slices/userSlice";
 import { Rnd } from "react-rnd";
 import axios from "axios";
 
-
 const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState("Background");
@@ -17,7 +16,10 @@ const OwnTikkaStep3 = () => {
   const [showTextInput, setShowTextInput] = useState(false);
   const [customText, setCustomText] = useState("");
   const [elementPos, setElementPos] = useState({ x: 60, y: 60 });
-  const [elementSize, setElementSize] = useState({ width: 96, height: 96 }); // 24 * 4 = 96
+  const [elementSize, setElementSize] = useState({ width: 96, height: 96 });
+  const [zoom, setZoom] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
     Background: "",
     Border: "",
@@ -28,49 +30,325 @@ const OwnTikkaStep3 = () => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
   const textInputRef = useRef(null);
+  const elementRef = useRef(null);
+  const ticketContainerRef = useRef(null);
+  const customTextRef = useRef(null);
+  const selectedTextRef = useRef(null);
+  const rndRef = useRef(null);
+
+  // Add gesture detection for pinch zooming
+  useEffect(() => {
+    const element = ticketContainerRef.current;
+    if (!element || !selectedOptions.Elements) return;
+
+    let startDistance = 0;
+    let currentZoom = zoom;
+
+    const handleTouchStart = (e) => {
+      if (e.touches.length === 2 && !isDragging && !isResizing) {
+        // Get the distance between two fingers
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        startDistance = Math.sqrt(dx * dx + dy * dy);
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches.length === 2 && startDistance > 0 && !isDragging && !isResizing) {
+        // Calculate new distance
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const newDistance = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate zoom factor
+        const factor = newDistance / startDistance;
+        const newZoom = Math.max(0.5, Math.min(3, currentZoom * factor));
+
+        // Apply zoom
+        setZoom(newZoom);
+
+        // Adjust size with zoom factor
+        setElementSize(prevSize => ({
+          width: Math.round(prevSize.width * factor),
+          height: Math.round(prevSize.height * factor)
+        }));
+
+        startDistance = newDistance;
+        currentZoom = newZoom;
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchEnd = () => {
+      startDistance = 0;
+    };
+
+    // Add wheel event for mouse wheel zooming
+    const handleWheel = (e) => {
+      if (selectedOptions.Elements && !isDragging && !isResizing) {
+        e.preventDefault();
+
+        // Calculate zoom direction and factor
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        const newZoom = Math.max(0.5, Math.min(3, zoom * delta));
+
+        // Apply zoom
+        setZoom(newZoom);
+
+        // Update element size
+        setElementSize(prevSize => ({
+          width: Math.round(prevSize.width * delta),
+          height: Math.round(prevSize.height * delta)
+        }));
+      }
+    };
+
+    element.addEventListener("touchstart", handleTouchStart, { passive: false });
+    element.addEventListener("touchmove", handleTouchMove, { passive: false });
+    element.addEventListener("touchend", handleTouchEnd);
+    element.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      element.removeEventListener("touchstart", handleTouchStart);
+      element.removeEventListener("touchmove", handleTouchMove);
+      element.removeEventListener("touchend", handleTouchEnd);
+      element.removeEventListener("wheel", handleWheel);
+    };
+  }, [selectedOptions.Elements, zoom, isDragging, isResizing]);
 
   const saveCreatedTika = async () => {
     if (typeof window === "undefined") return;
 
-    const element = document.getElementById("ticket-container");
+    // Hide input field during capture
+    const originalInputDisplay = textInputRef.current ? textInputRef.current.style.display : null;
+    if (textInputRef.current) {
+      textInputRef.current.style.display = "none";
+    }
+
+    // Create temporary text containers with fixed positions for the canvas capture
+    const element = ticketContainerRef.current;
     if (!element) return;
 
-    const scale = window.devicePixelRatio || 1;
+    // Create temporary text elements with exact positions
+    const tempTopText = document.createElement('p');
+    tempTopText.innerText = customText;
+    tempTopText.style.cssText = `
+      position: absolute;
+      top: 1px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      z-index: 40;
+      margin: 0;
+      padding: 0;
+    `;
 
-    const canvas = await html2canvas(element, {
-      scale,
-      useCORS: true,
-      scrollX: 0,
-      scrollY: -window.scrollY,
-    });
+    const tempBottomText = document.createElement('p');
+    tempBottomText.innerText = selectedOptions.Text;
+    tempBottomText.style.cssText = `
+      position: absolute;
+      bottom: ${selectedOptions.Border?.includes("border-5") ? "8px" : "11px"};
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      z-index: 40;
+      margin: 0;
+      padding: 0;
+    `;
 
-    canvas.toBlob(async (blob) => {
-      if (!blob) return;
+    // Hide original text elements
+    if (customTextRef.current) customTextRef.current.style.visibility = "hidden";
+    if (selectedTextRef.current) selectedTextRef.current.style.visibility = "hidden";
 
-      const formData = new FormData();
-      formData.append("file", blob, "ticket.png");
-      formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
-      try {
-        const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-        const response = await axios.post(
-            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-            formData
-        );
+    // Add temporary text elements
+    element.appendChild(tempTopText);
+    element.appendChild(tempBottomText);
 
-        const { secure_url } = response.data;
+    await Promise.all(
+        Array.from(document.images)
+            .filter(img => !img.complete)
+            .map(img => new Promise(resolve => {
+              img.onload = img.onerror = resolve;
+            }))
+    );
 
-        updateUserData({
-          ...userData,
-          createdTika: secure_url,
+    if (selectedOptions.Elements) {
+      const originalElementContainer = document.querySelector('.Rnd');
+      if (originalElementContainer) {
+        const originalDisplay = originalElementContainer.style.display;
+        originalElementContainer.style.display = 'none';
+
+        // Create temporary high-res element
+        const highResElement = document.createElement('img');
+        highResElement.src = selectedOptions.Elements;
+        highResElement.style.position = 'absolute';
+        highResElement.style.left = `${elementPos.x}px`;
+        highResElement.style.top = `${elementPos.y}px`;
+        highResElement.style.width = `${elementSize.width}px`;
+        highResElement.style.height = `${elementSize.height}px`;
+        highResElement.style.objectFit = 'contain';
+        highResElement.style.zIndex = '99';
+
+        element.appendChild(highResElement);
+
+        const canvas = await html2canvas(element, {
+          scale: 5,
+          useCORS: true,
+          backgroundColor: null,
+          scrollX: 0,
+          scrollY: -window.scrollY,
+          logging: false,
+          imageTimeout: 0,
+          allowTaint: true,
+          removeContainer: false
         });
-        next();
-      } catch (error) {
-        console.error("Upload to Cloudinary failed:", error);
+
+        // Cleanup: remove temporary elements
+        element.removeChild(highResElement);
+        element.removeChild(tempTopText);
+        element.removeChild(tempBottomText);
+        originalElementContainer.style.display = originalDisplay;
+
+        // Restore visibility of original text elements
+        if (customTextRef.current) customTextRef.current.style.visibility = "visible";
+        if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
+
+        // Restore input display
+        if (textInputRef.current) {
+          textInputRef.current.style.display = originalInputDisplay;
+        }
+
+        canvas.toBlob(async (blob) => {
+          if (!blob) return;
+
+          const formData = new FormData();
+          formData.append("file", blob, "ticket.png");
+          formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
+          try {
+            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+            const response = await axios.post(
+                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                formData
+            );
+
+            const { secure_url } = response.data;
+
+            updateUserData({
+              ...userData,
+              createdTika: secure_url,
+            });
+            next();
+          } catch (error) {
+            console.error("Upload to Cloudinary failed:", error);
+          }
+        }, "image/png", 1.0);
+      } else {
+        const canvas = await html2canvas(element, {
+          scale: 5,
+          useCORS: true,
+          backgroundColor: null,
+          scrollX: 0,
+          scrollY: -window.scrollY,
+          logging: false,
+          imageTimeout: 0,
+          allowTaint: true
+        });
+
+        // Cleanup: remove temporary elements
+        element.removeChild(tempTopText);
+        element.removeChild(tempBottomText);
+
+        // Restore visibility of original text elements
+        if (customTextRef.current) customTextRef.current.style.visibility = "visible";
+        if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
+
+        // Restore input display
+        if (textInputRef.current) {
+          textInputRef.current.style.display = originalInputDisplay;
+        }
+
+        canvas.toBlob(async (blob) => {
+          if (!blob) return;
+
+          const formData = new FormData();
+          formData.append("file", blob, "ticket.png");
+          formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
+          try {
+            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+            const response = await axios.post(
+                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                formData
+            );
+
+            const { secure_url } = response.data;
+
+            updateUserData({
+              ...userData,
+              createdTika: secure_url,
+            });
+            next();
+          } catch (error) {
+            console.error("Upload to Cloudinary failed:", error);
+          }
+        }, "image/png", 1.0);
       }
-    }, "image/png");
+    } else {
+      const canvas = await html2canvas(element, {
+        scale: 5,
+        useCORS: true,
+        backgroundColor: null,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        logging: false,
+        imageTimeout: 0,
+        allowTaint: true
+      });
+
+      // Cleanup: remove temporary elements
+      element.removeChild(tempTopText);
+      element.removeChild(tempBottomText);
+
+      // Restore visibility of original text elements
+      if (customTextRef.current) customTextRef.current.style.visibility = "visible";
+      if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
+
+      // Restore input display
+      if (textInputRef.current) {
+        textInputRef.current.style.display = originalInputDisplay;
+      }
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+
+        const formData = new FormData();
+        formData.append("file", blob, "ticket.png");
+        formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
+        try {
+          const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+          const response = await axios.post(
+              `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+              formData
+          );
+
+          const { secure_url } = response.data;
+
+          updateUserData({
+            ...userData,
+            createdTika: secure_url,
+          });
+          next();
+        } catch (error) {
+          console.error("Upload to Cloudinary failed:", error);
+        }
+      }, "image/png", 1.0);
+    }
   };
-
-
 
   const handleComplete = async () => {
     await saveCreatedTika();
@@ -140,6 +418,24 @@ const OwnTikkaStep3 = () => {
     },
   ];
 
+  // Preload selected element image for better rendering
+  useEffect(() => {
+    if (selectedOptions.Elements) {
+      const img = new Image();
+      img.src = selectedOptions.Elements;
+      img.onload = () => {
+        if (elementRef.current) {
+          // Force a redraw when image is loaded
+          const element = elementRef.current;
+          element.style.display = 'none';
+          setTimeout(() => {
+            element.style.display = 'block';
+          }, 0);
+        }
+      };
+    }
+  }, [selectedOptions.Elements]);
+
   return (
       <>
         <Menu
@@ -172,6 +468,7 @@ const OwnTikkaStep3 = () => {
                 </div>
                 <p className="mt-2 text-xs">
                   Use backgrounds, borders, characters and more to design your unique tika.
+                  {selectedOptions.Elements && " Pinch to zoom or use mouse wheel to resize elements."}
                 </p>
               </div>
             </div>
@@ -179,12 +476,13 @@ const OwnTikkaStep3 = () => {
         <div className={`h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope`}>
           <div
               id="ticket-container"
-              className="w-60 h-80 mb-16 relative"
+              ref={ticketContainerRef}
+              className="w-60 h-80 mb-16 relative touch-manipulation"
               style={{
                 backgroundImage: selectedOptions.Background
                     ? `url(${selectedOptions.Background})`
                     : "none",
-                backgroundSize: "contain",
+                backgroundSize: "cover",
                 backgroundPosition: "center",
                 border:
                     selectedOptions.Background ||
@@ -196,29 +494,60 @@ const OwnTikkaStep3 = () => {
           >
             {selectedOptions.Elements && (
                 <Rnd
+                    ref={rndRef}
                     bounds="parent"
                     size={elementSize}
                     position={elementPos}
+                    onDragStart={() => setIsDragging(true)}
                     onDragStop={(e, d) => {
-                      setElementPos({ x: d.x, y: d.y });
+                      setElementPos({x: d.x, y: d.y});
+                      setIsDragging(false);
                     }}
+                    onResizeStart={() => setIsResizing(true)}
                     onResizeStop={(e, direction, ref, delta, position) => {
                       setElementSize({
                         width: parseInt(ref.style.width),
                         height: parseInt(ref.style.height),
                       });
                       setElementPos(position);
+                      setIsResizing(false);
                     }}
                     className="absolute"
-                    style={{zIndex: 99}}
+                    style={{
+                      zIndex: 99,
+                      width: `${elementSize.width}px`,
+                      height: `${elementSize.height}px`,
+                    }}
                     enableUserSelectHack={false}
                     disableDragging={false}
                 >
-                  <img
-                      src={selectedOptions.Elements}
-                      alt="Selected Element"
-                      className="w-full h-full object-contain"
-                  />
+                  <div
+                      ref={elementRef}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        pointerEvents: "none"
+                      }}
+                  >
+                    <img
+                        src={selectedOptions.Elements}
+                        alt="Selected Element"
+                        style={{
+                          maxWidth: "100%",
+                          maxHeight: "100%",
+                          width: "auto",
+                          height: "auto",
+                          objectFit: "contain",
+                          display: "block",
+                          imageRendering: "-webkit-optimize-contrast",
+                          pointerEvents: "none"
+                        }}
+                        crossOrigin="anonymous"
+                    />
+                  </div>
                 </Rnd>
             )}
 
@@ -227,12 +556,9 @@ const OwnTikkaStep3 = () => {
                     src={selectedOptions.Border}
                     alt="Selected Border"
                     className="w-full h-full object-cover absolute top-0 left-0 z-20"
+                    crossOrigin="anonymous"
                 />
             )}
-
-            <p className="text-[10px] font-semibold text-center uppercase absolute top-1 z-40 flex justify-center w-full">
-              {customText}
-            </p>
 
             {showTextInput && (
                 <input
@@ -240,19 +566,23 @@ const OwnTikkaStep3 = () => {
                     type="text"
                     value={customText}
                     maxLength={16}
+                    style={{ fontSize: '10px' }}
                     onChange={(e) => setCustomText(e.target.value)}
-                    className="!text-[10px] font-semibold outline-none text-center uppercase absolute top-1 z-40 w-full bg-transparent placeholder:text-black"
+                    className="font-semibold outline-none text-center uppercase absolute top-1 z-40 w-full bg-transparent placeholder:text-black m-0 p-0"
                     autoFocus
                 />
             )}
 
-            <p className="text-[10px] font-semibold absolute bottom-1.5 z-40 flex justify-center w-full">
+            <p
+                ref={selectedTextRef}
+                className="text-[10px] font-semibold absolute z-40 flex justify-center w-full m-0 p-0"
+                style={{bottom: selectedOptions.Border?.includes("border-5") ? "4px" : "7px"}}
+            >
               {selectedOptions.Text}
             </p>
           </div>
 
-          {/* Menu Options */}
-          <div className="px-4 w-full absolute bottom-12">
+          <div className="px-4 w-full absolute bottom-14">
             <div className="w-full flex gap-3 flex-row justify-between items-center overflow-x-auto">
               {menu
                   .find((menuItem) => menuItem.menu === selectedMenu)
@@ -291,7 +621,6 @@ const OwnTikkaStep3 = () => {
                   )}
             </div>
 
-            {/* Menu Switcher */}
             <div className="mt-5 grid grid-cols-2 gap-4">
               {menu.map((item, index) => (
                   <div

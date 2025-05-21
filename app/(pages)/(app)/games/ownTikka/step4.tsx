@@ -13,14 +13,17 @@ const OwnTikkaStep4 = () => {
   const downloadImage = () => {
     const link = document.createElement("a");
     link.href = userData.createdTika;
-    link.download = "my-tika.png";
+    link.setAttribute("download", "my-tika.png");
+    link.setAttribute("target", "_blank");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     setTimeout(() => {
       next();
     }, 2000);
   };
+
 
   const shareImage = () => {
     setShowShareModal(true);
