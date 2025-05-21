@@ -74,7 +74,6 @@ const GameStepper = ({
       case 19:
         value = 100;
         break;
-
       default:
         break;
     }
@@ -121,22 +120,21 @@ const GameStepper = ({
         <div
           className={`absolute w-full h-0.5 ${
             iswhite ? "bg-[#FFFFFF40]" : "bg-[#00000040]"
-          } `}
+          }`}
         ></div>
         {step > 2 && (
           <>
             {(!steps.find((i) => i.step.includes(step)) ||
               reduceProgress !== 0) && (
               <div
-                className={`absolute -bottom-[7px] w-3 h-3 rounded-full bg-[#243200]`}
+                className={`absolute -bottom-[7px] w-3 h-3 rounded-full bg-[#243200] transition-all duration-300 ease-in-out`}
                 style={{
                   left: `${getProgress()}%`,
                 }}
               ></div>
             )}
             <div
-              className={`absolute  h-0.5 bg-[#243200]
-          `}
+              className={`absolute h-0.5 bg-[#243200] transition-all duration-300 ease-in-out`}
               style={{
                 width: `${getProgress()}%`,
               }}
@@ -147,7 +145,7 @@ const GameStepper = ({
           {steps.map((item, index) => (
             <div
               key={index}
-              className={`w-5 h-5 rounded-full overflow-hidden  ${
+              className={`w-5 h-5 rounded-full overflow-hidden ${
                 item.step.includes(step) && reduceProgress == 0
                   ? "border-4 border-[#243200]"
                   : step > item.step[item.step.length - 1]

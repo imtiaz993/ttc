@@ -75,7 +75,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* input[type="text"] {
+input[type="text"] {
   font-size: 16px;
 }
 input[type="email"] {
@@ -83,7 +83,7 @@ input[type="email"] {
 }
 textarea {
   font-size: 16px;
-} */
+}
 
 @keyframes sway1 {
   0% {
