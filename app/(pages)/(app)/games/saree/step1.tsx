@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { useDispatch } from "react-redux";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const SareeStep1 = () => {
   const [playSound, setPlaySound] = useState(false);
@@ -38,10 +39,22 @@ const SareeStep1 = () => {
     }
   }, [playSound]);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
       <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
         <div>
           <div className="w-full flex justify-between items-start mb-4">

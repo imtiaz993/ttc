@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import Success from "./success";
 import Failure from "./failure";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const SareeStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -83,6 +83,19 @@ const SareeStep3 = () => {
   useEffect(() => {
     setRandomColor();
   }, []);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: false,
+        showNext: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
 
   return (
     <>
@@ -94,7 +107,6 @@ const SareeStep3 = () => {
         isUndoDisabled={undoDisabled}
         handleUndo={undo}
       />
-      <GameStepper showNext={false} showPrev={false} />
       {state == "initial" ? (
         <>
           {overlay && (

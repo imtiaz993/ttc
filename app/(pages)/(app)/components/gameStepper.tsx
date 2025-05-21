@@ -2,14 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
 import { useEffect, useState } from "react";
 
-const GameStepper = ({
-  iswhite = false,
-  showCamera = false,
-  showNext = true,
-  showPrev = true,
-  onCameraClick = () => {},
-  reduceProgress = 0,
-}) => {
+const GameStepper = () => {
+  const {
+    iswhite,
+    showCamera,
+    showNext,
+    showPrev,
+    onCameraClick,
+    reduceProgress,
+  } = useSelector((state: any) => state.stepper);
+
+
   const steps = [
     { step: [2], icon: "/images/game1.png" },
     { step: [3], icon: "/images/game2.png" },
@@ -85,7 +88,10 @@ const GameStepper = ({
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setProgress(getProgress());
+      const newProgress = getProgress();
+      if (newProgress !== progress) {
+        setProgress(newProgress);
+      }
     }, 50);
     return () => clearTimeout(timeout);
   }, [step, reduceProgress]);
@@ -146,7 +152,7 @@ const GameStepper = ({
             <div
               className={`absolute h-0.5 bg-[#243200] transition-all duration-300 ease-in-out`}
               style={{
-                width: `${getProgress()}%`,
+                width: `${progress}%`,
               }}
             ></div>
           </>

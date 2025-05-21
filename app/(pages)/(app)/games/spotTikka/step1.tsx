@@ -1,11 +1,25 @@
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { useDispatch } from "react-redux";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import { useEffect } from "react";
 
 const SpotTikkaStep1 = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        iswhite: true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       <Menu />
-      <GameStepper iswhite />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",
@@ -18,7 +32,9 @@ const SpotTikkaStep1 = () => {
           <p className="font-playwriteDEGrund">30th April, 1886</p>
           <div>
             <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-            <p className="mt-1 text-xs font-medium text-center font-manrope">Ajji</p>
+            <p className="mt-1 text-xs font-medium text-center font-manrope">
+              Ajji
+            </p>
           </div>
         </div>
         <p className="text-sm mb-10 font-playwriteDEGrund">

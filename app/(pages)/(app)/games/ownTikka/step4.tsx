@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const OwnTikkaStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -47,10 +47,22 @@ const OwnTikkaStep4 = () => {
   };
 
 
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showNext: false,
+        showPrev:false
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
+
   return (
       <>
         <Menu />
-        <GameStepper showNext={false} showPrev={false} />
         <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
           <div className="flex justify-center items-center mb-5">
             <img

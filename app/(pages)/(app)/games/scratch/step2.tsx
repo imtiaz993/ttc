@@ -1,14 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
 import scanningAnimation from "../../../animation/Image Scan.json";
 import dynamic from "next/dynamic";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -36,6 +36,21 @@ const ScratchStep2 = () => {
   const handleSkip = () => {
     next();
   };
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showNext: verificationStatus === "initial",
+        showPrev: verificationStatus === "initial",
+        showCamera: verificationStatus === "initial",
+        onCameraClick: handleCameraClick,
+        reduceProgress: verificationStatus == "initial" ? 8 : 0,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, [verificationStatus]);
 
   const handleImageCapture = async (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -207,13 +222,6 @@ const ScratchStep2 = () => {
   return (
     <>
       <Menu />
-      <GameStepper
-        showNext={verificationStatus === "initial"}
-        showPrev={verificationStatus === "initial"}
-        showCamera={verificationStatus === "initial"}
-        onCameraClick={handleCameraClick}
-        reduceProgress={verificationStatus == "initial" ? 8 : 0}
-      />
       <input
         type="file"
         accept="image/*"

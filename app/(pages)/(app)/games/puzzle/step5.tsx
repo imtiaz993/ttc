@@ -1,13 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { useEffect } from "react";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const PuzzleStep5 = () => {
   const userData = useSelector((state: any) => state.user.userData);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex items-start mb-6">
           <div>
@@ -39,7 +53,11 @@ const PuzzleStep5 = () => {
             <p className="py-3 px-4 text-xs absolute bottom-0 text-white z-10">
               How did they survive all these centuries?
             </p>
-            <img className="relative rotate-180" src="/icons/cloud.svg" alt="" />
+            <img
+              className="relative rotate-180"
+              src="/icons/cloud.svg"
+              alt=""
+            />
           </div>
           <div
             className="w-[154px] absolute -right-2 top-28 fade-in opacity-0"
@@ -57,7 +75,11 @@ const PuzzleStep5 = () => {
             <p className="py-3 px-4 bottom-0 text-xs absolute text-white z-10">
               Who were they meant to attract?
             </p>
-            <img className="relative rotate-180" src="/icons/cloud.svg" alt="" />
+            <img
+              className="relative rotate-180"
+              src="/icons/cloud.svg"
+              alt=""
+            />
           </div>
           <div className="flex justify-center items-center">
             <img src="/images/manchester.png" alt="" className="w-52" />

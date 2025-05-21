@@ -1,11 +1,25 @@
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const OwnTikkaStep1 = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        iswhite: true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       <Menu />
-      <GameStepper iswhite />
       <div
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",

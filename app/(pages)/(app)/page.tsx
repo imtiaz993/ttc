@@ -31,6 +31,7 @@ import OwnTikkaStep4 from "./games/ownTikka/step4";
 
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
+import GameStepper from "./components/gameStepper";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -118,5 +119,10 @@ export default function Home() {
     <Feedback />,
     <Thankyou />,
   ];
-  return components[step - 1];
+  return (
+    <>
+      {![1, 20, 21].includes(step) && <GameStepper />}
+      {components[step - 1]}
+    </>
+  );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import { useDispatch } from "react-redux";
 
 const wordsInitialData = [
   {
@@ -59,6 +60,20 @@ const WordsStep2 = () => {
       setUndoDisabled(true);
     }
   }, [selectedWords, words]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: selectedWords.length > 0,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, [selectedWords]);
+
   return (
     <>
       <Menu
@@ -72,7 +87,6 @@ const WordsStep2 = () => {
           setWords(wordsInitialData);
         }}
       />
-      <GameStepper showPrev={selectedWords.length > 0} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>

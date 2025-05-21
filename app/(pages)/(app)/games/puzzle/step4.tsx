@@ -1,13 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
+import { useEffect } from "react";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const PuzzleStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+  
   return (
     <>
       <Menu />
-      <GameStepper showPrev={false} />
       <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
         <div>
           <div className="w-full flex items-start">

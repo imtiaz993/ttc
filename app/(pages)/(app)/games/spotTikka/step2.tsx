@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -9,6 +8,7 @@ import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
 import dynamic from "next/dynamic";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -36,6 +36,21 @@ const SpotTikkaStep2 = () => {
   const handleSkip = () => {
     next();
   };
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showNext: verificationStatus === "initial",
+        showPrev: verificationStatus === "initial",
+        showCamera: verificationStatus === "initial",
+        onCameraClick: handleCameraClick,
+        reduceProgress: verificationStatus == "initial" ? 8 : 0,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, [verificationStatus]);
 
   const renderVerificationStatus = () => {
     switch (verificationStatus) {
@@ -193,13 +208,6 @@ const SpotTikkaStep2 = () => {
   return (
     <>
       <Menu />
-      <GameStepper
-        showNext={verificationStatus === "initial"}
-        showPrev={verificationStatus === "initial"}
-        showCamera={verificationStatus === "initial"}
-        onCameraClick={handleCameraClick}
-        reduceProgress={verificationStatus == "initial" ? 8 : 0}
-      />
       <input
         type="file"
         accept="image/*"

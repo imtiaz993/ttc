@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
@@ -11,6 +10,7 @@ import {
 } from "react-dnd-multi-backend";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 // Custom backend configuration with optimized touch handling
 declare global {
   interface Window {
@@ -342,6 +342,19 @@ const PuzzleStep2 = () => {
       }
     }
   };
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showNext: false,
+        showPrev: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       <Menu
@@ -356,7 +369,6 @@ const PuzzleStep2 = () => {
           next();
         }}
       />
-      <GameStepper showNext={false} showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Menu from "../../components/menu";
-import GameStepper from "../../components/gameStepper";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import dynamic from "next/dynamic";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -40,10 +40,21 @@ const PuzzleStep3 = () => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showNext: !overlay,
+        showPrev: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, [overlay]);
+
   return (
     <>
       <Menu isGameOptions={isGameOptions} />
-      <GameStepper showNext={!overlay} showPrev={false} />
       {overlay && (
         <div>
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
