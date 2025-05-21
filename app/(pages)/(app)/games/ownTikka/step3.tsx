@@ -255,7 +255,7 @@ const OwnTikkaStep3 = () => {
                     value={customText}
                     maxLength={16}
                     onChange={(e) => setCustomText(e.target.value)}
-                    className="!text-[10px] font-semibold outline-none text-center uppercase absolute top-1 z-40 w-full bg-transparent placeholder:text-black"
+                    className="text-[10px] text-transparent font-semibold outline-none text-center uppercase absolute top-1 z-40 w-full bg-transparent placeholder:text-black"
                     autoFocus
                 />
             )}
