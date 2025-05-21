@@ -12,12 +12,12 @@ const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState("Background");
   const userData = useSelector((state: any) => state.user.userData);
+  const dispatch = useDispatch();
   const updateUserData = (data) => dispatch(setUserData(data));
   const [showTextInput, setShowTextInput] = useState(false);
   const [customText, setCustomText] = useState("");
   const [elementPos, setElementPos] = useState({ x: 60, y: 60 });
   const [elementSize, setElementSize] = useState({ width: 96, height: 96 });
-  const [zoom, setZoom] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
@@ -27,7 +27,14 @@ const OwnTikkaStep3 = () => {
     Text: "",
   });
 
-  const dispatch = useDispatch();
+  // References for touch zooming
+  const touchStartRef = useRef(null);
+  const initialSizeRef = useRef(null);
+  const zoomingRef = useRef(false);
+  const aspectRatioRef = useRef(1);
+  const activeTouchesRef = useRef(0);
+  const lastElementSize = useRef({ width: 96, height: 96 });
+
   const next = () => dispatch(nextStep());
   const textInputRef = useRef(null);
   const elementRef = useRef(null);
@@ -36,86 +43,175 @@ const OwnTikkaStep3 = () => {
   const selectedTextRef = useRef(null);
   const rndRef = useRef(null);
 
-  // Add gesture detection for pinch zooming
+  // Independent zoom handler - completely separated from React state for performance
   useEffect(() => {
     const element = ticketContainerRef.current;
     if (!element || !selectedOptions.Elements) return;
 
-    let startDistance = 0;
-    let currentZoom = zoom;
+    // Store original element touch action
+    const originalTouchAction = element.style.touchAction;
 
-    const handleTouchStart = (e) => {
-      if (e.touches.length === 2 && !isDragging && !isResizing) {
-        // Get the distance between two fingers
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        startDistance = Math.sqrt(dx * dx + dy * dy);
+    // Disable browser interactions during touch
+    const disableDefaultBehavior = (e) => {
+      if (e.touches && e.touches.length >= 2) {
         e.preventDefault();
       }
     };
 
+    // Handle touch start
+    const handleTouchStart = (e) => {
+      if (e.touches.length === 2) {
+        // Stop events from propagating to Rnd component
+        e.stopPropagation();
+        e.preventDefault();
+
+        // Mark that we're zooming
+        zoomingRef.current = true;
+        activeTouchesRef.current = 2;
+
+        // Store current element size
+        initialSizeRef.current = {
+          width: lastElementSize.current.width,
+          height: lastElementSize.current.height
+        };
+
+        // Calculate initial distance between fingers
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        touchStartRef.current = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate and store aspect ratio
+        aspectRatioRef.current = initialSizeRef.current.width / initialSizeRef.current.height;
+
+        // Apply touch-none style to prevent other gestures
+        if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
+          rndRef.current.resizableElement.current.style.touchAction = 'none';
+        }
+        element.style.touchAction = 'none';
+      }
+    };
+
+    // Handle touch movement - the core of zoom functionality
     const handleTouchMove = (e) => {
-      if (e.touches.length === 2 && startDistance > 0 && !isDragging && !isResizing) {
-        // Calculate new distance
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        const newDistance = Math.sqrt(dx * dx + dy * dy);
+      if (e.touches.length === 2 && zoomingRef.current && touchStartRef.current && initialSizeRef.current) {
+        // Stop propagation and prevent default
+        e.stopPropagation();
+        e.preventDefault();
+
+        // Calculate current distance between fingers
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        const currentDistance = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate zoom ratio
+        const scale = currentDistance / touchStartRef.current;
+
+        // Apply size with constraints while preserving aspect ratio
+        const targetWidth = Math.max(40, Math.min(240, initialSizeRef.current.width * scale));
+        const targetHeight = targetWidth / aspectRatioRef.current;
+
+        // Update element size directly on the DOM for immediate feedback
+        if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
+          const element = rndRef.current.resizableElement.current;
+
+          element.style.width = `${targetWidth}px`;
+          element.style.height = `${targetHeight}px`;
+
+          // Store the current size for next zoom operation
+          lastElementSize.current = {
+            width: targetWidth,
+            height: targetHeight
+          };
+        }
+      }
+    };
+
+    // Handle touch end
+    const handleTouchEnd = (e) => {
+      if (zoomingRef.current) {
+        // Decrement active touches count
+        activeTouchesRef.current = Math.max(0, activeTouchesRef.current - 1);
+
+        // If no more touches or only one touch left, finalize zoom
+        if (activeTouchesRef.current < 2) {
+          // Only update React state once at the end of the zoom operation
+          setElementSize({
+            width: Math.round(lastElementSize.current.width),
+            height: Math.round(lastElementSize.current.height)
+          });
+
+          // Reset zoom state
+          zoomingRef.current = false;
+          touchStartRef.current = null;
+          initialSizeRef.current = null;
+
+          // Restore original touch behavior
+          if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
+            rndRef.current.resizableElement.current.style.touchAction = '';
+          }
+          element.style.touchAction = originalTouchAction;
+        }
+      }
+    };
+
+    // Handle touch cancel (same as touch end)
+    const handleTouchCancel = handleTouchEnd;
+
+    // Mouse wheel handler for desktop zoom
+    const handleWheel = (e) => {
+      if (selectedOptions.Elements && !isDragging && !isResizing && !zoomingRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Get current size and calculate aspect ratio
+        const currentWidth = elementSize.width;
+        const currentHeight = elementSize.height;
+        const aspectRatio = currentWidth / currentHeight;
 
         // Calculate zoom factor
-        const factor = newDistance / startDistance;
-        const newZoom = Math.max(0.5, Math.min(3, currentZoom * factor));
+        const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
 
-        // Apply zoom
-        setZoom(newZoom);
-
-        // Adjust size with zoom factor
-        setElementSize(prevSize => ({
-          width: Math.round(prevSize.width * factor),
-          height: Math.round(prevSize.height * factor)
-        }));
-
-        startDistance = newDistance;
-        currentZoom = newZoom;
-        e.preventDefault();
-      }
-    };
-
-    const handleTouchEnd = () => {
-      startDistance = 0;
-    };
-
-    // Add wheel event for mouse wheel zooming
-    const handleWheel = (e) => {
-      if (selectedOptions.Elements && !isDragging && !isResizing) {
-        e.preventDefault();
-
-        // Calculate zoom direction and factor
-        const delta = e.deltaY > 0 ? 0.9 : 1.1;
-        const newZoom = Math.max(0.5, Math.min(3, zoom * delta));
-
-        // Apply zoom
-        setZoom(newZoom);
+        // Apply zoom with constraints
+        const newWidth = Math.max(40, Math.min(240, currentWidth * zoomFactor));
+        const newHeight = newWidth / aspectRatio;
 
         // Update element size
-        setElementSize(prevSize => ({
-          width: Math.round(prevSize.width * delta),
-          height: Math.round(prevSize.height * delta)
-        }));
+        setElementSize({
+          width: Math.round(newWidth),
+          height: Math.round(newHeight)
+        });
+
+        // Update last known size
+        lastElementSize.current = {
+          width: newWidth,
+          height: newHeight
+        };
       }
     };
 
-    element.addEventListener("touchstart", handleTouchStart, { passive: false });
-    element.addEventListener("touchmove", handleTouchMove, { passive: false });
-    element.addEventListener("touchend", handleTouchEnd);
+    // Add event listeners with capture to ensure they fire first
+    element.addEventListener("touchstart", handleTouchStart, { passive: false, capture: true });
+    element.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
+    element.addEventListener("touchend", handleTouchEnd, { capture: true });
+    element.addEventListener("touchcancel", handleTouchCancel, { capture: true });
     element.addEventListener("wheel", handleWheel, { passive: false });
 
+    // Prevent default touch behavior on the document during our operations
+    document.addEventListener("touchmove", disableDefaultBehavior, { passive: false });
+
     return () => {
-      element.removeEventListener("touchstart", handleTouchStart);
-      element.removeEventListener("touchmove", handleTouchMove);
-      element.removeEventListener("touchend", handleTouchEnd);
+      element.removeEventListener("touchstart", handleTouchStart, { capture: true });
+      element.removeEventListener("touchmove", handleTouchMove, { capture: true });
+      element.removeEventListener("touchend", handleTouchEnd, { capture: true });
+      element.removeEventListener("touchcancel", handleTouchCancel, { capture: true });
       element.removeEventListener("wheel", handleWheel);
+      document.removeEventListener("touchmove", disableDefaultBehavior);
     };
-  }, [selectedOptions.Elements, zoom, isDragging, isResizing]);
+  }, [selectedOptions.Elements, elementSize, isDragging, isResizing]);
 
   const saveCreatedTika = async () => {
     if (typeof window === "undefined") return;
@@ -511,15 +607,20 @@ const OwnTikkaStep3 = () => {
                       });
                       setElementPos(position);
                       setIsResizing(false);
+
+                      // Update last known size for zooming reference
+                      lastElementSize.current = {
+                        width: parseInt(ref.style.width),
+                        height: parseInt(ref.style.height),
+                      };
                     }}
                     className="absolute"
                     style={{
                       zIndex: 99,
-                      width: `${elementSize.width}px`,
-                      height: `${elementSize.height}px`,
+                      touchAction: "none", // Always disable browser touch actions on the element
                     }}
                     enableUserSelectHack={false}
-                    disableDragging={false}
+                    disableDragging={zoomingRef.current} // Disable dragging during zoom operations
                 >
                   <div
                       ref={elementRef}
@@ -572,6 +673,13 @@ const OwnTikkaStep3 = () => {
                     autoFocus
                 />
             )}
+
+            <p
+                ref={customTextRef}
+                className="text-[10px] font-semibold text-center uppercase absolute top-1 z-40 w-full m-0 p-0"
+            >
+              {customText}
+            </p>
 
             <p
                 ref={selectedTextRef}
