@@ -68,6 +68,8 @@ const Welcome = ({ playMusic = () => {} }) => {
             onMouseUp={handleDragEnd}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
+            onMouseDown={handleDragStart}
+            onTouchStart={handleDragStart}
             style={{
               opacity: fadeOut ? 0 : 1,
               transition: "opacity 0.3s ease-out",
@@ -82,8 +84,6 @@ const Welcome = ({ playMusic = () => {} }) => {
                 opacity: fadeOut ? 0 : 1,
                 transition: "opacity 1s ease-out",
               }}
-              onMouseDown={handleDragStart}
-              onTouchStart={handleDragStart}
             >
               <div className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between">
                 <img
