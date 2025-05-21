@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../../redux/slices/navigationSlice";
+import { useEffect, useState } from "react";
 
 const GameStepper = ({
   iswhite = false,
@@ -20,9 +21,6 @@ const GameStepper = ({
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
-
-  const next = () => dispatch(nextStep());
-  const prev = () => dispatch(prevStep());
 
   const getProgress = () => {
     let value = 0;
@@ -80,6 +78,18 @@ const GameStepper = ({
     return value - reduceProgress;
   };
 
+  const [progress, setProgress] = useState(getProgress());
+
+  const next = () => dispatch(nextStep());
+  const prev = () => dispatch(prevStep());
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setProgress(getProgress());
+    }, 50);
+    return () => clearTimeout(timeout);
+  }, [step, reduceProgress]);
+
   return (
     <div className="px-4 fixed bottom-6 left-0 right-0 z-20">
       <div className="mb-5 flex justify-between items-center h-[25px]">
@@ -129,7 +139,7 @@ const GameStepper = ({
               <div
                 className={`absolute -bottom-[7px] w-3 h-3 rounded-full bg-[#243200] transition-all duration-300 ease-in-out`}
                 style={{
-                  left: `${getProgress()}%`,
+                  left: `${progress}%`,
                 }}
               ></div>
             )}
