@@ -102,15 +102,17 @@ const SareeStep1 = () => {
           </div>
         </div>
         <div className="mt-5">
-          <div className="bg-[#FDD931] rounded py-3 px-4">
+          <div
+            className="bg-[#FDD931] rounded py-3 px-4"
+            onClick={() => {
+              setPlaySound(!playSound);
+            }}
+          >
             <div className="w-full flex justify-between items-center mb-2 font-manrope">
               <img
                 src={playSound ? "/icons/pause.svg" : "/icons/sound.svg"}
                 alt=""
                 className="w-6"
-                onClick={() => {
-                  setPlaySound(!playSound);
-                }}
               />
               <p
                 className={`ml-2 text-sm font-semibold w-[calc(100%-24px)] ${
