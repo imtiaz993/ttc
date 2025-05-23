@@ -177,7 +177,7 @@ const ScratchCard = ({ isRevealed, setIsRevealed, animation }) => {
         <p className="font-playwriteDEGrund">30th March, 1886</p>
         <div>
           <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-          <p className="mt-1 text-xs font-medium text-center font-manrope">
+          <p className="mt-1 text-sm font-medium text-center font-manrope">
             Kamla
           </p>
         </div>

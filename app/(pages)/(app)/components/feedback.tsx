@@ -80,13 +80,12 @@ const Feedback = () => {
         />
 
         <div className="mt-6 w-full">
-          <div className="w-full flex items-center mb-2">
-            <img src="/icons/emoji.svg" alt="" className="w-6" />
-            <p className="font-semibold ml-2">
+          <div className="mb-2">
+            <p className="font-semibold">
               Hope you enjoyed this little journey back in time! 
             </p>
           </div>
-          <p className="text-xs">
+          <p className="text-sm">
             Share your contact details with us to unravel more mysteries about
             art, only at the Museum of Art & Photography, Bangalore. 
           </p>

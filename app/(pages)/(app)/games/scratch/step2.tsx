@@ -172,7 +172,7 @@ const ScratchStep2 = () => {
                   alt=""
                   className="w-11 rounded-lg"
                 />
-                <p className="mt-1 text-xs font-medium text-center">You</p>
+                <p className="mt-1 text-sm font-medium text-center">You</p>
               </div>
               <p className="ml-4 font-medium w-[calc(100%-44px)]">
                 I love that I have a smartphone to help me solve this ancient

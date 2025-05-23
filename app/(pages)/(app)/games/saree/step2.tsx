@@ -14,7 +14,7 @@ const SareeStep2 = () => {
               alt=""
               className="w-11 rounded-lg"
             />
-            <p className="mt-1 text-xs font-medium text-center">You</p>
+            <p className="mt-1 text-sm font-medium text-center">You</p>
           </div>
           <div className="ml-4 w-[calc(100%-46px-16px)]">
             <p className="font-medium">

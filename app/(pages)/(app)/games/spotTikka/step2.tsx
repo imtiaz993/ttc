@@ -127,7 +127,7 @@ const SpotTikkaStep2 = () => {
                     alt=""
                     className="w-11 rounded-lg"
                   />
-                  <p className="mt-1 text-xs font-medium text-center">You</p>
+                  <p className="mt-1 text-sm font-medium text-center">You</p>
                 </div>
                 <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
                   &lt;text copy&gt;
@@ -137,7 +137,7 @@ const SpotTikkaStep2 = () => {
               <div className="bg-[#FDD931] w-full rounded py-3 px-4">
                 <div className="w-full flex items-center mb-2">
                   <img src="/icons/zoom-in.svg" alt="" className="w-6" />
-                  <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
+                  <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
                     Spot this ticket in the exhibition
                   </p>
                 </div>

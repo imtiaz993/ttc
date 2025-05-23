@@ -67,7 +67,7 @@ const SareeStep1 = () => {
                 alt=""
                 className="w-11 rounded-full bg-[#EA865B] border border-black"
               />
-              <p className="mt-1 text-xs font-medium text-center font-manrope">
+              <p className="mt-1 text-sm font-medium text-center font-manrope">
                 Selma
               </p>
             </div>

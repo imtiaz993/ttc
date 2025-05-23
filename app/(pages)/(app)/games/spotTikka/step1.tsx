@@ -35,8 +35,8 @@ const SpotTikkaStep1 = () => {
           <p className="font-playwriteDEGrund">30th April, 1886</p>
           <div>
             <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
-            <p className="mt-1 text-xs font-medium text-center font-manrope">
-              Ajji
+            <p className="mt-1 text-sm font-medium text-center font-manrope">
+              Kamla
             </p>
           </div>
         </div>
