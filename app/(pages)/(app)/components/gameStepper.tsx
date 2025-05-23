@@ -28,48 +28,48 @@ const GameStepper = () => {
     let value = 0;
     switch (step) {
       case 3:
-        value = 20;
+        value = 18;
         break;
       case 4:
-        value = 28;
+        value = 26;
         break;
       case 5:
-        value = 32;
+        value = 30;
         break;
       case 6:
-        value = 40;
+        value = 38;
         break;
       case 7:
-        value = 48;
+        value = 46;
         break;
       case 8:
-        value = 60;
+        value = 58;
         break;
       case 9:
-        value = 64;
+        value = 62;
         break;
       case 10:
       case 11:
-        value = 68;
+        value = 66;
         break;
       case 12:
-        value = 71;
+        value = 69;
         break;
       case 13:
       case 14:
-        value = 78;
+        value = 76;
         break;
       case 15:
-        value = 82;
+        value = 80;
         break;
       case 16:
-        value = 85;
+        value = 83;
         break;
       case 17:
-        value = 88;
+        value = 86;
         break;
       case 18:
-        value = 91;
+        value = 89;
         break;
       case 19:
       case 20:

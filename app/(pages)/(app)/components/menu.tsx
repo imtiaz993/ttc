@@ -14,6 +14,7 @@ const Menu = ({
   showSkip = true,
   showInfo = false,
   showFinish = false,
+  showSpeaker = false,
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
@@ -50,6 +51,18 @@ const Menu = ({
                 >
                   SKIP
                 </p>
+              )}
+              {showSpeaker && (
+                <img
+                  src={
+                    userData.sound
+                      ? "/icons/volume.svg"
+                      : "/icons/mute-black.svg"
+                  }
+                  decoding="sync"
+                  alt=""
+                  className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
+                />
               )}
             </div>
             <div className="flex items-center justify-between gap-4">
@@ -208,7 +221,7 @@ const Menu = ({
                     className="w-6 cursor-pointer"
                     onClick={() => {
                       localStorage.removeItem("wordsData");
-                      localStorage.removeItem("selectedWordsData")
+                      localStorage.removeItem("selectedWordsData");
                       reset();
                       updateUserData({
                         name: "",

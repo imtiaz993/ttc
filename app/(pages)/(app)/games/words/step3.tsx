@@ -39,8 +39,8 @@ const WordsStep3 = () => {
             </p>
           </div>
         </div>
-        <div className="min-h-28">
-          <div className="flex flex-wrap gap-4 max-h-80 overflow-auto">
+        <div className="min-h-28 w-full">
+          <div className="w-full flex flex-wrap gap-4 max-h-80 overflow-auto">
             {selectedWords.length > 0 ? (
               selectedWords.map((i, index) => (
                 <div

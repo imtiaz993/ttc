@@ -95,12 +95,13 @@ const WordsStep2 = () => {
     dispatch(
       setStepperProps({
         showPrev: false,
+        showNext: selectedWords.length > 0,
       })
     );
     return () => {
       dispatch(resetStepperProps());
     };
-  }, [dispatch]);
+  }, [selectedWords]);
 
   const handleAddWord = () => {
     if (word && customWordCount < 2) {
@@ -176,6 +177,8 @@ const WordsStep2 = () => {
     <>
       <Menu
         isGameOptions={true}
+        showSkip={false}
+        showSpeaker={true}
         handleInfo={() => {
           setOverlay(true);
         }}
