@@ -11,7 +11,6 @@ const OwnTikkaStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const dispatch = useDispatch();
   const [showShareModal, setShowShareModal] = useState(false);
-  const next = () => dispatch(nextStep());
 
   const downloadImage = () => {
     const link = document.createElement("a");
@@ -20,9 +19,6 @@ const OwnTikkaStep4 = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    setTimeout(() => {
-      next();
-    }, 2000);
   };
 
   const shareImage = () => {
@@ -63,7 +59,7 @@ const OwnTikkaStep4 = () => {
 
   return (
     <>
-      <Menu />
+      <Menu showContinue={true} />
       <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="flex justify-center items-center mb-5">
           <img

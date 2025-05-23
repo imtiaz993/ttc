@@ -60,12 +60,12 @@ const Feedback = () => {
         setFormSubmitted(true);
         setTimeout(() => next(), 3000);
       } else {
+        setIsSubmitting(false);
         console.error("Submission failed");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-    } finally {
       setIsSubmitting(false);
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -95,7 +95,7 @@ const Feedback = () => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ handleChange, values }) => (
+            {({ handleChange, isValid }) => (
               <Form>
                 <div className=" my-6">
                   <div className="flex justify-between pb-2 border-b border-[#223100]">
@@ -109,17 +109,6 @@ const Feedback = () => {
                         updateUserData({ ...userData, email: e.target.value });
                       }}
                     />
-                    <button
-                      disabled={submitting}
-                      type="submit"
-                      className="w-5 h-5"
-                    >
-                      <img
-                        src="/icons/arrow-forward.svg"
-                        alt=""
-                        className="w-5"
-                      />
-                    </button>
                   </div>
                   <ErrorMessage
                     name="email"
@@ -133,8 +122,8 @@ const Feedback = () => {
                     <Field
                       as="textarea"
                       name="feedback"
-                      placeholder="What would you like MAP to do next?"
-                      className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent"
+                      placeholder="What should MAP to do next?"
+                      className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent resize-none h-6 leading-6"
                     />
                   </div>
                   <ErrorMessage
@@ -145,7 +134,7 @@ const Feedback = () => {
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
-                  <label className="text-xs flex justify-center items-center max-w-[240px]">
+                  <label className="text-xs flex justify-center items-center  w-full">
                     <Field
                       type="checkbox"
                       name="policy1"
@@ -158,10 +147,10 @@ const Feedback = () => {
                   <ErrorMessage
                     name="policy1"
                     component="div"
-                    className="text-red-500 text-xs w-full max-w-[240px]"
+                    className="text-red-500 text-xs w-full "
                   />
 
-                  <label className="text-xs flex justify-center items-center max-w-[240px] mt-6">
+                  <label className="text-xs flex justify-center items-center  mt-3 w-full">
                     <Field
                       type="checkbox"
                       name="policy2"
@@ -177,8 +166,17 @@ const Feedback = () => {
                   <ErrorMessage
                     name="policy2"
                     component="div"
-                    className="text-red-500 text-xs w-full max-w-[240px]"
+                    className="text-red-500 text-xs w-full "
                   />
+                </div>
+                <div className="w-full mt-6">
+                  <button
+                    disabled={submitting || !isValid}
+                    type="submit"
+                    className="text-[#FFF8E7] font-semibold rounded flex flex-col justify-center leading-[0px] bg-black border border-black h-10 w-full disabled:text-[#FFF8E7] disabled:bg-[#817C74] disabled:border-[#817C74]"
+                  >
+                    {submitting ? "Submitting..." : "Submit"}
+                  </button>
                 </div>
               </Form>
             )}

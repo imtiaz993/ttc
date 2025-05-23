@@ -15,6 +15,7 @@ const Menu = ({
   showInfo = false,
   showFinish = false,
   showSpeaker = false,
+  showContinue = false,
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
@@ -110,6 +111,17 @@ const Menu = ({
                   className="w-6 cursor-pointer"
                   onClick={handleInfo}
                 />
+              )}
+
+              {showContinue && (
+                <p
+                  className="text-sm font-manrope font-medium"
+                  onClick={() => {
+                    next();
+                  }}
+                >
+                  CONTINUE
+                </p>
               )}
               {showFinish ? (
                 <p
