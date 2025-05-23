@@ -115,7 +115,7 @@ const SareeStep3 = () => {
               <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
                 <div className="w-full flex justify-between items-center mb-2">
                   <img src="/icons/paint.svg" alt="" className="w-6" />
-                  <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
+                  <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
                     Mix it Up!
                   </p>
                   <img
@@ -127,7 +127,7 @@ const SareeStep3 = () => {
                     }}
                   />
                 </div>
-                <p className="mt-2 text-xs">
+                <p className="mt-2 text-sm">
                   Select the two colours that make up{" "}
                   <span className="font-semibold">{resultColor?.name}</span>
                 </p>
@@ -135,7 +135,7 @@ const SareeStep3 = () => {
             </div>
           )}
           <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
-            <p className="text-xs mb-3">
+            <p className="text-sm mb-3">
               Select the two colours that make up{" "}
               <span className="font-semibold">{resultColor?.name}</span>
             </p>
@@ -206,7 +206,7 @@ const SareeStep3 = () => {
                       />
                     )}
                   </div>
-                  <p className="font-semibold mt-2">{i.name}</p>
+                  <p className="font-semibold text-sm mt-2">{i.name}</p>
                 </div>
               ))}
             </div>

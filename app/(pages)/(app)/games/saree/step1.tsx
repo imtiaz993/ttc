@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Menu from "../../components/menu";
 import { useDispatch } from "react-redux";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const SareeStep1 = () => {
   const [playSound, setPlaySound] = useState(false);
@@ -117,9 +120,9 @@ const SareeStep1 = () => {
                 Chromolithography
               </p>
             </div>
-            <p className="mt-2 text-xs">
-              A printing technique which uses many metal plates to build up a
-              picture layer by layer.
+            <p className="mt-2 text-sm">
+              Chromolithography is a print making technique which uses
+              impressions from a series of stone or metal plates.
             </p>
           </div>
         </div>

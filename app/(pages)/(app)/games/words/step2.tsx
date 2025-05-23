@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import Menu from "../../components/menu";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 import { useDispatch } from "react-redux";
 
 const wordsInitialData = [
   {
     id: 1,
-    word: "Quality",
+    word: "Strength",
     isCustom: false,
   },
   {
@@ -16,7 +19,7 @@ const wordsInitialData = [
   },
   {
     id: 3,
-    word: "Nature",
+    word: "Fashion",
     isCustom: false,
   },
   {
@@ -26,22 +29,17 @@ const wordsInitialData = [
   },
   {
     id: 5,
-    word: "Originality",
+    word: "Sustainability",
     isCustom: false,
   },
   {
     id: 6,
-    word: "Fashion",
+    word: "Originality",
     isCustom: false,
   },
   {
     id: 7,
-    word: "Durability",
-    isCustom: false,
-  },
-  {
-    id: 8,
-    word: "Strength",
+    word: "Magic",
     isCustom: false,
   },
 ];
@@ -93,8 +91,8 @@ const WordsStep2 = () => {
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
               <img src="/icons/psychology.svg" alt="" className="w-6" />
-              <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                Why choose a warrior to advertise cotton cloth?
+              <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
+                A warrior to advertise cotton cloth?
               </p>
               <img
                 src="/icons/close-black.svg"
@@ -105,8 +103,8 @@ const WordsStep2 = () => {
                 }}
               />
             </div>
-            <p className="mt-2 text-xs">
-              Look closely at the tika and click all the words you  think it
+            <p className="mt-2 text-sm">
+              Look closely at the ticket and click all the words you think it
               could signify!
             </p>
           </div>

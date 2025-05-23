@@ -379,7 +379,7 @@ const PuzzleStep2 = () => {
                 alt="Question"
                 className="w-6"
               />
-              <p className="ml-2 text-xs font-semibold w-[calc(100%-48px)]">
+              <p className="ml-2 text-sm font-semibold w-[calc(100%-48px)]">
                 Piece together
               </p>
               <img
@@ -389,7 +389,7 @@ const PuzzleStep2 = () => {
                 onClick={() => setOverlay(false)}
               />
             </div>
-            <p className="text-xs leading-relaxed">
+            <p className="text-sm leading-relaxed">
               Arrange the pieces to form the complete picture.
             </p>
           </div>

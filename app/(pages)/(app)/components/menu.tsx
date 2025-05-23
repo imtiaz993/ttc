@@ -129,21 +129,28 @@ const Menu = ({
           backgroundRepeat: "round",
         }}
       >
-        <div className="pt-5 px-4 flex flex-col justify-start h-full">
+        <div className="pt-5 pb-[60px] px-4 flex flex-col justify-start h-full">
           <div>
             <div className="flex justify-between">
               <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
-              <img
-                src="/icons/close.svg"
-                decoding="sync"
-                alt=""
-                className="w-6 cursor-pointer"
-                onClick={() => {
-                  setOpen(false);
-                  closeDrawer();
-                }}
-              />
+              {!isOpen && (
+                <img
+                  src="/icons/close.svg"
+                  decoding="sync"
+                  alt=""
+                  className="w-6 cursor-pointer"
+                  onClick={() => {
+                    setOpen(false);
+                    closeDrawer();
+                  }}
+                />
+              )}
             </div>
+            <p className="mt-4 font-manrope text-[#FFF8E7] font-medium">
+              Step back in time to join two best friends, Kamla and Selma, as
+              they help you uncover the many mysteries behind “tickets” or
+              textile labels.
+            </p>
             <div className="mt-10">
               <p className="text-[#FFF8E7] font-medium mb-2.5">
                 On this adventure. I’d like to be
@@ -213,6 +220,22 @@ const Menu = ({
               </div>
             </div>
           </div>
+          {isOpen && (
+            <p
+              className="text-sm mt-auto flex justify-end items-center text-[#FFF8E7] font-semibold gap-3"
+              onClick={() => {
+                setOpen(false);
+                closeDrawer();
+              }}
+            >
+              CONTINUE
+              <img
+                src="/icons/swipe-arrow-forward.svg"
+                alt=""
+                className="w-6"
+              />
+            </p>
+          )}
         </div>
       </div>
     </div>

@@ -104,7 +104,7 @@ const GameStepper = () => {
             <img
               src="/icons/swipe-arrow-dark.svg"
               alt=""
-              className="w-4"
+              className="w-6"
               onClick={() => {
                 prev();
               }}
@@ -124,7 +124,7 @@ const GameStepper = () => {
             <img
               src="/icons/swipe-arrow-dark.svg"
               alt=""
-              className="w-4 rotate-180"
+              className="w-6 rotate-180"
               onClick={() => {
                 next();
               }}
@@ -161,12 +161,12 @@ const GameStepper = () => {
           {steps.map((item, index) => (
             <div
               key={index}
-              className={`w-5 h-5 rounded-full overflow-hidden ${
+              className={`w-6 h-6 rounded-full overflow-hidden ${
                 item.step.includes(step) && reduceProgress == 0
                   ? "border-4 border-[#243200]"
                   : step > item.step[item.step.length - 1]
                   ? "border border-[#243200]"
-                  : "border border-[#FFFFFF]"
+                  : "border border-transparent"
               }`}
             >
               <img

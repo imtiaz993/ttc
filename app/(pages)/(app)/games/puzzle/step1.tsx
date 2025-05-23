@@ -43,7 +43,7 @@ const PuzzleStep1 = () => {
           He makes me so mad at times!
         </p>
         <div className="flex justify-center items-center">
-          <img src="/icons/puzzle.svg" alt="" className="w-72" />
+          <img src="/icons/puzzle.svg" alt="" className="w-80" />
         </div>
       </div>
     </>

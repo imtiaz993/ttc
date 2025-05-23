@@ -1,7 +1,10 @@
 import Menu from "../../components/menu";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const OwnTikkaStep1 = () => {
   const dispatch = useDispatch();
@@ -33,16 +36,16 @@ const OwnTikkaStep1 = () => {
           <div>
             <img src="/images/kamla.png" alt="" className="w-11 rounded-lg" />
             <p className="mt-1 text-xs font-medium text-center font-manrope">
-              Ajji
+              Kamla
             </p>
           </div>
         </div>
         <p className="text-sm mb-6 font-playwriteDEGrund">
-          My collection grows as I  almost every tika I come across.
+          I am saving almost every ticket I come across.
           <br />
-          Mumma says its all just junk, but I am sure, centuries from now, my
+          Mama says it's all just junk, but I am sure, centuries from now, my
           collection will grace the halls of some famous museum and bring joy to
-          some fanciful dreamer yet to be born!
+          some fanciful dreamer just like me!
         </p>
         <div className="flex justify-center items-center mb-32">
           <img src="/images/own-tikka.png" alt="" className="w-52" />

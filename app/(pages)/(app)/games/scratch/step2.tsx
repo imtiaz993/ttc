@@ -105,28 +105,28 @@ const ScratchStep2 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col justify-center items-center">
               <Animation
                 animation={verifyingAnimation}
                 height={154}
                 width={154}
               />
-              <p className="font-medium mt-7">Verifying your picture...</p>
+              <p className="font-medium text-sm mt-7">Verifying your picture...</p>
             </div>
           </div>
         );
       case "success":
         return (
-          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center">
               <Animation
                 animation={successAnimation}
                 height={137}
                 width={137}
               />
-              <p className="font-medium mt-7">Great job!</p>
-              <p className="text-center mt-2">
+              <p className="font-medium text-sm mt-7">Great job!</p>
+              <p className="text-center text-sm mt-2">
                 You got it right in the first go
               </p>
             </div>
@@ -138,7 +138,7 @@ const ScratchStep2 = () => {
             <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
               <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
-              <p className="text-center mt-2">
+              <p className="text-center text-sm mt-2">
                 Have another go before these big cats disappear into the wild!
               </p>
             </div>
@@ -205,12 +205,12 @@ const ScratchStep2 = () => {
                   alt=""
                   className="w-6"
                 />
-                <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
+                <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
                   Find this colorful image of a lion & lioness within a glass
                   case around you
                 </p>
               </div>
-              <p className="mt-2 text-xs">
+              <p className="mt-2 text-sm">
                 Now take a picture of it to see what you discover next!
               </p>
             </div>

@@ -1,6 +1,9 @@
 import Menu from "../../components/menu";
 import { useDispatch } from "react-redux";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 import { useEffect } from "react";
 
 const SpotTikkaStep1 = () => {
@@ -38,10 +41,10 @@ const SpotTikkaStep1 = () => {
           </div>
         </div>
         <p className="text-sm mb-10 font-playwriteDEGrund">
-          From the extraordinary to the everyday, tikas ran a range of design.
+          From the extraordinary to the everyday, tickets run a range of design.
           What imaginations their creators must have!
           <br />
-          <br />I am collecting more tikas to figure what their inspirations
+          <br />I am collecting more tickets to figure what their inspirations
           were. Alas, this one just got ripped apart by my clumsy efforts!
         </p>
         <div className="flex justify-center items-center">

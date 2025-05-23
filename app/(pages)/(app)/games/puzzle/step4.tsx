@@ -41,22 +41,22 @@ const PuzzleStep4 = () => {
             <img
               src="/images/wonder1.png"
               alt=""
-              className="w-28 relative top-8"
+              className="w-[138px]"
             />
-            <img src="/images/wonder2.png" alt="" className="w-32 relative" />
+            <img src="/images/wonder2.png" alt="" className="w-[146px]" />
           </div>
-          <div className="flex justify-center mt-10">
-            <img src="/images/wonder3.png" alt="" className="w-28" />
+          <div className="flex justify-center mt-5">
+            <img src="/images/wonder3.png" alt="" className="w-[139px]" />
           </div>
         </div>
         <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-7">
           <div className="w-full flex items-center mb-2">
-            <img src="/icons/zoom-in.svg" alt="" className="w-6" />
-            <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
+            <img src="/icons/location.svg" alt="" className="w-6" />
+            <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
               A secret chamber calls you…
             </p>
           </div>
-          <p className="mt-2 text-xs">
+          <p className="mt-2 text-sm">
             Once inside, you’ll know what to do next!
           </p>
         </div>

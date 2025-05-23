@@ -14,14 +14,14 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
     <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
       <Animation animation={failureAnimation} height={92} width={92} />
       <div className="my-6">
-        <p className="font-semibold text-xs mb-2 text-center">
+        <p className="font-semibold text-sm mb-2 text-center">
           Oops! Not quite.
         </p>
-        <p className="text-xs text-center">
+        <p className="text-sm text-center">
           You just created {results?.find((i) => i.color == finalColor)?.name}{" "}
           instead of {resultColor.name}.
         </p>
-        <p className="text-xs text-center"> Would you like to try again?</p>
+        <p className="text-sm text-center"> Would you like to try again?</p>
       </div>
       <div>
         <img src={sareePath} alt="" className="w-52" />

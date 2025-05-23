@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import { useEffect } from "react";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const PuzzleStep5 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -33,7 +36,7 @@ const PuzzleStep5 = () => {
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
           <p className="ml-4 font-medium w-[calc(100%-46px)]">
-            The more I look, the more I am surrounded by tikas!
+            The more I look, the more I am surrounded by tickets!
           </p>
         </div>
         <div className="relative w-full">

@@ -8,7 +8,10 @@ import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
 import dynamic from "next/dynamic";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -64,7 +67,7 @@ const SpotTikkaStep2 = () => {
                   height={154}
                   width={154}
                 />
-                <p className="font-medium mt-7">Verifying your picture...</p>
+                <p className="font-medium text-sm mt-7">Verifying your picture...</p>
               </div>
             </div>
           </div>
@@ -79,8 +82,8 @@ const SpotTikkaStep2 = () => {
                   height={154}
                   width={154}
                 />
-                <p className="font-medium mt-7">Great job!</p>
-                <p className="text-center mt-2">
+                <p className="font-medium text-sm mt-7">Great job!</p>
+                <p className="text-center text-sm mt-2">
                   You got it right in the first go
                 </p>
               </div>
@@ -92,8 +95,8 @@ const SpotTikkaStep2 = () => {
           <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
             <div className="flex flex-col items-center">
               <Animation animation={failureAnimation} height={81} width={81} />
-              <p className="font-medium mt-7">Oops! Not quite.</p>
-              <p className="text-center mt-2">How about we have another go?</p>
+              <p className="font-medium text-sm mt-7">Oops! Not quite.</p>
+              <p className="text-center text-sm mt-2">How about we have another go?</p>
             </div>
             <div className="w-full grid grid-cols-2 gap-4 mt-auto">
               <button
@@ -135,10 +138,10 @@ const SpotTikkaStep2 = () => {
                 <div className="w-full flex items-center mb-2">
                   <img src="/icons/zoom-in.svg" alt="" className="w-6" />
                   <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                    Spot this tika in the gallery
+                    Spot this ticket in the exhibition
                   </p>
                 </div>
-                <p className="mt-2 text-xs">
+                <p className="mt-2 text-sm">
                   Now take a picture of it to see what you discover next!
                 </p>
               </div>

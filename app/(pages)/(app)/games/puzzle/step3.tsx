@@ -61,14 +61,14 @@ const PuzzleStep3 = () => {
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
               <div className="flex items-center">
-                <img src="/icons/question-mark.svg" alt="" className="w-6" />
-                <p className="ml-2 text-xs font-semibold w-[calc(100%-24px)]">
-                  Find the tika
+                <img src="/icons/search.svg" alt="" className="w-6" />
+                <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
+                  Find the ticket
                 </p>
               </div>
 
               <p
-                className="text-sm font-medium flex items-center gap-1"
+                className="text-xs font-medium flex items-center gap-1"
                 onClick={() => {
                   next();
                 }}
@@ -81,7 +81,7 @@ const PuzzleStep3 = () => {
                 />
               </p>
             </div>
-            <p className="mt-2 text-xs">
+            <p className="mt-2 text-sm">
               Walk ahead to spot this ticket in the exhibition
             </p>
           </div>
@@ -97,7 +97,7 @@ const PuzzleStep3 = () => {
           </p>
         </div>
         <div className="flex justify-center items-center w-full relative">
-          <img src="/images/completed-puzzle.png" alt="" className="w-48" />
+          <img src="/images/completed-puzzle.png" alt="" className="w-[264px]" />
           <div className="absolute">
             <Animation animation={successAnimation} height={144} width={144} />
           </div>
