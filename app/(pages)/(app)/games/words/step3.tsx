@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Menu from "../../components/menu";
 
 const WordsStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
+  const [selectedWords, setSelectedWords] = useState([]);
+
+  // Load selectedWords from localStorage on component mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedSelectedWords = localStorage.getItem("selectedWordsData");
+      if (storedSelectedWords) {
+        setSelectedWords(JSON.parse(storedSelectedWords));
+      } else {
+        setSelectedWords([]);
+      }
+    }
+  }, []);
+
   return (
     <>
       <Menu />
@@ -25,100 +40,20 @@ const WordsStep3 = () => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 max-h-80 overflow-auto">
-          {[
-            {
-              id: 1,
-              word: "Strength",
-              isCustom: false,
-            },
-            {
-              id: 2,
-              word: "Royalty",
-              isCustom: false,
-            },
-            {
-              id: 3,
-              word: "Fashion",
-              isCustom: false,
-            },
-            {
-              id: 4,
-              word: "Affordability",
-              isCustom: false,
-            },
-            {
-              id: 5,
-              word: "Sustainability",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-            {
-              id: 6,
-              word: "Originality",
-              isCustom: false,
-            },
-            {
-              id: 7,
-              word: "Magic",
-              isCustom: false,
-            },
-          ].map((i, index) => (
-            <div
-              key={index}
-              className="flex-1 max-w-[calc(50%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 bg-[#2D6A42] text-white border border-[#2D6A42]"
-            >
-              {i.word}
-            </div>
-          ))}
+          {selectedWords.length > 0 ? (
+            selectedWords.map((i, index) => (
+              <div
+                key={index}
+                className="flex-1 max-w-[calc(50%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 bg-[#2D6A42] text-white border border-[#2D6A42]"
+              >
+                {i.word}
+              </div>
+            ))
+          ) : (
+            <p className="text-sm font-medium text-center w-full">
+              No words selected.
+            </p>
+          )}
         </div>
       </div>
     </>

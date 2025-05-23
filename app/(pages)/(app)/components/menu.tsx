@@ -207,6 +207,8 @@ const Menu = ({
                     alt=""
                     className="w-6 cursor-pointer"
                     onClick={() => {
+                      localStorage.removeItem("wordsData");
+                      localStorage.removeItem("selectedWordsData")
                       reset();
                       updateUserData({
                         name: "",

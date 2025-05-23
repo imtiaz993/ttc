@@ -48,10 +48,40 @@ const WordsStep2 = () => {
   const [overlay, setOverlay] = useState(true);
   const [word, setWord] = useState("");
   const [undoDisabled, setUndoDisabled] = useState(false);
-  const [words, setWords] = useState(wordsInitialData);
+  const [words, setWords] = useState([]);
   const [selectedWords, setSelectedWords] = useState([]);
-  const [customWordCount, setCustomWordCount] = useState(0); // Track custom words
+  const [customWordCount, setCustomWordCount] = useState(0);
 
+  const dispatch = useDispatch();
+
+  // Load words and selectedWords from localStorage on component mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Load words
+      const storedWords = localStorage.getItem("wordsData");
+      if (storedWords) {
+        const parsedWords = JSON.parse(storedWords);
+        setWords(parsedWords);
+        const customCount = parsedWords.filter((w) => w.isCustom).length;
+        setCustomWordCount(customCount);
+      } else {
+        setWords(wordsInitialData);
+        localStorage.setItem("wordsData", JSON.stringify(wordsInitialData));
+        setCustomWordCount(0);
+      }
+
+      // Load selectedWords
+      const storedSelectedWords = localStorage.getItem("selectedWordsData");
+      if (storedSelectedWords) {
+        setSelectedWords(JSON.parse(storedSelectedWords));
+      } else {
+        setSelectedWords([]);
+        localStorage.setItem("selectedWordsData", JSON.stringify([]));
+      }
+    }
+  }, []);
+
+  // Update undo button state
   useEffect(() => {
     if (selectedWords.length || words.length > wordsInitialData.length) {
       setUndoDisabled(false);
@@ -60,8 +90,7 @@ const WordsStep2 = () => {
     }
   }, [selectedWords, words]);
 
-  const dispatch = useDispatch();
-
+  // Update stepper props
   useEffect(() => {
     dispatch(
       setStepperProps({
@@ -71,7 +100,7 @@ const WordsStep2 = () => {
     return () => {
       dispatch(resetStepperProps());
     };
-  }, [selectedWords]);
+  }, [dispatch]);
 
   const handleAddWord = () => {
     if (word && customWordCount < 2) {
@@ -80,11 +109,67 @@ const WordsStep2 = () => {
         word: word,
         isCustom: true,
       };
-      setSelectedWords([...selectedWords, newWord]);
-      setWords([...words, newWord]);
+      const updatedWords = [...words, newWord];
+      const updatedSelectedWords = [...selectedWords, newWord];
+      setWords(updatedWords);
+      setSelectedWords(updatedSelectedWords);
       setWord("");
-      setCustomWordCount(customWordCount + 1); // Increment custom word count
+      setCustomWordCount(customWordCount + 1);
+      // Save to localStorage
+      localStorage.setItem("wordsData", JSON.stringify(updatedWords));
+      localStorage.setItem(
+        "selectedWordsData",
+        JSON.stringify(updatedSelectedWords)
+      );
     }
+  };
+
+  const handleRemoveWord = (wordId) => {
+    const wordToRemove = words.find((word) => word.id === wordId);
+    if (wordToRemove.isCustom) {
+      const updatedWords = words.filter((word) => word.id !== wordId);
+      const updatedSelectedWords = selectedWords.filter(
+        (word) => word.id !== wordId
+      );
+      setWords(updatedWords);
+      setSelectedWords(updatedSelectedWords);
+      setCustomWordCount(customWordCount - 1);
+      // Update localStorage
+      localStorage.setItem("wordsData", JSON.stringify(updatedWords));
+      localStorage.setItem(
+        "selectedWordsData",
+        JSON.stringify(updatedSelectedWords)
+      );
+    }
+  };
+
+  const handleSelectWord = (wordItem) => {
+    if (selectedWords.find((word) => word.id === wordItem.id)) {
+      const updatedSelectedWords = selectedWords.filter(
+        (word) => word.id !== wordItem.id
+      );
+      setSelectedWords(updatedSelectedWords);
+      localStorage.setItem(
+        "selectedWordsData",
+        JSON.stringify(updatedSelectedWords)
+      );
+    } else {
+      const updatedSelectedWords = [...selectedWords, wordItem];
+      setSelectedWords(updatedSelectedWords);
+      localStorage.setItem(
+        "selectedWordsData",
+        JSON.stringify(updatedSelectedWords)
+      );
+    }
+  };
+
+  const handleUndo = () => {
+    setSelectedWords([]);
+    setWords(wordsInitialData);
+    setCustomWordCount(0);
+    // Reset localStorage
+    localStorage.setItem("wordsData", JSON.stringify(wordsInitialData));
+    localStorage.setItem("selectedWordsData", JSON.stringify([]));
   };
 
   return (
@@ -95,11 +180,7 @@ const WordsStep2 = () => {
           setOverlay(true);
         }}
         isUndoDisabled={undoDisabled}
-        handleUndo={() => {
-          setSelectedWords([]);
-          setWords(wordsInitialData);
-          setCustomWordCount(0);
-        }}
+        handleUndo={handleUndo}
       />
       {overlay && (
         <div>
@@ -135,15 +216,7 @@ const WordsStep2 = () => {
             {words.map((i, index) => (
               <div
                 key={index}
-                onClick={() => {
-                  if (selectedWords.find((word) => word.id === i.id)) {
-                    setSelectedWords(
-                      selectedWords.filter((word) => word.id !== i.id)
-                    );
-                  } else {
-                    setSelectedWords([...selectedWords, i]);
-                  }
-                }}
+                onClick={() => handleSelectWord(i)}
                 className={`flex-1 max-w-[calc(50%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 ${
                   selectedWords.find((word) => word.id === i.id)
                     ? "bg-[#2D6A42] text-white border border-[#2D6A42]"
@@ -161,13 +234,7 @@ const WordsStep2 = () => {
                     className="w-5"
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (selectedWords.find((word) => word.id === i.id)) {
-                        setSelectedWords(
-                          selectedWords.filter((word) => word.id !== i.id)
-                        );
-                      }
-                      setWords(words.filter((word) => word.id !== i.id));
-                      setCustomWordCount(customWordCount - 1); // Decrement custom word count
+                      handleRemoveWord(i.id);
                     }}
                   />
                 )}

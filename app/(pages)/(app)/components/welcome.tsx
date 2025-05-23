@@ -137,6 +137,8 @@ const Welcome = ({ playMusic = () => {} }) => {
               playMusic();
               const name = e.target.name.value;
               updateUserData({ ...userData, name });
+              localStorage.removeItem("wordsData");
+              localStorage.removeItem("selectedWordsData");
               next();
             }}
             className={`flex justify-between pb-2 border-b border-[#223100] ${
