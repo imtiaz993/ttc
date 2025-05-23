@@ -39,21 +39,23 @@ const WordsStep3 = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap gap-4 max-h-80 overflow-auto">
-          {selectedWords.length > 0 ? (
-            selectedWords.map((i, index) => (
-              <div
-                key={index}
-                className="flex-1 max-w-[calc(50%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 bg-[#2D6A42] text-white border border-[#2D6A42]"
-              >
-                {i.word}
-              </div>
-            ))
-          ) : (
-            <p className="text-sm font-medium text-center w-full">
-              No words selected.
-            </p>
-          )}
+        <div className="min-h-28">
+          <div className="flex flex-wrap gap-4 max-h-80 overflow-auto">
+            {selectedWords.length > 0 ? (
+              selectedWords.map((i, index) => (
+                <div
+                  key={index}
+                  className="flex-1 max-w-[calc(33%-0.5rem)] min-w-[calc(33.33%-1rem)] rounded p-3 px-8 text-sm font-semibold flex justify-center items-center gap-2 bg-[#2D6A42] text-white border border-[#2D6A42]"
+                >
+                  {i.word}
+                </div>
+              ))
+            ) : (
+              <p className="text-sm font-medium text-center w-full">
+                No words selected.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </>
