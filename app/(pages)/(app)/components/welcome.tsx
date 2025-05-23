@@ -76,7 +76,7 @@ const Welcome = ({ playMusic = () => {} }) => {
             }}
           >
             <div
-              className="fixed z-20 right-0 left-0 bottom-0"
+              className="fixed z-20 right-0 left-0 bottom-0 w-full flex flex-col justify-center h-20"
               style={{
                 backgroundImage: "url('/images/overlay-yellow.png')",
                 backgroundSize: "contain",
@@ -85,7 +85,7 @@ const Welcome = ({ playMusic = () => {} }) => {
                 transition: "opacity 1s ease-out",
               }}
             >
-              <div className="bg-[#202F00] w-[168px] my-10 mx-auto rounded-full px-3 py-2 flex items-center justify-between">
+              <div className="bg-[#202F00] w-[168px] mx-auto rounded-full px-3 py-2 flex items-center justify-between">
                 <img
                   src="/icons/swipe-arrow.svg"
                   alt=""

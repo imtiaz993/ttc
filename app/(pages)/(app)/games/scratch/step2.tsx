@@ -134,7 +134,7 @@ const ScratchStep2 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 pb-16 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
             <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
               <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
@@ -142,7 +142,7 @@ const ScratchStep2 = () => {
                 Have another go before these big cats disappear into the wild!
               </p>
             </div>
-            <div className="w-full grid grid-cols-2 gap-4 mt-auto">
+            <div className="px-4 absolute bottom-14 w-full grid grid-cols-2 gap-4">
               <button
                 onClick={handleSkip}
                 className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"

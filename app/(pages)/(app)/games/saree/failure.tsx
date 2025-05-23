@@ -19,14 +19,14 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
         </p>
         <p className="text-sm text-center">
           You just created {results?.find((i) => i.color == finalColor)?.name}{" "}
-          instead of {resultColor.name}.
+          instead of <span className="font-bold"> {resultColor.name}</span>.
         </p>
         <p className="text-sm text-center"> Would you like to try again?</p>
       </div>
       <div>
         <img src={sareePath} alt="" className="w-52" />
       </div>
-      <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-16">
+      <div className="w-full grid grid-cols-2 gap-4 mt-auto mb-14">
         <button
           onClick={() => {
             next();

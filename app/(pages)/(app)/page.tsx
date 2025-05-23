@@ -32,6 +32,7 @@ import OwnTikkaStep4 from "./games/ownTikka/step4";
 import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 import GameStepper from "./components/gameStepper";
+import WordsStep3 from "./games/words/step3";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -91,7 +92,7 @@ export default function Home() {
 
   const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
 
-  const WordsGame = [<WordsStep1 />, <WordsStep2 />];
+  const WordsGame = [<WordsStep1 />, <WordsStep2 />, <WordsStep3 />];
 
   const PuzzleGame = [
     <PuzzleStep1 />,
@@ -121,7 +122,7 @@ export default function Home() {
   ];
   return (
     <>
-      {![1, 20, 21].includes(step) && <GameStepper />}
+      {![1, 21, 22].includes(step) && <GameStepper />}
       {components[step - 1]}
     </>
   );

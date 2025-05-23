@@ -48,7 +48,7 @@ const OwnTikkaStep1 = () => {
           some fanciful dreamer just like me!
         </p>
         <div className="flex justify-center items-center mb-32">
-          <img src="/images/own-tikka.png" alt="" className="w-52" />
+          <img src="/images/own-tikka.gif" alt="" className="w-52" />
         </div>
       </div>
     </>

@@ -199,13 +199,14 @@ const OwnTikkaStep3 = () => {
       >
         <div
           id="ticket-container"
-          className="w-60 h-80 mb-16 relative"
+          className="w-56 h-[300px] mb-16 relative"
           style={{
             backgroundImage: selectedOptions.Background
               ? `url(${selectedOptions.Background})`
               : "none",
             backgroundSize: "contain",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
             border:
               selectedOptions.Background ||
               selectedOptions.Border ||
@@ -272,7 +273,7 @@ const OwnTikkaStep3 = () => {
         </div>
 
         {/* Menu Options */}
-        <div className="px-4 w-full absolute bottom-12">
+        <div className="px-4 w-full absolute bottom-14">
           <div className="w-full flex gap-3 flex-row justify-between items-center overflow-x-auto">
             {menu
               .find((menuItem) => menuItem.menu === selectedMenu)

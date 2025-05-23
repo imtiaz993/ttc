@@ -7,6 +7,7 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
+import scanningAnimation from "../../../animation/Image Scan.json";
 import dynamic from "next/dynamic";
 import {
   resetStepperProps,
@@ -67,7 +68,9 @@ const SpotTikkaStep2 = () => {
                   height={154}
                   width={154}
                 />
-                <p className="font-medium text-sm mt-7">Verifying your picture...</p>
+                <p className="font-medium text-sm mt-7">
+                  Verifying your picture...
+                </p>
               </div>
             </div>
           </div>
@@ -96,9 +99,11 @@ const SpotTikkaStep2 = () => {
             <div className="flex flex-col items-center">
               <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium text-sm mt-7">Oops! Not quite.</p>
-              <p className="text-center text-sm mt-2">How about we have another go?</p>
+              <p className="text-center text-sm mt-2">
+                How about we have another go?
+              </p>
             </div>
-            <div className="w-full grid grid-cols-2 gap-4 mt-auto">
+            <div className="px-4 absolute bottom-14 w-full grid grid-cols-2 gap-4">
               <button
                 onClick={handleSkip}
                 className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
@@ -130,7 +135,7 @@ const SpotTikkaStep2 = () => {
                   <p className="mt-1 text-sm font-medium text-center">You</p>
                 </div>
                 <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
-                  &lt;text copy&gt;
+                  Wow! All of this in a time without AI?
                 </p>
               </div>
 
@@ -145,13 +150,21 @@ const SpotTikkaStep2 = () => {
                   Now take a picture of it to see what you discover next!
                 </p>
               </div>
-              <div className="flex justify-center items-center">
-                <img
-                  src="/images/spot-tikka.png"
-                  alt=""
-                  className="w-52 mt-20"
+            </div>
+
+            <div className="relative mt-auto" onClick={handleCameraClick}>
+              <div className="relative z-20">
+                <Animation
+                  animation={scanningAnimation}
+                  height={256}
+                  width={256}
                 />
               </div>
+              <img
+                src="/images/spot-tikka.png"
+                alt=""
+                className="w-[164px] absolute top-[35px] left-[46px] z-10"
+              />
             </div>
           </div>
         );

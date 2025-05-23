@@ -24,6 +24,9 @@ const OwnTikkaStep2 = () => {
             <br />I wish I could try my hand at making a ticket!
           </p>
         </div>
+        <div className="flex justify-center items-center mb-32">
+          <img src="/images/tikka-process.gif" alt="" className="w-[230px]" />
+        </div>
       </div>
     </>
   );

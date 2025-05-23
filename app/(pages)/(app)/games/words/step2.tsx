@@ -64,7 +64,7 @@ const WordsStep2 = () => {
   useEffect(() => {
     dispatch(
       setStepperProps({
-        showPrev: selectedWords.length > 0,
+        showPrev: false,
       })
     );
     return () => {

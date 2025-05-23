@@ -40,7 +40,7 @@ const SpotTikkaStep1 = () => {
             </p>
           </div>
         </div>
-        <p className="text-sm mb-10 font-playwriteDEGrund">
+        <p className="text-sm font-playwriteDEGrund">
           From the extraordinary to the everyday, tickets run a range of design.
           What imaginations their creators must have!
           <br />
@@ -48,7 +48,7 @@ const SpotTikkaStep1 = () => {
           were. Alas, this one just got ripped apart by my clumsy efforts!
         </p>
         <div className="flex justify-center items-center">
-          <img src="/images/spot-tikka.png" alt="" className="w-52" />
+          <img src="/images/spot-tikka.png" alt="" className="w-[264px]" />
         </div>
       </div>
     </>
