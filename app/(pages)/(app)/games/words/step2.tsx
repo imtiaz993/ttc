@@ -50,6 +50,7 @@ const WordsStep2 = () => {
   const [undoDisabled, setUndoDisabled] = useState(false);
   const [words, setWords] = useState(wordsInitialData);
   const [selectedWords, setSelectedWords] = useState([]);
+  const [customWordCount, setCustomWordCount] = useState(0); // Track custom words
 
   useEffect(() => {
     if (selectedWords.length || words.length > wordsInitialData.length) {
@@ -68,9 +69,23 @@ const WordsStep2 = () => {
       })
     );
     return () => {
-      dispatch(resetStepperProps()); // This resets to initialState
+      dispatch(resetStepperProps());
     };
   }, [selectedWords]);
+
+  const handleAddWord = () => {
+    if (word && customWordCount < 2) {
+      const newWord = {
+        id: words.length + 1,
+        word: word,
+        isCustom: true,
+      };
+      setSelectedWords([...selectedWords, newWord]);
+      setWords([...words, newWord]);
+      setWord("");
+      setCustomWordCount(customWordCount + 1); // Increment custom word count
+    }
+  };
 
   return (
     <>
@@ -83,6 +98,7 @@ const WordsStep2 = () => {
         handleUndo={() => {
           setSelectedWords([]);
           setWords(wordsInitialData);
+          setCustomWordCount(0);
         }}
       />
       {overlay && (
@@ -104,7 +120,7 @@ const WordsStep2 = () => {
               />
             </div>
             <p className="mt-2 text-sm">
-              Look closely at the ticket and click all the words you think it
+              Look closely at the ticket and click all the words you think it
               could signify!
             </p>
           </div>
@@ -151,6 +167,7 @@ const WordsStep2 = () => {
                         );
                       }
                       setWords(words.filter((word) => word.id !== i.id));
+                      setCustomWordCount(customWordCount - 1); // Decrement custom word count
                     }}
                   />
                 )}
@@ -158,7 +175,11 @@ const WordsStep2 = () => {
               </div>
             ))}
           </div>
-          <div className="mt-5 pb-2 border-b border-[#223100] flex justify-between">
+          <div
+            className={`mt-5 pb-2 border-b border-[#223100] flex justify-between ${
+              customWordCount < 2 ? "visible" : "invisible"
+            }`}
+          >
             <input
               type="text"
               value={word}
@@ -172,27 +193,7 @@ const WordsStep2 = () => {
               src="/icons/plus.svg"
               alt=""
               className="w-6"
-              onClick={() => {
-                if (word) {
-                  setSelectedWords([
-                    ...selectedWords,
-                    {
-                      id: words.length + 1,
-                      word: word,
-                      isCustom: true,
-                    },
-                  ]);
-                  setWords([
-                    ...words,
-                    {
-                      id: words.length + 1,
-                      word: word,
-                      isCustom: true,
-                    },
-                  ]);
-                  setWord("");
-                }
-              }}
+              onClick={handleAddWord}
             />
           </div>
         </div>
