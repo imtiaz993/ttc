@@ -11,42 +11,66 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const loadContent = async () => {
       try {
-        await Promise.all([
-          ...[
-            "/videos/welcome-video.mp4",
-            "/icons/logo.svg",
-            "/images/welcome-divider.png",
-            "/images/map-logo.png",
-            "/icons/swipe-arrow.svg",
-            "/icons/swipe-arrow-forward.svg",
-            "/images/overlay-yellow.png",
-            "/icons/arrow-forward.svg",
-            "/images/loading.gif",
-          ].map(
+        // Load critical assets
+        const assets = [
+          "/videos/welcome-video.mp4",
+          "/icons/logo.svg",
+          "/images/welcome-divider.png",
+          "/images/map-logo.png",
+          "/icons/swipe-arrow.svg",
+          "/icons/swipe-arrow-forward.svg",
+          "/images/overlay-yellow.png",
+          "/icons/arrow-forward.svg",
+          "/images/loading.gif",
+        ];
+
+        await Promise.all(
+          assets.map(
             (src) =>
               new Promise((resolve) => {
                 if (src.endsWith(".mp4")) {
                   const video = document.createElement("video");
                   video.src = src;
-                  video.onloadeddata = resolve;
-                  video.onerror = resolve;
+                  // Ensure video is preloaded
+                  video.preload = "auto";
+                  // iOS may require muted for autoplay
+                  video.muted = true;
+                  video.onloadeddata = () => {
+                    console.log(`Loaded video: ${src}`);
+                    resolve(true);
+                  };
+                  video.onerror = (err) => {
+                    console.error(`Error loading video ${src}:`, err);
+                    resolve(true); // Resolve even on error
+                  };
+                  // Start loading
+                  video.load();
                 } else {
                   const img = new Image();
                   img.src = src;
-                  img.onload = resolve;
-                  img.onerror = resolve;
+                  img.onload = () => {
+                    console.log(`Loaded image: ${src}`);
+                    resolve(true);
+                  };
+                  img.onerror = (err) => {
+                    console.error(`Error loading image ${src}:`, err);
+                    resolve(true); // Resolve even on error
+                  };
                 }
               })
-          ),
-          new Promise((resolve) => {
-            if (document.readyState === "complete") {
-              resolve(true);
-            } else {
-              window.onload = resolve;
-            }
-          }),
-        ]);
-        setIsLoading(false); // Hide preloader
+          )
+        );
+
+        // Check document.readyState
+        if (document.readyState === "complete") {
+          console.log("Document already complete");
+          setIsLoading(false);
+        } else {
+          window.onload = () => {
+            console.log("window.onload triggered");
+            setIsLoading(false);
+          };
+        }
       } catch (error) {
         console.error("Error loading assets:", error);
         setIsLoading(false); // Hide preloader on error
@@ -54,6 +78,15 @@ export default function RootLayout({ children }) {
     };
 
     loadContent();
+
+    // Fallback timeout to hide preloader after 10 seconds
+    const timeout = setTimeout(() => {
+      console.log("Fallback timeout triggered");
+      setIsLoading(false);
+    }, 10000);
+
+    // Cleanup timeout on unmount
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -79,7 +112,7 @@ export default function RootLayout({ children }) {
               <img
                 src="/images/preloader.gif"
                 alt="Loading"
-                className="w-32 h-32" // Adjust size as needed
+                className="w-32 h-32"
               />
             </div>
           )}
