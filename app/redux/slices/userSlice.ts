@@ -12,7 +12,8 @@ const userSlice = createSlice({
       overlay: true,
       email: "",
       feedback: "",
-      createdTika: ""
+      createdTika: "",
+      showMenu: false,
     },
     isMuted: false,
   },
@@ -30,9 +31,12 @@ const userSlice = createSlice({
     closeOverlay: (state) => {
       state.userData.overlay = false;
     },
+    toggleMenu: (state, action) => {
+      state.userData.showMenu = !action.payload;
+    },
   },
 });
 
-export const { setUserData, toggleMute, closeMenu, closeOverlay } =
+export const { setUserData, toggleMute, closeMenu, closeOverlay, toggleMenu } =
   userSlice.actions;
 export default userSlice.reducer;

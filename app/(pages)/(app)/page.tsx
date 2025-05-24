@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMute } from "../../redux/slices/userSlice";
 
@@ -33,11 +33,16 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 import GameStepper from "./components/gameStepper";
 import WordsStep3 from "./games/words/step3";
+import { nextStep, prevStep } from "../../redux/slices/navigationSlice";
+import Menu from "./components/menu";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const next = () => dispatch(nextStep());
+  const prev = () => dispatch(prevStep());
+  const stepper = useSelector((state: any) => state.stepper);
   const step = useSelector((state: any) => state.navigation.step);
-  const isMuted = useSelector((state: any) => state.user.isMuted);
+  const userData = useSelector((state: any) => state.user);
   const handleToggleMute = (data) => dispatch(toggleMute(data));
   const bgMusicRef = useRef(null);
 
@@ -47,7 +52,7 @@ export default function Home() {
 
     bgMusicRef.current = new Audio(audioFiles[currentIndex]);
     bgMusicRef.current.loop = false; // Disable loop for sequential play
-    bgMusicRef.current.muted = isMuted;
+    bgMusicRef.current.muted = userData.isMuted;
 
     const playNext = () => {
       currentIndex++;
@@ -82,9 +87,9 @@ export default function Home() {
 
   useEffect(() => {
     if (bgMusicRef.current) {
-      bgMusicRef.current.muted = isMuted;
+      bgMusicRef.current.muted = userData.isMuted;
     }
-  }, [isMuted]);
+  }, [userData.isMuted]);
 
   const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
 
@@ -120,10 +125,59 @@ export default function Home() {
     <Feedback />,
     <Thankyou />,
   ];
+
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragPosition, setDragPosition] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  const handleDragStart = (e) => {
+    setIsSwiping(true);
+    setDragStartX(e.type === "touchstart" ? e.touches[0].clientX : e.clientX);
+  };
+
+  const handleDragMove = (e) => {
+    if (!isSwiping) return;
+    const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+    const diffX = clientX - dragStartX;
+    setDragPosition(diffX);
+  };
+
+  const handleDragEnd = () => {
+    const screenWidth = window.innerWidth;
+    if (
+      dragPosition < -screenWidth * 0.25 &&
+      ![1, 21, 22].includes(step) &&
+      stepper.showNext &&
+      userData.userData.showMenu == false
+    ) {
+      next();
+    } else if (
+      dragPosition > screenWidth * 0.25 &&
+      ![1, 21, 22].includes(step) &&
+      stepper.showPrev &&
+      userData.userData.showMenu == false
+    ) {
+      prev();
+    }
+    setDragStartX(0);
+    setDragPosition(0);
+    setIsSwiping(false);
+  };
+
   return (
     <>
-      {![1, 21, 22].includes(step) && <GameStepper />}
-      {components[step - 1]}
+      <div
+        className="h-dvh"
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+      >
+        {![1, 21, 22].includes(step) && <GameStepper />}
+        {components[step - 1]}
+      </div>
     </>
   );
 }

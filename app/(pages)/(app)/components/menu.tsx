@@ -5,6 +5,7 @@ import {
   setUserData,
   toggleMute,
   closeMenu,
+  toggleMenu,
 } from "../../../redux/slices/userSlice";
 
 const Menu = ({
@@ -24,6 +25,7 @@ const Menu = ({
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
 
+  const toggleMenuBar = (data) => dispatch(toggleMenu(data));
   const next = () => dispatch(nextStep());
   const reset = () => dispatch(resetStep());
   const closeDrawer = () => dispatch(closeMenu());
@@ -34,6 +36,7 @@ const Menu = ({
 
   useEffect(() => {
     setOpen(isOpen);
+    toggleMenuBar(!isOpen);
   }, []);
 
   return (
@@ -138,6 +141,7 @@ const Menu = ({
                   className="w-6 cursor-pointer"
                   onClick={() => {
                     setOpen(true);
+                    toggleMenuBar(false);
                   }}
                 />
               )}
@@ -166,6 +170,7 @@ const Menu = ({
                   className="w-6 cursor-pointer"
                   onClick={() => {
                     setOpen(false);
+                    toggleMenuBar(true);
                     closeDrawer();
                   }}
                 />
@@ -251,6 +256,7 @@ const Menu = ({
             <p
               className="text-sm mt-auto flex justify-end items-center text-[#FFF8E7] font-semibold gap-3"
               onClick={() => {
+                toggleMenuBar(true);
                 setOpen(false);
                 closeDrawer();
               }}
