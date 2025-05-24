@@ -3,8 +3,59 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import PreloadImages from "./preloadImages";
 import "./globals.css";
+import { useEffect, useState } from "react";
 
 export default function RootLayout({ children }) {
+  const [isLoading, setIsLoading] = useState(true); // Preloader state
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        await Promise.all([
+          ...[
+            "/videos/welcome-video.mp4",
+            "/icons/logo.svg",
+            "/images/welcome-divider.png",
+            "/images/map-logo.png",
+            "/icons/swipe-arrow.svg",
+            "/icons/swipe-arrow-forward.svg",
+            "/images/overlay-yellow.png",
+            "/icons/arrow-forward.svg",
+            "/images/loading.gif",
+          ].map(
+            (src) =>
+              new Promise((resolve) => {
+                if (src.endsWith(".mp4")) {
+                  const video = document.createElement("video");
+                  video.src = src;
+                  video.onloadeddata = resolve;
+                  video.onerror = resolve;
+                } else {
+                  const img = new Image();
+                  img.src = src;
+                  img.onload = resolve;
+                  img.onerror = resolve;
+                }
+              })
+          ),
+          new Promise((resolve) => {
+            if (document.readyState === "complete") {
+              resolve(true);
+            } else {
+              window.onload = resolve;
+            }
+          }),
+        ]);
+        setIsLoading(false); // Hide preloader
+      } catch (error) {
+        console.error("Error loading assets:", error);
+        setIsLoading(false); // Hide preloader on error
+      }
+    };
+
+    loadContent();
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -15,7 +66,27 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-dvh max-h-dvh overflow-hidden">
         <div className="sm:hidden h-dvh overflow-hidden">
-          <div className="h-dvh">
+          {/* Preloader with GIF */}
+          {isLoading && (
+            <div
+              className="fixed inset-0 bg-white flex items-center justify-center z-50"
+              style={{
+                opacity: isLoading ? 1 : 0,
+                transition: "opacity 0.5s ease-out",
+                pointerEvents: isLoading ? "auto" : "none",
+              }}
+            >
+              <img
+                src="/images/preloader.gif"
+                alt="Loading"
+                className="w-32 h-32" // Adjust size as needed
+              />
+            </div>
+          )}
+          <div
+            className="h-dvh"
+            style={{ pointerEvents: isLoading ? "none" : "auto" }}
+          >
             <Provider store={store}>{children}</Provider>
           </div>
           <PreloadImages />
