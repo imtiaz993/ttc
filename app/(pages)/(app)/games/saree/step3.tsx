@@ -89,13 +89,13 @@ const SareeStep3 = () => {
     dispatch(
       setStepperProps({
         showPrev: false,
-        showNext: false,
+        showNext: finalColor === resultColor.color,
       })
     );
     return () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
-  }, []);
+  }, [finalColor,resultColor]);
 
   return (
     <>

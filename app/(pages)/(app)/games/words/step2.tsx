@@ -51,6 +51,7 @@ const WordsStep2 = () => {
   const [words, setWords] = useState([]);
   const [selectedWords, setSelectedWords] = useState([]);
   const [customWordCount, setCustomWordCount] = useState(0);
+  const [error, setError] = useState(""); // New state for error message
 
   const dispatch = useDispatch();
 
@@ -104,10 +105,24 @@ const WordsStep2 = () => {
   }, [selectedWords]);
 
   const handleAddWord = () => {
-    if (word && customWordCount < 2) {
+    if (!word.trim()) {
+      setError("Please enter a word.");
+      return;
+    }
+
+    // Check for duplicate words (case-insensitive)
+    const wordExists = words.some(
+      (w) => w.word.toLowerCase() === word.trim().toLowerCase()
+    );
+    if (wordExists) {
+      setError("This word already exists.");
+      return;
+    }
+
+    if (customWordCount < 2) {
       const newWord = {
         id: words.length + 1,
-        word: word,
+        word: word.trim(),
         isCustom: true,
       };
       const updatedWords = [...words, newWord];
@@ -116,12 +131,15 @@ const WordsStep2 = () => {
       setSelectedWords(updatedSelectedWords);
       setWord("");
       setCustomWordCount(customWordCount + 1);
+      setError(""); // Clear error on successful addition
       // Save to localStorage
       localStorage.setItem("wordsData", JSON.stringify(updatedWords));
       localStorage.setItem(
         "selectedWordsData",
         JSON.stringify(updatedSelectedWords)
       );
+    } else {
+      setError("You can only add up to 2 custom words.");
     }
   };
 
@@ -168,6 +186,7 @@ const WordsStep2 = () => {
     setSelectedWords([]);
     setWords(wordsInitialData);
     setCustomWordCount(0);
+    setError(""); // Clear error on undo
     // Reset localStorage
     localStorage.setItem("wordsData", JSON.stringify(wordsInitialData));
     localStorage.setItem("selectedWordsData", JSON.stringify([]));
@@ -255,6 +274,7 @@ const WordsStep2 = () => {
               value={word}
               onChange={(e) => {
                 setWord(e.target.value);
+                setError(""); // Clear error when input changes
               }}
               placeholder="Any more that come to mind? Add them here"
               className="outline-none placeholder:text-[#00000040] text-sm font-semibold bg-transparent w-full"
@@ -266,6 +286,13 @@ const WordsStep2 = () => {
               onClick={handleAddWord}
             />
           </div>
+          <p
+            className={`text-xs text-red-500 mt-1 min-h-4 ${
+              error ? "visible" : "invisible"
+            }`}
+          >
+            {error}
+          </p>
         </div>
       </div>
     </>

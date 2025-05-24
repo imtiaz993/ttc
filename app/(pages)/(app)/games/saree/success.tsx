@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import dynamic from "next/dynamic";
 
@@ -9,15 +6,6 @@ const Animation = dynamic(() => import("../../components/animation"), {
 });
 
 const Success = ({ userData, sareePath }) => {
-  const dispatch = useDispatch();
-
-  const next = () => dispatch(nextStep());
-
-  useEffect(() => {
-    setTimeout(() => {
-      next();
-    }, 3000);
-  }, []);
   return (
     <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
       <div className="w-full flex justify-between items-start">

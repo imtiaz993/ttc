@@ -46,6 +46,45 @@ export default function Home() {
   const handleToggleMute = (data) => dispatch(toggleMute(data));
   const bgMusicRef = useRef(null);
 
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragPosition, setDragPosition] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  const handleDragStart = (e) => {
+    setIsSwiping(true);
+    setDragStartX(e.type === "touchstart" ? e.touches[0].clientX : e.clientX);
+  };
+
+  const handleDragMove = (e) => {
+    if (!isSwiping) return;
+    const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+    const diffX = clientX - dragStartX;
+    setDragPosition(diffX);
+  };
+
+  const handleDragEnd = (data?: any) => {
+    const screenWidth = window.innerWidth;
+    if (
+      dragPosition < -screenWidth * 0.25 &&
+      (data.forward ||
+        (![1, 21, 22].includes(step) &&
+          stepper.showNext &&
+          userData.userData.showMenu == false))
+    ) {
+      next();
+    } else if (
+      dragPosition > screenWidth * 0.25 &&
+      ![1, 21, 22].includes(step) &&
+      stepper.showPrev &&
+      userData.userData.showMenu == false
+    ) {
+      prev();
+    }
+    setDragStartX(0);
+    setDragPosition(0);
+    setIsSwiping(false);
+  };
+
   useEffect(() => {
     const audioFiles = ["/audio/Music 1.mp3", "/audio/Music 2.mp3"];
     let currentIndex = 0;
@@ -115,7 +154,15 @@ export default function Home() {
   ];
 
   const components = [
-    <Welcome playMusic={playMusic} />,
+    <Welcome
+      playMusic={playMusic}
+      onMouseDown={handleDragStart}
+      onMouseMove={handleDragMove}
+      onMouseUp={handleDragEnd}
+      onTouchStart={handleDragStart}
+      onTouchMove={handleDragMove}
+      onTouchEnd={handleDragEnd}
+    />,
     ...ScratchGame,
     ...SareeGame,
     ...SpotTikka,
@@ -125,44 +172,6 @@ export default function Home() {
     <Feedback />,
     <Thankyou />,
   ];
-
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragPosition, setDragPosition] = useState(0);
-  const [isSwiping, setIsSwiping] = useState(false);
-
-  const handleDragStart = (e) => {
-    setIsSwiping(true);
-    setDragStartX(e.type === "touchstart" ? e.touches[0].clientX : e.clientX);
-  };
-
-  const handleDragMove = (e) => {
-    if (!isSwiping) return;
-    const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-    const diffX = clientX - dragStartX;
-    setDragPosition(diffX);
-  };
-
-  const handleDragEnd = () => {
-    const screenWidth = window.innerWidth;
-    if (
-      dragPosition < -screenWidth * 0.25 &&
-      ![1, 21, 22].includes(step) &&
-      stepper.showNext &&
-      userData.userData.showMenu == false
-    ) {
-      next();
-    } else if (
-      dragPosition > screenWidth * 0.25 &&
-      ![1, 21, 22].includes(step) &&
-      stepper.showPrev &&
-      userData.userData.showMenu == false
-    ) {
-      prev();
-    }
-    setDragStartX(0);
-    setDragPosition(0);
-    setIsSwiping(false);
-  };
 
   return (
     <>

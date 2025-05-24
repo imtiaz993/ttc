@@ -3,9 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
 
-const Welcome = ({ playMusic = () => {} }) => {
+const Welcome = ({
+  playMusic = () => {},
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+}) => {
   const dispatch = useDispatch();
   const [overlay, setOverlay] = useState(false);
+  const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [dragStartX, setDragStartX] = useState(0);
   const [dragPosition, setDragPosition] = useState(0);
@@ -104,7 +113,19 @@ const Welcome = ({ playMusic = () => {} }) => {
           </div>
         </>
       )}
-      <div className="relative flex flex-col justify-center items-center border-transparent h-dvh">
+      <div
+        className="relative flex flex-col justify-center items-center border-transparent h-dvh"
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={() => {
+          if (name) onMouseUp({ forward: true });
+        }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={() => {
+          if (name) onTouchEnd({ forward: true });
+        }}
+      >
         <video
           autoPlay
           loop
@@ -135,7 +156,6 @@ const Welcome = ({ playMusic = () => {} }) => {
             onSubmit={(e: any) => {
               e.preventDefault();
               playMusic();
-              const name = e.target.name.value;
               updateUserData({ ...userData, name });
               localStorage.removeItem("wordsData");
               localStorage.removeItem("selectedWordsData");
@@ -150,6 +170,10 @@ const Welcome = ({ playMusic = () => {} }) => {
               placeholder="Enter your name to begin"
               type="text"
               name="name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
               autoComplete="off"
               disabled={disabled}
               required
