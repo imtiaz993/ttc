@@ -105,7 +105,7 @@ const SareeStep1 = () => {
           <div
             className="bg-[#FDD931] rounded py-3 px-4"
             onClick={() => {
-              setPlaySound(!playSound);
+              setPlaySound(true);
             }}
           >
             <div className="w-full flex justify-between items-center mb-2 font-manrope">
