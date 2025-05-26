@@ -173,7 +173,7 @@ const Feedback = () => {
                   <button
                     disabled={submitting || !isValid}
                     type="submit"
-                    className="text-[#FFF8E7] font-semibold rounded flex flex-col justify-center leading-[0px] bg-black border border-black h-10 w-full disabled:text-[#FFF8E7] disabled:bg-[#817C74] disabled:border-[#817C74]"
+                    className="text-[#FFF8E7] font-semibold rounded text-center leading-[0px] bg-black border border-black h-10 w-full disabled:text-[#FFF8E7] disabled:bg-[#817C74] disabled:border-[#817C74]"
                   >
                     {submitting ? "Submitting..." : "Submit"}
                   </button>
