@@ -62,16 +62,17 @@ export default function Home() {
     setDragPosition(diffX);
   };
 
-  const handleDragEnd = (data?: any) => {
+  const handleDragEnd = (data?: any, callback?: any) => {
     const screenWidth = window.innerWidth;
-    if (
-      dragPosition < -screenWidth * 0.25 &&
-      (data.forward ||
-        (![1, 21, 22].includes(step) &&
-          stepper.showNext &&
-          userData.userData.showMenu == false))
-    ) {
-      next();
+    if (dragPosition < -screenWidth * 0.25) {
+      if (data.forward && callback) {
+        callback();
+      } else if (
+        ![1, 21, 22].includes(step) &&
+        stepper.showNext &&
+        userData.userData.showMenu == false
+      ) {
+      }
     } else if (
       dragPosition > screenWidth * 0.25 &&
       ![1, 21, 22].includes(step) &&

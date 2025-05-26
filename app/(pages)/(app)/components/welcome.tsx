@@ -118,12 +118,26 @@ const Welcome = ({
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={() => {
-          if (name) onMouseUp({ forward: true });
+          if (name)
+            onMouseUp({ forward: true }, () => {
+              playMusic();
+              updateUserData({ ...userData, name });
+              localStorage.removeItem("wordsData");
+              localStorage.removeItem("selectedWordsData");
+              next();
+            });
         }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={() => {
-          if (name) onTouchEnd({ forward: true });
+          if (name)
+            onTouchEnd({ forward: true }, () => {
+              playMusic();
+              updateUserData({ ...userData, name });
+              localStorage.removeItem("wordsData");
+              localStorage.removeItem("selectedWordsData");
+              next();
+            });
         }}
       >
         <video
