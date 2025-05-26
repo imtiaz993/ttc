@@ -72,6 +72,7 @@ export default function Home() {
         stepper.showNext &&
         userData.userData.showMenu == false
       ) {
+        next();
       }
     } else if (
       dragPosition > screenWidth * 0.25 &&
