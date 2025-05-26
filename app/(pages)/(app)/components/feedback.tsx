@@ -58,7 +58,7 @@ const Feedback = () => {
 
       if (response.ok) {
         setFormSubmitted(true);
-        setTimeout(() => next(), 3000);
+        setTimeout(() => next(), 1000);
       } else {
         setIsSubmitting(false);
         console.error("Submission failed");

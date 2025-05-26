@@ -44,7 +44,8 @@ const SpotTikkaStep2 = () => {
   useEffect(() => {
     dispatch(
       setStepperProps({
-        showNext: verificationStatus === "initial",
+        showNext:
+          verificationStatus === "initial" || verificationStatus === "success",
         showPrev: verificationStatus === "initial",
         showCamera: verificationStatus === "initial",
         onCameraClick: handleCameraClick,
@@ -202,9 +203,6 @@ const SpotTikkaStep2 = () => {
         if (response.data.isMatched) {
           setVerificationStatus("success");
           // You might want to add a timeout to move to the next step on success
-          setTimeout(() => {
-            next();
-          }, 3000);
         } else {
           setVerificationStatus("failure");
           setAttempts(attempts + 1);

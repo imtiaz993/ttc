@@ -8,7 +8,10 @@ import failureAnimation from "../../../animation/IR Try again.json";
 import verifyingAnimation from "../../../animation/Image Recognition Checker.json";
 import scanningAnimation from "../../../animation/Image Scan.json";
 import dynamic from "next/dynamic";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -40,7 +43,8 @@ const ScratchStep2 = () => {
   useEffect(() => {
     dispatch(
       setStepperProps({
-        showNext: verificationStatus === "initial",
+        showNext:
+          verificationStatus === "initial" || verificationStatus === "success",
         showPrev: verificationStatus === "initial",
         showCamera: verificationStatus === "initial",
         onCameraClick: handleCameraClick,
@@ -81,10 +85,6 @@ const ScratchStep2 = () => {
         // Update status based on API response
         if (response.data.isMatched) {
           setVerificationStatus("success");
-
-          setTimeout(() => {
-            next();
-          }, 3000);
         } else {
           setVerificationStatus("failure");
           setAttempts(attempts + 1);
@@ -112,7 +112,9 @@ const ScratchStep2 = () => {
                 height={154}
                 width={154}
               />
-              <p className="font-medium text-sm mt-7">Verifying your picture...</p>
+              <p className="font-medium text-sm mt-7">
+                Verifying your picture...
+              </p>
             </div>
           </div>
         );
