@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from "react";
 import Menu from "../../components/menu";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -11,6 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+
 // Custom backend configuration with optimized touch handling
 declare global {
   interface Window {
@@ -28,65 +30,101 @@ const HTML5toTouch = {
       backend: TouchBackend,
       options: {
         enableMouseEvents: true,
-        delay: 0, // Remove delay for immediate dragging
-        delayTouchStart: 0, // Remove touch delay
-        touchSlop: 0, // Reduce touch slop to improve responsiveness
-        enableKeyboardEvents: true, // Enable keyboard events for accessibility
+        delay: 0,
+        delayTouchStart: 0,
+        touchSlop: 0,
+        enableKeyboardEvents: true,
       },
       preview: true,
       transition: TouchTransition,
     },
   ],
 };
+
 const PieceType: any = "PUZZLE_PIECE";
+
 // Custom drag preview component
-const CustomDragLayer = ({ pieces, pieceSize, puzzleImagePath }) => {
+const CustomDragLayer = ({ pieces, pieceSize, puzzleImagePath, gridCols, gridRows }) => {
   const [{ isDragging, currentOffset, item }]: any = useDragLayer(
-    (monitor) => ({
-      isDragging: monitor.isDragging(),
-      currentOffset: monitor.getSourceClientOffset(),
-      item: monitor.getItem(),
-    })
+      (monitor) => ({
+        isDragging: monitor.isDragging(),
+        currentOffset: monitor.getSourceClientOffset(),
+        item: monitor.getItem(),
+      })
   );
   if (!isDragging || !currentOffset) {
     return null;
   }
   const { x, y } = currentOffset;
   const piece = pieces.find((p) => p.id === item.id);
+  if (!piece) return null;
+
+  const jigsawPath = generateJigsawPath(piece.row, piece.col, gridRows, gridCols, pieceSize);
+  const clipPathId = `drag-preview-${piece.id}`;
+
   return (
-    <div
-      style={{
-        position: "fixed",
-        pointerEvents: "none",
-        zIndex: 100,
-        left: 0,
-        top: 0,
-        width: "100%",
-        height: "100%",
-      }}
-    >
       <div
-        style={{
-          position: "absolute",
-          left: x,
-          top: y,
-          width: pieceSize,
-          height: pieceSize,
-          backgroundImage: `url(${puzzleImagePath})`,
-          backgroundSize: `${pieceSize * 3}px ${pieceSize * 3}px`,
-          backgroundPosition: `-${piece.col * pieceSize}px -${
-            piece.row * pieceSize
-          }px`,
-          opacity: 0.8,
-          boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-          transform: "translate(-50%, -50%)",
-          border: "1px solid #ccc",
-          boxSizing: "border-box",
-        }}
-      />
-    </div>
+          style={{
+            position: "fixed",
+            pointerEvents: "none",
+            zIndex: 100,
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+          }}
+      >
+        <div
+            style={{
+              position: "absolute",
+              left: x,
+              top: y,
+              width: pieceSize * 1.4,
+              height: pieceSize * 1.4,
+              transform: "translate(-50%, -50%)",
+            }}
+        >
+          <svg
+              width={pieceSize * 1.4}
+              height={pieceSize * 1.4}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                overflow: "visible",
+              }}
+          >
+            <defs>
+              <clipPath id={clipPathId}>
+                <path d={jigsawPath} transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`} />
+              </clipPath>
+            </defs>
+            <image
+                href={puzzleImagePath}
+                x={pieceSize * 0.2 - piece.col * pieceSize}
+                y={pieceSize * 0.2 - piece.row * pieceSize}
+                width={pieceSize * gridCols}
+                height={pieceSize * gridRows}
+                clipPath={`url(#${clipPathId})`}
+                style={{
+                  opacity: 0.8,
+                  filter: "drop-shadow(0 5px 15px rgba(0,0,0,0.3))",
+                }}
+                preserveAspectRatio="xMidYMid slice"
+            />
+            <path
+                d={jigsawPath}
+                transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`}
+                fill="none"
+                stroke="#000000"
+                strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
   );
 };
+
 // Custom drag layer hook
 const useDragLayer = (collect) => {
   const [collected, setCollected] = useState({
@@ -97,8 +135,8 @@ const useDragLayer = (collect) => {
   const dragLayerRef = useRef(null);
   useEffect(() => {
     if (
-      !window.__REACT_DND_CONTEXT__ ||
-      !window.__REACT_DND_CONTEXT__.dragDropManager
+        !window.__REACT_DND_CONTEXT__ ||
+        !window.__REACT_DND_CONTEXT__.dragDropManager
     ) {
       return () => {};
     }
@@ -110,17 +148,104 @@ const useDragLayer = (collect) => {
   }, [collect]);
   return [collected, dragLayerRef];
 };
+
+// Function to generate jigsaw piece SVG path
+const generateJigsawPath = (row, col, gridRows, gridCols, pieceSize) => {
+  const tabSize = pieceSize * 0.2;
+  const smoothness = 0.1;
+
+  const hasTopTab = row > 0 && (row + col) % 2 === 0;
+  const hasRightTab = col < gridCols - 1 && (row + col + 1) % 2 === 0;
+  const hasBottomTab = row < gridRows - 1 && (row + col) % 2 === 1;
+  const hasLeftTab = col > 0 && (row + col - 1) % 2 === 1;
+
+  let path = `M 0 0`;
+
+  // Top edge
+  if (row === 0) {
+    path += ` L ${pieceSize} 0`;
+  } else if (hasTopTab) {
+    path += ` L ${pieceSize * 0.35} 0 
+              Q ${pieceSize * 0.4} 0 ${pieceSize * 0.4} ${-tabSize * 0.3}
+              Q ${pieceSize * 0.5} ${-tabSize} ${pieceSize * 0.6} ${-tabSize * 0.3}
+              Q ${pieceSize * 0.6} 0 ${pieceSize * 0.65} 0
+              L ${pieceSize} 0`;
+  } else {
+    path += ` L ${pieceSize * 0.35} 0
+              Q ${pieceSize * 0.4} 0 ${pieceSize * 0.4} ${tabSize * 0.3}
+              Q ${pieceSize * 0.5} ${tabSize} ${pieceSize * 0.6} ${tabSize * 0.3}
+              Q ${pieceSize * 0.6} 0 ${pieceSize * 0.65} 0
+              L ${pieceSize} 0`;
+  }
+
+  // Right edge
+  if (col === gridCols - 1) {
+    path += ` L ${pieceSize} ${pieceSize}`;
+  } else if (hasRightTab) {
+    path += ` L ${pieceSize} ${pieceSize * 0.35}
+              Q ${pieceSize} ${pieceSize * 0.4} ${pieceSize + tabSize * 0.3} ${pieceSize * 0.4}
+              Q ${pieceSize + tabSize} ${pieceSize * 0.5} ${pieceSize + tabSize * 0.3} ${pieceSize * 0.6}
+              Q ${pieceSize} ${pieceSize * 0.6} ${pieceSize} ${pieceSize * 0.65}
+              L ${pieceSize} ${pieceSize}`;
+  } else {
+    path += ` L ${pieceSize} ${pieceSize * 0.35}
+              Q ${pieceSize} ${pieceSize * 0.4} ${pieceSize - tabSize * 0.3} ${pieceSize * 0.4}
+              Q ${pieceSize - tabSize} ${pieceSize * 0.5} ${pieceSize - tabSize * 0.3} ${pieceSize * 0.6}
+              Q ${pieceSize} ${pieceSize * 0.6} ${pieceSize} ${pieceSize * 0.65}
+              L ${pieceSize} ${pieceSize}`;
+  }
+
+  // Bottom edge
+  if (row === gridRows - 1) {
+    path += ` L 0 ${pieceSize}`;
+  } else if (hasBottomTab) {
+    path += ` L ${pieceSize * 0.65} ${pieceSize}
+              Q ${pieceSize * 0.6} ${pieceSize} ${pieceSize * 0.6} ${pieceSize - tabSize * 0.3}
+              Q ${pieceSize * 0.5} ${pieceSize - tabSize} ${pieceSize * 0.4} ${pieceSize - tabSize * 0.3}
+              Q ${pieceSize * 0.4} ${pieceSize} ${pieceSize * 0.35} ${pieceSize}
+              L 0 ${pieceSize}`;
+  } else {
+    path += ` L ${pieceSize * 0.65} ${pieceSize}
+              Q ${pieceSize * 0.6} ${pieceSize} ${pieceSize * 0.6} ${pieceSize + tabSize * 0.3}
+              Q ${pieceSize * 0.5} ${pieceSize + tabSize} ${pieceSize * 0.4} ${pieceSize + tabSize * 0.3}
+              Q ${pieceSize * 0.4} ${pieceSize} ${pieceSize * 0.35} ${pieceSize}
+              L 0 ${pieceSize}`;
+  }
+
+  // Left edge
+  if (col === 0) {
+    path += ` L 0 0`;
+  } else if (hasLeftTab) {
+    path += ` L 0 ${pieceSize * 0.65}
+              Q 0 ${pieceSize * 0.6} ${tabSize * 0.3} ${pieceSize * 0.6}
+              Q ${tabSize} ${pieceSize * 0.5} ${tabSize * 0.3} ${pieceSize * 0.4}
+              Q 0 ${pieceSize * 0.4} 0 ${pieceSize * 0.35}
+              L 0 0`;
+  } else {
+    path += ` L 0 ${pieceSize * 0.65}
+              Q 0 ${pieceSize * 0.6} ${-tabSize * 0.3} ${pieceSize * 0.6}
+              Q ${-tabSize} ${pieceSize * 0.5} ${-tabSize * 0.3} ${pieceSize * 0.4}
+              Q 0 ${pieceSize * 0.4} 0 ${pieceSize * 0.35}
+              L 0 0`;
+  }
+
+  path += ` Z`;
+  return path;
+};
+
 const DraggablePiece = ({
-  id,
-  image,
-  left,
-  top,
-  row,
-  col,
-  pieceSize,
-  zIndex = 1,
-  isCompleted,
-}) => {
+                          id,
+                          image,
+                          left,
+                          top,
+                          row,
+                          col,
+                          pieceSize,
+                          gridCols,
+                          gridRows,
+                          zIndex = 1,
+                          isCompleted,
+                        }) => {
   const data: any = {
     type: PieceType,
     item: { id, row, col },
@@ -128,39 +253,74 @@ const DraggablePiece = ({
       isDragging: !!monitor.isDragging(),
     }),
     options: {
-      touchStartThreshold: 0, // Lower threshold for touch start
+      touchStartThreshold: 0,
     },
   };
   const [{ isDragging }, drag]: any = useDrag(() => data);
+
+  const jigsawPath = generateJigsawPath(row, col, gridRows, gridCols, pieceSize);
+  const clipPathId = `jigsaw-${id}`;
+
   return (
-    <div
-      ref={drag}
-      className="puzzle-piece"
-      style={{
-        position: "absolute",
-        left,
-        top,
-        width: pieceSize,
-        height: pieceSize,
-        backgroundImage: `url(${image})`,
-        backgroundSize: `${pieceSize * 3}px ${pieceSize * 3}px`,
-        backgroundPosition: `-${col * pieceSize}px -${row * pieceSize}px`,
-        opacity: isDragging ? 0.1 : 1, // Make original almost invisible when dragging
-        cursor: "move",
-        border: isCompleted ? "none" : "1px solid #ccc",
-        boxSizing: "border-box",
-        zIndex: zIndex || 1,
-        transition: isDragging ? "none" : "border 0.3s ease", // Remove transition during drag
-        touchAction: "none",
-        WebkitTouchCallout: "none",
-        WebkitUserSelect: "none",
-        userSelect: "none",
-        boxShadow: isDragging ? "none" : "0 2px 5px rgba(0,0,0,0.1)",
-      }}
-    />
+      <div
+          ref={drag}
+          className="puzzle-piece"
+          style={{
+            position: "absolute",
+            left: left - pieceSize * 0.2,
+            top: top - pieceSize * 0.2,
+            width: pieceSize * 1.4,
+            height: pieceSize * 1.4,
+            cursor: "move",
+            zIndex: zIndex || 1,
+            transition: isDragging ? "none" : "all 0.3s ease",
+            touchAction: "none",
+            WebkitTouchCallout: "none",
+            WebkitUserSelect: "none",
+            userSelect: "none",
+            opacity: isDragging ? 0.1 : 1,
+          }}
+      >
+        <svg
+            width={pieceSize * 1.4}
+            height={pieceSize * 1.4}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              overflow: "visible",
+            }}
+        >
+          <defs>
+            <clipPath id={clipPathId}>
+              <path d={jigsawPath} transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`} />
+            </clipPath>
+          </defs>
+          <image
+              href={image}
+              x={pieceSize * 0.2 - col * pieceSize}
+              y={pieceSize * 0.2 - row * pieceSize}
+              width={pieceSize * gridCols}
+              height={pieceSize * gridRows}
+              clipPath={`url(#${clipPathId})`}
+              preserveAspectRatio="xMidYMid slice"
+          />
+          <path
+              d={jigsawPath}
+              transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`}
+              fill="none"
+              stroke={isCompleted ? "none" : "none"}
+              strokeWidth="2"
+              style={{
+                filter: isDragging ? "none" : "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
+              }}
+          />
+        </svg>
+      </div>
   );
 };
-const DropZone = ({ id, left, top, onDrop, hasPiece, pieceSize }) => {
+
+const DropZone = ({ id, left, top, onDrop, hasPiece, pieceSize, row, col, gridRows, gridCols }) => {
   const [{ isOver, canDrop }, drop]: any = useDrop({
     accept: PieceType,
     drop: (item: any) => onDrop(item.id, id),
@@ -170,23 +330,54 @@ const DropZone = ({ id, left, top, onDrop, hasPiece, pieceSize }) => {
       canDrop: !!monitor.canDrop(),
     }),
   });
-  // Enhanced visual feedback for drop zones
-  const dropZoneStyle: any = {
-    position: "absolute",
-    left,
-    top,
-    width: pieceSize,
-    height: pieceSize,
-    border: isOver && canDrop ? "2px dashed #4CAF50" : "1px dashed #999",
-    boxSizing: "border-box",
-    backgroundColor:
-      isOver && canDrop ? "rgba(76, 175, 80, 0.15)" : "transparent",
-    transition: "all 0.2s ease",
-    zIndex: isOver ? 5 : 0,
-    borderRadius: isOver && canDrop ? "4px" : "0",
-  };
-  return <div ref={drop} className="drop-zone" style={dropZoneStyle} />;
+
+  const jigsawPath = generateJigsawPath(row, col, gridRows, gridCols, pieceSize);
+  const clipPathId = `dropzone-${id}`;
+
+  return (
+      <div
+          ref={drop}
+          className="drop-zone"
+          style={{
+            position: "absolute",
+            left: left - pieceSize * 0.2,
+            top: top - pieceSize * 0.2,
+            width: pieceSize * 1.4,
+            height: pieceSize * 1.4,
+            zIndex: isOver ? 5 : 0,
+          }}
+      >
+        <svg
+            width={pieceSize * 1.4}
+            height={pieceSize * 1.4}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              overflow: "visible",
+            }}
+        >
+          <defs>
+            <clipPath id={clipPathId}>
+              <path d={jigsawPath} transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`} />
+            </clipPath>
+          </defs>
+          <path
+              d={jigsawPath}
+              transform={`translate(${pieceSize * 0.2}, ${pieceSize * 0.2})`}
+              fill={isOver && canDrop ? "rgba(76, 175, 80, 0.15)" : "transparent"}
+              stroke={isOver && canDrop ? "#4CAF50" : "#000000"}
+              strokeWidth="2"
+              strokeDasharray={isOver && canDrop ? "none" : "5,5"}
+              style={{
+                transition: "all 0.2s ease",
+              }}
+          />
+        </svg>
+      </div>
+  );
 };
+
 const PuzzleStep2 = () => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
@@ -197,17 +388,21 @@ const PuzzleStep2 = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const pieceSize = 80;
-  const gridSize = 3;
+  const gridRows = 4;
+  const gridCols = 3;
   const [placedPieces, setPlacedPieces] = useState({});
   const [timer, setTimer] = useState(15);
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
   const intervalRef = useRef(null);
+
   // Detect touch device on mount
   useEffect(() => {
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
+
   const puzzleImagePath = "/images/completed-puzzle.png";
+
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
@@ -215,16 +410,18 @@ const PuzzleStep2 = () => {
       minutes,
       seconds: secs,
       display: `${minutes.toString().padStart(2, "0")} minute${
-        minutes !== 1 ? "s" : ""
+          minutes !== 1 ? "s" : ""
       } ${secs.toString().padStart(2, "0")} second${secs !== 1 ? "s" : ""}`,
     };
   };
+
   const stopTimer = () => {
     clearInterval(intervalRef.current);
     const formattedTime = formatTime(seconds);
     localStorage.setItem("puzzle-time", JSON.stringify(formattedTime));
     return formattedTime;
   };
+
   useEffect(() => {
     const startTime = Date.now();
     intervalRef.current = setInterval(() => {
@@ -232,9 +429,10 @@ const PuzzleStep2 = () => {
     }, 1000);
     return () => clearInterval(intervalRef.current);
   }, []);
-  const pieces = Array.from({ length: gridSize * gridSize }, (_, i) => {
-    const row = Math.floor(i / gridSize);
-    const col = i % gridSize;
+
+  const pieces = Array.from({ length: gridRows * gridCols }, (_, i) => {
+    const row = Math.floor(i / gridCols);
+    const col = i % gridCols;
     return {
       id: `piece-${i}`,
       correctPos: { top: row * pieceSize, left: col * pieceSize },
@@ -242,6 +440,8 @@ const PuzzleStep2 = () => {
       col,
     };
   });
+
+  // Updated initial layout for 4x3 grid (12 pieces total)
   const initialLayout = [
     { id: "piece-0", top: 60, left: 70 },
     { id: "piece-1", top: 120, left: 135 },
@@ -252,7 +452,11 @@ const PuzzleStep2 = () => {
     { id: "piece-6", top: 0, left: 10 },
     { id: "piece-7", top: -5, left: 180 },
     { id: "piece-8", top: 5, left: 80 },
+    { id: "piece-9", top: 160, left: 20 },
+    { id: "piece-10", top: 180, left: 160 },
+    { id: "piece-11", top: 200, left: 100 },
   ];
+
   useEffect(() => {
     let interval = null;
     if (isTimerRunning && timer > 0) {
@@ -264,21 +468,22 @@ const PuzzleStep2 = () => {
     }
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
+
   // Track drag state for the entire application
   useEffect(() => {
     const handleDragStateChange = () => {
       if (
-        window.__REACT_DND_CONTEXT__ &&
-        window.__REACT_DND_CONTEXT__.dragDropManager
+          window.__REACT_DND_CONTEXT__ &&
+          window.__REACT_DND_CONTEXT__.dragDropManager
       ) {
         const monitor =
-          window.__REACT_DND_CONTEXT__.dragDropManager.getMonitor();
+            window.__REACT_DND_CONTEXT__.dragDropManager.getMonitor();
         setIsDragging(monitor.isDragging());
       }
     };
     if (
-      window.__REACT_DND_CONTEXT__ &&
-      window.__REACT_DND_CONTEXT__.dragDropManager
+        window.__REACT_DND_CONTEXT__ &&
+        window.__REACT_DND_CONTEXT__.dragDropManager
     ) {
       const monitor = window.__REACT_DND_CONTEXT__.dragDropManager.getMonitor();
       return monitor.subscribeToStateChange(handleDragStateChange);
@@ -295,11 +500,11 @@ const PuzzleStep2 = () => {
     const dropPiece = pieces.find((p) => p.id === pieceId);
     const dropZone = pieces.find((p) => p.id === zoneId);
     if (!dropPiece || !dropZone) return;
-    // Provide haptic feedback on successful drop if available
+
     if (navigator.vibrate) {
-      navigator.vibrate(50); // Short vibration on successful drop
+      navigator.vibrate(50);
     }
-    // Save current state for undo functionality
+
     setMoveHistory((prev) => [...prev, { ...placedPieces }]);
     setUndoDisabled(false);
     setPlacedPieces((prev) => {
@@ -315,9 +520,9 @@ const PuzzleStep2 = () => {
       const allCorrect = pieces.every((p) => {
         const placed = updated[p.id];
         return (
-          placed &&
-          placed.left === p.correctPos.left &&
-          placed.top === p.correctPos.top
+            placed &&
+            placed.left === p.correctPos.left &&
+            placed.top === p.correctPos.top
         );
       });
 
@@ -345,170 +550,186 @@ const PuzzleStep2 = () => {
 
   useEffect(() => {
     dispatch(
-      setStepperProps({
-        showNext: false,
-        showPrev: false,
-      })
+        setStepperProps({
+          showNext: false,
+          showPrev: false,
+        })
     );
     return () => {
-      dispatch(resetStepperProps()); // This resets to initialState
+      dispatch(resetStepperProps());
     };
   }, []);
 
   return (
-    <>
-      <Menu
-        isGameOptions={true}
-        handleInfo={() => {
-          setOverlay(true);
-        }}
-        isUndoDisabled={undoDisabled}
-        handleUndo={handleUndo}
-        handleSkip={() => {
-          stopTimer();
-          next();
-        }}
-      />
-      {overlay && (
-        <div>
-          <div className="fixed inset-0 bg-[#00000040] z-30"></div>
-          <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 font-manrope">
-            <div className="w-full flex justify-between items-center mb-2">
-              <img
-                src="/icons/question-mark.svg"
-                alt="Question"
-                className="w-6"
-              />
-              <p className="ml-2 text-sm font-semibold w-[calc(100%-48px)]">
-                Piece together
-              </p>
-              <img
-                src="/icons/close-black.svg"
-                alt="Close"
-                className="w-5 cursor-pointer"
-                onClick={() => setOverlay(false)}
-              />
+      <>
+        <Menu
+            isGameOptions={true}
+            handleInfo={() => {
+              setOverlay(true);
+            }}
+            isUndoDisabled={undoDisabled}
+            handleUndo={handleUndo}
+            handleSkip={() => {
+              stopTimer();
+              next();
+            }}
+        />
+        {overlay && (
+            <div>
+              <div className="fixed inset-0 bg-[#00000040] z-30"></div>
+              <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 font-manrope">
+                <div className="w-full flex justify-between items-center mb-2">
+                  <img
+                      src="/icons/question-mark.svg"
+                      alt="Question"
+                      className="w-6"
+                  />
+                  <p className="ml-2 text-sm font-semibold w-[calc(100%-48px)]">
+                    Piece together
+                  </p>
+                  <img
+                      src="/icons/close-black.svg"
+                      alt="Close"
+                      className="w-5 cursor-pointer"
+                      onClick={() => setOverlay(false)}
+                  />
+                </div>
+                <p className="text-sm leading-relaxed">
+                  Arrange the pieces to form the complete picture.
+                </p>
+              </div>
             </div>
-            <p className="text-sm leading-relaxed">
-              Arrange the pieces to form the complete picture.
-            </p>
+        )}
+        <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
+          <div>
+            <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5 font-manrope">
+              TIMER
+              <span className="text-xl font-medium font-lora">
+                            {Math.floor(seconds / 60)
+                                .toString()
+                                .padStart(2, "0")}
+                :{(seconds % 60)?.toString()?.padStart(2, "0")}
+                        </span>
+            </h1>
+            <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+              <div
+                  className="game-container"
+                  style={{
+                    backgroundColor: "#FAF7E8",
+                    minHeight: "100vh",
+                  }}
+              >
+                <CustomDragLayer
+                    pieces={pieces}
+                    pieceSize={pieceSize}
+                    puzzleImagePath={puzzleImagePath}
+                    gridCols={gridCols}
+                    gridRows={gridRows}
+                />
+                <div
+                    className="puzzle-area"
+                    style={{
+                      position: "relative",
+                      width: pieceSize * gridCols + pieceSize * 0.4,
+                      height: pieceSize * gridRows + pieceSize * 0.4,
+                      margin: "0 auto 30px auto",
+                      borderRadius: "4px",
+                      padding: `${pieceSize * 0.2}px`,
+                    }}
+                >
+                  {pieces.map((p) => (
+                      <DropZone
+                          key={`drop-${p.id}`}
+                          id={p.id}
+                          left={p.correctPos.left}
+                          top={p.correctPos.top}
+                          row={p.row}
+                          col={p.col}
+                          gridRows={gridRows}
+                          gridCols={gridCols}
+                          onDrop={handleDrop}
+                          hasPiece={Object.values(placedPieces).some(
+                              (pos: any) =>
+                                  pos.left === p.correctPos.left &&
+                                  pos.top === p.correctPos.top
+                          )}
+                          pieceSize={pieceSize}
+                      />
+                  ))}
+                  {Object.entries(placedPieces).map(([id, pos]: any) => (
+                      <DraggablePiece
+                          key={`placed-${id}`}
+                          id={id}
+                          image={puzzleImagePath}
+                          left={pos.left}
+                          top={pos.top}
+                          row={pos.row}
+                          col={pos.col}
+                          pieceSize={pieceSize}
+                          gridCols={gridCols}
+                          gridRows={gridRows}
+                          isCompleted={isCompleted}
+                      />
+                  ))}
+                </div>
+                <div
+                    className="pieces-container"
+                    style={{
+                      position: "relative",
+                      height: 400,
+                      width: "100%",
+                      maxWidth: 400,
+                      margin: "0 auto",
+                      padding: "10px",
+                      backgroundColor: isDragging
+                          ? "rgba(250, 247, 232, 0.9)"
+                          : "transparent",
+                      transition: "background-color 0.3s ease",
+                    }}
+                >
+                  {pieces.map((p) => {
+                    if (placedPieces[p.id]) return null;
+                    const initialPos = initialLayout.find(
+                        (item) => item.id === p.id
+                    );
+                    let zIndex = 1;
+
+                    if (p.id === "piece-7") zIndex = 10;
+                    if (p.id === "piece-4") zIndex = 8;
+                    if (p.id === "piece-5") zIndex = 6;
+                    if (p.id === "piece-2") zIndex = 4;
+                    if (p.id === "piece-3") zIndex = 2;
+                    if (p.id === "piece-10") zIndex = 9;
+                    if (p.id === "piece-11") zIndex = 7;
+                    if (p.id === "piece-9") zIndex = 5;
+
+                    return (
+                        <DraggablePiece
+                            key={`unplaced-${p.id}`}
+                            id={p.id}
+                            image={puzzleImagePath}
+                            left={initialPos?.left || 0}
+                            top={initialPos?.top || 0}
+                            row={p.row}
+                            col={p.col}
+                            pieceSize={pieceSize}
+                            gridCols={gridCols}
+                            gridRows={gridRows}
+                            zIndex={zIndex}
+                            isCompleted={isCompleted}
+                        />
+                    );
+                  })}
+                </div>
+              </div>
+            </DndProvider>
+          </div>
+          <div className="flex justify-center items-center mt-6 w-full">
+            <img src="/images/puzzle.png" alt="" className="w-2/3" />
           </div>
         </div>
-      )}
-      <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
-        <div>
-          <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5 font-manrope">
-            TIMER
-            <span className="text-xl font-medium font-lora">
-              {Math.floor(seconds / 60)
-                .toString()
-                .padStart(2, "0")}
-              :{(seconds % 60)?.toString()?.padStart(2, "0")}
-            </span>
-          </h1>
-          <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-            <div
-              className="game-container"
-              style={{
-                backgroundColor: "#FAF7E8",
-                minHeight: "100vh",
-              }}
-            >
-              {/* Custom drag layer for visible drag preview */}
-              <CustomDragLayer
-                pieces={pieces}
-                pieceSize={pieceSize}
-                puzzleImagePath={puzzleImagePath}
-              />
-              <div
-                className="puzzle-area"
-                style={{
-                  position: "relative",
-                  width: pieceSize * gridSize,
-                  height: pieceSize * gridSize,
-                  margin: "0 auto 30px auto",
-                  borderRadius: "4px",
-                }}
-              >
-                {pieces.map((p) => (
-                  <DropZone
-                    key={`drop-${p.id}`}
-                    id={p.id}
-                    left={p.correctPos.left}
-                    top={p.correctPos.top}
-                    onDrop={handleDrop}
-                    hasPiece={Object.values(placedPieces).some(
-                      (pos: any) =>
-                        pos.left === p.correctPos.left &&
-                        pos.top === p.correctPos.top
-                    )}
-                    pieceSize={pieceSize}
-                  />
-                ))}
-                {Object.entries(placedPieces).map(([id, pos]: any) => (
-                  <DraggablePiece
-                    key={`placed-${id}`}
-                    id={id}
-                    image={puzzleImagePath}
-                    left={pos.left}
-                    top={pos.top}
-                    row={pos.row}
-                    col={pos.col}
-                    pieceSize={pieceSize}
-                    isCompleted={isCompleted}
-                  />
-                ))}
-              </div>
-              <div
-                className="pieces-container"
-                style={{
-                  position: "relative",
-                  height: 400,
-                  width: "100%",
-                  maxWidth: 400,
-                  margin: "0 auto",
-                  padding: "10px",
-                  backgroundColor: isDragging
-                    ? "rgba(250, 247, 232, 0.9)"
-                    : "transparent",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                {pieces.map((p) => {
-                  if (placedPieces[p.id]) return null;
-                  const initialPos = initialLayout.find(
-                    (item) => item.id === p.id
-                  );
-                  let zIndex = 1;
-                  if (p.id === "piece-7") zIndex = 10;
-                  if (p.id === "piece-4") zIndex = 8;
-                  if (p.id === "piece-5") zIndex = 6;
-                  if (p.id === "piece-2") zIndex = 4;
-                  if (p.id === "piece-3") zIndex = 2;
-                  return (
-                    <DraggablePiece
-                      key={`unplaced-${p.id}`}
-                      id={p.id}
-                      image={puzzleImagePath}
-                      left={initialPos.left}
-                      top={initialPos.top}
-                      row={p.row}
-                      col={p.col}
-                      pieceSize={pieceSize}
-                      zIndex={zIndex}
-                      isCompleted={isCompleted}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </DndProvider>
-        </div>
-        <div className="flex justify-center items-center mt-6 w-full">
-          <img src="/images/puzzle.png" alt="" className="w-2/3" />
-        </div>
-      </div>
-    </>
+      </>
   );
 };
+
 export default PuzzleStep2;

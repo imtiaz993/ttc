@@ -144,7 +144,7 @@ const Feedback = () => {
                     <Field
                       type="checkbox"
                       name="policy1"
-                      className="mr-2 w-[18px] h-[18px] -mt-1"
+                      className="mr-2 w-[24px] h-[24px] -mt-1"
                     />
                     <span className="w-[calc(100%-20px)]">
                       Receiving communication from MAP via Email and WhatsApp.
@@ -160,7 +160,7 @@ const Feedback = () => {
                     <Field
                       type="checkbox"
                       name="policy2"
-                      className="mr-2 w-[18px] h-[18px] -mt-1"
+                      className="mr-2 w-[24px] h-[24px] -mt-1"
                     />
                     <span className="w-[calc(100%-20px)]">
                       Having my data stored as per MAP’s{" "}
