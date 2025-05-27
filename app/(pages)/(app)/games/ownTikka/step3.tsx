@@ -275,7 +275,7 @@ const OwnTikkaStep3 = () => {
     );
 
     if (selectedOptions.Elements) {
-      const originalElementContainer = document.querySelector('.Rnd');
+      const originalElementContainer:any = document.querySelector('.Rnd');
       if (originalElementContainer) {
         const originalDisplay = originalElementContainer.style.display;
         originalElementContainer.style.display = 'none';
@@ -545,7 +545,7 @@ const OwnTikkaStep3 = () => {
             handleFinish={handleComplete}
             handleInfo={() => setOverlay(true)}
         />
-        <GameStepper showPrev={false} showNext={false} />
+        <GameStepper  />
         {overlay && (
             <div>
               <div className="fixed inset-0 bg-[#00000040] z-50"></div>
