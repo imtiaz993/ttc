@@ -4,7 +4,6 @@ import { nextStep } from "../../../redux/slices/navigationSlice";
 import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
 
 const Welcome = ({
-  playMusic = () => {},
   onMouseDown,
   onMouseMove,
   onMouseUp,
@@ -120,7 +119,6 @@ const Welcome = ({
         onMouseUp={() => {
           if (name)
             onMouseUp({ forward: true }, () => {
-              playMusic();
               updateUserData({ ...userData, name });
               localStorage.removeItem("wordsData");
               localStorage.removeItem("selectedWordsData");
@@ -132,7 +130,6 @@ const Welcome = ({
         onTouchEnd={() => {
           if (name)
             onTouchEnd({ forward: true }, () => {
-              playMusic();
               updateUserData({ ...userData, name });
               localStorage.removeItem("wordsData");
               localStorage.removeItem("selectedWordsData");
@@ -169,7 +166,6 @@ const Welcome = ({
           <form
             onSubmit={(e: any) => {
               e.preventDefault();
-              playMusic();
               updateUserData({ ...userData, name });
               localStorage.removeItem("wordsData");
               localStorage.removeItem("selectedWordsData");

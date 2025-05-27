@@ -203,6 +203,8 @@ const PuzzleStep2 = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
   const intervalRef = useRef(null);
+  const hasTimerStarted = useRef(false); // New ref to prevent timer restart
+
   // Detect touch device on mount
   useEffect(() => {
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
@@ -221,17 +223,28 @@ const PuzzleStep2 = () => {
   };
   const stopTimer = () => {
     clearInterval(intervalRef.current);
+    intervalRef.current = null;
     const formattedTime = formatTime(seconds);
     localStorage.setItem("puzzle-time", JSON.stringify(formattedTime));
     return formattedTime;
   };
+
+  // Start timer when overlay is closed
   useEffect(() => {
-    const startTime = Date.now();
-    intervalRef.current = setInterval(() => {
-      setSeconds(Math.floor((Date.now() - startTime) / 1000));
-    }, 1000);
-    return () => clearInterval(intervalRef.current);
-  }, []);
+    if (!overlay && !hasTimerStarted.current && !intervalRef.current) {
+      hasTimerStarted.current = true;
+      const startTime = Date.now();
+      intervalRef.current = setInterval(() => {
+        setSeconds(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+    }
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [overlay]);
   const pieces = Array.from({ length: gridSize * gridSize }, (_, i) => {
     const row = Math.floor(i / gridSize);
     const col = i % gridSize;
@@ -242,6 +255,7 @@ const PuzzleStep2 = () => {
       col,
     };
   });
+
   const initialLayout = [
     { id: "piece-0", top: 60, left: 70 },
     { id: "piece-1", top: 120, left: 135 },
@@ -347,7 +361,7 @@ const PuzzleStep2 = () => {
     dispatch(
       setStepperProps({
         showNext: false,
-        showPrev: false,
+        showPrev: true,
       })
     );
     return () => {

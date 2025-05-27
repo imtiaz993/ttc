@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Menu from "../../components/menu";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import { toggleMute } from "../../../../redux/slices/userSlice";
 
 const SareeStep1 = () => {
+  const dispatch = useDispatch();
+  const handleToggleMute = (data) => dispatch(toggleMute(data));
+  const isMuted = useSelector((state: any) => state.user.isMuted);
+  const [playingBg, setPlayingBg] = useState(isMuted ? "paused" : "playing");
   const [playSound, setPlaySound] = useState(false);
   const bgMusicRef = useRef(null);
 
@@ -38,11 +43,13 @@ const SareeStep1 = () => {
     if (playSound) {
       playMusic();
     } else {
+      if (playingBg === "delaying") {
+        handleToggleMute(false);
+        setPlayingBg("playing");
+      }
       bgMusicRef.current.pause();
     }
   }, [playSound]);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
@@ -106,6 +113,10 @@ const SareeStep1 = () => {
             className="bg-[#FDD931] rounded py-3 px-4"
             onClick={() => {
               setPlaySound(true);
+              if (playingBg === "playing") {
+                handleToggleMute(true);
+                setPlayingBg("delaying");
+              }
             }}
           >
             <div className="w-full flex justify-between items-center mb-2 font-manrope">
