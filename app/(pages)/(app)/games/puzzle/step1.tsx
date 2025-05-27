@@ -36,7 +36,7 @@ const PuzzleStep1 = () => {
             </p>
           </div>
         </div>
-        <p className="text-sm mb-6 ont-playwriteDEGrund">
+        <p className="text-sm mb-16 font-playwriteDEGrund">
           My brother cut up my newest ticket when playing with his pair of
           scissors!
           <br />
