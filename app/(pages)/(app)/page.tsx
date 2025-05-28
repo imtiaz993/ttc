@@ -34,7 +34,6 @@ import Thankyou from "./components/thankyou";
 import GameStepper from "./components/gameStepper";
 import WordsStep3 from "./games/words/step3";
 import { nextStep, prevStep } from "../../redux/slices/navigationSlice";
-import Menu from "./components/menu";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -93,7 +92,6 @@ export default function Home() {
 
     bgMusicRef.current = new Audio(audioFiles[currentIndex]);
     bgMusicRef.current.loop = false; // Disable loop for sequential play
-    bgMusicRef.current.muted = userData.isMuted;
 
     const playNext = () => {
       currentIndex++;
@@ -127,12 +125,17 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (bgMusicRef.current) {
-      bgMusicRef.current.muted = userData.isMuted;
+    if (bgMusicRef.current && userData.isMuted) {
+      bgMusicRef.current.pause();
+    } else {
+      bgMusicRef.current.play();
     }
   }, [userData.isMuted]);
 
-  const ScratchGame = [<ScratchStep1 />, <ScratchStep2 />];
+  const ScratchGame = [
+    <ScratchStep1 playMusic={playMusic} />,
+    <ScratchStep2 />,
+  ];
 
   const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
@@ -157,7 +160,6 @@ export default function Home() {
 
   const components = [
     <Welcome
-      playMusic={playMusic}
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}

@@ -7,6 +7,7 @@ import { nextStep } from "../../../../redux/slices/navigationSlice";
 import { setUserData } from "../../../../redux/slices/userSlice";
 import { Rnd } from "react-rnd";
 import axios from "axios";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const OwnTikkaStep3 = () => {
   const [overlay, setOverlay] = useState(true);
@@ -463,6 +464,18 @@ if (response.data){
   };
 
   useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showPrev: false,
+        showNext: false,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
+  useEffect(() => {
     if (
         selectedOptions.Background &&
         selectedOptions.Border &&
@@ -558,7 +571,6 @@ if (response.data){
             handleInfo={() => setOverlay(true)}
             isFinishing={isFinishing}
         />
-        <GameStepper  />
         {overlay && (
             <div>
               <div className="fixed inset-0 bg-[#00000040] z-50"></div>

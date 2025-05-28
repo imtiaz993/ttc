@@ -22,6 +22,7 @@ const Menu = ({
   handleInfo = () => {},
   handleSkip = () => {},
   handleFinish = () => {},
+  playMusic = () => {},
 }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
@@ -271,6 +272,9 @@ const Menu = ({
                 toggleMenuBar(true);
                 setOpen(false);
                 closeDrawer();
+                if (userData?.sound) {
+                  playMusic();
+                }
               }}
             >
               CONTINUE
