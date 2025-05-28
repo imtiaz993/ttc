@@ -1,10 +1,13 @@
 import Menu from "../../components/menu";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const OwnTikkaStep1 = () => {
   const dispatch = useDispatch();
@@ -20,8 +23,22 @@ const OwnTikkaStep1 = () => {
     };
   }, []);
 
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
+
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div
         style={{

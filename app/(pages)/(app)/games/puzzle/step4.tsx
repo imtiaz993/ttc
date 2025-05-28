@@ -1,7 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import { useEffect } from "react";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import { useEffect, useState } from "react";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const PuzzleStep4 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -17,9 +23,23 @@ const PuzzleStep4 = () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
   }, []);
-  
+
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
+
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
         <div>
@@ -38,11 +58,7 @@ const PuzzleStep4 = () => {
             </p>
           </div>
           <div className="w-full flex justify-between items-start mt-6">
-            <img
-              src="/images/wonder1.png"
-              alt=""
-              className="w-[138px]"
-            />
+            <img src="/images/wonder1.png" alt="" className="w-[138px]" />
             <img src="/images/wonder2.png" alt="" className="w-[146px]" />
           </div>
           <div className="flex justify-center mt-5">

@@ -102,6 +102,9 @@ const Menu = ({
               src={
                 userData.sound ? "/icons/volume.svg" : "/icons/mute-black.svg"
               }
+              onClick={() => {
+                handleToggleMute(userData.sound);
+              }}
               decoding="sync"
               alt=""
               className={`${userData.sound ? "w-6" : "w-5"} cursor-pointer`}
@@ -129,47 +132,44 @@ const Menu = ({
                 </p>
               )}
               {showFinish ? (
-                  <button
-                      className="text-sm font-manrope font-medium cursor-pointer flex items-center gap-2"
-                      onClick={async () => {
-                        setIsFinishing(true);
-                        try {
-                          await handleFinish(); // Ensure handleFinish is async or returns a Promise
-                        } finally {
-                          setIsFinishing(false);
-                        }
-                      }}
-                      disabled={isFinishing}
-                  >
-                    {isFinishing ? (
-                        <>
-                          <span
-                              className="animate-spin rounded-full h-4 w-4 border-2 border-t-transparent border-white"/>
-                          FINISHING...
-                        </>
-                    ) : (
-                        "FINISH"
-                    )}
-                  </button>
-
-
+                <button
+                  className="text-sm font-manrope font-medium cursor-pointer flex items-center gap-2"
+                  onClick={async () => {
+                    setIsFinishing(true);
+                    try {
+                      await handleFinish(); // Ensure handleFinish is async or returns a Promise
+                    } finally {
+                      setIsFinishing(false);
+                    }
+                  }}
+                  disabled={isFinishing}
+                >
+                  {isFinishing ? (
+                    <>
+                      <span className="animate-spin rounded-full h-4 w-4 border-2 border-t-transparent border-white" />
+                      FINISHING...
+                    </>
+                  ) : (
+                    "FINISH"
+                  )}
+                </button>
               ) : (
-                  <img
-                      src="/icons/menu.svg"
-                      decoding="sync"
-                      alt=""
-                      className="w-6 cursor-pointer"
-                      onClick={() => {
-                        setOpen(true);
-                        toggleMenuBar(false);
-                      }}
-                  />
+                <img
+                  src="/icons/menu.svg"
+                  decoding="sync"
+                  alt=""
+                  className="w-6 cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    toggleMenuBar(false);
+                  }}
+                />
               )}
             </div>
           </div>
         ))}
       <div
-          className={`fixed z-50 top-0 bottom-0 right-0 w-full transition-transform duration-500 ease-in-out ${
+        className={`fixed z-50 top-0 bottom-0 right-0 w-full transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         style={{

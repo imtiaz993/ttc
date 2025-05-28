@@ -2,6 +2,7 @@ import React, {useRef, useEffect, useState, useCallback} from "react";
 import confetti from "canvas-confetti";
 import scratchAnimation from "../../animation/Scratch Card.json";
 import dynamic from "next/dynamic";
+import {useInactivity} from "../../../hooks/useInactivity";
 
 const Animation = dynamic(() => import("./animation"), {ssr: false});
 
@@ -12,6 +13,10 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
   const isDrawing = useRef(false);
+  
+  useInactivity({time:3000,onInactivity:()=>{setShowAnimation(true)}, condition: () => {
+    return !isRevealed && !isDrawing.current;
+  }});
 
   // Preload image and set up canvas immediately when component mounts
   useEffect(() => {
@@ -188,7 +193,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
       setShowAnimation(false);
     }, 2000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [showAnimation]);
 
   return (
       <div
@@ -240,7 +245,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                   <Animation
                       animation={scratchAnimation}
-                      loop={false}
+                      loop={true}
                       height={137}
                       width={137}
                   />

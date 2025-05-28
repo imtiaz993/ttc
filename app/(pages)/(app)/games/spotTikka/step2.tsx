@@ -13,6 +13,9 @@ import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import SwipeOverlay from "../../components/swipeOverlay";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -56,6 +59,19 @@ const SpotTikkaStep2 = () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
   }, [verificationStatus]);
+
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay && verificationStatus === "success";
+    },
+  });
 
   const renderVerificationStatus = () => {
     switch (verificationStatus) {
@@ -221,6 +237,7 @@ const SpotTikkaStep2 = () => {
 
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <input
         type="file"
