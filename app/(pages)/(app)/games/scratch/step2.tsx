@@ -31,9 +31,17 @@ const ScratchStep2 = () => {
     }
   };
 
-  async function fetchLocalImage() {
-    const response = await fetch("/images/scratched-image.jpeg");
-    return await response.blob();
+  async function convertImageUrlToFile(imageUrl, filename) {
+    const response = await fetch(imageUrl);
+    const contentType = response.headers.get("Content-Type");
+    if (!response.ok || !contentType?.startsWith("image/")) {
+      console.error("Image fetch failed or not an image");
+      return null;
+    }
+    const blob = await response.blob();
+    console.log(blob, "blob data");
+    const mimeType = blob.type || 'image/png';
+    return new File([blob], filename, { type: mimeType });
   }
 
   const handleSkip = () => {
@@ -67,7 +75,7 @@ const ScratchStep2 = () => {
         const formData = new FormData();
         formData.append("image1", file1);
 
-        const localImageFile = await fetchLocalImage();
+        const localImageFile = await convertImageUrlToFile("/images/camera-scanning-art.png","camera-scanning-art.png");
         formData.append("image2", localImageFile, "local-image.jpg");
 
         const response = await axios.post(
