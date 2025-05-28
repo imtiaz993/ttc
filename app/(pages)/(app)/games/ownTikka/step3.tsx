@@ -20,6 +20,7 @@ const OwnTikkaStep3 = () => {
   const [elementSize, setElementSize] = useState({ width: 96, height: 96 });
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
     Background: "",
     Border: "",
@@ -214,8 +215,8 @@ const OwnTikkaStep3 = () => {
   }, [selectedOptions.Elements, elementSize, isDragging, isResizing]);
 
   const saveCreatedTika = async () => {
+    setIsFinishing(true);
     if (typeof window === "undefined") return;
-
 
     const originalInputDisplay = textInputRef.current ? textInputRef.current.style.display : null;
     if (textInputRef.current) {
@@ -334,13 +335,16 @@ const OwnTikkaStep3 = () => {
             );
 
             const { secure_url } = response.data;
-
+if (response.data){
+  setIsFinishing(false);
+}
             updateUserData({
               ...userData,
               createdTika: secure_url,
             });
             next();
           } catch (error) {
+            setIsFinishing(false);
             console.error("Upload to Cloudinary failed:", error);
           }
         }, "image/png", 1.0);
@@ -384,6 +388,10 @@ const OwnTikkaStep3 = () => {
 
             const { secure_url } = response.data;
 
+            if (response.data){
+              setIsFinishing(false);
+            }
+
             updateUserData({
               ...userData,
               createdTika: secure_url,
@@ -391,6 +399,7 @@ const OwnTikkaStep3 = () => {
             next();
           } catch (error) {
             console.error("Upload to Cloudinary failed:", error);
+            setIsFinishing(false);
           }
         }, "image/png", 1.0);
       }
@@ -433,13 +442,16 @@ const OwnTikkaStep3 = () => {
           );
 
           const { secure_url } = response.data;
-
+if (response.data){
+  setIsFinishing(false);
+}
           updateUserData({
             ...userData,
             createdTika: secure_url,
           });
           next();
         } catch (error) {
+          setIsFinishing(false);
           console.error("Upload to Cloudinary failed:", error);
         }
       }, "image/png", 1.0);
@@ -447,7 +459,7 @@ const OwnTikkaStep3 = () => {
   };
 
   const handleComplete = async () => {
-    await saveCreatedTika();
+      await saveCreatedTika();
   };
 
   useEffect(() => {
@@ -544,6 +556,7 @@ const OwnTikkaStep3 = () => {
             )}
             handleFinish={handleComplete}
             handleInfo={() => setOverlay(true)}
+            isFinishing={isFinishing}
         />
         <GameStepper  />
         {overlay && (

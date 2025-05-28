@@ -8,7 +8,7 @@ const Animation = dynamic(() => import("./animation"), {ssr: false});
 const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
   const canvasRef = useRef(null);
   const [showAnimation, setShowAnimation] = useState(animation);
-  const [selectedImage, setSelectedImage] = useState("/images/scratched-image.png");
+  const [selectedImage, setSelectedImage] = useState("/images/scratch-card-2.png");
   const [imageLoaded, setImageLoaded] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
   const isDrawing = useRef(false);

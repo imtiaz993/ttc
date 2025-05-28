@@ -17,6 +17,7 @@ const Menu = ({
   showFinish = false,
   showSpeaker = false,
   showContinue = false,
+  isFinishing = false,
   handleUndo = () => {},
   handleInfo = () => {},
   handleSkip = () => {},
@@ -31,7 +32,6 @@ const Menu = ({
   const closeDrawer = () => dispatch(closeMenu());
   const updateUserData = (data) => dispatch(setUserData(data));
   const handleToggleMute = (data) => dispatch(toggleMute(data));
-  const [isFinishing, setIsFinishing] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -130,14 +130,7 @@ const Menu = ({
               {showFinish ? (
                   <button
                       className="text-sm font-manrope font-medium cursor-pointer flex items-center gap-2"
-                      onClick={async () => {
-                        setIsFinishing(true);
-                        try {
-                          await handleFinish(); // Ensure handleFinish is async or returns a Promise
-                        } finally {
-                          setIsFinishing(false);
-                        }
-                      }}
+                      onClick={handleFinish}
                       disabled={isFinishing}
                   >
                     {isFinishing ? (
