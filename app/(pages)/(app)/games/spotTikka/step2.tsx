@@ -34,7 +34,22 @@ const SpotTikkaStep2 = () => {
       fileInputRef.current.click();
     }
   };
+  async function convertImageUrlToFile(imageUrl, filename) {
+    const response = await fetch(imageUrl);
 
+    const contentType = response.headers.get("Content-Type");
+    console.log("Fetched content-type:", contentType); // Debug
+
+    if (!response.ok || !contentType?.startsWith("image/")) {
+      console.error("Image fetch failed or not an image");
+      return null;
+    }
+
+    const blob = await response.blob();
+    console.log(blob, "blob data");
+    const mimeType = blob.type || 'image/png';
+    return new File([blob], filename, { type: mimeType });
+  }
   async function fetchLocalImage() {
     const response = await fetch("/images/spot-tikka.png");
     return await response.blob();
@@ -200,8 +215,8 @@ const SpotTikkaStep2 = () => {
         const formData = new FormData();
         formData.append("image1", file1);
 
-        const localImageFile = await fetchLocalImage();
-        formData.append("image2", localImageFile, "local-image.jpg");
+        const localImageFile =  await convertImageUrlToFile("/images/graham-bombay.png","graham-bombay.png");
+        formData.append("image2", localImageFile, "local-image.png");
 
         const response = await axios.post(
           "https://ttc-master-be.onrender.com/api/compare-images",
