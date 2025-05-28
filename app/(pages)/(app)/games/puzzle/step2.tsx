@@ -437,6 +437,18 @@ const PuzzleStep2 = () => {
         }
     };
 
+useEffect(() => {
+    dispatch(
+        setStepperProps({
+            showNext: false,
+            showPrev: false,
+        })
+    );
+    return () => {
+        dispatch(resetStepperProps());
+    };
+}, []);
+
     return (
         <>
             <Menu
@@ -451,7 +463,6 @@ const PuzzleStep2 = () => {
                     next();
                 }}
             />
-            <GameStepper  />
             {overlay && (
                 <div>
                     <div className="fixed inset-0 bg-[#00000040] z-30"></div>

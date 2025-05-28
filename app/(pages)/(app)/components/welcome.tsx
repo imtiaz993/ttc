@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
+import SwipeOverlay from "./swipeOverlay";
 
 const Welcome = ({
   onMouseDown,
@@ -15,12 +16,8 @@ const Welcome = ({
   const [overlay, setOverlay] = useState(false);
   const [name, setName] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragPosition, setDragPosition] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
   const userData = useSelector((state: any) => state.user.userData);
   const next = () => dispatch(nextStep());
-  const hideOverlay = () => dispatch(closeOverlay());
 
   const updateUserData = (data) => dispatch(setUserData(data));
 
@@ -37,80 +34,10 @@ const Welcome = ({
     }
   }, []);
 
-  const handleDragStart = (e) => {
-    setDragStartX(e.type === "touchstart" ? e.touches[0].clientX : e.clientX);
-  };
-
-  const handleDragMove = (e) => {
-    if (!dragStartX) return;
-    const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-    const diffX = clientX - dragStartX;
-    setDragPosition(diffX);
-  };
-
-  const handleDragEnd = (e) => {
-    const screenWidth = window.innerWidth;
-    if (
-      dragPosition < -screenWidth * 0.25 ||
-      dragPosition > screenWidth * 0.25
-    ) {
-      setFadeOut(true); // Trigger fade-out animation
-      setTimeout(() => {
-        setOverlay(false);
-        setDisabled(false);
-        hideOverlay();
-        setFadeOut(false); // Reset fadeOut state
-      }, 300); // Match the transition duration
-    }
-    setDragStartX(0);
-    setDragPosition(0);
-  };
-
   return (
     <>
       {overlay && (
-        <>
-          <div
-            className="fixed inset-0 bg-[#00000040] z-20"
-            onMouseMove={handleDragMove}
-            onMouseUp={handleDragEnd}
-            onTouchMove={handleDragMove}
-            onTouchEnd={handleDragEnd}
-            onMouseDown={handleDragStart}
-            onTouchStart={handleDragStart}
-            style={{
-              opacity: fadeOut ? 0 : 1,
-              transition: "opacity 0.3s ease-out",
-            }}
-          >
-            <div
-              className="fixed z-20 right-0 left-0 bottom-0 w-full flex flex-col justify-center h-20"
-              style={{
-                backgroundImage: "url('/images/overlay-yellow.png')",
-                backgroundSize: "contain",
-                backgroundRepeat: "round",
-                opacity: fadeOut ? 0 : 1,
-                transition: "opacity 1s ease-out",
-              }}
-            >
-              <div className="bg-[#202F00] w-[168px] mx-auto rounded-full px-3 py-2 flex items-center justify-between">
-                <img
-                  src="/icons/swipe-arrow.svg"
-                  alt=""
-                  className="w-4 animate-sway1"
-                />
-                <p className="mx-1.5 text-[#FFF8E7] text-xs text-center font-Manrope">
-                  swipe to navigate
-                </p>
-                <img
-                  src="/icons/swipe-arrow-forward.svg"
-                  alt=""
-                  className="w-4 animate-sway2"
-                />
-              </div>
-            </div>
-          </div>
-        </>
+        <SwipeOverlay setOverlay={setOverlay} setDisabled={setDisabled} />
       )}
       <div
         className="relative flex flex-col justify-center items-center border-transparent h-dvh"

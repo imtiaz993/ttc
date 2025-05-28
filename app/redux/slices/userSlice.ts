@@ -31,12 +31,21 @@ const userSlice = createSlice({
     closeOverlay: (state) => {
       state.userData.overlay = false;
     },
+    openOverlay: (state) => {
+      state.userData.overlay = true;
+    },
     toggleMenu: (state, action) => {
       state.userData.showMenu = !action.payload;
     },
   },
 });
 
-export const { setUserData, toggleMute, closeMenu, closeOverlay, toggleMenu } =
-  userSlice.actions;
+export const {
+  setUserData,
+  toggleMute,
+  closeMenu,
+  openOverlay,
+  closeOverlay,
+  toggleMenu,
+} = userSlice.actions;
 export default userSlice.reducer;

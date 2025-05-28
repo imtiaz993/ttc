@@ -12,6 +12,9 @@ import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -63,6 +66,19 @@ const ScratchStep2 = () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
   }, [verificationStatus]);
+
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay && verificationStatus === "success";
+    },
+  });
 
   const handleImageCapture = async (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -231,6 +247,7 @@ const ScratchStep2 = () => {
 
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <input
         type="file"

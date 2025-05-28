@@ -69,7 +69,8 @@ export default function Home() {
       } else if (
         ![1, 21, 22].includes(step) &&
         stepper.showNext &&
-        userData.userData.showMenu == false
+        userData.userData.showMenu == false &&
+        userData.userData.overlay == false
       ) {
         next();
       }
@@ -77,7 +78,8 @@ export default function Home() {
       dragPosition > screenWidth * 0.25 &&
       ![1, 21, 22].includes(step) &&
       stepper.showPrev &&
-      userData.userData.showMenu == false
+      userData.userData.showMenu == false &&
+      userData.userData.overlay == false
     ) {
       prev();
     }

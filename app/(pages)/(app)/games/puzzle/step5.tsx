@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import SwipeOverlay from "../../components/swipeOverlay";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
 
 const PuzzleStep5 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -22,8 +25,22 @@ const PuzzleStep5 = () => {
     };
   }, []);
 
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
+
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex items-start mb-6">

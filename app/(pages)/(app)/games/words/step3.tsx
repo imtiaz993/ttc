@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const WordsStep3 = () => {
+  const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
   const [selectedWords, setSelectedWords] = useState([]);
 
@@ -18,8 +22,22 @@ const WordsStep3 = () => {
     }
   }, []);
 
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
+
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex justify-between items-start">

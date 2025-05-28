@@ -5,7 +5,9 @@ import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
-import { toggleMute } from "../../../../redux/slices/userSlice";
+import { openOverlay, toggleMute } from "../../../../redux/slices/userSlice";
+import SwipeOverlay from "../../components/swipeOverlay";
+import { useInactivity } from "../../../../hooks/useInactivity";
 
 const SareeStep1 = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,19 @@ const SareeStep1 = () => {
   const [playingBg, setPlayingBg] = useState(isMuted ? "paused" : "playing");
   const [playSound, setPlaySound] = useState(false);
   const bgMusicRef = useRef(null);
+
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay && !playSound;
+    },
+  });
 
   useEffect(() => {
     bgMusicRef.current = new Audio("/audio/chromo.mp3");
@@ -41,6 +56,10 @@ const SareeStep1 = () => {
 
   useEffect(() => {
     if (playSound) {
+      if (playingBg === "playing") {
+        handleToggleMute(true);
+        setPlayingBg("delaying");
+      }
       playMusic();
     } else {
       if (playingBg === "delaying") {
@@ -64,6 +83,7 @@ const SareeStep1 = () => {
 
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
         <div>
@@ -90,7 +110,7 @@ const SareeStep1 = () => {
           </div>
           <div className="w-full">
             <p className="text-sm">
-              <p className="mt-4"> Dearest Kamla, </p>
+              <p className="mt-4 font-playwriteDEGrund"> Dearest Kamla, </p>
             </p>
             <p className="text-sm mb-6 font-playwriteDEGrund">
               <p className="mb-2">
@@ -112,11 +132,7 @@ const SareeStep1 = () => {
           <div
             className="bg-[#FDD931] rounded py-3 px-4"
             onClick={() => {
-              setPlaySound(true);
-              if (playingBg === "playing") {
-                handleToggleMute(true);
-                setPlayingBg("delaying");
-              }
+              setPlaySound(!playSound);
             }}
           >
             <div className="w-full flex justify-between items-center mb-2 font-manrope">
