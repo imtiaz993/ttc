@@ -232,6 +232,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
           the loveliest fabric from Calcutta! But what caught my eye was not the
           fabric, but this unusual label stuck on it.
           <br/>
+          <br />
           Can't wait to show it to my closest friend Selma.Her family's in the
           textile business after all!
         </p>
@@ -240,7 +241,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
             <img
                 src={selectedImage}
                 alt=""
-                className="w-60 object-cover"
+                className="w-56 object-cover"
                 onLoad={() => setImageLoaded(true)}
             />
             {!isRevealed && (

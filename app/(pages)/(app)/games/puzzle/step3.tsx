@@ -37,7 +37,7 @@ const PuzzleStep3 = () => {
   useEffect(() => {
     setTimeout(() => {
       setOverlay(true);
-    }, 2000);
+    }, 5000);
   }, []);
 
   useEffect(() => {
