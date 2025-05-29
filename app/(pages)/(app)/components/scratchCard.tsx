@@ -2,6 +2,7 @@ import React, {useRef, useEffect, useState, useCallback} from "react";
 import confetti from "canvas-confetti";
 import scratchAnimation from "../../animation/Scratch Card.json";
 import dynamic from "next/dynamic";
+import dustImage from '/public/images/Frame.png';
 import {useInactivity} from "../../../hooks/useInactivity";
 
 const Animation = dynamic(() => import("./animation"), {ssr: false});
@@ -13,7 +14,8 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
   const isDrawing = useRef(false);
-  
+
+
   useInactivity({time:3000,onInactivity:()=>{setShowAnimation(true)}, condition: () => {
     return !isRevealed && !isDrawing.current;
   }});
@@ -41,23 +43,26 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
     patternCanvas.width = 50;
     patternCanvas.height = 50;
 
-    // Dusty silver base
-    patternCtx.fillStyle = "#999";
-    patternCtx.fillRect(0, 0, 50, 50);
+    // Load dust image
+    const img = new Image();
+    img.src = '/images/Frame.png';
 
-    // Add dust specks
-    for (let i = 0; i < 40; i++) {
-      const x = Math.random() * 50;
-      const y = Math.random() * 50;
-      const radius = Math.random() * 1.5;
-      patternCtx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.15})`;
-      patternCtx.beginPath();
-      patternCtx.arc(x, y, radius, 0, Math.PI * 2);
-      patternCtx.fill();
-    }
-
-    return ctx.createPattern(patternCanvas, "repeat");
+    return new Promise((resolve) => {
+      img.onload = () => {
+        patternCtx.drawImage(img, 0, 0, 50, 50);
+        const pattern = ctx.createPattern(patternCanvas, "repeat");
+        resolve(pattern);
+      };
+      img.onerror = () => {
+        // fallback to grey fill if image fails
+        patternCtx.fillStyle = "#999";
+        patternCtx.fillRect(0, 0, 50, 50);
+        const fallbackPattern = ctx.createPattern(patternCanvas, "repeat");
+        resolve(fallbackPattern);
+      };
+    });
   }, []);
+
 
   const initializeCanvas = useCallback(() => {
     if (!canvasRef.current || isRevealed) return;
@@ -69,27 +74,34 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
-    // Fill with scratch pattern
-    const pattern = createDustyPattern();
-    if (pattern) {
-      ctx.fillStyle = pattern;
+    // Draw the dust image once, scaled to cover the canvas
+    const img = new Image();
+    img.src = dustImage.src; // .src is necessary when using imported images
+
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      setCanvasReady(true);
+    };
+
+    img.onerror = () => {
+      // Fallback fill if image fails
+      ctx.fillStyle = "#999";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
+      setCanvasReady(true);
+    };
+  }, [isRevealed]);
 
-    setCanvasReady(true);
-  }, [isRevealed, createDustyPattern]);
 
-  // Initialize canvas as soon as possible
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Small delay to ensure canvas is properly mounted
     const timer = setTimeout(() => {
       initializeCanvas();
     }, 10);
 
     return () => clearTimeout(timer);
   }, [initializeCanvas]);
+
 
   const handleScratch = useCallback((e) => {
     if (!isDrawing.current || isRevealed || !canvasReady) return;
