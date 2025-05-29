@@ -17,11 +17,13 @@ const OwnTikkaStep3 = () => {
   const updateUserData = (data) => dispatch(setUserData(data));
   const [showTextInput, setShowTextInput] = useState(false);
   const [customText, setCustomText] = useState("");
-  const [elementPos, setElementPos] = useState({ x: 60, y: 60 });
-  const [elementSize, setElementSize] = useState({ width: 96, height: 96 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [isResizing, setIsResizing] = useState(false);
   const [isFinishing, setIsFinishing] = useState(false);
+
+  // Updated state structure for multiple elements
+  const [selectedElements, setSelectedElements] = useState([]);
+  const [elementInstances, setElementInstances] = useState([]);
+  const [activeElementId, setActiveElementId] = useState(null);
+
   const [selectedOptions, setSelectedOptions] = useState({
     Background: "",
     Border: "",
@@ -29,30 +31,64 @@ const OwnTikkaStep3 = () => {
     Text: "",
   });
 
-
   const touchStartRef = useRef(null);
   const initialSizeRef = useRef(null);
   const zoomingRef = useRef(false);
   const aspectRatioRef = useRef(1);
   const activeTouchesRef = useRef(0);
-  const lastElementSize = useRef({ width: 96, height: 96 });
+  const activeElementRef = useRef(null);
 
   const next = () => dispatch(nextStep());
   const textInputRef = useRef(null);
-  const elementRef = useRef(null);
   const ticketContainerRef = useRef(null);
   const customTextRef = useRef(null);
   const selectedTextRef = useRef(null);
-  const rndRef = useRef(null);
 
+  // Generate unique ID for elements
+  const generateId = () => `element_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
+  // Handle element selection (max 3)
+  const handleElementSelect = (elementSrc) => {
+    if (selectedElements.length < 3 && !selectedElements.includes(elementSrc)) {
+      const newElement = {
+        id: generateId(),
+        src: elementSrc,
+        position: { x: 60 + selectedElements.length * 20, y: 60 + selectedElements.length * 20 },
+        size: { width: 96, height: 96 },
+        isDragging: false,
+        isResizing: false
+      };
+
+      setSelectedElements([...selectedElements, elementSrc]);
+      setElementInstances([...elementInstances, newElement]);
+      setSelectedOptions({ ...selectedOptions, Elements: elementSrc });
+    }
+  };
+
+  // Remove element
+  const removeElement = (elementId) => {
+    const elementToRemove = elementInstances.find(el => el.id === elementId);
+    setElementInstances(elementInstances.filter(el => el.id !== elementId));
+    setSelectedElements(selectedElements.filter(el => el !== elementToRemove.src));
+
+    if (activeElementId === elementId) {
+      setActiveElementId(null);
+    }
+  };
+
+  // Update element properties
+  const updateElementInstance = (elementId, updates) => {
+    setElementInstances(prev =>
+        prev.map(el => el.id === elementId ? { ...el, ...updates } : el)
+    );
+  };
+
+  // Touch and zoom handling for active element
   useEffect(() => {
     const element = ticketContainerRef.current;
-    if (!element || !selectedOptions.Elements) return;
-
+    if (!element || elementInstances.length === 0) return;
 
     const originalTouchAction = element.style.touchAction;
-
 
     const disableDefaultBehavior = (e) => {
       if (e.touches && e.touches.length >= 2) {
@@ -60,23 +96,22 @@ const OwnTikkaStep3 = () => {
       }
     };
 
-
     const handleTouchStart = (e) => {
-      if (e.touches.length === 2) {
-
+      if (e.touches.length === 2 && activeElementId) {
         e.stopPropagation();
         e.preventDefault();
 
+        const activeElement = elementInstances.find(el => el.id === activeElementId);
+        if (!activeElement) return;
 
         zoomingRef.current = true;
         activeTouchesRef.current = 2;
-
+        activeElementRef.current = activeElement;
 
         initialSizeRef.current = {
-          width: lastElementSize.current.width,
-          height: lastElementSize.current.height
+          width: activeElement.size.width,
+          height: activeElement.size.height
         };
-
 
         const touch1 = e.touches[0];
         const touch2 = e.touches[1];
@@ -84,24 +119,15 @@ const OwnTikkaStep3 = () => {
         const dy = touch1.clientY - touch2.clientY;
         touchStartRef.current = Math.sqrt(dx * dx + dy * dy);
 
-
         aspectRatioRef.current = initialSizeRef.current.width / initialSizeRef.current.height;
-
-
-        if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
-          rndRef.current.resizableElement.current.style.touchAction = 'none';
-        }
         element.style.touchAction = 'none';
       }
     };
 
-
     const handleTouchMove = (e) => {
-      if (e.touches.length === 2 && zoomingRef.current && touchStartRef.current && initialSizeRef.current) {
-
+      if (e.touches.length === 2 && zoomingRef.current && touchStartRef.current && initialSizeRef.current && activeElementRef.current) {
         e.stopPropagation();
         e.preventDefault();
-
 
         const touch1 = e.touches[0];
         const touch2 = e.touches[1];
@@ -109,99 +135,57 @@ const OwnTikkaStep3 = () => {
         const dy = touch1.clientY - touch2.clientY;
         const currentDistance = Math.sqrt(dx * dx + dy * dy);
 
-
         const scale = currentDistance / touchStartRef.current;
-
-
         const targetWidth = Math.max(40, Math.min(240, initialSizeRef.current.width * scale));
         const targetHeight = targetWidth / aspectRatioRef.current;
 
-
-        if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
-          const element = rndRef.current.resizableElement.current;
-
-          element.style.width = `${targetWidth}px`;
-          element.style.height = `${targetHeight}px`;
-
-
-          lastElementSize.current = {
-            width: targetWidth,
-            height: targetHeight
-          };
-        }
+        updateElementInstance(activeElementRef.current.id, {
+          size: { width: targetWidth, height: targetHeight }
+        });
       }
     };
 
-
     const handleTouchEnd = (e) => {
       if (zoomingRef.current) {
-
         activeTouchesRef.current = Math.max(0, activeTouchesRef.current - 1);
 
-
         if (activeTouchesRef.current < 2) {
-
-          setElementSize({
-            width: Math.round(lastElementSize.current.width),
-            height: Math.round(lastElementSize.current.height)
-          });
-
-
           zoomingRef.current = false;
           touchStartRef.current = null;
           initialSizeRef.current = null;
-
-
-          if (rndRef.current && rndRef.current.resizableElement && rndRef.current.resizableElement.current) {
-            rndRef.current.resizableElement.current.style.touchAction = '';
-          }
+          activeElementRef.current = null;
           element.style.touchAction = originalTouchAction;
         }
       }
     };
 
-
-    const handleTouchCancel = handleTouchEnd;
-
-
     const handleWheel = (e) => {
-      if (selectedOptions.Elements && !isDragging && !isResizing && !zoomingRef.current) {
+      if (activeElementId && !zoomingRef.current) {
+        const activeElement = elementInstances.find(el => el.id === activeElementId);
+        if (!activeElement) return;
+
         e.preventDefault();
         e.stopPropagation();
 
-
-        const currentWidth = elementSize.width;
-        const currentHeight = elementSize.height;
+        const currentWidth = activeElement.size.width;
+        const currentHeight = activeElement.size.height;
         const aspectRatio = currentWidth / currentHeight;
 
-
         const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-
-
         const newWidth = Math.max(40, Math.min(240, currentWidth * zoomFactor));
         const newHeight = newWidth / aspectRatio;
 
-
-        setElementSize({
-          width: Math.round(newWidth),
-          height: Math.round(newHeight)
+        updateElementInstance(activeElementId, {
+          size: { width: Math.round(newWidth), height: Math.round(newHeight) }
         });
-
-
-        lastElementSize.current = {
-          width: newWidth,
-          height: newHeight
-        };
       }
     };
-
 
     element.addEventListener("touchstart", handleTouchStart, { passive: false, capture: true });
     element.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
     element.addEventListener("touchend", handleTouchEnd, { capture: true });
-    element.addEventListener("touchcancel", handleTouchCancel, { capture: true });
+    element.addEventListener("touchcancel", handleTouchEnd, { capture: true });
     element.addEventListener("wheel", handleWheel, { passive: false });
-
 
     document.addEventListener("touchmove", disableDefaultBehavior, { passive: false });
 
@@ -209,11 +193,11 @@ const OwnTikkaStep3 = () => {
       element.removeEventListener("touchstart", handleTouchStart, { capture: true });
       element.removeEventListener("touchmove", handleTouchMove, { capture: true });
       element.removeEventListener("touchend", handleTouchEnd, { capture: true });
-      element.removeEventListener("touchcancel", handleTouchCancel, { capture: true });
+      element.removeEventListener("touchcancel", handleTouchEnd, { capture: true });
       element.removeEventListener("wheel", handleWheel);
       document.removeEventListener("touchmove", disableDefaultBehavior);
     };
-  }, [selectedOptions.Elements, elementSize, isDragging, isResizing]);
+  }, [elementInstances, activeElementId]);
 
   const saveCreatedTika = async () => {
     setIsFinishing(true);
@@ -224,16 +208,17 @@ const OwnTikkaStep3 = () => {
       textInputRef.current.style.display = "none";
     }
 
-
     const element = ticketContainerRef.current;
     if (!element) return;
 
-
+    // Create temporary text elements
     const tempTopText = document.createElement('p');
     tempTopText.innerText = customText;
     tempTopText.style.cssText = `
       position: absolute;
-      top: -3px;
+      top: ${selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "-4px" :
+        selectedOptions.Border.includes("border-6") ? "3px" :
+            "-1px"};
       left: 0;
       width: 100%;
       text-align: center;
@@ -249,7 +234,9 @@ const OwnTikkaStep3 = () => {
     tempBottomText.innerText = selectedOptions.Text;
     tempBottomText.style.cssText = `
       position: absolute;
-      bottom: ${selectedOptions.Border?.includes("border-5") ? "8px" : "11px"};
+      bottom: ${selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "7px" :
+        selectedOptions.Border.includes("border-6") ? "15px" :
+            "10px"};
       left: 0;
       width: 100%;
       text-align: center;
@@ -260,14 +247,14 @@ const OwnTikkaStep3 = () => {
       padding: 0;
     `;
 
-
+    // Hide original text elements
     if (customTextRef.current) customTextRef.current.style.visibility = "hidden";
     if (selectedTextRef.current) selectedTextRef.current.style.visibility = "hidden";
-
 
     element.appendChild(tempTopText);
     element.appendChild(tempBottomText);
 
+    // Wait for images to load
     await Promise.all(
         Array.from(document.images)
             .filter(img => !img.complete)
@@ -276,135 +263,93 @@ const OwnTikkaStep3 = () => {
             }))
     );
 
-    if (selectedOptions.Elements) {
-      const originalElementContainer:any = document.querySelector('.Rnd');
-      if (originalElementContainer) {
-        const originalDisplay = originalElementContainer.style.display;
-        originalElementContainer.style.display = 'none';
+    // Handle multiple elements for high-res capture
+    if (elementInstances.length > 0) {
+      const originalRndContainers = document.querySelectorAll('.Rnd');
+      const tempHighResElements = [];
 
+      // Hide original Rnd containers and create high-res replacements
+      originalRndContainers.forEach((container:any, index) => {
+        const originalDisplay = container.style.display;
+        container.style.display = 'none';
+        container.setAttribute('data-original-display', originalDisplay);
 
-        const highResElement = document.createElement('img');
-        highResElement.src = selectedOptions.Elements;
-        highResElement.style.position = 'absolute';
-        highResElement.style.left = `${elementPos.x}px`;
-        highResElement.style.top = `${elementPos.y}px`;
-        highResElement.style.width = `${elementSize.width}px`;
-        highResElement.style.height = `${elementSize.height}px`;
-        highResElement.style.objectFit = 'contain';
-        highResElement.style.zIndex = '99';
+        if (elementInstances[index]) {
+          const elementInstance = elementInstances[index];
+          const highResElement = document.createElement('img');
+          highResElement.src = elementInstance.src;
+          highResElement.style.position = 'absolute';
+          highResElement.style.left = `${elementInstance.position.x}px`;
+          highResElement.style.top = `${elementInstance.position.y}px`;
+          highResElement.style.width = `${elementInstance.size.width}px`;
+          highResElement.style.height = `${elementInstance.size.height}px`;
+          highResElement.style.objectFit = 'contain';
+          highResElement.style.zIndex = '99';
 
-        element.appendChild(highResElement);
-
-        const canvas = await html2canvas(element, {
-          scale: 5,
-          useCORS: true,
-          backgroundColor: null,
-          scrollX: 0,
-          scrollY: -window.scrollY,
-          logging: false,
-          imageTimeout: 0,
-          allowTaint: true,
-          removeContainer: false
-        });
-
-
-        element.removeChild(highResElement);
-        element.removeChild(tempTopText);
-        element.removeChild(tempBottomText);
-        originalElementContainer.style.display = originalDisplay;
-
-
-        if (customTextRef.current) customTextRef.current.style.visibility = "visible";
-        if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
-
-
-        if (textInputRef.current) {
-          textInputRef.current.style.display = originalInputDisplay;
+          element.appendChild(highResElement);
+          tempHighResElements.push(highResElement);
         }
+      });
 
-        canvas.toBlob(async (blob) => {
-          if (!blob) return;
+      const canvas = await html2canvas(element, {
+        scale: 5,
+        useCORS: true,
+        backgroundColor: null,
+        scrollX: 0,
+        scrollY: -window.scrollY,
+        logging: false,
+        imageTimeout: 0,
+        allowTaint: true,
+        removeContainer: false
+      });
 
-          const formData = new FormData();
-          formData.append("file", blob, "ticket.png");
-          formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
-          try {
-            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-            const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-                formData
-            );
+      // Cleanup: remove temp elements and restore original containers
+      tempHighResElements.forEach(el => element.removeChild(el));
+      element.removeChild(tempTopText);
+      element.removeChild(tempBottomText);
 
-            const { secure_url } = response.data;
-if (response.data){
-  setIsFinishing(false);
-}
-            updateUserData({
-              ...userData,
-              createdTika: secure_url,
-            });
-            next();
-          } catch (error) {
-            setIsFinishing(false);
-            console.error("Upload to Cloudinary failed:", error);
-          }
-        }, "image/png", 1.0);
-      } else {
-        const canvas = await html2canvas(element, {
-          scale: 5,
-          useCORS: true,
-          backgroundColor: null,
-          scrollX: 0,
-          scrollY: -window.scrollY,
-          logging: false,
-          imageTimeout: 0,
-          allowTaint: true
-        });
+      originalRndContainers.forEach((container:any) => {
+        const originalDisplay = container.getAttribute('data-original-display') || '';
+        container.style.display = originalDisplay;
+        container.removeAttribute('data-original-display');
+      });
 
+      // Restore visibility
+      if (customTextRef.current) customTextRef.current.style.visibility = "visible";
+      if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
+      if (textInputRef.current) textInputRef.current.style.display = originalInputDisplay;
 
-        element.removeChild(tempTopText);
-        element.removeChild(tempBottomText);
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
 
+        const formData = new FormData();
+        formData.append("file", blob, "ticket.png");
+        formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
 
-        if (customTextRef.current) customTextRef.current.style.visibility = "visible";
-        if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
+        try {
+          const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+          const response = await axios.post(
+              `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+              formData
+          );
 
-
-        if (textInputRef.current) {
-          textInputRef.current.style.display = originalInputDisplay;
-        }
-
-        canvas.toBlob(async (blob) => {
-          if (!blob) return;
-
-          const formData = new FormData();
-          formData.append("file", blob, "ticket.png");
-          formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
-          try {
-            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-            const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-                formData
-            );
-
-            const { secure_url } = response.data;
-
-            if (response.data){
-              setIsFinishing(false);
-            }
-
-            updateUserData({
-              ...userData,
-              createdTika: secure_url,
-            });
-            next();
-          } catch (error) {
-            console.error("Upload to Cloudinary failed:", error);
+          const { secure_url } = response.data;
+          if (response.data) {
             setIsFinishing(false);
           }
-        }, "image/png", 1.0);
-      }
+
+          updateUserData({
+            ...userData,
+            createdTika: secure_url,
+          });
+          next();
+        } catch (error) {
+          setIsFinishing(false);
+          console.error("Upload to Cloudinary failed:", error);
+        }
+      }, "image/png", 1.0);
     } else {
+      // Handle case with no elements (same as original)
       const canvas = await html2canvas(element, {
         scale: 5,
         useCORS: true,
@@ -416,18 +361,12 @@ if (response.data){
         allowTaint: true
       });
 
-
       element.removeChild(tempTopText);
       element.removeChild(tempBottomText);
 
-
       if (customTextRef.current) customTextRef.current.style.visibility = "visible";
       if (selectedTextRef.current) selectedTextRef.current.style.visibility = "visible";
-
-
-      if (textInputRef.current) {
-        textInputRef.current.style.display = originalInputDisplay;
-      }
+      if (textInputRef.current) textInputRef.current.style.display = originalInputDisplay;
 
       canvas.toBlob(async (blob) => {
         if (!blob) return;
@@ -435,6 +374,7 @@ if (response.data){
         const formData = new FormData();
         formData.append("file", blob, "ticket.png");
         formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "");
+
         try {
           const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
           const response = await axios.post(
@@ -443,9 +383,10 @@ if (response.data){
           );
 
           const { secure_url } = response.data;
-if (response.data){
-  setIsFinishing(false);
-}
+          if (response.data) {
+            setIsFinishing(false);
+          }
+
           updateUserData({
             ...userData,
             createdTika: secure_url,
@@ -460,18 +401,18 @@ if (response.data){
   };
 
   const handleComplete = async () => {
-      await saveCreatedTika();
+    await saveCreatedTika();
   };
 
   useEffect(() => {
     dispatch(
-      setStepperProps({
-        showPrev: false,
-        showNext: false,
-      })
+        setStepperProps({
+          showPrev: false,
+          showNext: false,
+        })
     );
     return () => {
-      dispatch(resetStepperProps()); // This resets to initialState
+      dispatch(resetStepperProps());
     };
   }, []);
 
@@ -479,12 +420,12 @@ if (response.data){
     if (
         selectedOptions.Background &&
         selectedOptions.Border &&
-        selectedOptions.Elements &&
+        selectedElements.length > 0 &&
         selectedOptions.Text
     ) {
       setShowTextInput(true);
     }
-  }, [selectedOptions]);
+  }, [selectedOptions, selectedElements]);
 
   useEffect(() => {
     if (textInputRef.current) {
@@ -539,24 +480,6 @@ if (response.data){
     },
   ];
 
-
-  useEffect(() => {
-    if (selectedOptions.Elements) {
-      const img = new Image();
-      img.src = selectedOptions.Elements;
-      img.onload = () => {
-        if (elementRef.current) {
-
-          const element = elementRef.current;
-          element.style.display = 'none';
-          setTimeout(() => {
-            element.style.display = 'block';
-          }, 0);
-        }
-      };
-    }
-  }, [selectedOptions.Elements]);
-
   return (
       <>
         <Menu
@@ -564,7 +487,7 @@ if (response.data){
             showFinish={Boolean(
                 selectedOptions.Background &&
                 selectedOptions.Border &&
-                selectedOptions.Elements &&
+                selectedElements.length > 0 &&
                 selectedOptions.Text
             )}
             handleFinish={handleComplete}
@@ -588,8 +511,9 @@ if (response.data){
                   />
                 </div>
                 <p className="mt-2 text-xs">
-                  Use backgrounds, borders, characters and more to design your unique tika.
-                  {selectedOptions.Elements && " Pinch to zoom or use mouse wheel to resize elements."}
+                  Use backgrounds,borders, characters and more from ticket all
+                  around you to design your unique tika and leave a Chaap on the
+                  world!
                 </p>
               </div>
             </div>
@@ -608,58 +532,64 @@ if (response.data){
                 border:
                     selectedOptions.Background ||
                     selectedOptions.Border ||
-                    selectedOptions.Elements
+                    selectedElements.length > 0
                         ? ""
                         : "1px solid black",
               }}
           >
-            {selectedOptions.Elements && (
+            {/* Render all element instances */}
+            {elementInstances.map((elementInstance) => (
                 <Rnd
-                    ref={rndRef}
-                    bounds="body"
-                    size={elementSize}
-                    position={elementPos}
-                    onDragStart={() => setIsDragging(true)}
-                    onDragStop={(e, d) => {
-                      setElementPos({x: d.x, y: d.y});
-                      setIsDragging(false);
+                    key={elementInstance.id}
+                    bounds="parent"
+                    size={elementInstance.size}
+                    position={elementInstance.position}
+                    onDragStart={() => {
+                      updateElementInstance(elementInstance.id, { isDragging: true });
+                      setActiveElementId(elementInstance.id);
                     }}
-                    onResizeStart={() => setIsResizing(true)}
-                    onResizeStop={(e, direction, ref, delta, position) => {
-                      setElementSize({
-                        width: parseInt(ref.style.width),
-                        height: parseInt(ref.style.height),
+                    onDragStop={(e, d) => {
+                      updateElementInstance(elementInstance.id, {
+                        position: { x: d.x, y: d.y },
+                        isDragging: false
                       });
-                      setElementPos(position);
-                      setIsResizing(false);
-
-
-                      lastElementSize.current = {
-                        width: parseInt(ref.style.width),
-                        height: parseInt(ref.style.height),
-                      };
+                    }}
+                    onResizeStart={() => {
+                      updateElementInstance(elementInstance.id, { isResizing: true });
+                      setActiveElementId(elementInstance.id);
+                    }}
+                    onResizeStop={(e, direction, ref, delta, position) => {
+                      updateElementInstance(elementInstance.id, {
+                        size: {
+                          width: parseInt(ref.style.width),
+                          height: parseInt(ref.style.height),
+                        },
+                        position: position,
+                        isResizing: false
+                      });
                     }}
                     className="absolute"
                     style={{
-                      zIndex: 99,
+                      zIndex: activeElementId === elementInstance.id ? 100 : 99,
                       touchAction: "none",
                     }}
                     enableUserSelectHack={false}
                     disableDragging={zoomingRef.current}
+                    onClick={() => setActiveElementId(elementInstance.id)}
                 >
                   <div
-                      ref={elementRef}
                       style={{
                         width: "100%",
                         height: "100%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        pointerEvents: "none"
+                        pointerEvents: "none",
+                        position: "relative"
                       }}
                   >
                     <img
-                        src={selectedOptions.Elements}
+                        src={elementInstance.src}
                         alt="Selected Element"
                         style={{
                           maxWidth: "100%",
@@ -675,13 +605,13 @@ if (response.data){
                     />
                   </div>
                 </Rnd>
-            )}
+            ))}
 
             {selectedOptions.Border && (
                 <img
                     src={selectedOptions.Border}
                     alt="Selected Border"
-                    className="w-full h-full object-cover absolute top-0 left-0 z-20"
+                    className="w-full h-full absolute top-0 left-0 z-20"
                     crossOrigin="anonymous"
                 />
             )}
@@ -692,16 +622,25 @@ if (response.data){
                     type="text"
                     value={customText}
                     maxLength={16}
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: '10px', top:
+                          selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "2px" :
+                              selectedOptions.Border.includes("border-6") ? "9px" :
+                                  "4px" }}
                     onChange={(e) => setCustomText(e.target.value)}
-                    className="font-semibold outline-none text-center uppercase absolute top-1 z-40 w-full bg-transparent placeholder:text-black m-0 p-0"
+                    className="font-semibold outline-none text-center uppercase absolute z-40 w-full bg-transparent placeholder:text-black m-0 p-0"
                     autoFocus
                 />
             )}
 
             <p
                 ref={customTextRef}
-                className="text-[10px] font-semibold text-center uppercase absolute top-1 z-40 w-full m-0 p-0"
+                className="text-[10px] font-semibold text-center uppercase absolute z-40 w-full m-0 p-0"
+                style={{
+                  top:
+                      selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "2px" :
+                          selectedOptions.Border.includes("border-6") ? "9px" :
+                              "4px"
+                }}
             >
               {customText}
             </p>
@@ -709,7 +648,12 @@ if (response.data){
             <p
                 ref={selectedTextRef}
                 className="text-[10px] font-semibold absolute z-40 flex justify-center w-full m-0 p-0"
-                style={{bottom: selectedOptions.Border?.includes("border-5") ? "4px" : "7px"}}
+                style={{
+                  bottom:
+                      selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "2px" :
+                          selectedOptions.Border.includes("border-6") ? "9px" :
+                              "4px"
+                }}
             >
               {selectedOptions.Text}
             </p>
@@ -732,6 +676,35 @@ if (response.data){
                           >
                             {option}
                           </p>
+                      ) : selectedMenu === "Elements" ? (
+                          <div key={index} className="relative flex-shrink-0 w-20">
+                            {selectedElements.includes(option) && (
+                                <img
+                                    src="/icons/selected.svg"
+                                    alt=""
+                                    className="w-10 h-10 absolute translate-x-1/2 translate-y-1/2"
+                                />
+                            )}
+                            <img
+                                src={option}
+                                alt=""
+                                className={`w-20 h-[100px] object-contain ${
+                                    selectedElements.length >= 3 && !selectedElements.includes(option)
+                                        ? "opacity-50 cursor-not-allowed"
+                                        : "cursor-pointer"
+                                }`}
+                                onClick={() => {
+                                  if (selectedElements.length < 3 || selectedElements.includes(option)) {
+                                    handleElementSelect(option);
+                                  }
+                                }}
+                            />
+                            {selectedElements.length >= 3 && !selectedElements.includes(option) && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-xs font-bold rounded">
+                                  MAX
+                                </div>
+                            )}
+                          </div>
                       ) : (
                           <div key={index} className="relative flex-shrink-0 w-20">
                             {selectedOptions[selectedMenu] === option && (

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
-import {DndProvider, DragSourceOptions, useDrag, useDrop} from "react-dnd";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import { MultiBackend, TouchTransition, MouseTransition } from "react-dnd-multi-backend";
@@ -33,7 +33,7 @@ const HTML5toTouch = {
 
 const PieceType = 'PUZZLE_PIECE';
 
-const CustomDragLayer = ({ pieces, pieceWidth, pieceHeight, puzzleImagePath, gridCols }:any) => {
+const CustomDragLayer = ({ pieces, pieceWidth, pieceHeight, puzzleImagePath, gridCols }) => {
     const [{ isDragging, currentOffset, item }]:any = useDragLayer((monitor) => ({
         isDragging: monitor.isDragging(),
         currentOffset: monitor.getSourceClientOffset(),
@@ -90,46 +90,37 @@ const useDragLayer = (collect) => {
 
     useEffect(() => {
         const dndContext = (window as any).__REACT_DND_CONTEXT__;
-
         if (!dndContext || !dndContext.dragDropManager) {
-            return;
+            return () => {};
         }
 
-        const monitor:any = dndContext.dragDropManager.getMonitor();
-
-        const handleChange = () => {
+        const monitor = dndContext.dragDropManager.getMonitor();
+        const unsubscribe = monitor.subscribeToStateChange(() => {
             setCollected(collect(monitor));
-        };
+        });
 
-        const unsubscribe = monitor.subscribeToStateChange(handleChange);
-
-        return () => {
-            unsubscribe();
-        };
+        return unsubscribe;
     }, [collect]);
+
 
     return [collected, dragLayerRef];
 };
 
-const DraggablePiece = ({
-                            id, image, left, top, row, col, pieceWidth, pieceHeight, zIndex,
-                            isCompleted, gridCols, isInPuzzleArea
-                        }: any) => {
-
-    const [{isDragging}, drag]:any = useDrag(() => ({
+const DraggablePiece = ({ id, image, left, top, row, col, pieceWidth, pieceHeight, zIndex, isCompleted, gridCols, isInPuzzleArea }: any) => {
+    const [{ isDragging }, drag]: any = useDrag((): any => ({
         type: PieceType,
         item: { id, row, col, isInPuzzleArea },
-        collect: (monitor) => ({
+        collect: (monitor: any) => ({
             isDragging: !!monitor.isDragging(),
         }),
         options: {
             touchStartThreshold: 0,
         }
-    } as any));
+    }));
 
     return (
         <div
-            ref={drag as any}
+            ref={drag}
             className="puzzle-piece"
             style={{
                 position: 'absolute',
@@ -155,6 +146,7 @@ const DraggablePiece = ({
         />
     );
 };
+
 
 const DropZone = ({ id, left, top, onDrop, hasPiece, pieceWidth, pieceHeight }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
@@ -232,8 +224,8 @@ const PuzzleStep2 = () => {
     const [isTouchDevice, setIsTouchDevice] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
 
-    const pieceWidth = 150;
-    const pieceHeight = 100;
+    const pieceWidth = 120;
+    const pieceHeight = 69;
     const gridRows = 4;
     const gridCols = 2;
 
@@ -264,9 +256,9 @@ const PuzzleStep2 = () => {
     const stopTimer = () => {
         clearInterval(intervalRef.current);
         const formattedTime = formatTime(seconds);
+        localStorage.setItem("puzzle-time", JSON.stringify(formattedTime));
         return formattedTime;
     };
-
     const handleOverlayClose = () => {
         setOverlay(false);
     };
@@ -310,9 +302,9 @@ const PuzzleStep2 = () => {
         {id: "piece-2", top: 80, left:140},
         {id: "piece-3", top: 130, left:120},
         {id: "piece-4", top: 0, left:160},
-        {id: "piece-5", top: 150, left:10},
-        {id: "piece-6", top: 30, left:0},
-        {id: "piece-7", top: 180, left:180},
+        {id: "piece-5", top: 140, left:10},
+        {id: "piece-6", top: 20, left:30},
+        {id: "piece-7", top: 135, left:160},
     ];
 
     useEffect(() => {
@@ -328,26 +320,21 @@ const PuzzleStep2 = () => {
     }, [isTimerRunning, timer]);
 
     useEffect(() => {
-        const dndContext = (window as any).__REACT_DND_CONTEXT__;
-
-        if (!dndContext || !dndContext.dragDropManager) {
-            return;
-        }
-
-        const monitor:any = dndContext.dragDropManager.getMonitor();
-
         const handleDragStateChange = () => {
-            setIsDragging(monitor.isDragging());
+            const context: any = (window as any).__REACT_DND_CONTEXT__;
+            if (context && context.dragDropManager) {
+                const monitor: any = context.dragDropManager.getMonitor();
+                setIsDragging(monitor.isDragging());
+            }
         };
 
-        const unsubscribe = monitor.subscribeToStateChange(handleDragStateChange);
-
-        handleDragStateChange();
-
-        return () => {
-            unsubscribe();
-        };
+        const context: any = (window as any).__REACT_DND_CONTEXT__;
+        if (context && context.dragDropManager) {
+            const monitor: any = context.dragDropManager.getMonitor();
+            return monitor.subscribeToStateChange(handleDragStateChange);
+        }
     }, []);
+
 
     useEffect(() => {
         if (isCompleted) {
@@ -437,18 +424,6 @@ const PuzzleStep2 = () => {
         }
     };
 
-useEffect(() => {
-    dispatch(
-        setStepperProps({
-            showNext: false,
-            showPrev: false,
-        })
-    );
-    return () => {
-        dispatch(resetStepperProps());
-    };
-}, []);
-
     return (
         <>
             <Menu
@@ -463,6 +438,7 @@ useEffect(() => {
                     next();
                 }}
             />
+            <GameStepper />
             {overlay && (
                 <div>
                     <div className="fixed inset-0 bg-[#00000040] z-30"></div>
@@ -490,9 +466,9 @@ useEffect(() => {
                     </div>
                 </div>
             )}
-            <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
+            <div className="h-full pt-10 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
                 <div>
-                    <h1 className="text-sm font-medium mb-3 flex justify-center items-center gap-5">
+                    <h1 className="text-sm font-medium flex justify-center items-center gap-5">
                         TIMER
                         <span className="text-xl font-medium">
                             {Math.floor(seconds / 60)
@@ -544,7 +520,7 @@ useEffect(() => {
                                         pieceHeight={pieceHeight}
                                     />
                                 ))}
-                                {Object.entries(placedPieces).map(([id, pos]:[any,any]) => (
+                                {Object.entries(placedPieces).map(([id, pos]:any) => (
                                     <DraggablePiece
                                         key={`placed-${id}`}
                                         id={id}
