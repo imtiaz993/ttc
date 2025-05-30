@@ -15,10 +15,9 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
   const [canvasReady, setCanvasReady] = useState(false);
   const isDrawing = useRef(false);
 
-
   useInactivity({time:3000,onInactivity:()=>{setShowAnimation(true)}, condition: () => {
-    return !isRevealed && !isDrawing.current;
-  }});
+      return !isRevealed && !isDrawing.current;
+    }});
 
   // Preload image and set up canvas immediately when component mounts
   useEffect(() => {
@@ -63,7 +62,6 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
     });
   }, []);
 
-
   const initializeCanvas = useCallback(() => {
     if (!canvasRef.current || isRevealed) return;
 
@@ -91,7 +89,6 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
     };
   }, [isRevealed]);
 
-
   useEffect(() => {
     if (!canvasRef.current) return;
 
@@ -101,7 +98,6 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
 
     return () => clearTimeout(timer);
   }, [initializeCanvas]);
-
 
   const handleScratch = useCallback((e) => {
     if (!isDrawing.current || isRevealed || !canvasReady) return;
@@ -165,12 +161,23 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
 
     const canvas = canvasRef.current;
 
-    const handleMouseDown = () => (isDrawing.current = true);
+    const handleMouseDown = () => {
+      isDrawing.current = true;
+      // Hide animation immediately when user starts interacting
+      if (showAnimation) {
+        setShowAnimation(false);
+      }
+    };
+
     const handleMouseUp = () => (isDrawing.current = false);
     const handleMouseLeave = () => (isDrawing.current = false);
     const handleTouchStart = (e) => {
       e.preventDefault();
       isDrawing.current = true;
+      // Hide animation immediately when user starts interacting
+      if (showAnimation) {
+        setShowAnimation(false);
+      }
     };
     const handleTouchEnd = () => (isDrawing.current = false);
 
@@ -194,17 +201,19 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
       canvas.removeEventListener("touchmove", handleScratch);
       canvas.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [canvasReady, isRevealed, handleScratch]);
+  }, [canvasReady, isRevealed, handleScratch, showAnimation]);
 
   useEffect(() => {
     setShowAnimation(animation);
   }, [animation]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAnimation(false);
-    }, 2000);
-    return () => clearTimeout(timer);
+    if (showAnimation) {
+      const timer = setTimeout(() => {
+        setShowAnimation(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
   }, [showAnimation]);
 
   return (
@@ -255,7 +264,10 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
                 />
             )}
             {showAnimation && (
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{ pointerEvents: 'none' }}
+                >
                   <Animation
                       animation={scratchAnimation}
                       loop={true}

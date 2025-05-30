@@ -31,9 +31,10 @@ const Feedback = () => {
     return new File([blob], fileName, {type: blob.type});
   };
 
+  // Updated validation schema to include required privacy policy
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
-    feedback: Yup.string().required("Feedback is required"),
+    policy2: Yup.boolean().oneOf([true], "You must accept the Privacy Policy to continue"),
   });
 
   const initialValues = {
@@ -103,7 +104,7 @@ const Feedback = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-              {({handleChange, isValid}) => (
+              {({handleChange, isValid, setFieldValue, values}) => (
                   <Form>
                     <div className=" my-6">
                       <div className="flex justify-between pb-2 border-b border-[#223100]">
@@ -136,32 +137,29 @@ const Feedback = () => {
                               el.style.height = "auto";
                               el.style.height = `${el.scrollHeight}px`;
                             }}
-                            placeholder="What should MAP to do next?"
+                            placeholder="What should MAP do next?"
                             className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent resize-none h-6 leading-6 max-h-[6rem]"
                         />
                       </div>
-                      <ErrorMessage
-                          name="feedback"
-                          component="div"
-                          className="text-red-500 text-xs mt-1"
-                      />
                     </div>
 
                     <div className="flex flex-col justify-center items-center">
                       <label className="text-xs flex items-center w-full gap-2 cursor-pointer">
-                        {/* Custom checkbox */}
+                        {/* Custom checkbox for policy1 */}
                         <div
                             className={`
-                                              w-[20px] h-[20px] rounded-[3px] border-2 flex items-center justify-center
+                                              w-[18px] h-[18px] rounded-[2px] border-2 flex items-center justify-center
                                               transition-all duration-200
-                                              ${isChecked ? 'bg-black border-black' : 'border-black hover:border-gray-900'}
+                                              ${values.policy1 ? 'bg-black border-black' : 'border-black hover:border-gray-900'}
                                             `}
                             style={{
-                              backgroundColor: isChecked ? 'black' : '#fff8e7',
+                              backgroundColor: values.policy1 ? 'black' : '#fff8e7',
                             }}
-                            onClick={toggleCheckbox}
+                            onClick={() => {
+                              setFieldValue('policy1', !values.policy1);
+                            }}
                         >
-                          {isChecked && (
+                          {values.policy1 && (
                               <svg
                                   className="w-4 h-4 text-white"
                                   fill="none"
@@ -181,14 +179,39 @@ const Feedback = () => {
                         <span className="flex-1">Receiving communication from MAP via Email and WhatsApp.</span>
                       </label>
 
-                      <label className="text-xs flex justify-center items-center  mt-3 w-full">
-                        <Field
-                            type="checkbox"
-                            name="policy2"
-                            className="mr-2 w-[24px] h-[24px] -mt-1"
-                        />
-                        <span className="w-[calc(100%-20px)]">
-                      Having my data stored as per MAP’s{" "}
+                      <label className="text-xs flex justify-center gap-2 items-center  mt-3 w-full">
+                        {/* Custom checkbox for policy2 - now required */}
+                        <div
+                            className={`
+                                              w-[18px] h-[18px] rounded-[2px] border-2 flex items-center justify-center
+                                              transition-all duration-200
+                                              ${values.policy2 ? 'bg-black border-black' : 'border-black hover:border-gray-900'}
+                                            `}
+                            style={{
+                              backgroundColor: values.policy2 ? 'black' : '#fff8e7',
+                            }}
+                            onClick={() => {
+                              setFieldValue('policy2', !values.policy2);
+                            }}
+                        >
+                          {values.policy2 && (
+                              <svg
+                                  className="w-4 h-4 text-white"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                              >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={3}
+                                    d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                          )}
+                        </div>
+                        <span className="w-[calc(100%-20px)] flex-1">
+                      Having my data stored as per MAP's{" "}
                           <span className="underline whitespace-nowrap">
                         Privacy Policy
                       </span>
@@ -197,7 +220,7 @@ const Feedback = () => {
                       <ErrorMessage
                           name="policy2"
                           component="div"
-                          className="text-red-500 text-xs w-full "
+                          className="text-red-500 text-xs w-full mt-1"
                       />
                     </div>
                     <div className="w-full mt-6">
@@ -216,7 +239,7 @@ const Feedback = () => {
             {formSubmitted && (
                 <div className="fixed inset-0 flex justify-center items-center">
                   <div className="mt-5 bg-[#202F00] rounded-full py-1.5 px-3 flex items-center w-fit">
-                    <img src="/icons/info.svg" alt="" className="w-6" />
+                    <img src="/icons/info.svg" alt="" className="w-6"/>
                     <p className="ml-2 text-xs text-[#FFF8E7]">
                       Submitted successfully!
                     </p>
