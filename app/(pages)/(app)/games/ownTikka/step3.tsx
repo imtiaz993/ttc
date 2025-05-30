@@ -47,9 +47,33 @@ const OwnTikkaStep3 = () => {
   // Generate unique ID for elements
   const generateId = () => `element_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-  // Handle element selection (max 3)
+  // Updated handleElementSelect function - now handles both select and deselect
   const handleElementSelect = (elementSrc) => {
-    if (selectedElements.length < 3 && !selectedElements.includes(elementSrc)) {
+    // Check if element is already selected - if yes, deselect it
+    if (selectedElements.includes(elementSrc)) {
+      // Find the element instance to remove
+      const elementToRemove = elementInstances.find(el => el.src === elementSrc);
+
+      // Remove from selectedElements array
+      setSelectedElements(selectedElements.filter(el => el !== elementSrc));
+
+      // Remove from elementInstances array
+      setElementInstances(elementInstances.filter(el => el.src !== elementSrc));
+
+      // Clear active element if it was the one being removed
+      if (elementToRemove && activeElementId === elementToRemove.id) {
+        setActiveElementId(null);
+      }
+
+      // Update selectedOptions.Elements to the last remaining element or empty
+      const remainingElements = selectedElements.filter(el => el !== elementSrc);
+      setSelectedOptions({
+        ...selectedOptions,
+        Elements: remainingElements.length > 0 ? remainingElements[remainingElements.length - 1] : ""
+      });
+    }
+    // If element is not selected and we haven't reached the limit, add it
+    else if (selectedElements.length < 3) {
       const newElement = {
         id: generateId(),
         src: elementSrc,
@@ -65,7 +89,25 @@ const OwnTikkaStep3 = () => {
     }
   };
 
-  // Remove element
+  // Alternative remove function for explicit removal
+  const removeElementBySrc = (elementSrc) => {
+    const elementToRemove = elementInstances.find(el => el.src === elementSrc);
+
+    setSelectedElements(selectedElements.filter(el => el !== elementSrc));
+    setElementInstances(elementInstances.filter(el => el.src !== elementSrc));
+
+    if (elementToRemove && activeElementId === elementToRemove.id) {
+      setActiveElementId(null);
+    }
+
+    const remainingElements = selectedElements.filter(el => el !== elementSrc);
+    setSelectedOptions({
+      ...selectedOptions,
+      Elements: remainingElements.length > 0 ? remainingElements[remainingElements.length - 1] : ""
+    });
+  };
+
+  // Remove element by ID (for elements on canvas)
   const removeElement = (elementId) => {
     const elementToRemove = elementInstances.find(el => el.id === elementId);
     setElementInstances(elementInstances.filter(el => el.id !== elementId));
@@ -216,7 +258,8 @@ const OwnTikkaStep3 = () => {
     tempTopText.innerText = customText;
     tempTopText.style.cssText = `
       position: absolute;
-      top: ${selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "-4px" :
+      top: ${selectedOptions.Border.includes("border-4") ? "-4px" :
+        selectedOptions.Border.includes("border-5") ? "-3px" :
         selectedOptions.Border.includes("border-6") ? "3px" :
             "-1px"};
       left: 0;
@@ -623,7 +666,8 @@ const OwnTikkaStep3 = () => {
                     value={customText}
                     maxLength={16}
                     style={{ fontSize: '10px', top:
-                          selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "2px" :
+                          selectedOptions.Border.includes("border-4") ? "2px" :
+                              selectedOptions.Border.includes("border-5") ? "3px" :
                               selectedOptions.Border.includes("border-6") ? "9px" :
                                   "4px" }}
                     onChange={(e) => setCustomText(e.target.value)}
@@ -637,7 +681,8 @@ const OwnTikkaStep3 = () => {
                 className="text-[10px] font-semibold text-center uppercase absolute z-40 w-full m-0 p-0"
                 style={{
                   top:
-                      selectedOptions.Border.includes("border-4") || selectedOptions.Border.includes("border-5") ? "2px" :
+                      selectedOptions.Border.includes("border-4") ? "2px" :
+                          selectedOptions.Border.includes("border-5") ? "3px" :
                           selectedOptions.Border.includes("border-6") ? "9px" :
                               "4px"
                 }}
@@ -670,7 +715,7 @@ const OwnTikkaStep3 = () => {
                               onClick={() =>
                                   setSelectedOptions({ ...selectedOptions, [selectedMenu]: option })
                               }
-                              className={`flex-shrink-0 ${
+                              className={`flex-shrink-0 cursor-pointer ${
                                   selectedOptions[selectedMenu] === option ? "font-semibold" : ""
                               }`}
                           >
@@ -679,26 +724,44 @@ const OwnTikkaStep3 = () => {
                       ) : selectedMenu === "Elements" ? (
                           <div key={index} className="relative flex-shrink-0 w-20">
                             {selectedElements.includes(option) && (
-                                <img
-                                    src="/icons/selected.svg"
-                                    alt=""
-                                    className="w-10 h-10 absolute translate-x-1/2 translate-y-1/2"
-                                />
+                                <>
+                                  {/* Selected indicator */}
+                                  <img
+                                      src="/icons/selected.svg"
+                                      alt=""
+                                      className="w-10 h-10 absolute translate-x-1/2 translate-y-1/2 z-10"
+                                  />
+                                  {/* Remove button */}
+                                  <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeElementBySrc(option);
+                                      }}
+                                      className="text-xl absolute top-3 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center font-bold z-20 transform translate-x-1/2 -translate-y-1/2 hover:bg-red-600"
+                                      title="Remove element"
+                                  >
+                                    ×
+                                  </button>
+                                </>
                             )}
+
                             <img
                                 src={option}
                                 alt=""
-                                className={`w-20 h-[100px] object-contain ${
+                                className={`w-20 h-[100px] object-contain cursor-pointer ${
                                     selectedElements.length >= 3 && !selectedElements.includes(option)
                                         ? "opacity-50 cursor-not-allowed"
-                                        : "cursor-pointer"
+                                        : ""
                                 }`}
                                 onClick={() => {
+                                  // Allow clicking if: we're under limit OR element is already selected (to deselect)
                                   if (selectedElements.length < 3 || selectedElements.includes(option)) {
                                     handleElementSelect(option);
                                   }
                                 }}
                             />
+
+                            {/* Max limit indicator */}
                             {selectedElements.length >= 3 && !selectedElements.includes(option) && (
                                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-xs font-bold rounded">
                                   MAX
@@ -717,7 +780,7 @@ const OwnTikkaStep3 = () => {
                             <img
                                 src={option}
                                 alt=""
-                                className="w-20 h-[100px] object-contain"
+                                className="w-20 h-[100px] object-contain cursor-pointer"
                                 onClick={() =>
                                     setSelectedOptions({ ...selectedOptions, [selectedMenu]: option })
                                 }
@@ -732,7 +795,7 @@ const OwnTikkaStep3 = () => {
                   <div
                       key={index}
                       onClick={() => setSelectedMenu(item.menu)}
-                      className={`border border-black rounded flex justify-center gap-2 py-[11px] w-full font-semibold ${
+                      className={`border border-black rounded flex justify-center gap-2 py-[11px] w-full font-semibold cursor-pointer ${
                           item.menu === selectedMenu
                               ? "bg-black text-white"
                               : "bg-transparent text-black"
