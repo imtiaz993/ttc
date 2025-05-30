@@ -26,7 +26,7 @@ const GameStepper = () => {
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
-console.log(step);
+  console.log(step);
 
   const getProgress = () => {
     let value = 0;
@@ -131,8 +131,11 @@ console.log(step);
             <div
               className="flex items-center"
               onClick={() => {
-                if (!isContinueDisabled) {
+                if (!isContinueDisabled && !showCamera) {
                   next();
+                }
+                if (showCamera) {
+                  onCameraClick();
                 }
               }}
             >
