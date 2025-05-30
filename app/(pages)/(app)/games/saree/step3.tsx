@@ -11,71 +11,117 @@ import {
 const SareeStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const [overlay, setOverlay] = useState(true);
-  const [sareePath, setSareePath] = useState("/images/saree-white.png");
+  const [firstSareePath, setFirstSareePath] = useState(
+    "/images/saree-white.png"
+  );
+  const [secondSareePath, setSecondSareePath] = useState(null);
+  const [resultSareePath, setResultSareePath] = useState(null);
   const [state, setState] = useState("initial");
   const [selectedColor, setSelectedColor] = useState([]);
   const [finalColor, setFinalColor] = useState("");
-  const [undoDisabled, setUndoDisabled] = useState(false);
+  const [undoDisabled, setUndoDisabled] = useState(true);
   const [resultColor, setResultColor] = useState<any>({});
+  const [firstSareeOpacity, setFirstSareeOpacity] = useState(1);
+  const [secondSareeOpacity, setSecondSareeOpacity] = useState(0);
+  const [resultSareeOpacity, setResultSareeOpacity] = useState(0);
   const results = [
-    { name: "Orange", color: "bg-[#FA9439]" },
-    { name: "Green", color: "bg-[#78CC87]" },
-    { name: "Purple", color: "bg-[#937DC5]" },
+    { name: "Orange", color: "bg-[#FA9439]", path: "/images/saree-orange.png" },
+    { name: "Green", color: "bg-[#78CC87]", path: "/images/saree-green.png" },
+    { name: "Purple", color: "bg-[#937DC5]", path: "/images/saree-purple.png" },
   ];
 
   useEffect(() => {
-    if (selectedColor[0] || selectedColor[1]) {
-      if (selectedColor[0] == "bg-[#EA5B7C]") {
-        setSareePath("/images/saree-red.png");
-      } else if (selectedColor[0] == "bg-[#F6D44C]") {
-        setSareePath("/images/saree-yellow.png");
-      } else if (selectedColor[0] == "bg-[#71B0DC]") {
-        setSareePath("/images/saree-blue.png");
+    let timeout1, timeout2;
+
+    if (selectedColor[0]) {
+      if (selectedColor[0] === "bg-[#EA5B7C]") {
+        setFirstSareePath("/images/saree-red.png");
+      } else if (selectedColor[0] === "bg-[#F6D44C]") {
+        setFirstSareePath("/images/saree-yellow.png");
+      } else if (selectedColor[0] === "bg-[#71B0DC]") {
+        setFirstSareePath("/images/saree-blue.png");
       }
       setUndoDisabled(false);
     } else {
-      setSareePath("/images/saree-white.png");
+      setFirstSareePath("/images/saree-white.png");
+      setSecondSareePath(null);
+      setResultSareePath(null);
       setUndoDisabled(true);
+      setFirstSareeOpacity(1);
+      setSecondSareeOpacity(0);
+      setResultSareeOpacity(0);
     }
+
     if (selectedColor[0] && selectedColor[1]) {
+      let newResultSareePath = "";
+      let newFinalColor = "";
+      if (selectedColor[1] === "bg-[#EA5B7C]") {
+        setSecondSareePath("/images/saree-red.png");
+      } else if (selectedColor[1] === "bg-[#F6D44C]") {
+        setSecondSareePath("/images/saree-yellow.png");
+      } else if (selectedColor[1] === "bg-[#71B0DC]") {
+        setSecondSareePath("/images/saree-blue.png");
+      }
       if (
         selectedColor.includes("bg-[#EA5B7C]") &&
         selectedColor.includes("bg-[#F6D44C]")
       ) {
-        setSareePath("/images/saree-orange.png");
-        setFinalColor("bg-[#FA9439]");
-        setTimeout(() => {
-          setState("result");
-        }, 1500);
+        newResultSareePath = "/images/saree-orange.png";
+        newFinalColor = "bg-[#FA9439]";
       } else if (
         selectedColor.includes("bg-[#F6D44C]") &&
         selectedColor.includes("bg-[#71B0DC]")
       ) {
-        setSareePath("/images/saree-green.png");
-        setFinalColor("bg-[#78CC87]");
-        setTimeout(() => {
-          setState("result");
-        }, 1500);
+        newResultSareePath = "/images/saree-green.png";
+        newFinalColor = "bg-[#78CC87]";
       } else if (
         selectedColor.includes("bg-[#EA5B7C]") &&
         selectedColor.includes("bg-[#71B0DC]")
       ) {
-        setSareePath("/images/saree-purple.png");
-        setFinalColor("bg-[#937DC5]");
-        setTimeout(() => {
-          setState("result");
-        }, 1500);
+        newResultSareePath = "/images/saree-purple.png";
+        newFinalColor = "bg-[#937DC5]";
       }
-    }
-    if (selectedColor.length < 2) {
+
+      // First second: Second color/saree fades in
+      setFirstSareeOpacity(1);
+      setSecondSareeOpacity(0);
+      setResultSareeOpacity(0);
+      setResultSareePath(newResultSareePath);
+      setFinalColor(newFinalColor);
+
+      timeout1 = setTimeout(() => {
+        setSecondSareeOpacity(0.5); // Second saree at half opacity
+        // Second second: Resultant color/saree fades in
+        timeout2 = setTimeout(() => {
+          setResultSareeOpacity(0.7); // Resultant saree at higher opacity
+          setState("result");
+        }, 500); // Start resultant fade-in at 2 seconds
+      }, 500); // Start second color/saree fade-in at 1 second
+    } else {
       setFinalColor("");
+      setSecondSareePath(null);
+      setResultSareePath(null);
+      setFirstSareeOpacity(1);
+      setSecondSareeOpacity(0);
+      setResultSareeOpacity(0);
     }
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
   }, [selectedColor]);
 
   const undo = () => {
     setSelectedColor([]);
     setState("initial");
-    setSareePath("/images/saree-white.png");
+    setFirstSareePath("/images/saree-white.png");
+    setSecondSareePath(null);
+    setResultSareePath(null);
+    setFinalColor("");
+    setFirstSareeOpacity(1);
+    setSecondSareeOpacity(0);
+    setResultSareeOpacity(0);
   };
 
   const setRandomColor = () => {
@@ -100,18 +146,15 @@ const SareeStep3 = () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
   }, [finalColor, state, resultColor]);
-
   return (
     <>
       <Menu
-        isGameOptions={state == "initial"}
-        handleInfo={() => {
-          setOverlay(true);
-        }}
+        isGameOptions={state === "initial"}
+        handleInfo={() => setOverlay(true)}
         isUndoDisabled={undoDisabled}
         handleUndo={undo}
       />
-      {state == "initial" ? (
+      {state === "initial" ? (
         <>
           {overlay && (
             <div>
@@ -126,9 +169,7 @@ const SareeStep3 = () => {
                     src="/icons/close-black.svg"
                     alt=""
                     className="w-6"
-                    onClick={() => {
-                      setOverlay(false);
-                    }}
+                    onClick={() => setOverlay(false)}
                   />
                 </div>
                 <p className="mt-2 text-sm">
@@ -143,7 +184,33 @@ const SareeStep3 = () => {
               Select the two colours that make up{" "}
               <span className="font-semibold">{resultColor?.name}</span>
             </p>
-            <img src={sareePath} alt="" className="w-64" />
+            <div className="relative w-64 h-[324px]">
+              <img
+                src={firstSareePath}
+                alt="First Saree"
+                className={`w-64 absolute top-0 left-0 transition-opacity duration-500 opacity-${Math.round(
+                  firstSareeOpacity * 100
+                )}`}
+              />
+              {secondSareePath && (
+                <img
+                  src={secondSareePath}
+                  alt="Second Saree"
+                  className={`w-64 absolute top-0 left-0 transition-opacity duration-500 opacity-${Math.round(
+                    secondSareeOpacity * 100
+                  )}`}
+                />
+              )}
+              {resultSareePath && (
+                <img
+                  src={resultSareePath}
+                  alt="Result Saree"
+                  className={`w-64 absolute top-0 left-0 transition-opacity duration-500 opacity-${Math.round(
+                    resultSareeOpacity * 100
+                  )}`}
+                />
+              )}
+            </div>
             <div className="w-full mt-12 flex justify-center items-center">
               <div
                 className={`rounded-full w-8 h-8 ${
@@ -175,13 +242,31 @@ const SareeStep3 = () => {
             </div>
             <div className="mt-10 flex justify-center items-center gap-6">
               {[
-                { color: "bg-[#EA5B7C]", name: "Red" },
-                { color: "bg-[#F6D44C]", name: "Yellow" },
-                { color: "bg-[#71B0DC]", name: "Blue" },
+                {
+                  color: "bg-[#EA5B7C]",
+                  name: "Red",
+                  path: "/images/saree-red.png",
+                },
+                {
+                  color: "bg-[#F6D44C]",
+                  name: "Yellow",
+                  path: "/images/saree-yellow.png",
+                },
+                {
+                  color: "bg-[#71B0DC]",
+                  name: "Blue",
+                  path: "/images/saree-blue.png",
+                },
               ].map((i, index) => (
                 <div key={index} className="flex flex-col items-center">
                   <div
-                    className={`flex justify-center items-center w-[60px] h-[60px] ${i.color} rounded-full`}
+                    className={`flex justify-center items-center w-[60px] h-[60px] ${
+                      i.color
+                    } rounded-full transition-transform duration-300 ${
+                      selectedColor.includes(i.color)
+                        ? "scale-105"
+                        : "scale-100"
+                    }`}
                     onClick={() => {
                       if (!selectedColor[0] || !selectedColor[1]) {
                         if (selectedColor.includes(i.color)) {
@@ -217,14 +302,17 @@ const SareeStep3 = () => {
           </div>
         </>
       ) : finalColor === resultColor.color ? (
-        <Success userData={userData} sareePath={sareePath} />
+        <Success
+          userData={userData}
+          sareePath={resultSareePath || firstSareePath}
+        />
       ) : (
         <Failure
           finalColor={finalColor}
           resultColor={resultColor}
           results={results}
           undo={undo}
-          sareePath={sareePath}
+          sareePath={resultSareePath || firstSareePath}
         />
       )}
     </>
