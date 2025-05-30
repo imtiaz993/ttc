@@ -47,6 +47,27 @@ const OwnTikkaStep3 = () => {
   // Generate unique ID for elements
   const generateId = () => `element_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
+  // Function to enable text editing
+  const enableTextEditing = () => {
+    setShowTextInput(true);
+  };
+
+  // Function to finish text editing
+  const finishTextEditing = () => {
+    setShowTextInput(false);
+  };
+
+  // Handle input blur and Enter key
+  const handleTextInputBlur = () => {
+    finishTextEditing();
+  };
+
+  const handleTextInputKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      finishTextEditing();
+    }
+  };
+
   // Updated handleElementSelect function - now handles both select and deselect
   const handleElementSelect = (elementSrc) => {
     // Check if element is already selected - if yes, deselect it
@@ -260,8 +281,8 @@ const OwnTikkaStep3 = () => {
       position: absolute;
       top: ${selectedOptions.Border.includes("border-4") ? "-4px" :
         selectedOptions.Border.includes("border-5") ? "-3px" :
-        selectedOptions.Border.includes("border-6") ? "3px" :
-            "-1px"};
+            selectedOptions.Border.includes("border-6") ? "3px" :
+                "-1px"};
       left: 0;
       width: 100%;
       text-align: center;
@@ -459,19 +480,22 @@ const OwnTikkaStep3 = () => {
     };
   }, []);
 
+  // Updated effect to show text input initially when all conditions are met
   useEffect(() => {
     if (
         selectedOptions.Background &&
         selectedOptions.Border &&
         selectedElements.length > 0 &&
-        selectedOptions.Text
+        selectedOptions.Text &&
+        customText === "" // Only show initially if no custom text yet
     ) {
       setShowTextInput(true);
     }
-  }, [selectedOptions, selectedElements]);
+  }, [selectedOptions, selectedElements, customText]);
 
+  // Focus input when it becomes visible
   useEffect(() => {
-    if (textInputRef.current) {
+    if (showTextInput && textInputRef.current) {
       textInputRef.current.focus();
     }
   }, [showTextInput]);
@@ -659,36 +683,46 @@ const OwnTikkaStep3 = () => {
                 />
             )}
 
+            {/* Input field for editing custom text */}
             {showTextInput && (
                 <input
                     ref={textInputRef}
                     type="text"
                     value={customText}
                     maxLength={16}
-                    style={{ fontSize: '10px', top:
-                          selectedOptions.Border.includes("border-4") ? "2px" :
-                              selectedOptions.Border.includes("border-5") ? "3px" :
+                    style={{
+                      fontSize: '10px',
+                      top: selectedOptions.Border.includes("border-4") ? "2px" :
+                          selectedOptions.Border.includes("border-5") ? "3px" :
                               selectedOptions.Border.includes("border-6") ? "9px" :
-                                  "4px" }}
+                                  "4px"
+                    }}
                     onChange={(e) => setCustomText(e.target.value)}
+                    onBlur={handleTextInputBlur}
+                    onKeyPress={handleTextInputKeyPress}
                     className="font-semibold outline-none text-center uppercase absolute z-40 w-full bg-transparent placeholder:text-black m-0 p-0"
+                    placeholder="Enter your text"
                     autoFocus
                 />
             )}
 
-            <p
-                ref={customTextRef}
-                className="text-[10px] font-semibold text-center uppercase absolute z-40 w-full m-0 p-0"
-                style={{
-                  top:
-                      selectedOptions.Border.includes("border-4") ? "2px" :
+            {/* Display text that can be clicked to edit */}
+            {!showTextInput && (
+                <p
+                    ref={customTextRef}
+                    onClick={enableTextEditing}
+                    className="text-[10px] font-semibold text-center uppercase absolute z-40 w-full m-0 p-0 cursor-pointer hover:opacity-80"
+                    style={{
+                      top: selectedOptions.Border.includes("border-4") ? "2px" :
                           selectedOptions.Border.includes("border-5") ? "3px" :
-                          selectedOptions.Border.includes("border-6") ? "9px" :
-                              "4px"
-                }}
-            >
-              {customText}
-            </p>
+                              selectedOptions.Border.includes("border-6") ? "9px" :
+                                  "4px"
+                    }}
+                    title="Click to edit text"
+                >
+                  {customText || "Click to add text"}
+                </p>
+            )}
 
             <p
                 ref={selectedTextRef}
