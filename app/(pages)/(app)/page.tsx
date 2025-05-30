@@ -68,6 +68,7 @@ export default function Home() {
         callback();
       } else if (
         ![1, 21, 22].includes(step) &&
+        !stepper.showCamera &&
         stepper.showNext &&
         userData.userData.showMenu == false &&
         userData.userData.overlay == false
@@ -136,12 +137,29 @@ export default function Home() {
 
   const ScratchGame = [
     <ScratchStep1 playMusic={playMusic} />,
-    <ScratchStep2 />,
+    <ScratchStep2
+      onMouseDown={handleDragStart}
+      onMouseMove={handleDragMove}
+      onMouseUp={handleDragEnd}
+      onTouchStart={handleDragStart}
+      onTouchMove={handleDragMove}
+      onTouchEnd={handleDragEnd}
+    />,
   ];
 
   const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
-  const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
+  const SpotTikka = [
+    <SpotTikkaStep1 />,
+    <SpotTikkaStep2
+      onMouseDown={handleDragStart}
+      onMouseMove={handleDragMove}
+      onMouseUp={handleDragEnd}
+      onTouchStart={handleDragStart}
+      onTouchMove={handleDragMove}
+      onTouchEnd={handleDragEnd}
+    />,
+  ];
 
   const WordsGame = [<WordsStep1 />, <WordsStep2 />, <WordsStep3 />];
 

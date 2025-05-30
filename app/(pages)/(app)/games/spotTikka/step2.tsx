@@ -21,7 +21,14 @@ const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
 });
 
-const SpotTikkaStep2 = () => {
+const SpotTikkaStep2 = ({
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+}) => {
   const userData = useSelector((state: any) => state.user.userData);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -47,7 +54,7 @@ const SpotTikkaStep2 = () => {
 
     const blob = await response.blob();
     console.log(blob, "blob data");
-    const mimeType = blob.type || 'image/png';
+    const mimeType = blob.type || "image/png";
     return new File([blob], filename, { type: mimeType });
   }
   async function fetchLocalImage() {
@@ -155,36 +162,39 @@ const SpotTikkaStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
-            <div className="w-full">
-              <div className="w-full flex items-start mb-6">
-                <div>
-                  <img
-                    src={`/images/${userData.char}.png`}
-                    alt=""
-                    className="w-11 rounded-lg"
-                  />
-                  <p className="mt-1 text-sm font-medium text-center">You</p>
-                </div>
-                <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
-                  Wow! All of this in a time without AI?
-                </p>
+          <div
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={() => {
+              if (verificationStatus === "initial")
+                onMouseUp({ forward: true }, () => {
+                  handleCameraClick();
+                });
+            }}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={() => {
+              if (verificationStatus === "initial")
+                onTouchEnd({ forward: true }, () => {
+                  handleCameraClick();
+                });
+            }}
+            className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope"
+          >
+            <div className="w-full flex items-start">
+              <div>
+                <img
+                  src={`/images/${userData.char}.png`}
+                  alt=""
+                  className="w-11 rounded-lg"
+                />
+                <p className="mt-1 text-sm font-medium text-center">You</p>
               </div>
-
-              <div className="bg-[#FDD931] w-full rounded py-3 px-4">
-                <div className="w-full flex items-center mb-2">
-                  <img src="/icons/zoom-in.svg" alt="" className="w-6" />
-                  <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-                    Spot this ticket in the exhibition
-                  </p>
-                </div>
-                <p className="mt-2 text-sm">
-                  Now take a picture of it to see what you discover next!
-                </p>
-              </div>
+              <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
+                Wow! All of this in a time without AI?
+              </p>
             </div>
-
-            <div className="relative mt-auto" onClick={handleCameraClick}>
+            <div className="relative mt-10 mb-6" onClick={handleCameraClick}>
               <div className="relative z-20">
                 <Animation
                   animation={scanningAnimation}
@@ -197,6 +207,17 @@ const SpotTikkaStep2 = () => {
                 alt=""
                 className="w-[164px] absolute top-[35px] left-[46px] z-10"
               />
+            </div>
+            <div className="bg-[#FDD931] w-full rounded py-3 px-4">
+              <div className="w-full flex items-center mb-2">
+                <img src="/icons/zoom-in.svg" alt="" className="w-6" />
+                <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
+                  Spot this ticket in the exhibition
+                </p>
+              </div>
+              <p className="mt-2 text-sm">
+                Now take a picture of it to see what you discover next!
+              </p>
             </div>
           </div>
         );
@@ -215,7 +236,10 @@ const SpotTikkaStep2 = () => {
         const formData = new FormData();
         formData.append("image1", file1);
 
-        const localImageFile =  await convertImageUrlToFile("/images/graham-bombay.png","graham-bombay.png");
+        const localImageFile = await convertImageUrlToFile(
+          "/images/graham-bombay.png",
+          "graham-bombay.png"
+        );
         formData.append("image2", localImageFile, "local-image.png");
 
         const response = await axios.post(

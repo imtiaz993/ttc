@@ -20,7 +20,14 @@ const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
 });
 
-const ScratchStep2 = () => {
+const ScratchStep2 = ({
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+}) => {
   const userData = useSelector((state: any) => state.user.userData);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -43,7 +50,7 @@ const ScratchStep2 = () => {
     }
     const blob = await response.blob();
     console.log(blob, "blob data");
-    const mimeType = blob.type || 'image/png';
+    const mimeType = blob.type || "image/png";
     return new File([blob], filename, { type: mimeType });
   }
 
@@ -91,7 +98,10 @@ const ScratchStep2 = () => {
         const formData = new FormData();
         formData.append("image1", file1);
 
-        const localImageFile = await convertImageUrlToFile("/images/camera-scanning-art.png","camera-scanning-art.png");
+        const localImageFile = await convertImageUrlToFile(
+          "/images/camera-scanning-art.png",
+          "camera-scanning-art.png"
+        );
         formData.append("image2", localImageFile, "local-image.jpg");
 
         const response = await axios.post(
@@ -188,7 +198,25 @@ const ScratchStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
+          <div
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={() => {
+              if (verificationStatus === "initial")
+                onMouseUp({ forward: true }, () => {
+                  handleCameraClick();
+                });
+            }}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={() => {
+              if (verificationStatus === "initial")
+                onTouchEnd({ forward: true }, () => {
+                  handleCameraClick();
+                });
+            }}
+            className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="w-full flex items-start mb-4">
               <div>
                 <img
