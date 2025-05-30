@@ -17,6 +17,7 @@ const ScratchStep1 = ({ playMusic = () => {} }: any) => {
     dispatch(
       setStepperProps({
         iswhite: true,
+        showPrev: false,
       })
     );
     return () => {

@@ -1,9 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import SwipeOverlay from "../../components/swipeOverlay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const OwnTikkaStep2 = () => {
   const dispatch = useDispatch();
@@ -21,6 +25,17 @@ const OwnTikkaStep2 = () => {
       return !overlay;
     },
   });
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showContinue: true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
 
   return (
     <>

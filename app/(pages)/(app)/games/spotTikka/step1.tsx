@@ -16,6 +16,7 @@ const SpotTikkaStep1 = () => {
     dispatch(
       setStepperProps({
         iswhite: true,
+        showContinue:true,
       })
     );
     return () => {

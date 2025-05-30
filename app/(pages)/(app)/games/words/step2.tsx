@@ -96,7 +96,8 @@ const WordsStep2 = () => {
     dispatch(
       setStepperProps({
         showPrev: false,
-        showNext: selectedWords.length > 0,
+        showContinue: true,
+        isContinueDisabled: selectedWords.length < 3,
       })
     );
     return () => {
@@ -280,7 +281,7 @@ const WordsStep2 = () => {
               className="outline-none placeholder:text-[#00000040] text-sm font-semibold bg-transparent w-full"
             />
             <img
-              src="/icons/plus.svg"
+              src={word?"/icons/plus.svg":"/icons/plus-disabled.svg"}
               alt=""
               className="w-6"
               onClick={handleAddWord}

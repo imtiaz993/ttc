@@ -16,6 +16,8 @@ const PuzzleStep1 = () => {
     dispatch(
       setStepperProps({
         iswhite: true,
+        showContinue: true,
+        continueText: "START",
       })
     );
     return () => {

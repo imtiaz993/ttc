@@ -10,69 +10,76 @@ const GameStepper = () => {
     showPrev,
     onCameraClick,
     reduceProgress,
+    showContinue,
+    continueText = "CONTINUE",
+    isContinueDisabled = false,
   } = useSelector((state: any) => state.stepper);
 
   const steps = [
     { step: [2], icon: "/images/game1.png" },
-    { step: [3], icon: "/images/game2.png" },
-    { step: [6], icon: "/images/game3.png" },
-    { step: [8], icon: "/images/game4.png" },
-    { step: [13, 14], icon: "/images/game5.png" },
-    { step: [19, 20], icon: "/images/game6.png" },
+    { step: [4], icon: "/images/game2.png" },
+    { step: [7], icon: "/images/game3.png" },
+    { step: [9], icon: "/images/game4.png" },
+    { step: [14, 15], icon: "/images/game5.png" },
+    { step: [20, 21], icon: "/images/game6.png" },
   ];
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
+console.log(step);
 
   const getProgress = () => {
     let value = 0;
     switch (step) {
       case 3:
-        value = 18;
+        value = 10;
         break;
       case 4:
-        value = 26;
+        value = 22;
         break;
       case 5:
-        value = 30;
+        value = 26;
         break;
       case 6:
-        value = 38;
+        value = 30;
         break;
       case 7:
-        value = 46;
+        value = 38;
         break;
       case 8:
-        value = 58;
+        value = 46;
         break;
       case 9:
-        value = 62;
+        value = 58;
         break;
       case 10:
+        value = 62;
+        break;
       case 11:
+      case 12:
         value = 66;
         break;
-      case 12:
+      case 13:
         value = 69;
         break;
-      case 13:
       case 14:
+      case 15:
         value = 76;
         break;
-      case 15:
+      case 16:
         value = 80;
         break;
-      case 16:
+      case 17:
         value = 83;
         break;
-      case 17:
+      case 18:
         value = 86;
         break;
-      case 18:
+      case 19:
         value = 89;
         break;
-      case 19:
       case 20:
+      case 21:
         value = 100;
         break;
       default:
@@ -121,15 +128,35 @@ const GameStepper = () => {
             />
           )}
           {showNext && (
-            <img
-              src="/icons/swipe-arrow-dark.svg"
-              alt=""
-              className="w-6 rotate-180"
+            <div
+              className="flex items-center"
               onClick={() => {
-                next();
+                if (!isContinueDisabled) {
+                  next();
+                }
               }}
-            />
+            >
+              {showContinue && (
+                <p
+                  className={`text-sm font-manrope font-medium mr-2 ${
+                    isContinueDisabled ? "text-[#817c74]" : ""
+                  }`}
+                >
+                  {continueText || "CONTINUE"}
+                </p>
+              )}
+              <img
+                src={
+                  isContinueDisabled
+                    ? "/icons/swipe-arrow-dark-disabled.svg"
+                    : "/icons/swipe-arrow-dark.svg"
+                }
+                alt=""
+                className="w-6 rotate-180"
+              />
+            </div>
           )}
+          <p></p>
         </div>
       </div>
       <div className="relative">
@@ -172,7 +199,7 @@ const GameStepper = () => {
               <img
                 src={item.icon}
                 alt={`Step ${index + 1}`}
-                className="w-full h-full object-cover cursor-pointer"
+                className="w-6 h-6 object-cover cursor-pointer"
               />
             </div>
           ))}
