@@ -16,6 +16,7 @@ const OwnTikkaStep1 = () => {
     dispatch(
       setStepperProps({
         iswhite: true,
+        showContinue: true,
       })
     );
     return () => {

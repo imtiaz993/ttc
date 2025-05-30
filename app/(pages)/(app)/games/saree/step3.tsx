@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
 import Success from "./success";
 import Failure from "./failure";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const SareeStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
@@ -84,18 +87,19 @@ const SareeStep3 = () => {
     setRandomColor();
   }, []);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(
       setStepperProps({
         showPrev: false,
-        showNext: finalColor === resultColor.color,
+        showNext: state == "result" && finalColor === resultColor.color,
+        showContinue: state == "result" && finalColor === resultColor.color,
       })
     );
     return () => {
       dispatch(resetStepperProps()); // This resets to initialState
     };
-  }, [finalColor,resultColor]);
+  }, [finalColor, state, resultColor]);
 
   return (
     <>

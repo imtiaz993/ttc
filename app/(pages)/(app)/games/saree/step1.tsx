@@ -74,6 +74,7 @@ const SareeStep1 = () => {
     dispatch(
       setStepperProps({
         showPrev: false,
+        showContinue: true,
       })
     );
     return () => {
@@ -135,18 +136,23 @@ const SareeStep1 = () => {
               setPlaySound(!playSound);
             }}
           >
-            <div className="w-full flex justify-between items-center mb-2 font-manrope">
+            <div className="w-full flex justify-start items-center mb-2 font-manrope">
               <img
                 src={playSound ? "/icons/pause.svg" : "/icons/sound.svg"}
                 alt=""
                 className="w-6"
               />
               <p
-                className={`ml-2 text-sm font-semibold w-[calc(100%-24px)] ${
+                className={`ml-2 flex items-center text-sm font-semibold w-[calc(100%-24px)] ${
                   playSound ? "underline" : ""
                 }`}
               >
                 Chromolithography
+                <img
+                  src={"/icons/volume.svg"}
+                  alt=""
+                  className="w-[18px] ml-1"
+                />
               </p>
             </div>
             <p className="mt-2 text-sm">

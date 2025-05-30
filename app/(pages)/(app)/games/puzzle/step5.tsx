@@ -14,17 +14,6 @@ const PuzzleStep5 = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      setStepperProps({
-        showPrev: false,
-      })
-    );
-    return () => {
-      dispatch(resetStepperProps()); // This resets to initialState
-    };
-  }, []);
-
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({

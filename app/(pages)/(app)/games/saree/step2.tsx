@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import Menu from "../../components/menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
 import SwipeOverlay from "../../components/swipeOverlay";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const SareeStep2 = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.user.userData);
-  
+
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
@@ -21,6 +25,17 @@ const SareeStep2 = () => {
       return !overlay;
     },
   });
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showContinue: true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
 
   return (
     <>

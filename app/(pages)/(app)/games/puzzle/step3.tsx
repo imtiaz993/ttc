@@ -44,7 +44,7 @@ const PuzzleStep3 = () => {
     dispatch(
       setStepperProps({
         showNext: !overlay,
-        showPrev: false,
+        showPrev: !overlay,
       })
     );
     return () => {

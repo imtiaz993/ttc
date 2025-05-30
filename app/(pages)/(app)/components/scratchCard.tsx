@@ -237,17 +237,17 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
           textile business after all!
         </p>
         <div className="flex justify-center items-center mb-32">
-          <div className="relative w-60 aspect-square">
+          <div className="relative w-52 aspect-square">
             <img
                 src={selectedImage}
                 alt=""
-                className="w-56 object-cover"
+                className="w-52 object-cover"
                 onLoad={() => setImageLoaded(true)}
             />
             {!isRevealed && (
                 <canvas
                     ref={canvasRef}
-                    className="absolute top-0 left-0 w-60 h-full touch-none cursor-crosshair"
+                    className="absolute top-0 left-0 w-52 h-full touch-none cursor-crosshair"
                     style={{
                       pointerEvents: canvasReady ? 'auto' : 'none',
                       opacity: canvasReady ? 1 : 0.8

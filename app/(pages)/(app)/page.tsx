@@ -2,11 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMute } from "../../redux/slices/userSlice";
+import { nextStep, prevStep } from "../../redux/slices/navigationSlice";
 
 import Welcome from "./components/welcome";
 
 import ScratchStep1 from "./games/scratch/step1";
 import ScratchStep2 from "./games/scratch/step2";
+import ScratchStep3 from "./games/scratch/step3";
 
 import SareeStep1 from "./games/saree/step1";
 import SareeStep2 from "./games/saree/step2";
@@ -33,7 +35,6 @@ import Feedback from "./components/feedback";
 import Thankyou from "./components/thankyou";
 import GameStepper from "./components/gameStepper";
 import WordsStep3 from "./games/words/step3";
-import { nextStep, prevStep } from "../../redux/slices/navigationSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,12 +63,14 @@ export default function Home() {
   };
 
   const handleDragEnd = (data?: any, callback?: any) => {
+    console.log("TEST");
+    
     const screenWidth = window.innerWidth;
     if (dragPosition < -screenWidth * 0.25) {
       if (data.forward && callback) {
         callback();
       } else if (
-        ![1, 21, 22].includes(step) &&
+        ![1, 22, 23].includes(step) &&
         !stepper.showCamera &&
         stepper.showNext &&
         userData.userData.showMenu == false &&
@@ -77,7 +80,7 @@ export default function Home() {
       }
     } else if (
       dragPosition > screenWidth * 0.25 &&
-      ![1, 21, 22].includes(step) &&
+      ![1, 22, 23].includes(step) &&
       stepper.showPrev &&
       userData.userData.showMenu == false &&
       userData.userData.overlay == false
@@ -137,7 +140,8 @@ export default function Home() {
 
   const ScratchGame = [
     <ScratchStep1 playMusic={playMusic} />,
-    <ScratchStep2
+    <ScratchStep2 />,
+    <ScratchStep3
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
@@ -208,7 +212,7 @@ export default function Home() {
         onTouchMove={handleDragMove}
         onTouchEnd={handleDragEnd}
       >
-        {![1, 21, 22].includes(step) && <GameStepper />}
+        {![1, 22, 23].includes(step) && <GameStepper />}
         {components[step - 1]}
       </div>
     </>

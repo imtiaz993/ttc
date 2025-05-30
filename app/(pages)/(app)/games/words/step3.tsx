@@ -4,6 +4,7 @@ import Menu from "../../components/menu";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
 import SwipeOverlay from "../../components/swipeOverlay";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const WordsStep3 = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,17 @@ const WordsStep3 = () => {
       return !overlay;
     },
   });
+
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showContinue:true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
 
   return (
     <>

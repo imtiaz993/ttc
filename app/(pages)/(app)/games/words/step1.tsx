@@ -17,6 +17,7 @@ const WordsStep1 = () => {
       setStepperProps({
         iswhite: true,
         showPrev: false,
+        showContinue: true,
       })
     );
     return () => {
