@@ -147,7 +147,7 @@ const DraggablePiece = ({ id, image, left, top, row, col, pieceWidth, pieceHeigh
     );
 };
 
-
+// Fixed DropZone component - removed green background
 const DropZone = ({ id, left, top, onDrop, hasPiece, pieceWidth, pieceHeight }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: PieceType,
@@ -167,7 +167,7 @@ const DropZone = ({ id, left, top, onDrop, hasPiece, pieceWidth, pieceHeight }) 
         height: pieceHeight,
         border: isOver && canDrop ? '2px dashed #4CAF50' : '1px dashed #999',
         boxSizing: 'border-box',
-        backgroundColor: isOver && canDrop ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
+        backgroundColor: 'transparent',
         transition: 'all 0.2s ease',
         zIndex: isOver ? 5 : 0,
         borderRadius: isOver && canDrop ? '4px' : '0',
@@ -182,6 +182,7 @@ const DropZone = ({ id, left, top, onDrop, hasPiece, pieceWidth, pieceHeight }) 
     );
 };
 
+// Also fixed PiecesContainerDropZone to remove any potential background color changes
 const PiecesContainerDropZone = ({ onDrop, children, isDragging }) => {
     const [{ isOver }, drop] = useDrop({
         accept: PieceType,
@@ -207,6 +208,7 @@ const PiecesContainerDropZone = ({ onDrop, children, isDragging }) => {
                 padding: '10px',
                 borderRadius: isOver ? '8px' : '0',
                 transition: 'all 0.3s ease',
+                backgroundColor: 'transparent', // Ensure no background color changes
             }}
         >
             {children}
@@ -259,6 +261,7 @@ const PuzzleStep2 = () => {
         localStorage.setItem("puzzle-time", JSON.stringify(formattedTime));
         return formattedTime;
     };
+
     const handleOverlayClose = () => {
         setOverlay(false);
     };
@@ -297,14 +300,14 @@ const PuzzleStep2 = () => {
     });
 
     const initialLayout = [
-        {id: "piece-0", top: 100, left:30},
-        {id: "piece-1", top: 0, left:0},
-        {id: "piece-2", top: 80, left:140},
-        {id: "piece-3", top: 130, left:120},
-        {id: "piece-4", top: 0, left:160},
-        {id: "piece-5", top: 140, left:10},
-        {id: "piece-6", top: 20, left:30},
-        {id: "piece-7", top: 135, left:160},
+        {id: "piece-0", top: 100, left:10},
+        {id: "piece-1", top: 0, left:-20},
+        {id: "piece-2", top: 80, left:120},
+        {id: "piece-3", top: 130, left:100},
+        {id: "piece-4", top: 0, left:140},
+        {id: "piece-5", top: 140, left:-10},
+        {id: "piece-6", top: 20, left:10},
+        {id: "piece-7", top: 135, left:140},
     ];
 
     useEffect(() => {
@@ -334,7 +337,6 @@ const PuzzleStep2 = () => {
             return monitor.subscribeToStateChange(handleDragStateChange);
         }
     }, []);
-
 
     useEffect(() => {
         if (isCompleted) {
@@ -480,7 +482,6 @@ const PuzzleStep2 = () => {
                         <div
                             className="game-container"
                             style={{
-                                backgroundColor: '#FAF7E8',
                                 minHeight: '100vh',
                                 padding: '10px',
                             }}
