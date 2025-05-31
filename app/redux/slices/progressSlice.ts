@@ -5,6 +5,9 @@ const initialState = {
   showCamera: false,
   showNext: true,
   showPrev: true,
+  showContinue: false,
+  continueText: "",
+  isContinueDisabled: false,
   reduceProgress: 0,
   onCameraClick: () => {},
 };

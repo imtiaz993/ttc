@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import Menu from "../../components/menu";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import Menu from "../../components/menu";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import failureAnimation from "../../../animation/IR Try again.json";
@@ -13,15 +12,15 @@ import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
-import SwipeOverlay from "../../components/swipeOverlay";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
 });
 
-const SpotTikkaStep2 = ({
+const ScratchStep3 = ({
   onMouseDown,
   onMouseMove,
   onMouseUp,
@@ -33,7 +32,7 @@ const SpotTikkaStep2 = ({
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
-  const [verificationStatus, setVerificationStatus] = useState("initial");
+  const [verificationStatus, setVerificationStatus] = useState("initial"); // "initial", "verifying", "success", "failure"
   const [attempts, setAttempts] = useState(0);
 
   const handleCameraClick = () => {
@@ -41,25 +40,18 @@ const SpotTikkaStep2 = ({
       fileInputRef.current.click();
     }
   };
+
   async function convertImageUrlToFile(imageUrl, filename) {
     const response = await fetch(imageUrl);
-
     const contentType = response.headers.get("Content-Type");
-    console.log("Fetched content-type:", contentType); // Debug
-
     if (!response.ok || !contentType?.startsWith("image/")) {
       console.error("Image fetch failed or not an image");
       return null;
     }
-
     const blob = await response.blob();
     console.log(blob, "blob data");
     const mimeType = blob.type || "image/png";
     return new File([blob], filename, { type: mimeType });
-  }
-  async function fetchLocalImage() {
-    const response = await fetch("/images/spot-tikka.png");
-    return await response.blob();
   }
 
   const handleSkip = () => {
@@ -96,51 +88,95 @@ const SpotTikkaStep2 = ({
     },
   });
 
+  const handleImageCapture = async (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const file1 = event.target.files[0];
+
+      try {
+        // Set status to verifying
+        setVerificationStatus("verifying");
+
+        const formData = new FormData();
+        formData.append("image1", file1);
+
+        const localImageFile = await convertImageUrlToFile(
+          "/images/camera-scanning-art.png",
+          "camera-scanning-art.png"
+        );
+        formData.append("image2", localImageFile, "local-image.jpg");
+
+        const response = await axios.post(
+          "https://ttc-master-be.onrender.com/api/compare-images",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log("API response:", response.data);
+
+        // Update status based on API response
+        if (response.data.isMatched) {
+          setVerificationStatus("success");
+        } else {
+          setVerificationStatus("failure");
+          setAttempts(attempts + 1);
+        }
+      } catch (error) {
+        console.error("Error processing images:", error);
+        console.error(
+          "Error details:",
+          error.response ? error.response.data : error.message
+        );
+        setVerificationStatus("failure");
+        setAttempts(attempts + 1);
+      }
+    }
+  };
+
   const renderVerificationStatus = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
-            <div className="w-full">
-              <div className="mt-10 mb-6 flex flex-col items-center">
-                <Animation
-                  animation={verifyingAnimation}
-                  height={154}
-                  width={154}
-                />
-                <p className="font-medium text-sm mt-7">
-                  Verifying your picture...
-                </p>
-              </div>
+          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+            <div className="mt-10 mb-6 flex flex-col justify-center items-center">
+              <Animation
+                animation={verifyingAnimation}
+                height={154}
+                width={154}
+              />
+              <p className="font-medium text-sm mt-7">
+                Verifying your picture...
+              </p>
             </div>
           </div>
         );
       case "success":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
-            <div className="w-full">
-              <div className="flex flex-col items-center">
-                <Animation
-                  animation={successAnimation}
-                  height={154}
-                  width={154}
-                />
-                <p className="font-medium text-sm mt-7">Great job!</p>
-                <p className="text-center text-sm mt-2">
-                  You got it right in the first go
-                </p>
-              </div>
+          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+            <div className="mt-10 mb-6 flex flex-col items-center">
+              <Animation
+                animation={successAnimation}
+                height={137}
+                width={137}
+              />
+              <p className="font-medium text-sm mt-7">Great job!</p>
+              <p className="text-center text-sm mt-2">
+                You got it right in the first go
+              </p>
             </div>
           </div>
         );
       case "failure":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
-            <div className="flex flex-col items-center">
+          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+            <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
               <Animation animation={failureAnimation} height={81} width={81} />
-              <p className="font-medium text-sm mt-7">Oops! Not quite.</p>
+              <p className="font-medium mt-7">Oops! Not quite.</p>
               <p className="text-center text-sm mt-2">
-                How about we have another go?
+                Have another go before these big cats disappear into the wild!
               </p>
             </div>
             <div className="px-4 absolute bottom-14 w-full grid grid-cols-2 gap-4">
@@ -180,22 +216,25 @@ const SpotTikkaStep2 = ({
                   handleCameraClick();
                 });
             }}
-            className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope"
+            className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
           >
-            <div className="w-full flex items-start">
+            <div className="w-full flex items-start mb-4">
               <div>
                 <img
                   src={`/images/${userData.char}.png`}
+                  height={0}
+                  width={0}
                   alt=""
                   className="w-11 rounded-lg"
                 />
                 <p className="mt-1 text-sm font-medium text-center">You</p>
               </div>
-              <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
-                Wow! All of this in a time without AI?
+              <p className="ml-4 font-medium w-[calc(100%-44px)]">
+                I love that I have a smartphone to help me solve this ancient
+                mystery!
               </p>
             </div>
-            <div className="relative mt-10 mb-6" onClick={handleCameraClick}>
+            <div className="mt-10 mb-6 relative" onClick={handleCameraClick}>
               <div className="relative z-20">
                 <Animation
                   animation={scanningAnimation}
@@ -204,16 +243,26 @@ const SpotTikkaStep2 = ({
                 />
               </div>
               <img
-                src="/images/spot-tikka.png"
+                src="/images/camera-scanning-art.png"
+                sizes="100vw"
+                height={0}
+                width={0}
                 alt=""
-                className="w-[164px] absolute top-[35px] left-[46px] z-10"
+                className="w-28 absolute top-[52px] left-[70px] z-10"
               />
             </div>
-            <div className="bg-[#FDD931] w-full rounded py-3 px-4">
-              <div className="w-full flex items-center mb-2">
-                <img src="/icons/zoom-in.svg" alt="" className="w-6" />
+            <div className="bg-[#FDD931] rounded py-3 px-4">
+              <div className="w-full flex items-start mb-2">
+                <img
+                  src="/icons/zoom-in.svg"
+                  height={0}
+                  width={0}
+                  alt=""
+                  className="w-6"
+                />
                 <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-                  Spot this ticket in the exhibition
+                  Find this colorful image of a lion & lioness within a glass
+                  case around you
                 </p>
               </div>
               <p className="mt-2 text-sm">
@@ -222,56 +271,6 @@ const SpotTikkaStep2 = ({
             </div>
           </div>
         );
-    }
-  };
-
-  const handleImageCapture = async (event) => {
-    console.log(event.target.files[0], "event.target.files[0]");
-    if (event.target.files && event.target.files[0]) {
-      const file1 = event.target.files[0];
-
-      try {
-        // Set status to verifying
-        setVerificationStatus("verifying");
-
-        const formData = new FormData();
-        formData.append("image1", file1);
-
-        const localImageFile = await convertImageUrlToFile(
-          "/images/graham-bombay.png",
-          "graham-bombay.png"
-        );
-        formData.append("image2", localImageFile, "local-image.png");
-
-        const response = await axios.post(
-          "https://ttc-master-be.onrender.com/api/compare-images",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-
-        console.log("API response:", response.data);
-
-        // Update status based on API response
-        if (response.data.isMatched) {
-          setVerificationStatus("success");
-          // You might want to add a timeout to move to the next step on success
-        } else {
-          setVerificationStatus("failure");
-          setAttempts(attempts + 1);
-        }
-      } catch (error) {
-        console.error("Error processing images:", error);
-        console.error(
-          "Error details:",
-          error.response ? error.response.data : error.message
-        );
-        setVerificationStatus("failure");
-        setAttempts(attempts + 1);
-      }
     }
   };
 
@@ -292,4 +291,4 @@ const SpotTikkaStep2 = ({
   );
 };
 
-export default SpotTikkaStep2;
+export default ScratchStep3;

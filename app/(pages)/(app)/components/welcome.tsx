@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep } from "../../../redux/slices/navigationSlice";
 import { closeOverlay, setUserData } from "../../../redux/slices/userSlice";
 import SwipeOverlay from "./swipeOverlay";
+import { useInactivity } from "../../../hooks/useInactivity";
 
 const Welcome = ({
   onMouseDown,
@@ -18,6 +19,16 @@ const Welcome = ({
   const [disabled, setDisabled] = useState(true);
   const userData = useSelector((state: any) => state.user.userData);
   const next = () => dispatch(nextStep());
+
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
 
   const updateUserData = (data) => dispatch(setUserData(data));
 
@@ -76,7 +87,7 @@ const Welcome = ({
           <p className="text-[#D02E01] font-medium text-center font-manrope">
             Welcome to
           </p>
-          <img src="/icons/logo.svg" alt="" className="w-[260px] mb-10" />
+          <img src="/icons/logo.svg" alt="" className="w-[235px] mb-10" />
           <img
             src="/images/welcome-divider.png"
             alt=""

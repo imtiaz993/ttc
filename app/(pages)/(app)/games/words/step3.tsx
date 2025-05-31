@@ -4,6 +4,7 @@ import Menu from "../../components/menu";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
 import SwipeOverlay from "../../components/swipeOverlay";
+import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
 
 const WordsStep3 = () => {
   const dispatch = useDispatch();
@@ -35,11 +36,22 @@ const WordsStep3 = () => {
     },
   });
 
+  useEffect(() => {
+    dispatch(
+      setStepperProps({
+        showContinue:true,
+      })
+    );
+    return () => {
+      dispatch(resetStepperProps()); // This resets to initialState
+    };
+  }, []);
+
   return (
     <>
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
-      <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+      <div className="h-full pt-16 pb-20 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div className="w-full flex justify-between items-start">
           <div>
             <img
@@ -56,6 +68,9 @@ const WordsStep3 = () => {
               <br /> Different strokes for different folk, I suppose.
             </p>
           </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <img src="/images/graham-bombay.png" alt="" className="w-40" />
         </div>
         <div className="min-h-28 w-full">
           <div className="w-full flex flex-wrap gap-4 max-h-80 overflow-auto">
