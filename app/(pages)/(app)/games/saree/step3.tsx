@@ -31,7 +31,7 @@ const SareeStep3 = () => {
   ];
 
   useEffect(() => {
-    let timeout1, timeout2;
+    let timeout1, timeout2, timeout3;
 
     if (selectedColor[0]) {
       if (selectedColor[0] === "bg-[#EA5B7C]") {
@@ -94,9 +94,12 @@ const SareeStep3 = () => {
         // Second second: Resultant color/saree fades in
         timeout2 = setTimeout(() => {
           setResultSareeOpacity(0.7); // Resultant saree at higher opacity
-          setState("result");
-        }, 500); // Start resultant fade-in at 2 seconds
-      }, 500); // Start second color/saree fade-in at 1 second
+          // Add delay before transitioning to result screen
+          timeout3 = setTimeout(() => {
+            setState("result");
+          }, 2000); // 1-second delay before moving to Success/Failure
+        }, 500); // Start resultant fade-in at 0.5 seconds
+      }, 500); // Start second color/saree fade-in at 0.5 seconds
     } else {
       setFinalColor("");
       setSecondSareePath(null);
@@ -109,6 +112,7 @@ const SareeStep3 = () => {
     return () => {
       clearTimeout(timeout1);
       clearTimeout(timeout2);
+      clearTimeout(timeout3); // Clear the new timeout
     };
   }, [selectedColor]);
 
