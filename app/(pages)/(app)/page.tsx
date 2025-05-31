@@ -204,7 +204,7 @@ export default function Home() {
   return (
     <>
       <div
-        className="h-dvh"
+        className="h-dvh max-h-[1000px]"
         onMouseDown={handleDragStart}
         onMouseMove={handleDragMove}
         onMouseUp={handleDragEnd}
