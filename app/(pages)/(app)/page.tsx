@@ -100,13 +100,11 @@ export default function Home() {
     bgMusicRef.current.loop = false; // Disable loop for sequential play
 
     const playNext = () => {
-      currentIndex++;
-      if (currentIndex < audioFiles.length) {
-        bgMusicRef.current.src = audioFiles[currentIndex];
-        bgMusicRef.current
-          .play()
-          .catch((error) => console.error("Play failed:", error));
-      }
+      currentIndex = (currentIndex + 1) % audioFiles.length; // Reset to 0 when reaching the end
+      bgMusicRef.current.src = audioFiles[currentIndex];
+      bgMusicRef.current
+        .play()
+        .catch((error) => console.error("Play failed:", error));
     };
 
     bgMusicRef.current.addEventListener("ended", playNext);
