@@ -41,7 +41,7 @@ const SwipeOverlay = ({ setOverlay, setDisabled = () => {} }: any) => {
 
   return (
     <div
-      className="fixed inset-0 bg-[#00000040] z-20"
+      className="fixed inset-0 bg-[#00000040] z-20 max-w-md h-full w-full max-h-[1000px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
       onTouchMove={handleDragMove}
@@ -54,7 +54,7 @@ const SwipeOverlay = ({ setOverlay, setDisabled = () => {} }: any) => {
       }}
     >
       <div
-        className="fixed z-20 right-0 left-0 bottom-0 w-full flex flex-col justify-center h-20"
+        className="absolute z-20 right-0 left-0 bottom-0 w-full flex flex-col justify-center h-20 max-w-md max-h-[1000px]"
         style={{
           backgroundImage: "url('/images/overlay-yellow.png')",
           backgroundSize: "contain",

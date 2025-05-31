@@ -97,8 +97,8 @@ export default function RootLayout({ children }) {
           content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"
         />
       </head>
-      <body className="min-h-dvh max-h-dvh overflow-hidden">
-        <div className="sm:hidden h-dvh overflow-hidden">
+      <body className="min-h-dvh max-h-dvh flex justify-center items-center overflow-hidden">
+        <div className="h-dvh overflow-hidden max-w-md max-h-[1000px] mx-auto">
           {/* Preloader with GIF */}
           {isLoading && (
             <div
@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
           </div>
           <PreloadImages />
         </div>
-        <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100 font-manrope">
+        {/* <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100 font-manrope">
           <div className="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white max-w-md">
             <svg
               className="w-16 h-16 text-blue-500 mb-4"
@@ -148,7 +148,7 @@ export default function RootLayout({ children }) {
               your smartphone for the best experience.
             </p>
           </div>
-        </div>
+        </div> */}
       </body>
     </html>
   );

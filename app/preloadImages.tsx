@@ -82,6 +82,7 @@ const PreloadImages = () => {
     "/icons/check-white.svg",
     "/icons/close-black.svg",
     "/icons/close.svg",
+    "/icons/cancel.svg",
     "/icons/download.svg",
     "/icons/emoji.svg",
     "/icons/equal.svg",

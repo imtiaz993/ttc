@@ -51,7 +51,7 @@ const Welcome = ({
         <SwipeOverlay setOverlay={setOverlay} setDisabled={setDisabled} />
       )}
       <div
-        className="relative flex flex-col justify-center items-center border-transparent h-dvh"
+        className="relative flex flex-col justify-center items-center border-transparent h-dvh max-h-[1000px]"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={() => {

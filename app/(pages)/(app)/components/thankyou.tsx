@@ -1,7 +1,7 @@
 const Thankyou = () => {
   return (
     <div
-      className="flex flex-col justify-center items-center border-transparent h-dvh px-12"
+      className="flex flex-col justify-center items-center border-transparent h-dvh px-12 max-h-[1000px]"
       style={{
         backgroundImage: "url('/images/welcome-frame.png')",
         backgroundSize: "contain",
