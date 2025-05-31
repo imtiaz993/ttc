@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Menu from "./menu";
 import {nextStep} from "../../../redux/slices/navigationSlice";
 import {setUserData} from "../../../redux/slices/userSlice";
+import PrivacyPolicy from "./privacyPolicy";
 
 const Feedback = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Feedback = () => {
   const [submitting, setIsSubmitting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
   };
@@ -81,6 +83,7 @@ const Feedback = () => {
   return (
       <>
         <Menu/>
+      {showPrivacy &&  <PrivacyPolicy setShowPrivacy={setShowPrivacy} />}
         <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
           <img
               src={`/images/${userData.char}.png`}
@@ -212,7 +215,7 @@ const Feedback = () => {
                         </div>
                         <span className="w-[calc(100%-20px)] flex-1">
                       Having my data stored as per MAP's{" "}
-                          <span className="underline whitespace-nowrap">
+                          <span className="underline whitespace-nowrap" onClick={()=>{setShowPrivacy(true)}}>
                         Privacy Policy
                       </span>
                     </span>
