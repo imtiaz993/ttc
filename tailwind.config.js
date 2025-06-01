@@ -8,6 +8,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        xs: "390px",
+      },
       fontFamily: {
         lora: ["lora", "serif"],
         manrope: ["manrope", "sans-serif"],

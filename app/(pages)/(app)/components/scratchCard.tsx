@@ -234,7 +234,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
             </p>
           </div>
         </div>
-        <p className="text-sm mb-6 font-playwriteDEGrund font-light">
+        <p className="text-sm font-playwriteDEGrund font-light xs:mb-6">
           Dearest diary,
           <br/>
           Last evening we had one of Papa's merchant friends over. He brought us
@@ -245,7 +245,7 @@ const ScratchCard = ({isRevealed, setIsRevealed, animation}) => {
           Can't wait to show it to my closest friend Selma.Her family's in the
           textile business after all!
         </p>
-        <div className="flex justify-center items-center mb-32">
+        <div className="scale-[0.85] xs:scale-100 flex justify-center items-center mb-32">
           <div className="relative w-52 aspect-square">
             <img
                 src={selectedImage}
