@@ -1,94 +1,7 @@
-"use client";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import PreloadImages from "./preloadImages";
 import "./globals.css";
-import { useEffect, useState } from "react";
+import Wrapper from "./Wrapper";
 
 export default function RootLayout({ children }) {
-  const [isLoading, setIsLoading] = useState(true); // Preloader state
-
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        // Load critical assets
-        const assets = [
-          "/videos/welcome-video.mp4",
-          "/icons/logo.svg",
-          "/images/welcome-divider.png",
-          "/images/map-logo.png",
-          "/icons/swipe-arrow.svg",
-          "/icons/swipe-arrow-forward.svg",
-          "/images/overlay-yellow.png",
-          "/icons/arrow-forward.svg",
-          "/images/loading.gif",
-        ];
-
-        await Promise.all(
-          assets.map(
-            (src) =>
-              new Promise((resolve) => {
-                if (src.endsWith(".mp4")) {
-                  const video = document.createElement("video");
-                  video.src = src;
-                  // Ensure video is preloaded
-                  video.preload = "auto";
-                  // iOS may require muted for autoplay
-                  video.muted = true;
-                  video.onloadeddata = () => {
-                    console.log(`Loaded video: ${src}`);
-                    resolve(true);
-                  };
-                  video.onerror = (err) => {
-                    console.error(`Error loading video ${src}:`, err);
-                    resolve(true); // Resolve even on error
-                  };
-                  // Start loading
-                  video.load();
-                } else {
-                  const img = new Image();
-                  img.src = src;
-                  img.onload = () => {
-                    console.log(`Loaded image: ${src}`);
-                    resolve(true);
-                  };
-                  img.onerror = (err) => {
-                    console.error(`Error loading image ${src}:`, err);
-                    resolve(true); // Resolve even on error
-                  };
-                }
-              })
-          )
-        );
-
-        // Check document.readyState
-        if (document.readyState === "complete") {
-          console.log("Document already complete");
-          setIsLoading(false);
-        } else {
-          window.onload = () => {
-            console.log("window.onload triggered");
-            setIsLoading(false);
-          };
-        }
-      } catch (error) {
-        console.error("Error loading assets:", error);
-        setIsLoading(false); // Hide preloader on error
-      }
-    };
-
-    loadContent();
-
-    // Fallback timeout to hide preloader after 10 seconds
-    const timeout = setTimeout(() => {
-      console.log("Fallback timeout triggered");
-      setIsLoading(false);
-    }, 10000);
-
-    // Cleanup timeout on unmount
-    return () => clearTimeout(timeout);
-  }, []);
-
   return (
     <html lang="en">
       <head>
@@ -98,57 +11,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-dvh max-h-dvh flex justify-center items-center overflow-hidden">
-        <div className="h-dvh overflow-hidden max-w-md max-h-[1000px] mx-auto">
-          {/* Preloader with GIF */}
-          {isLoading && (
-            <div
-              className="fixed inset-0 bg-white flex items-center justify-center z-50"
-              style={{
-                opacity: isLoading ? 1 : 0,
-                transition: "opacity 0.5s ease-out",
-                pointerEvents: isLoading ? "auto" : "none",
-              }}
-            >
-              <img
-                src="/images/preloader.gif"
-                alt="Loading"
-                className="w-32 h-32"
-              />
-            </div>
-          )}
-          <div
-            className="h-dvh"
-            style={{ pointerEvents: isLoading ? "none" : "auto" }}
-          >
-            <Provider store={store}>{children}</Provider>
-          </div>
-          <PreloadImages />
-        </div>
-        {/* <div className="hidden sm:flex flex-col justify-center items-center h-dvh bg-gray-100 font-manrope">
-          <div className="flex flex-col items-center text-center p-6 rounded-lg shadow bg-white max-w-md">
-            <svg
-              className="w-16 h-16 text-blue-500 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-              />
-            </svg>
-            <h1 className="text-2xl font-semibold text-gray-800 mb-2">
-              Mobile-Only Access
-            </h1>
-            <p className="text-gray-600 mb-4">
-              This application is designed for mobile devices. Please open it on
-              your smartphone for the best experience.
-            </p>
-          </div>
-        </div> */}
+        <Wrapper>{children}</Wrapper>
       </body>
     </html>
   );
