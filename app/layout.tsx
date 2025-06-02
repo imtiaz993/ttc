@@ -9,7 +9,7 @@ export const metadata = {
         title: "Timeless Ticket Tales",
         description:"",
         image: "/images/opengraph-image.jpg",
-        url:"http://ttc-delta.vercel.app/",
+        url:"http://ttc-delta.vercel.app",
         alt: "",
       },
     ],
