@@ -174,12 +174,14 @@ const WordsStep2 = () => {
         JSON.stringify(updatedSelectedWords)
       );
     } else {
-      const updatedSelectedWords = [...selectedWords, wordItem];
-      setSelectedWords(updatedSelectedWords);
-      localStorage.setItem(
-        "selectedWordsData",
-        JSON.stringify(updatedSelectedWords)
-      );
+      if (selectedWords.length < 3) {
+        const updatedSelectedWords = [...selectedWords, wordItem];
+        setSelectedWords(updatedSelectedWords);
+        localStorage.setItem(
+          "selectedWordsData",
+          JSON.stringify(updatedSelectedWords)
+        );
+      }
     }
   };
 
@@ -267,7 +269,9 @@ const WordsStep2 = () => {
           </div>
           <div
             className={`mt-5 pb-2 border-b border-[#223100] flex justify-between ${
-              customWordCount < 2 ? "visible" : "invisible"
+              customWordCount < 2 && selectedWords.length < 3
+                ? "visible"
+                : "invisible"
             }`}
           >
             <input
@@ -281,7 +285,7 @@ const WordsStep2 = () => {
               className="outline-none placeholder:text-[#00000040] text-sm font-semibold bg-transparent w-full"
             />
             <img
-              src={word?"/icons/plus.svg":"/icons/plus-disabled.svg"}
+              src={word ? "/icons/plus.svg" : "/icons/plus-disabled.svg"}
               alt=""
               className="w-6"
               onClick={handleAddWord}
