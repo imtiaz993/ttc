@@ -7,9 +7,9 @@ export const metadata = {
     images: [
       {
         title: "Timeless Ticket Tales",
-        description:"",
+        description: "",
         image: "/images/opengraph-image.jpg",
-        url:"http://ttc-delta.vercel.app",
+        url: "https://ttc-delta.vercel.app",
         alt: "",
       },
     ],
@@ -26,6 +26,10 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"
         />
+        {/* <meta property="og:title" content="Timeless Ticket Tales" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="cloudinary-image-url" />
+        <meta property="og:url" content="https://ugwu-opg.netlify.app/" /> */}
       </head>
       <body className="min-h-dvh max-h-dvh flex justify-center items-center overflow-hidden">
         <Wrapper>{children}</Wrapper>
