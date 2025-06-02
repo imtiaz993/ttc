@@ -1,6 +1,23 @@
 import "./globals.css";
 import Wrapper from "./Wrapper";
 
+export const metadata = {
+  openGraph: {
+    siteName: "Timeless Ticket Tales",
+    images: [
+      {
+        title: "Timeless Ticket Tales",
+        description:"",
+        image: "/images/opengraph-image.jpg",
+        url:"http://ttc-delta.vercel.app/",
+        alt: "",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
