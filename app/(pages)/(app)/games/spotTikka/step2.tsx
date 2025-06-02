@@ -36,7 +36,8 @@ const SpotTikkaStep2 = ({
   const [verificationStatus, setVerificationStatus] = useState("initial");
   const [attempts, setAttempts] = useState(0);
 
-  const handleCameraClick = () => {
+  const handleCameraClick = (e) => {
+    e.preventDefault();
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -166,18 +167,18 @@ const SpotTikkaStep2 = ({
           <div
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
-            onMouseUp={() => {
+            onMouseUp={(e) => {
               if (verificationStatus === "initial")
                 onMouseUp({ forward: true }, () => {
-                  handleCameraClick();
+                  handleCameraClick(e);
                 });
             }}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
-            onTouchEnd={() => {
+            onTouchEnd={(e) => {
               if (verificationStatus === "initial")
                 onTouchEnd({ forward: true }, () => {
-                  handleCameraClick();
+                  handleCameraClick(e);
                 });
             }}
             className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope"

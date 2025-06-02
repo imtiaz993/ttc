@@ -35,7 +35,8 @@ const ScratchStep3 = ({
   const [verificationStatus, setVerificationStatus] = useState("initial"); // "initial", "verifying", "success", "failure"
   const [attempts, setAttempts] = useState(0);
 
-  const handleCameraClick = () => {
+  const handleCameraClick = (e) => {
+    e.preventDefault();
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -202,18 +203,18 @@ const ScratchStep3 = ({
           <div
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
-            onMouseUp={() => {
+            onMouseUp={(e) => {
               if (verificationStatus === "initial")
                 onMouseUp({ forward: true }, () => {
-                  handleCameraClick();
+                  handleCameraClick(e);
                 });
             }}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
-            onTouchEnd={() => {
+            onTouchEnd={(e) => {
               if (verificationStatus === "initial")
                 onTouchEnd({ forward: true }, () => {
-                  handleCameraClick();
+                  handleCameraClick(e);
                 });
             }}
             className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
@@ -234,7 +235,10 @@ const ScratchStep3 = ({
                 mystery!
               </p>
             </div>
-            <div className="mt-4 xs:mt-10 mb-4 xs:mb-6 relative scale-90 xs:scale-100" onClick={handleCameraClick}>
+            <div
+              className="mt-4 xs:mt-10 mb-4 xs:mb-6 relative scale-90 xs:scale-100"
+              onClick={handleCameraClick}
+            >
               <div className="relative z-20">
                 <Animation
                   animation={scanningAnimation}
