@@ -113,7 +113,7 @@ const SareeStep1 = () => {
             <p className="text-sm">
               <p className="mt-4 font-playwriteDEGrund"> Dearest Kamla, </p>
             </p>
-            <p className="text-sm mb-6 font-playwriteDEGrund">
+            <p className="text-sm mb-4 xs:mb-6 font-playwriteDEGrund">
               <p className="mb-2">
                 Papa says tikas are printed in their thousands using this ultra
                 modern  technique called Chromolithography
@@ -129,7 +129,7 @@ const SareeStep1 = () => {
             </p>
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-2 xs:mt-5">
           <div
             className="bg-[#FDD931] rounded py-3 px-4"
             onClick={() => {

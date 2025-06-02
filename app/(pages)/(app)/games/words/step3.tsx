@@ -72,7 +72,7 @@ const WordsStep3 = () => {
         <div className="flex justify-center items-center">
           <img src="/images/graham-bombay.png" alt="" className="w-40" />
         </div>
-        <div className="min-h-28 w-full">
+        <div className="mt-2 min-h-28 w-full">
           <div className="w-full flex flex-wrap gap-4 max-h-80 overflow-auto">
             {selectedWords.length > 0 ? (
               selectedWords.map((i, index) => (

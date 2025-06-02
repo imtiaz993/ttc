@@ -26,7 +26,9 @@ const OwnTikkaStep4 = () => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Download failed:", error);
-      alert("Failed to download image. Try long-pressing the image to save manually.");
+      alert(
+        "Failed to download image. Try long-pressing the image to save manually."
+      );
     }
   };
 
@@ -56,10 +58,10 @@ const OwnTikkaStep4 = () => {
 
   useEffect(() => {
     dispatch(
-        setStepperProps({
-          showNext: false,
-          showPrev: false,
-        })
+      setStepperProps({
+        showNext: false,
+        showPrev: false,
+      })
     );
     return () => {
       dispatch(resetStepperProps()); // This resets to initialState
@@ -67,139 +69,138 @@ const OwnTikkaStep4 = () => {
   }, []);
 
   return (
-      <>
-        <Menu showContinue={true} />
-        <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
-          <div className="flex justify-center items-center mb-5">
-            <img
-                src={userData.createdTika}
-                alt=""
-                className="object-contain w-72"
-                style={{ width: "288px", height: "384px" }}
-            />
-          </div>
+    <>
+      <Menu showContinue={true} />
+      <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+        <div className="flex justify-center items-center mb-5">
+          <img
+            src={userData.createdTika}
+            alt=""
+            className="object-contain w-[270px] xs:w-[288px] h-[350px] xs:h-[384px]"
+          />
+        </div>
 
-          <div>
-            <div className="w-full flex items-start mb-10">
-              <div>
-                <img
-                    src={`/images/${userData.char}.png`}
-                    alt=""
-                    className="w-11 rounded-lg"
-                />
-                <p className="mt-1 text-sm font-medium text-center">You</p>
-              </div>
-              <p className="ml-4 font-medium w-[calc(100%-44px)]">
-                Look at that! I just made my first Ticket. I should save it.
-              </p>
+        <div>
+          <div className="w-full flex items-start mb-4 xs:mb-10">
+            <div>
+              <img
+                src={`/images/${userData.char}.png`}
+                alt=""
+                className="w-11 rounded-lg"
+              />
+              <p className="mt-1 text-sm font-medium text-center">You</p>
             </div>
-            <div className="w-full grid grid-cols-2 gap-4">
-              <button
-                  onClick={downloadImage}
-                  className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
+            <p className="ml-4 font-medium w-[calc(100%-44px)]">
+              Look at that! I just made my first Ticket. I should save it.
+            </p>
+          </div>
+          <div className="w-full grid grid-cols-2 gap-4">
+            <button
+              onClick={downloadImage}
+              className="border border-black bg-transparent rounded font-semibold flex justify-center py-3 w-full"
+            >
+              <img src="/icons/download.svg" alt="" className="w-6 mr-2" />
+              Download
+            </button>
+            <button
+              onClick={shareImage}
+              className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
+            >
+              <img src="/icons/share.svg" alt="" className="w-6 mr-2" />
+              Share
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-50">
+          <div className="bg-white w-full rounded-t-2xl p-6 shadow-xl">
+            <h3 className="text-lg font-bold mb-4 text-center">Share Tika</h3>
+            <div className="grid grid-cols-3 gap-4 text-center text-sm font-medium">
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(
+                  userData.createdTika
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center"
               >
-                <img src="/icons/download.svg" alt="" className="w-6 mr-2" />
-                Download
+                <img
+                  src="/icons/whatsapp.svg"
+                  alt="WhatsApp"
+                  className="w-8 mb-1"
+                />
+                WhatsApp
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  userData.createdTika
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center"
+              >
+                <img
+                  src="/icons/facebook.svg"
+                  alt="Facebook"
+                  className="w-8 mb-1"
+                />
+                Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                  userData.createdTika
+                )}&text=Check+out+this+Tika!`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center"
+              >
+                <img
+                  src="/icons/twitter.svg"
+                  alt="Twitter"
+                  className="w-8 mb-1"
+                />
+                Twitter
+              </a>
+              <a
+                href={`https://t.me/share/url?url=${encodeURIComponent(
+                  userData.createdTika
+                )}&text=Check+out+this+Tika!`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center"
+              >
+                <img
+                  src="/icons/telegram.svg"
+                  alt="Telegram"
+                  className="w-8 mb-1"
+                />
+                Telegram
+              </a>
+              <button
+                onClick={copyToClipboard}
+                className="flex flex-col items-center"
+              >
+                <img
+                  src="/icons/link.svg"
+                  alt="Copy Link"
+                  className="w-8 mb-1"
+                />
+                Copy Link
               </button>
               <button
-                  onClick={shareImage}
-                  className="text-[#FFF8E7] font-semibold rounded flex justify-center bg-black border border-black py-3 w-full"
+                onClick={() => setShowShareModal(false)}
+                className="col-span-3 mt-4 bg-black text-white py-2 rounded"
               >
-                <img src="/icons/share.svg" alt="" className="w-6 mr-2" />
-                Share
+                Cancel
               </button>
             </div>
           </div>
         </div>
-
-        {/* Share Modal */}
-        {showShareModal && (
-            <div className="fixed inset-0 z-50 flex items-end justify-center bg-black bg-opacity-50">
-              <div className="bg-white w-full rounded-t-2xl p-6 shadow-xl">
-                <h3 className="text-lg font-bold mb-4 text-center">Share Tika</h3>
-                <div className="grid grid-cols-3 gap-4 text-center text-sm font-medium">
-                  <a
-                      href={`https://wa.me/?text=${encodeURIComponent(
-                          userData.createdTika
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center"
-                  >
-                    <img
-                        src="/icons/whatsapp.svg"
-                        alt="WhatsApp"
-                        className="w-8 mb-1"
-                    />
-                    WhatsApp
-                  </a>
-                  <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                          userData.createdTika
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center"
-                  >
-                    <img
-                        src="/icons/facebook.svg"
-                        alt="Facebook"
-                        className="w-8 mb-1"
-                    />
-                    Facebook
-                  </a>
-                  <a
-                      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                          userData.createdTika
-                      )}&text=Check+out+this+Tika!`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center"
-                  >
-                    <img
-                        src="/icons/twitter.svg"
-                        alt="Twitter"
-                        className="w-8 mb-1"
-                    />
-                    Twitter
-                  </a>
-                  <a
-                      href={`https://t.me/share/url?url=${encodeURIComponent(
-                          userData.createdTika
-                      )}&text=Check+out+this+Tika!`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center"
-                  >
-                    <img
-                        src="/icons/telegram.svg"
-                        alt="Telegram"
-                        className="w-8 mb-1"
-                    />
-                    Telegram
-                  </a>
-                  <button
-                      onClick={copyToClipboard}
-                      className="flex flex-col items-center"
-                  >
-                    <img
-                        src="/icons/link.svg"
-                        alt="Copy Link"
-                        className="w-8 mb-1"
-                    />
-                    Copy Link
-                  </button>
-                  <button
-                      onClick={() => setShowShareModal(false)}
-                      className="col-span-3 mt-4 bg-black text-white py-2 rounded"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-        )}
-      </>
+      )}
+    </>
   );
 };
 

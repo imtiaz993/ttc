@@ -585,7 +585,7 @@ const OwnTikkaStep3 = () => {
               </div>
             </div>
         )}
-        <div className={`h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope `}>
+        <div className={`h-full pt-10 xs:pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope `}>
           <div
               id="ticket-container"
               ref={ticketContainerRef}
@@ -738,7 +738,7 @@ const OwnTikkaStep3 = () => {
             </p>
           </div>
 
-          <div className="px-4 w-full absolute bottom-14">
+          <div className="px-4 w-full absolute bottom-12 xs:bottom-14">
             <div className="w-full flex gap-3 flex-row justify-between items-center overflow-x-auto">
               {menu
                   .find((menuItem) => menuItem.menu === selectedMenu)
@@ -824,7 +824,7 @@ const OwnTikkaStep3 = () => {
                   )}
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-4">
+            <div className="mt-4 xs:mt-5 grid grid-cols-2 gap-3 xs:gap-4">
               {menu.map((item, index) => (
                   <div
                       key={index}

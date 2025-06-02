@@ -215,7 +215,7 @@ const SareeStep3 = () => {
                 />
               )}
             </div>
-            <div className="w-full mt-12 flex justify-center items-center">
+            <div className="w-full mt-6 xs:mt-12 flex justify-center items-center">
               <div
                 className={`rounded-full w-8 h-8 ${
                   selectedColor[0]

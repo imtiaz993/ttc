@@ -234,7 +234,7 @@ const ScratchStep3 = ({
                 mystery!
               </p>
             </div>
-            <div className="mt-10 mb-6 relative" onClick={handleCameraClick}>
+            <div className="mt-4 xs:mt-10 mb-4 xs:mb-6 relative scale-90 xs:scale-100" onClick={handleCameraClick}>
               <div className="relative z-20">
                 <Animation
                   animation={scanningAnimation}
