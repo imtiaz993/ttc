@@ -8,7 +8,7 @@ export const metadata = {
       {
         title: "Timeless Ticket Tales",
         description: "",
-        image: "/images/opengraph-image.jpg",
+        image: "/opengraph-image.jpg",
         url: "https://ttc-delta.vercel.app",
         alt: "",
       },
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         />
         <meta property="og:title" content="Timeless Ticket Tales" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/opengraph-image.jpg" />
+        <meta property="og:image" content="/opengraph-image.jpg" />
         <meta property="og:url" content="https://ttc-delta.vercel.app" />
       </head>
       <body className="min-h-dvh max-h-dvh flex justify-center items-center overflow-hidden">
