@@ -585,11 +585,11 @@ const OwnTikkaStep3 = () => {
               </div>
             </div>
         )}
-        <div className={`h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope`}>
+        <div className={`h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope `}>
           <div
               id="ticket-container"
               ref={ticketContainerRef}
-              className="w-60 h-80 mb-16 relative touch-manipulation"
+              className="w-60 h-80 mb-16 relative touch-manipulation scale-[0.85] xs:scale-90"
               style={{
                 backgroundImage: selectedOptions.Background
                     ? `url(${selectedOptions.Background})`

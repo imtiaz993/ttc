@@ -84,17 +84,21 @@ const Welcome = ({
           src="/videos/welcome-video.mp4"
         />
         <div className="relative z-10 flex flex-col justify-center items-center">
-          <p className="text-[#D02E01] font-medium text-center font-manrope">
+          <p className="scale-90 xs:scale-100 text-[#D02E01] font-medium text-center font-manrope">
             Welcome to
           </p>
-          <img src="/icons/logo.svg" alt="" className="w-[235px] mb-10" />
+          <img
+            src="/icons/logo.svg"
+            alt=""
+            className="scale-90 xs:scale-100 w-[235px] mb-10"
+          />
           <img
             src="/images/welcome-divider.png"
             alt=""
             className="w-full px-12"
           />
         </div>
-        <div className="relative z-10 mt-7 px-5">
+        <div className="scale-90 xs:scale-100 relative z-10 mt-7 px-5">
           <p className="text-[#D02E01] text-sm mb-6 text-center font-playwriteDEGrund">
             A world within a world…
             <br /> Messages from a time forgotten…

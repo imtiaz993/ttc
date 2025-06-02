@@ -200,25 +200,27 @@ const Menu = ({
               </p>
               <div className="flex justify-between overflow-auto gap-4 mb-5 pb-5">
                 {Array.from({ length: 4 }).map((_, index) => (
-                  <img
-                    key={index}
-                    src={
-                      userData.char == `char${index + 1}`
-                        ? `/images/char${index + 1}.png`
-                        : `/images/char${index + 1}-inactive.png`
-                    }
-                    height={75}
-                    width={75}
-                    decoding="sync"
-                    alt=""
-                    className="cursor-pointer object-cover rounded-full"
-                    onClick={() => {
-                      updateUserData({
-                        ...userData,
-                        char: `char${index + 1}`,
-                      });
-                    }}
-                  />
+                  <div>
+                    <img
+                      key={index}
+                      src={
+                        userData.char == `char${index + 1}`
+                          ? `/images/char${index + 1}.png`
+                          : `/images/char${index + 1}-inactive.png`
+                      }
+                      height={75}
+                      width={75}
+                      decoding="sync"
+                      alt=""
+                      className="cursor-pointer object-cover rounded-full"
+                      onClick={() => {
+                        updateUserData({
+                          ...userData,
+                          char: `char${index + 1}`,
+                        });
+                      }}
+                    />
+                  </div>
                 ))}
               </div>
               <div>

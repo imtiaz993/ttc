@@ -244,7 +244,7 @@ const SareeStep3 = () => {
                 }`}
               ></div>
             </div>
-            <div className="mt-10 flex justify-center items-center gap-6">
+            <div className="mt-6 flex justify-center items-center gap-6">
               {[
                 {
                   color: "bg-[#EA5B7C]",

@@ -69,7 +69,7 @@ const ScratchStep2 = () => {
           How delightfully vibrant and colourful they are! I wonder how they are
           made?
         </p>
-        <div className="flex justify-center items-center mt-6">
+        <div className="scale-[0.85] xs:scale-100 flex justify-center items-center mt-2 xs:mt-6">
           <img src="/images/scratch-2.png" alt="" className="w-[178px]" />
         </div>
       </div>
