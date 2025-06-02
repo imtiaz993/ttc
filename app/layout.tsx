@@ -1,16 +1,19 @@
 import "./globals.css";
 import Wrapper from "./Wrapper";
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://ttc-delta.vercel.app";
+
 export const metadata = {
   openGraph: {
     url: "https://ttc-delta.vercel.app",
     type: "website",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: `${baseUrl}/opengraph-image.jpg`, // Absolute URL
         width: 1200,
         height: 630,
-        alt: "",
+        alt: "Website OG Image", // Add a descriptive alt text
       },
     ],
   },
