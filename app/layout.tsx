@@ -5,6 +5,7 @@ export const metadata = {
   openGraph: {
     url: "https://ttc-delta.vercel.app",
     type: "website",
+    title: "Timeless Ticket Tales",
     images: [
       {
         url: `https://ttc-delta.vercel.app/opengraph-image.jpg`, // Absolute URL
