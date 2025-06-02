@@ -3,18 +3,16 @@ import Wrapper from "./Wrapper";
 
 export const metadata = {
   openGraph: {
-    siteName: "Timeless Ticket Tales",
+    url: "https://ttc-delta.vercel.app",
+    type: "website",
     images: [
       {
-        title: "Timeless Ticket Tales",
-        description: "",
-        image: "https://ttc-delta.vercel.app/opengraph-image.jpg",
-        url: "https://ttc-delta.vercel.app/opengraph-image.jpg",
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
         alt: "",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
 };
 
