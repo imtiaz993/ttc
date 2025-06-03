@@ -107,7 +107,7 @@ const ScratchStep3 = ({
         formData.append("image2", localImageFile, "local-image.jpg");
 
         const response = await axios.post(
-          "https://ttc-master-be.onrender.com/api/compare-images",
+          "https://human-vg-speaks-uh.trycloudflare.com/api/compare-images",
           formData,
           {
             headers: {
