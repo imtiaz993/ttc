@@ -4,7 +4,10 @@ import Menu from "../../components/menu";
 import { openOverlay } from "../../../../redux/slices/userSlice";
 import { useInactivity } from "../../../../hooks/useInactivity";
 import SwipeOverlay from "../../components/swipeOverlay";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const WordsStep3 = () => {
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ const WordsStep3 = () => {
   useEffect(() => {
     dispatch(
       setStepperProps({
-        showContinue:true,
+        showContinue: true,
       })
     );
     return () => {
@@ -63,9 +66,11 @@ const WordsStep3 = () => {
           </div>
           <div className="ml-4 w-[calc(100%-46px-16px)]">
             <p className="font-medium">
-              I am beginning to see that tickets could mean whatever people
-              wanted them to mean. 
-              <br /> Different strokes for different folk, I suppose.
+              So that’s how it worked! Customers could make all kinds of
+              connections.
+              <br />
+              <br />
+              It’s rather nice isn’t it? Different strokes for different folk!
             </p>
           </div>
         </div>

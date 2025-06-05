@@ -91,7 +91,7 @@ const OwnTikkaStep4 = () => {
               <p className="mt-1 text-sm font-medium text-center">You</p>
             </div>
             <p className="ml-4 font-medium w-[calc(100%-44px)]">
-              Look at that! I just made my first Ticket. I should save it.
+              What a lovely ticket ! Let's save it.
             </p>
           </div>
           <div className="w-full grid grid-cols-2 gap-4">

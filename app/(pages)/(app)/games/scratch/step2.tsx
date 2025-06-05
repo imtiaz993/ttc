@@ -59,9 +59,9 @@ const ScratchStep2 = () => {
           </div>
         </div>
         <p className="text-sm font-playwriteDEGrund">
-          Last evening, I went shopping and found another one of these! Selma
-          says they are called "tickets". She mentioned she'd also heard her
-          father refer to them as "chaaps" or "tikas" on some occasions.
+          Went shopping yesterday and found another one! Selma says they are
+          called "tickets". She mentioned she'd also heard her father refer to
+          them as "chaaps" or "tikas" on some occasions.
           <br />
           They are meant to be advertisements, except they don’t sell us
           Coca-Cola or Pears soap but instead cotton cloth!

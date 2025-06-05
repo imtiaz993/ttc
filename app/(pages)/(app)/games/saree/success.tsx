@@ -40,8 +40,8 @@ const Success = ({ userData, sareePath }) => {
           </div>
           <div className="ml-4 w-[calc(100%-46px-16px)]">
             <p className="font-medium">
-              I am an absolute pro at this! 19th century printing houses would
-              have started a bidding war to hire me as their printer! hehe
+              What a pro! 19th century printing houses would have started a
+              bidding war over such a talented colourist!
             </p>
           </div>
         </div>

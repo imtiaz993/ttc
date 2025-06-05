@@ -16,7 +16,7 @@ const SpotTikkaStep1 = () => {
     dispatch(
       setStepperProps({
         iswhite: true,
-        showContinue:true,
+        showContinue: true,
       })
     );
     return () => {
@@ -59,11 +59,11 @@ const SpotTikkaStep1 = () => {
           </div>
         </div>
         <p className="text-sm font-playwriteDEGrund">
-          From the extraordinary to the everyday, tickets run a range of design.
-          What imaginations their creators must have!
+          From the extraordinary to the everyday, tickets run such a range of
+          designs. What imaginations their creators must have!
           <br />
-          <br />I am collecting more tickets to figure what their inspirations
-          were. Alas, this one just got ripped apart by my clumsy efforts!
+          <br />I am collecting more of them to find out what inspired their
+          creators. Alas, this one just got ripped apart by my clumsy efforts!
         </p>
         <div className="flex justify-center items-center">
           <img src="/images/spot-tikka.png" alt="" className="w-[264px]" />

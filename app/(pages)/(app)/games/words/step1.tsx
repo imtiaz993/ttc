@@ -61,15 +61,23 @@ const WordsStep1 = () => {
             </div>
           </div>
           <p className="text-sm mb-6 font-playwriteDEGrund">
-            Now I see that tickets can be inspired by almost anything - from
-            famous artworks to photographs to architecture and even mangoes!
+            Today I showed Papa the tickets I’ve collected so far. Funnily, he
+            was most struck by the torn one! He fished out a magazine which
+            featured this painting. Sticking it here to show Selma later how
+            remarkably similar they seem! These tickets really are inspired by
+            all kinds of things!
             <br />
             <br />
-            But I wonder what it all means…
+            What I am puzzled by is why this warrior woman design for a ticket
+            though?. . .
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <img src="/images/graham-bombay.png" alt="" className="w-52" />
+          <img
+            src="/images/graham-bombay.png"
+            alt=""
+            className="w-40 xs:w-44"
+          />
         </div>
       </div>
     </>

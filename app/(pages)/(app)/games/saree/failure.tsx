@@ -15,11 +15,11 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
       <Animation animation={failureAnimation} height={92} width={92} />
       <div className="my-6">
         <p className="font-semibold text-sm mb-2 text-center">
-          Oops! Not quite.
+          Uh, oh! That wasn't what was supposed to happen.
         </p>
         <p className="text-sm text-center">
           You just created {results?.find((i) => i.color == finalColor)?.name}{" "}
-          instead of <span className="font-bold"> {resultColor.name}</span>.
+          instead of <span className="font-bold"> {resultColor.name}</span>
         </p>
         <p className="text-sm text-center"> Would you like to try again?</p>
       </div>

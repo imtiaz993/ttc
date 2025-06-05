@@ -240,7 +240,7 @@ const WordsStep2 = ({
             <div className="w-full flex justify-between items-center mb-2">
               <img src="/icons/psychology.svg" alt="" className="w-6" />
               <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-                A warrior to advertise cotton cloth?
+                What do you think this ticket could mean?
               </p>
               <img
                 src="/icons/close-black.svg"
@@ -253,7 +253,7 @@ const WordsStep2 = ({
             </div>
             <p className="mt-2 text-sm">
               Look closely at the ticket and click all the words you think it
-              could signify!
+              could signify.
             </p>
           </div>
         </div>

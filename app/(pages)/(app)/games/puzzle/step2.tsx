@@ -462,7 +462,7 @@ const PuzzleStep2 = () => {
                             />
                         </div>
                         <p className="text-sm leading-relaxed">
-                            Arrange the pieces to form the complete picture.
+                        Arrange the pieces to form the complete ticket.
                         </p>
                     </div>
                 </div>

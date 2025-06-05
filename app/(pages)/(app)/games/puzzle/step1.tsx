@@ -59,11 +59,11 @@ const PuzzleStep1 = () => {
             </p>
           </div>
         </div>
-        <p className="text-sm mb-16 font-playwriteDEGrund">
-          My brother cut up my newest ticket when playing with his pair of
-          scissors!
-          <br />
-          He makes me so mad at times!
+        <p className="text-sm mb-2 xs:mb-6 font-playwriteDEGrund">
+          I am so mad at my brother since he cut up the most exceptional ticket
+          I have come across so far! Just imagine! A new gadget that allows you
+          to speak to someone far away at the drop of a hat!
+          <br />I cannot wait to make my first telephone call to Selma!
         </p>
         <div className="flex justify-center items-center">
           <img src="/icons/puzzle.svg" alt="" className="w-80" />

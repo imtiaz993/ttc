@@ -61,7 +61,7 @@ const OwnTikkaStep1 = () => {
         <p className="text-sm mb-6 font-playwriteDEGrund">
           I am saving almost every ticket I come across.
           <br />
-          Mama says it's all just junk, but I am sure, centuries from now, my
+          Maa says it's all just junk, but I am sure, centuries from now, my
           collection will grace the halls of some famous museum and bring joy to
           some fanciful dreamer just like me!
         </p>

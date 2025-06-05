@@ -53,15 +53,16 @@ const PuzzleStep4 = () => {
               <p className="mt-1 text-sm font-medium text-center">You</p>
             </div>
             <p className="ml-4 font-medium w-[calc(100%-44px)]">
-              Wow! A wall of modern wonders - some oddly familiar, some utterly
-              bizarre
+              Look! A wall full of odd looking tickets showing outdated versions
+              of gadgets we use today. Amidst them an aeroplane that looks like
+              it can barely seat a handful of people!
             </p>
           </div>
-          <div className="w-full flex justify-between items-start mt-4 xs:mt-6">
+          <div className="w-full flex justify-center gap-10 items-start mt-2 xs:mt-4">
             <img src="/images/wonder1.png" alt="" className="w-[118px]" />
             <img src="/images/wonder2.png" alt="" className="w-[126px]" />
           </div>
-          <div className="flex justify-center mt-4 xs:mt-5">
+          <div className="flex justify-center mt-1 xs:mt-2">
             <img src="/images/wonder3.png" alt="" className="w-[119px]" />
           </div>
         </div>
@@ -69,11 +70,11 @@ const PuzzleStep4 = () => {
           <div className="w-full flex items-center mb-2">
             <img src="/icons/location.svg" alt="" className="w-6" />
             <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-              A secret chamber calls you…
+              I spy with my little eye. . .
             </p>
           </div>
           <p className="mt-2 text-sm">
-            Once inside, you’ll know what to do next!
+            A doorway to your right. Enter and you’ll know what to do next!
           </p>
         </div>
       </div>

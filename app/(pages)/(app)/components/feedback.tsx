@@ -137,13 +137,8 @@ const Feedback = () => {
                     <Field
                       as="textarea"
                       name="feedback"
-                      rows={1}
-                      onInput={(e) => {
-                        const el = e.target;
-                        el.style.height = "auto";
-                        el.style.height = `${el.scrollHeight}px`;
-                      }}
-                      placeholder="What should MAP do next?"
+                      rows={2}
+                      placeholder="How was your experience of playing Timeless Ticket Tales?"
                       className="text-[#202F00] text-sm outline-none placeholder:text-[#202F00] w-full bg-transparent resize-none h-6 leading-6 max-h-[6rem]"
                     />
                   </div>

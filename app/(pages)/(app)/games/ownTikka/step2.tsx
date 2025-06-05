@@ -52,11 +52,10 @@ const OwnTikkaStep2 = () => {
             <p className="mt-1 text-sm font-medium text-center">You</p>
           </div>
           <p className="ml-4 font-medium w-[calc(100%-44px)]">
-            Tickets - A legacy of 200 years of advertising! I wonder how much
-            they have  influenced newspapers, television commercials, even
-            social media… 
+            Tickets - What a rich legacy of 200 years of advertising! <br />
+            Wouldn't it be awesome to create a ticket from scratch?
             <br />
-            <br />I wish I could try my hand at making a ticket!
+            Let's get started !
           </p>
         </div>
         <div className="flex justify-center items-center mb-32 scale-[0.85] xs:scale-100">

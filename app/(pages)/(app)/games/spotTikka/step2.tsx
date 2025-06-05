@@ -120,7 +120,7 @@ const SpotTikkaStep2 = () => {
                 />
                 <p className="font-medium text-sm mt-7">Great job!</p>
                 <p className="text-center text-sm mt-2">
-                  You got it right in the first go
+                  Spot on! You got it right!
                 </p>
               </div>
             </div>
@@ -167,7 +167,8 @@ const SpotTikkaStep2 = () => {
                 <p className="mt-1 text-sm font-medium text-center">You</p>
               </div>
               <p className="ml-4 font-medium text-left w-[calc(100%-44px)]">
-                Wow! All of this in a time without AI?
+                Let's see if technology can help undo Kamla's error. Handy
+                smartphone to the rescue again!
               </p>
             </div>
             <div className="relative mt-10 mb-6" onClick={handleCameraClick}>
@@ -188,11 +189,12 @@ const SpotTikkaStep2 = () => {
               <div className="w-full flex items-center mb-2">
                 <img src="/icons/zoom-in.svg" alt="" className="w-6" />
                 <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-                  Spot this ticket in the exhibition
+                  Spot the complete ticket in the exhibition
                 </p>
               </div>
               <p className="mt-2 text-sm">
-                Now take a picture of it to see what you discover next!
+                Use this piece to spot the complete ticket. Take a picture of it
+                to see what you discover next!
               </p>
             </div>
           </div>

@@ -113,20 +113,22 @@ const SareeStep1 = () => {
             <p className="text-sm">
               <p className="mt-4 font-playwriteDEGrund"> Dearest Kamla, </p>
             </p>
-            <p className="text-sm mb-4 xs:mb-6 font-playwriteDEGrund">
-              <p className="mb-2">
-                Papa says tikas are printed in their thousands using this ultra
-                modern  technique called Chromolithography
+            <div className="text-sm mb-4 xs:mb-6 font-playwriteDEGrund">
+              <p className="mb-4">
+                Papa says tickets are made using this modern printing technique
+                called “Chromolithography.” Impressions taken from many metal
+                plates are overlapped to build a picture layer by layer. Some
+                Frenchman invented it to make playing cards!
               </p>
-              Many metal plates are used to overlap colours and build a picture
-              layer by layer. Some Frenchman invented it to make playing cards! 
-              <br />
-              <br />
-              Sounds like magic, doesn’t it? <br />
-              <br />
-              Much love, <br />
-              Selma <br />
-            </p>
+              <p>
+                Oh, I almost forgot! The most fascinating part about this
+                process is that you can print thousands of copies of a single
+                design!
+              </p>
+              <p> Sounds like magic, doesn’t it?</p>
+              <p> Much love,</p>
+              Selma
+            </div>
           </div>
         </div>
         <div className="mt-2 xs:mt-5">
@@ -156,8 +158,8 @@ const SareeStep1 = () => {
               </p>
             </div>
             <p className="mt-2 text-sm">
-              Chromolithography is a print making technique which uses
-              impressions from a series of stone or metal plates.
+              Chromolithography is a print making technique which layers
+              impressions from a series of stones or metal plates.
             </p>
           </div>
         </div>

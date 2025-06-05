@@ -53,9 +53,9 @@ const SareeStep2 = () => {
           </div>
           <div className="ml-4 w-[calc(100%-46px-16px)]">
             <p className="font-medium">
-              Ah, I see! First we have the black and white drawing on the metal
-              plate. Then by overlapping colours, I can create the colourful
-              ticket of the lion and lioness!
+              Ah! So first comes the black and white drawing on the metal plate.
+              Then by overlapping multiple plates with different colours, one
+              can create such colourful tickets!
             </p>
           </div>
         </div>
