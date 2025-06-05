@@ -26,7 +26,6 @@ const GameStepper = () => {
 
   const dispatch = useDispatch();
   const step = useSelector((state: any) => state.navigation.step);
-  console.log(step);
 
   const getProgress = () => {
     let value = 0;

@@ -6,12 +6,28 @@ import {
   resetStepperProps,
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
+import SwipeOverlay from "../../components/swipeOverlay";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
 
 const ScratchStep1 = ({ playMusic = () => {} }: any) => {
   const userData = useSelector((state: any) => state.user.userData);
   const [isRevealed, setIsRevealed] = useState(false);
 
   const dispatch = useDispatch();
+
+  const [overlay, setOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !overlay;
+    },
+  });
 
   useEffect(() => {
     dispatch(
@@ -27,6 +43,7 @@ const ScratchStep1 = ({ playMusic = () => {} }: any) => {
 
   return (
     <>
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu isOpen={userData.menu} playMusic={playMusic} />
       <ScratchCard
         isRevealed={isRevealed}

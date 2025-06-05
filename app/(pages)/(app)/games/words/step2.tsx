@@ -6,6 +6,9 @@ import {
 } from "../../../../redux/slices/progressSlice";
 import { useDispatch } from "react-redux";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
+import { openOverlay } from "../../../../redux/slices/userSlice";
+import { useInactivity } from "../../../../hooks/useInactivity";
+import SwipeOverlay from "../../components/swipeOverlay";
 
 const wordsInitialData = [
   {
@@ -204,8 +207,22 @@ const WordsStep2 = ({
     localStorage.setItem("selectedWordsData", JSON.stringify([]));
   };
 
+  const [swipeOverlay, setSwipeOverlay] = useState(false);
+  const displayOverlay = () => dispatch(openOverlay());
+  useInactivity({
+    time: 8000,
+    onInactivity: () => {
+      setSwipeOverlay(true);
+      displayOverlay();
+    },
+    condition: () => {
+      return !swipeOverlay && selectedWords.length >= 3;
+    },
+  });
+
   return (
     <>
+      {swipeOverlay && <SwipeOverlay setOverlay={setSwipeOverlay} />}
       <Menu
         isGameOptions={true}
         showSkip={false}

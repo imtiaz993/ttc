@@ -707,7 +707,7 @@ const OwnTikkaStep3 = () => {
             )}
 
             {/* Display text that can be clicked to edit */}
-            {!showTextInput && (
+            {!showTextInput && selectedOptions.Border && (
                 <p
                     ref={customTextRef}
                     onClick={enableTextEditing}

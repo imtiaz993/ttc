@@ -205,8 +205,8 @@ const ScratchStep3 = () => {
                 <p className="mt-1 text-sm font-medium text-center">You</p>
               </div>
               <p className="ml-4 font-medium w-[calc(100%-44px)]">
-                I love that I have a smartphone to help me solve this ancient
-                mystery!
+                Here in the 21st century, a smartphone can help solve the
+                mystery! You
               </p>
             </div>
             <div
@@ -239,12 +239,12 @@ const ScratchStep3 = () => {
                   className="w-6"
                 />
                 <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">
-                  Find this colorful image of a lion & lioness within a glass
-                  case around you
+                  Find a colourful ticket of a lion and lioness inside a glass
+                  case.
                 </p>
               </div>
               <p className="mt-2 text-sm">
-                Now take a picture of it to see what you discover next!
+                Take a picture of it to see what you discover next!
               </p>
             </div>
           </div>

@@ -27,7 +27,7 @@ const ScratchStep2 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000000,
+    time: 8000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
