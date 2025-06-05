@@ -72,6 +72,7 @@ const PreloadImages = () => {
     "/icons/arrow-forward.svg",
     "/icons/backgroud-white.svg",
     "/icons/cloud.svg",
+    "/icons/cloud-2.svg",
     "/icons/pause.svg",
     "/icons/background-black.svg",
     "/icons/bofa-bank.svg",

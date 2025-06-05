@@ -32,7 +32,7 @@ const PuzzleStep5 = () => {
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
-        <div className="w-full flex items-start mb-6">
+        <div className="w-full flex items-start mb-2 xs:mb-4">
           <div>
             <img
               src={`/images/${userData.char}.png`}
@@ -52,51 +52,44 @@ const PuzzleStep5 = () => {
         </div>
         <div className="relative w-full">
           <div
-            className="w-[154px] absolute left-0 -top-12 fade-in opacity-0"
+            className="w-[148px] absolute left-0 -top-12 fade-in opacity-0"
             style={{ animationDelay: "1s", animationFillMode: "forwards" }}
           >
             <p className="py-3 px-4 text-xs absolute text-white z-10">
-              What are all these tickets trying to say?
+              Spot a pair of winged mermaids. . .
             </p>
-            <img className="relative" src="/icons/cloud.svg" alt="" />
+            <img className="relative mt-0.5" src="/icons/cloud.svg" alt="" />
           </div>
+
           <div
-            className="w-[154px] absolute left-8 -bottom-11 fade-in opacity-0"
-            style={{ animationDelay: "3s", animationFillMode: "forwards" }}
-          >
-            <p className="py-3 px-4 text-xs absolute bottom-0 text-white z-10">
-              How did they survive all these centuries?
-            </p>
-            <img
-              className="relative rotate-180"
-              src="/icons/cloud.svg"
-              alt=""
-            />
-          </div>
-          <div
-            className="w-[154px] absolute -right-2 top-28 fade-in opacity-0"
+            className="w-[148px] absolute -right-2 top-24 fade-in opacity-0"
             style={{ animationDelay: "2s", animationFillMode: "forwards" }}
           >
             <p className="py-3 px-4 text-xs absolute text-white z-10">
-              Take a small pause to reflect..
+              Did you see a pair of black cats yet?
             </p>
-            <img className="relative" src="/icons/cloud.svg" alt="" />
+            <img className="relative mt-1" src="/icons/cloud.svg" alt="" />
           </div>
           <div
-            className="w-[154px] absolute -right-2 -bottom-28 fade-in opacity-0"
+            className="w-[151px] absolute left-8 -bottom-16 fade-in opacity-0"
+            style={{ animationDelay: "3s", animationFillMode: "forwards" }}
+          >
+            <p className="py-3 px-4 text-xs absolute bottom-0 text-white z-10">
+              Keep safe distance! A family of sharks swims underwater..
+            </p>
+            <img className="relative" src="/icons/cloud-2.svg" alt="" />
+          </div>
+          <div
+            className="w-[133px] absolute -right-2 -bottom-32 fade-in opacity-0"
             style={{ animationDelay: "4s", animationFillMode: "forwards" }}
           >
             <p className="py-3 px-4 bottom-0 text-xs absolute text-white z-10">
-              Who were they meant to attract?
+              What a feast! Find as many items one could eat!
             </p>
-            <img
-              className="relative rotate-180"
-              src="/icons/cloud.svg"
-              alt=""
-            />
+            <img className="relative mb-1" src="/icons/cloud-2.svg" alt="" />
           </div>
           <div className="flex justify-center items-center">
-            <img src="/images/manchester.png" alt="" className="w-52" />
+            <img src="/images/manchester.png" alt="" className="w-40" />
           </div>
         </div>
         <div className="h-28"></div>
