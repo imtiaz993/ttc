@@ -63,7 +63,8 @@ const PuzzleStep1 = () => {
           I am so mad at my brother since he cut up the most exceptional ticket
           I have come across so far! Just imagine! A new gadget that allows you
           to speak to someone far away at the drop of a hat!
-          <br />I cannot wait to make my first telephone call to Selma!
+          <br />I cannot wait to make my first telephone call today <br />
+          Selma!
         </p>
         <div className="flex justify-center items-center">
           <img src="/icons/puzzle.svg" alt="" className="w-80" />

@@ -42,7 +42,12 @@ const PuzzleStep5 = () => {
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
           <p className="ml-4 font-medium w-[calc(100%-46px)]">
-            The more I look, the more I am surrounded by tickets!
+            Tickets here, tickets there, tickets tickets everywhere!
+            <br />
+            <br />
+            Let’s go fishing!
+            <br />
+            Can you help find the catch of the day?
           </p>
         </div>
         <div className="relative w-full">
