@@ -99,7 +99,7 @@ const ScratchStep3 = () => {
         formData.append("image2", localImageFile, "local-image.jpg");
 
         const response = await axios.post(
-          "https://human-vg-speaks-uh.trycloudflare.com/api/compare-images",
+          "https://tikka-backend.nvmsoft.fi/api/compare-images",
           formData,
           {
             headers: {

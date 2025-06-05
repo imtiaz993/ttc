@@ -63,7 +63,7 @@ const Feedback = () => {
 
     try {
       const response = await fetch(
-        " https://human-vg-speaks-uh.trycloudflare.com/api/users",
+        "https://tikka-backend.nvmsoft.fi/api/users",
         {
           method: "POST",
           body: formData,
