@@ -5,6 +5,7 @@ import {
   setStepperProps,
 } from "../../../../redux/slices/progressSlice";
 import { useDispatch } from "react-redux";
+import { nextStep } from "../../../../redux/slices/navigationSlice";
 
 const wordsInitialData = [
   {
@@ -44,7 +45,14 @@ const wordsInitialData = [
   },
 ];
 
-const WordsStep2 = () => {
+const WordsStep2 = ({
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+}) => {
   const [overlay, setOverlay] = useState(true);
   const [word, setWord] = useState("");
   const [undoDisabled, setUndoDisabled] = useState(false);
@@ -54,6 +62,7 @@ const WordsStep2 = () => {
   const [error, setError] = useState(""); // New state for error message
 
   const dispatch = useDispatch();
+  const next = () => dispatch(nextStep());
 
   // Load words and selectedWords from localStorage on component mount
   useEffect(() => {
@@ -232,7 +241,27 @@ const WordsStep2 = () => {
           </div>
         </div>
       )}
-      <div className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope">
+      <div
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={() => {
+          onMouseUp({ forward: true }, () => {
+            if (selectedWords.length >= 3) {
+              next();
+            }
+          });
+        }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={() => {
+          onTouchEnd({ forward: true }, () => {
+            if (selectedWords.length >= 3) {
+              next();
+            }
+          });
+        }}
+        className="h-full pt-16 px-4 flex flex-col justify-between pb-24 items-center bg-[#FFF8E7] font-manrope"
+      >
         <div className="flex justify-center items-center">
           <img src="/images/graham-bombay.png" alt="" className="w-44" />
         </div>

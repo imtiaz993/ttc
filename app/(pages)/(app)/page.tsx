@@ -63,14 +63,12 @@ export default function Home() {
   };
 
   const handleDragEnd = (data?: any, callback?: any) => {
-    console.log("TEST");
-    
     const screenWidth = window.innerWidth;
     if (dragPosition < -screenWidth * 0.25) {
       if (data.forward && callback) {
         callback();
       } else if (
-        ![1, 22, 23].includes(step) &&
+        ![1, 11, 22, 23].includes(step) &&
         !stepper.showCamera &&
         stepper.showNext &&
         userData.userData.showMenu == false &&
@@ -139,21 +137,16 @@ export default function Home() {
   const ScratchGame = [
     <ScratchStep1 playMusic={playMusic} />,
     <ScratchStep2 />,
-    <ScratchStep3
-      onMouseDown={handleDragStart}
-      onMouseMove={handleDragMove}
-      onMouseUp={handleDragEnd}
-      onTouchStart={handleDragStart}
-      onTouchMove={handleDragMove}
-      onTouchEnd={handleDragEnd}
-    />,
+    <ScratchStep3 />,
   ];
 
   const SareeGame = [<SareeStep1 />, <SareeStep2 />, <SareeStep3 />];
 
-  const SpotTikka = [
-    <SpotTikkaStep1 />,
-    <SpotTikkaStep2
+  const SpotTikka = [<SpotTikkaStep1 />, <SpotTikkaStep2 />];
+
+  const WordsGame = [
+    <WordsStep1 />,
+    <WordsStep2
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
@@ -161,9 +154,8 @@ export default function Home() {
       onTouchMove={handleDragMove}
       onTouchEnd={handleDragEnd}
     />,
+    <WordsStep3 />,
   ];
-
-  const WordsGame = [<WordsStep1 />, <WordsStep2 />, <WordsStep3 />];
 
   const PuzzleGame = [
     <PuzzleStep1 />,

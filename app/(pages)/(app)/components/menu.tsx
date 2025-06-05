@@ -173,8 +173,7 @@ const Menu = ({
       >
         <div className="pt-5 pb-[60px] px-4 flex flex-col justify-start h-full">
           <div>
-            <div className="flex justify-between">
-              <p className="text-[#FFF8E7] text-sm font-semibold">MENU</p>
+            <div className="flex justify-end">
               {!isOpen && (
                 <img
                   src="/icons/close.svg"

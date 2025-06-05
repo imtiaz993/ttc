@@ -20,14 +20,7 @@ const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
 });
 
-const ScratchStep3 = ({
-  onMouseDown,
-  onMouseMove,
-  onMouseUp,
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-}) => {
+const ScratchStep3 = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -35,8 +28,7 @@ const ScratchStep3 = ({
   const [verificationStatus, setVerificationStatus] = useState("initial"); // "initial", "verifying", "success", "failure"
   const [attempts, setAttempts] = useState(0);
 
-  const handleCameraClick = (e) => {
-    e.preventDefault();
+  const handleCameraClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -200,25 +192,7 @@ const ScratchStep3 = ({
         );
       default:
         return (
-          <div
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={(e) => {
-              if (verificationStatus === "initial")
-                onMouseUp({ forward: true }, () => {
-                  handleCameraClick(e);
-                });
-            }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={(e) => {
-              if (verificationStatus === "initial")
-                onTouchEnd({ forward: true }, () => {
-                  handleCameraClick(e);
-                });
-            }}
-            className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
-          >
+          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full flex items-start mb-4">
               <div>
                 <img

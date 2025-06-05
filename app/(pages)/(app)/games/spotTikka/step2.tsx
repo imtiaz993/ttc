@@ -21,14 +21,7 @@ const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
 });
 
-const SpotTikkaStep2 = ({
-  onMouseDown,
-  onMouseMove,
-  onMouseUp,
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-}) => {
+const SpotTikkaStep2 = () => {
   const userData = useSelector((state: any) => state.user.userData);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
@@ -36,8 +29,7 @@ const SpotTikkaStep2 = ({
   const [verificationStatus, setVerificationStatus] = useState("initial");
   const [attempts, setAttempts] = useState(0);
 
-  const handleCameraClick = (e) => {
-    e.preventDefault();
+  const handleCameraClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -164,25 +156,7 @@ const SpotTikkaStep2 = ({
         );
       default:
         return (
-          <div
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={(e) => {
-              if (verificationStatus === "initial")
-                onMouseUp({ forward: true }, () => {
-                  handleCameraClick(e);
-                });
-            }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={(e) => {
-              if (verificationStatus === "initial")
-                onTouchEnd({ forward: true }, () => {
-                  handleCameraClick(e);
-                });
-            }}
-            className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope"
-          >
+          <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope">
             <div className="w-full flex items-start">
               <div>
                 <img
