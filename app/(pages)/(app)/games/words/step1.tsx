@@ -73,11 +73,7 @@ const WordsStep1 = () => {
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <img
-            src="/images/graham-bombay.png"
-            alt=""
-            className="w-40 xs:w-44"
-          />
+          <img src="/images/words-1.jpg" alt="" className="w-40 xs:w-44" />
         </div>
       </div>
     </>

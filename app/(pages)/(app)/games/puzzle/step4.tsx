@@ -59,14 +59,14 @@ const PuzzleStep4 = () => {
             </p>
           </div>
           <div className="w-full flex justify-center gap-10 items-start mt-2 xs:mt-4">
-            <img src="/images/wonder1.png" alt="" className="w-[118px]" />
-            <img src="/images/wonder2.png" alt="" className="w-[126px]" />
+            <img src="/images/wonder1.png" alt="" className="w-[108px] xs:w-[118px]" />
+            <img src="/images/wonder2.png" alt="" className="w-[116px] xs:w-[126px]" />
           </div>
           <div className="flex justify-center mt-1 xs:mt-2">
-            <img src="/images/wonder3.png" alt="" className="w-[119px]" />
+            <img src="/images/wonder3.png" alt="" className="w-[109px] xs:w-[119px]" />
           </div>
         </div>
-        <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-4 xs:mt-7">
+        <div className="bg-[#FDD931] rounded py-3 px-4 w-full mt-2 xs:mt-4">
           <div className="w-full flex items-center mb-2">
             <img src="/icons/location.svg" alt="" className="w-6" />
             <p className="ml-2 text-sm font-semibold w-[calc(100%-24px)]">

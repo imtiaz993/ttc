@@ -14,6 +14,7 @@ const PreloadImages = () => {
     "/images/bg-3.png",
     "/images/border-1.png",
     "/images/border-2.png",
+    "/images/words-1.jpg",
     "/images/border-3.png",
     "/images/border-4.png",
     "/images/border-5.png",
