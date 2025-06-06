@@ -80,7 +80,7 @@ const PuzzleStep5 = () => {
             <img className="relative" src="/icons/cloud-2.svg" alt="" />
           </div>
           <div
-            className="w-[133px] absolute -right-2 -bottom-32 fade-in opacity-0"
+            className="w-[133px] absolute -right-2 -bottom-24 xs:-bottom-32 fade-in opacity-0"
             style={{ animationDelay: "4s", animationFillMode: "forwards" }}
           >
             <p className="py-3 px-4 bottom-0 text-xs absolute text-white z-10">

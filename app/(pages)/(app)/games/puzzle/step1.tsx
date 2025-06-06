@@ -67,7 +67,7 @@ const PuzzleStep1 = () => {
           Selma!
         </p>
         <div className="flex justify-center items-center">
-          <img src="/icons/puzzle.svg" alt="" className="w-80" />
+          <img src="/icons/puzzle.svg" alt="" className="w-72 xs:w-80" />
         </div>
       </div>
     </>
