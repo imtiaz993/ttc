@@ -1,4 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+whatsapp: 380 96 357 3943
+telegram: @IIMYwP
+teams: https://teams.live.com/l/invite/FEAdfyVGDcO-O8WqwI
 
 ## Getting Started
 
