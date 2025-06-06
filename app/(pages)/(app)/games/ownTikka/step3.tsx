@@ -17,7 +17,7 @@ const OwnTikkaStep3 = () => {
   const [selectedMenu, setSelectedMenu] = useState("Background");
   const userData = useSelector((state: any) => state.user.userData);
   const dispatch = useDispatch();
-  const updateUserData = (data) => dispatch(setUserData(data));
+  const updateUserData = (data: any) => dispatch(setUserData(data));
   const [showTextInput, setShowTextInput] = useState(false);
   const [customText, setCustomText] = useState("");
   const [isFinishing, setIsFinishing] = useState(false);
@@ -66,14 +66,14 @@ const OwnTikkaStep3 = () => {
     finishTextEditing();
   };
 
-  const handleTextInputKeyPress = (e) => {
+  const handleTextInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Enter") {
       finishTextEditing();
     }
   };
 
   // Updated handleElementSelect function - now handles both select and deselect
-  const handleElementSelect = (elementSrc) => {
+  const handleElementSelect = (elementSrc: string): void => {
     // Check if element is already selected - if yes, deselect it
     if (selectedElements.includes(elementSrc)) {
       // Find the element instance to remove
@@ -127,7 +127,7 @@ const OwnTikkaStep3 = () => {
   };
 
   // Alternative remove function for explicit removal
-  const removeElementBySrc = (elementSrc) => {
+  const removeElementBySrc = (elementSrc: string): void => {
     const elementToRemove = elementInstances.find(
       (el) => el.src === elementSrc
     );
@@ -152,7 +152,7 @@ const OwnTikkaStep3 = () => {
   };
 
   // Remove element by ID (for elements on canvas)
-  const removeElement = (elementId) => {
+  const removeElement = (elementId: string): void => {
     const elementToRemove = elementInstances.find((el) => el.id === elementId);
     setElementInstances(elementInstances.filter((el) => el.id !== elementId));
     setSelectedElements(
@@ -165,7 +165,7 @@ const OwnTikkaStep3 = () => {
   };
 
   // Update element properties
-  const updateElementInstance = (elementId, updates) => {
+  const updateElementInstance = (elementId: string, updates: any): void => {
     setElementInstances((prev) =>
       prev.map((el) => (el.id === elementId ? { ...el, ...updates } : el))
     );
@@ -178,13 +178,13 @@ const OwnTikkaStep3 = () => {
 
     const originalTouchAction = element.style.touchAction;
 
-    const disableDefaultBehavior = (e) => {
+    const disableDefaultBehavior = (e: TouchEvent): void => {
       if (e.touches && e.touches.length >= 2) {
         e.preventDefault();
       }
     };
 
-    const handleTouchStart = (e) => {
+    const handleTouchStart = (e: TouchEvent): void => {
       if (e.touches.length === 2 && activeElementId) {
         e.stopPropagation();
         e.preventDefault();
@@ -215,7 +215,7 @@ const OwnTikkaStep3 = () => {
       }
     };
 
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: TouchEvent): void => {
       if (
         e.touches.length === 2 &&
         zoomingRef.current &&
@@ -245,7 +245,7 @@ const OwnTikkaStep3 = () => {
       }
     };
 
-    const handleTouchEnd = (e) => {
+    const handleTouchEnd = (e: TouchEvent): void => {
       if (zoomingRef.current) {
         activeTouchesRef.current = Math.max(0, activeTouchesRef.current - 1);
 
@@ -259,7 +259,7 @@ const OwnTikkaStep3 = () => {
       }
     };
 
-    const handleWheel = (e) => {
+    const handleWheel = (e: WheelEvent): void => {
       if (activeElementId && !zoomingRef.current) {
         const activeElement = elementInstances.find(
           (el) => el.id === activeElementId
@@ -698,7 +698,7 @@ const OwnTikkaStep3 = () => {
         <div
           id="ticket-container"
           ref={ticketContainerRef}
-          className="w-60 h-80 mb-16 relative touch-manipulation scale-[0.85] xs:scale-90"
+          className="w-60 h-80 mb-16 relative overflow-hidden touch-manipulation scale-[0.85] xs:scale-90"
           style={{
             backgroundImage: selectedOptions.Background
               ? `url(${selectedOptions.Background})`
@@ -709,7 +709,7 @@ const OwnTikkaStep3 = () => {
               selectedOptions.Background ||
               selectedOptions.Border ||
               selectedElements.length > 0
-                ? ""
+                ? "2px solid black"
                 : "1px solid black",
           }}
         >
