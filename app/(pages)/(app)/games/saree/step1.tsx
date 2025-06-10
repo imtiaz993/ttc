@@ -103,7 +103,7 @@ const SareeStep1 = () => {
               </p>
             </div>
             <p className="text-right font-playwriteDEGrund">
-              111 Arthur Road,
+              11 Arthur Road,
               <br />
               Bombay,
               <br />

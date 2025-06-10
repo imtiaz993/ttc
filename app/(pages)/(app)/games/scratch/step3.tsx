@@ -163,7 +163,7 @@ const ScratchStep3 = () => {
               />
               <p className="font-medium text-sm mt-7">Great job!</p>
               <p className="text-center text-sm mt-2">
-                You got it right in the first go
+                Spot on! You got it right!
               </p>
             </div>
           </div>
@@ -218,7 +218,7 @@ const ScratchStep3 = () => {
               </div>
               <p className="ml-4 font-medium w-[calc(100%-44px)]">
                 Here in the 21st century, a smartphone can help solve the
-                mystery! You
+                mystery!
               </p>
             </div>
             <div
