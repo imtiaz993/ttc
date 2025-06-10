@@ -467,7 +467,7 @@ const PuzzleStep2 = () => {
                     </div>
                 </div>
             )}
-            <div className="h-full pt-10 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
+            <div id="screen-22"  className="h-full pt-10 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7]">
                 <div>
                     <h1 className="text-sm font-medium flex justify-center items-center gap-5">
                         TIMER

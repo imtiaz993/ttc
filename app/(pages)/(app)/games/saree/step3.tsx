@@ -183,7 +183,7 @@ const SareeStep3 = () => {
               </div>
             </div>
           )}
-          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
+          <div id="screen-10" className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
             <p className="text-sm mb-3">
               Select the two colours that make up{" "}
               <span className="font-semibold">{resultColor?.name}</span>

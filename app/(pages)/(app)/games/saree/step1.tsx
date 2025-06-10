@@ -20,7 +20,7 @@ const SareeStep1 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -86,7 +86,10 @@ const SareeStep1 = () => {
     <>
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
-      <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]">
+      <div
+        id="screen-8"
+        className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7]"
+      >
         <div>
           <div className="w-full flex justify-between items-start mb-2 xs:mb-4">
             <div>
@@ -111,7 +114,10 @@ const SareeStep1 = () => {
           </div>
           <div className="w-full">
             <p className="text-sm">
-              <p className="mt-2 xs:mt-4 font-playwriteDEGrund"> Dearest Kamla, </p>
+              <p className="mt-2 xs:mt-4 font-playwriteDEGrund">
+                {" "}
+                Dearest Kamla, 
+              </p>
             </p>
             <div className="text-sm font-playwriteDEGrund">
               <p className="mb-4">

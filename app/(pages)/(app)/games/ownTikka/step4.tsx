@@ -71,7 +71,10 @@ const OwnTikkaStep4 = () => {
   return (
     <>
       <Menu showContinue={true} />
-      <div className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+      <div
+        id="screen-29"
+        className="h-full pt-16 pb-12 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope"
+      >
         <div className="flex justify-center items-center mb-5">
           <img
             src={userData.createdTika}

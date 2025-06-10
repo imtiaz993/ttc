@@ -1,6 +1,7 @@
 const Thankyou = () => {
   return (
     <div
+      id="screen-32"
       className="flex flex-col justify-center items-center border-transparent h-dvh px-12 max-h-[1000px]"
       style={{
         backgroundImage: "url('/images/welcome-frame.png')",

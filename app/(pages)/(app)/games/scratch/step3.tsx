@@ -71,7 +71,7 @@ const ScratchStep3 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -133,7 +133,10 @@ const ScratchStep3 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-5"
+            className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="mt-10 mb-6 flex flex-col justify-center items-center">
               <Animation
                 animation={verifyingAnimation}
@@ -148,7 +151,10 @@ const ScratchStep3 = () => {
         );
       case "success":
         return (
-          <div className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-6"
+            className="h-full pt-16 pb-28 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="mt-10 mb-6 flex flex-col items-center">
               <Animation
                 animation={successAnimation}
@@ -164,7 +170,10 @@ const ScratchStep3 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-7"
+            className="h-full pt-16 pb-24 px-4 flex flex-col justify-center items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="mt-10 mb-6 flex flex-col items-center w-[250px]">
               <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium mt-7">Oops! Not quite.</p>
@@ -192,7 +201,10 @@ const ScratchStep3 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-4"
+            className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="w-full flex items-start mb-4">
               <div>
                 <img

@@ -16,41 +16,26 @@ const Welcome = ({
   const dispatch = useDispatch();
   const [overlay, setOverlay] = useState(false);
   const [name, setName] = useState("");
-  const [disabled, setDisabled] = useState(true);
   const userData = useSelector((state: any) => state.user.userData);
   const next = () => dispatch(nextStep());
 
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
     },
     condition: () => {
-      return !overlay;
+      return !overlay && !!name;
     },
   });
 
   const updateUserData = (data) => dispatch(setUserData(data));
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (userData.overlay) {
-        setOverlay(true);
-      } else {
-        setDisabled(false);
-      }
-    }, 500);
-    if (!userData.overlay) {
-      setDisabled(false);
-    }
-  }, []);
-
   return (
     <>
-      {overlay && (
-        <SwipeOverlay setOverlay={setOverlay} setDisabled={setDisabled} />
-      )}
+      {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <div
+        id="screen-1"
         className="relative flex flex-col justify-center items-center border-transparent h-dvh max-h-[1000px]"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
@@ -113,9 +98,7 @@ const Welcome = ({
               localStorage.removeItem("selectedWordsData");
               next();
             }}
-            className={`flex justify-between pb-2 border-b border-[#223100] ${
-              disabled ? "opacity-50" : ""
-            }`}
+            className={`flex justify-between pb-2 border-b border-[#223100]`}
           >
             <input
               className="text-[#202F00] text-sm font-lora outline-none placeholder:text-[#202F00] w-full bg-transparent"
@@ -127,7 +110,6 @@ const Welcome = ({
                 setName(e.target.value);
               }}
               autoComplete="off"
-              disabled={disabled}
               required
             />
             <button type="submit" className="w-5 h-5">

@@ -4,7 +4,10 @@ import Menu from "../../components/menu";
 import { nextStep } from "../../../../redux/slices/navigationSlice";
 import successAnimation from "../../../animation/Correct Case.json";
 import dynamic from "next/dynamic";
-import { resetStepperProps, setStepperProps } from "../../../../redux/slices/progressSlice";
+import {
+  resetStepperProps,
+  setStepperProps,
+} from "../../../../redux/slices/progressSlice";
 
 const Animation = dynamic(() => import("../../components/animation"), {
   ssr: false,
@@ -56,7 +59,7 @@ const PuzzleStep3 = () => {
     <>
       <Menu isGameOptions={isGameOptions} />
       {overlay && (
-        <div>
+        <div id="screen-23">
           <div className="fixed inset-0 bg-[#00000040] z-30"></div>
           <div className="fixed z-40 h-fit w-11/12 inset-0 rounded py-3 px-4 bg-[#FDD931] mx-auto left-1/2 top-1/2 transform -translate-x-1/2 font-manrope">
             <div className="w-full flex justify-between items-center mb-2">
@@ -97,7 +100,11 @@ const PuzzleStep3 = () => {
           </p>
         </div>
         <div className="flex justify-center items-center w-full relative">
-          <img src="/images/completed-puzzle.png" alt="" className="w-[264px]" />
+          <img
+            src="/images/completed-puzzle.png"
+            alt=""
+            className="w-[264px]"
+          />
           <div className="absolute">
             <Animation animation={successAnimation} height={144} width={144} />
           </div>

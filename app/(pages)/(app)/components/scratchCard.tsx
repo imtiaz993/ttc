@@ -233,6 +233,7 @@ const ScratchCard = ({ isRevealed, setIsRevealed, animation }) => {
 
   return (
     <div
+      id="screen-2"
       className="h-full pt-16 px-4 flex flex-col justify-start items-center"
       style={{
         backgroundImage: "url('/images/yellow-bg.png')",

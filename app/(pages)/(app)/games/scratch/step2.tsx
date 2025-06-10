@@ -27,7 +27,7 @@ const ScratchStep2 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -42,6 +42,7 @@ const ScratchStep2 = () => {
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
       <div
+        id="screen-3"
         style={{
           backgroundImage: "url('/images/yellow-bg.png')",
           backgroundSize: "cover",

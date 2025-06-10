@@ -17,7 +17,7 @@ const PuzzleStep5 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -31,7 +31,10 @@ const PuzzleStep5 = () => {
     <>
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
-      <div className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+      <div
+        id="screen-25"
+        className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope"
+      >
         <div className="w-full flex items-start mb-2 xs:mb-4">
           <div>
             <img

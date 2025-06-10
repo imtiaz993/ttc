@@ -29,7 +29,7 @@ const WordsStep3 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -54,7 +54,10 @@ const WordsStep3 = () => {
     <>
       {overlay && <SwipeOverlay setOverlay={setOverlay} />}
       <Menu />
-      <div className="h-full pt-16 pb-20 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
+      <div
+        id="screen-20"
+        className="h-full pt-16 pb-20 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope"
+      >
         <div className="w-full flex justify-between items-start">
           <div>
             <img

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeOverlay, openOverlay } from "../../../redux/slices/userSlice";
+import { closeOverlay } from "../../../redux/slices/userSlice";
 
-const SwipeOverlay = ({ setOverlay, setDisabled = () => {} }: any) => {
+const SwipeOverlay = ({ setOverlay }: any) => {
   const dispatch = useDispatch();
   const [dragStartX, setDragStartX] = useState(0);
   const [dragPosition, setDragPosition] = useState(0);
@@ -30,7 +30,6 @@ const SwipeOverlay = ({ setOverlay, setDisabled = () => {} }: any) => {
       setFadeOut(true); // Trigger fade-out animation
       setTimeout(() => {
         setOverlay(false);
-        setDisabled(false);
         hideOverlay();
         setFadeOut(false); // Reset fadeOut state
       }, 300); // Match the transition duration

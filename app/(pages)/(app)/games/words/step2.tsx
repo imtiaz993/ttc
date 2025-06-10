@@ -109,7 +109,7 @@ const WordsStep2 = ({
       setStepperProps({
         showPrev: false,
         showContinue: true,
-        isContinueDisabled: selectedWords.length < 3,
+        isContinueDisabled: selectedWords.length < 1,
       })
     );
     return () => {
@@ -186,14 +186,12 @@ const WordsStep2 = ({
         JSON.stringify(updatedSelectedWords)
       );
     } else {
-      if (selectedWords.length < 3) {
-        const updatedSelectedWords = [...selectedWords, wordItem];
-        setSelectedWords(updatedSelectedWords);
-        localStorage.setItem(
-          "selectedWordsData",
-          JSON.stringify(updatedSelectedWords)
-        );
-      }
+      const updatedSelectedWords = [...selectedWords, wordItem];
+      setSelectedWords(updatedSelectedWords);
+      localStorage.setItem(
+        "selectedWordsData",
+        JSON.stringify(updatedSelectedWords)
+      );
     }
   };
 
@@ -210,13 +208,13 @@ const WordsStep2 = ({
   const [swipeOverlay, setSwipeOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setSwipeOverlay(true);
       displayOverlay();
     },
     condition: () => {
-      return !swipeOverlay && selectedWords.length >= 3;
+      return !swipeOverlay && selectedWords.length >= 1;
     },
   });
 
@@ -259,11 +257,12 @@ const WordsStep2 = ({
         </div>
       )}
       <div
+        id="screen-19"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={() => {
           onMouseUp({ forward: true }, () => {
-            if (selectedWords.length >= 3) {
+            if (selectedWords.length >= 1) {
               next();
             }
           });
@@ -272,7 +271,7 @@ const WordsStep2 = ({
         onTouchMove={onTouchMove}
         onTouchEnd={() => {
           onTouchEnd({ forward: true }, () => {
-            if (selectedWords.length >= 3) {
+            if (selectedWords.length >= 1) {
               next();
             }
           });
@@ -315,9 +314,7 @@ const WordsStep2 = ({
           </div>
           <div
             className={`mt-5 pb-2 border-b border-[#223100] flex justify-between ${
-              customWordCount < 2 && selectedWords.length < 3
-                ? "visible"
-                : "invisible"
+              customWordCount < 2 ? "visible" : "invisible"
             }`}
           >
             <input

@@ -79,7 +79,7 @@ const SpotTikkaStep2 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 8000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -93,7 +93,10 @@ const SpotTikkaStep2 = () => {
     switch (verificationStatus) {
       case "verifying":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-15"
+            className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="w-full">
               <div className="mt-10 mb-6 flex flex-col items-center">
                 <Animation
@@ -110,7 +113,10 @@ const SpotTikkaStep2 = () => {
         );
       case "success":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-16"
+            className="h-full pt-16 px-4 flex flex-col justify-center pb-24 items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="w-full">
               <div className="flex flex-col items-center">
                 <Animation
@@ -128,7 +134,10 @@ const SpotTikkaStep2 = () => {
         );
       case "failure":
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-17"
+            className="h-full pt-16 px-4 flex flex-col justify-center pb-16 items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="flex flex-col items-center">
               <Animation animation={failureAnimation} height={81} width={81} />
               <p className="font-medium text-sm mt-7">Oops! Not quite.</p>
@@ -156,7 +165,10 @@ const SpotTikkaStep2 = () => {
         );
       default:
         return (
-          <div className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope">
+          <div
+            id="screen-14"
+            className="h-full pt-16 px-4 flex flex-col justify-start pb-24 items-center bg-[#FFF8E7] font-manrope"
+          >
             <div className="w-full flex items-start">
               <div>
                 <img

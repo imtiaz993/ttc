@@ -695,6 +695,7 @@ const OwnTikkaStep3 = () => {
         </div>
       )}
       <div
+        id="screen-28" 
         className={`h-full pt-10 xs:pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope `}
       >
         <div

@@ -11,7 +11,10 @@ const Failure = ({ finalColor, resultColor, results, undo, sareePath }) => {
   const dispatch = useDispatch();
   const next = () => dispatch(nextStep());
   return (
-    <div className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
+    <div
+      id="screen-12"
+      className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
+    >
       <Animation animation={failureAnimation} height={92} width={92} />
       <div className="my-6">
         <p className="font-semibold text-sm mb-2 text-center">

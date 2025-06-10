@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPolicy = ({ setShowPrivacy }) => {
   return (
-    <div className="fixed inset-0 w-full h-full bg-white">
+    <div id="screen-31" className="fixed inset-0 w-full h-full bg-white">
       <div className="w-full h-full px-4 pt-5 pb-14 overflow-auto">
         <div className="mb-6 flex justify-end">
           <img
