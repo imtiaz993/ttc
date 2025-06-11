@@ -29,7 +29,7 @@ const PuzzleStep5 = () => {
       <Menu />
       <div
         id="screen-25"
-        className="h-full pt-16 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope"
+        className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
       >
         <div className="w-full flex items-start mb-2 xs:mb-4">
           <div>
@@ -49,7 +49,7 @@ const PuzzleStep5 = () => {
             Can you find these tickets ?
           </p>
         </div>
-        <div className="relative w-full">
+        <div className="relative w-full mt-6 xs:mt-14">
           <div
             className="w-[148px] absolute left-0 xs:left-1 top-0 fade-in opacity-0"
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
@@ -81,7 +81,7 @@ const PuzzleStep5 = () => {
             className="w-[151px] absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0"
             style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-6 px-4 text-xs absolute bottom-0 z-10">
+            <p className="py-4 px-4 text-xs absolute bottom-0 z-10">
               Keep safe distance! A family of sharks swims underwater..
             </p>
             <img
@@ -94,7 +94,7 @@ const PuzzleStep5 = () => {
             className="w-[133px] absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0"
             style={{ animationDelay: "3.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-5 px-4 bottom-0 text-xs absolute z-10">
+            <p className="py-4 px-4 bottom-0 text-xs absolute z-10">
               What a feast! Find as many items one could eat!
             </p>
             <img
@@ -105,7 +105,6 @@ const PuzzleStep5 = () => {
           </div>
           <div className="flex justify-center items-center mx-auto w-40 h-[202px]"></div>
         </div>
-        <div className="h-28"></div>
       </div>
     </>
   );
