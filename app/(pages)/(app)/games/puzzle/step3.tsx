@@ -93,7 +93,7 @@ const PuzzleStep3 = () => {
       <div className="h-full pt-16 pb-24 px-4 flex flex-col justify-between items-center bg-[#FFF8E7] font-manrope">
         <div>
           <p className="text-sm font-medium mt-5">
-            Great job! You finished the puzzle in{" "}
+            Great job! You solved the puzzle in{" "}
           </p>
           <p className="text-xl font-medium mt-2 mb-6 font-lora">
             {completionTime?.display}

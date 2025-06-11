@@ -69,8 +69,8 @@ const WordsStep1 = () => {
             all kinds of things!
             <br />
             <br />
-            What I am puzzled by is why this warrior woman design for a ticket
-            though?. . .
+            However, I wonder, why someone would pick this warrior woman design
+            for a ticket. . . ?
           </p>
         </div>
         <div className="flex justify-center items-center">

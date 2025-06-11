@@ -41,46 +41,67 @@ const PuzzleStep5 = () => {
             <p className="mt-1 text-xs font-medium text-center">You</p>
           </div>
           <p className="ml-4 font-medium w-[calc(100%-46px)]">
-            The more I look, the more I am surrounded by tikas!
+            Tickets here, tickets there, tickets tickets everywhere!
+            <br />
+            <br />
+            A ticket hunt!
+            <br />
+            Can you find these tickets ?
           </p>
         </div>
         <div className="relative w-full">
           <div
-            className="w-[148px] absolute left-1 top-0 fade-in opacity-0"
+            className="w-[148px] absolute left-0 xs:left-1 top-0 fade-in opacity-0"
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
           >
             <p className="py-3 px-4 text-xs absolute z-10">
               Spot a pair of winged mermaids. . .
             </p>
-            <img className="relative mt-0.5 w-[148px]" src="/icons/cloud.svg" alt="" />
+            <img
+              className="relative mt-0.5 w-[148px]"
+              src="/icons/cloud.svg"
+              alt=""
+            />
           </div>
 
           <div
-            className="w-[148px] absolute right-2 top-16 fade-in opacity-0"
+            className="w-[148px] absolute right-0 xs:right-2 top-16 fade-in opacity-0"
             style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
           >
             <p className="py-4 px-4 text-xs absolute z-10">
               Did you see a pair of black cats yet?
             </p>
-            <img className="relative mt-1 w-[148px]" src="/icons/cloud.svg" alt="" />
+            <img
+              className="relative mt-1 w-[148px]"
+              src="/icons/cloud.svg"
+              alt=""
+            />
           </div>
           <div
-            className="w-[151px] absolute left-9 -bottom-10 fade-in opacity-0"
+            className="w-[151px] absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0"
             style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
           >
             <p className="py-6 px-4 text-xs absolute bottom-0 z-10">
               Keep safe distance! A family of sharks swims underwater..
             </p>
-            <img className="relative w-[151px]" src="/icons/cloud-2.svg" alt="" />
+            <img
+              className="relative w-[151px]"
+              src="/icons/cloud-2.svg"
+              alt=""
+            />
           </div>
           <div
-            className="w-[133px] absolute right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0"
+            className="w-[133px] absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0"
             style={{ animationDelay: "3.5s", animationFillMode: "forwards" }}
           >
             <p className="py-5 px-4 bottom-0 text-xs absolute z-10">
               What a feast! Find as many items one could eat!
             </p>
-            <img className="relative mb-1 w-[133px]" src="/icons/cloud-2.svg" alt="" />
+            <img
+              className="relative mb-1 w-[133px]"
+              src="/icons/cloud-2.svg"
+              alt=""
+            />
           </div>
           <div className="flex justify-center items-center mx-auto w-40 h-[202px]"></div>
         </div>
