@@ -99,7 +99,7 @@ const PuzzleStep5 = () => {
             className="absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0 w-[148px] h-[72px] bg-[#FDD931] rounded-lg"
           >
             <div
-              className="absolute -top-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
+              className="absolute -top-[17px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
               style={{
                 clipPath: "polygon(0 100%, 100% 100%, 0 0)",
                 boxShadow: "0px 4px 4px 0px #0000001A",
@@ -119,7 +119,7 @@ const PuzzleStep5 = () => {
             className="absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0 w-[148px] h-[72px] bg-[#FDD931] rounded-lg"
           >
             <div
-              className="absolute -top-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
+              className="absolute -top-[17px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
               style={{
                 clipPath: "polygon(0 100%, 100% 100%, 0 0)",
                 boxShadow: "0px 4px 4px 0px #0000001A",
