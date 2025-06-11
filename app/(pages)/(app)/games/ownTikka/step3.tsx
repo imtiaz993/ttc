@@ -227,23 +227,38 @@ const OwnTikkaStep3 = () => {
       ) {
         e.stopPropagation();
         e.preventDefault();
-
+    
         const touch1 = e.touches[0];
         const touch2 = e.touches[1];
         const dx = touch1.clientX - touch2.clientX;
         const dy = touch1.clientY - touch2.clientY;
         const currentDistance = Math.sqrt(dx * dx + dy * dy);
-
+    
         const scale = currentDistance / touchStartRef.current;
         const targetWidth = Math.max(
           40,
           Math.min(240, initialSizeRef.current.width * scale)
         );
         const targetHeight = targetWidth / aspectRatioRef.current;
-
-        updateElementInstance(activeElementRef.current.id, {
-          size: { width: targetWidth, height: targetHeight },
-        });
+    
+        // Get current position
+        const currentElement = elementInstances.find(
+          (el) => el.id === activeElementRef.current.id
+        );
+        
+        if (currentElement) {
+          // Apply boundary constraints
+          const constrained = constrainElementToBounds(
+            activeElementRef.current.id,
+            { width: targetWidth, height: targetHeight },
+            currentElement.position
+          );
+    
+          updateElementInstance(activeElementRef.current.id, {
+            size: constrained.size,
+            position: constrained.position,
+          });
+        }
       }
     };
 
@@ -261,26 +276,69 @@ const OwnTikkaStep3 = () => {
       }
     };
 
+    // Add this helper function inside your component
+    const constrainElementToBounds = (elementId, newSize, currentPosition) => {
+      const containerWidth = 240; // ticket container width (w-60 = 240px)
+      const containerHeight = 320; // ticket container height (h-80 = 320px)
+      
+      let constrainedSize = { ...newSize };
+      let adjustedPosition = { ...currentPosition };
+      
+      // Constrain size to fit within container
+      if (constrainedSize.width > containerWidth) {
+        const ratio = constrainedSize.height / constrainedSize.width;
+        constrainedSize.width = containerWidth;
+        constrainedSize.height = containerWidth * ratio;
+      }
+      
+      if (constrainedSize.height > containerHeight) {
+        const ratio = constrainedSize.width / constrainedSize.height;
+        constrainedSize.height = containerHeight;
+        constrainedSize.width = containerHeight * ratio;
+      }
+      
+      if (adjustedPosition.x + constrainedSize.width > containerWidth) {
+        adjustedPosition.x = containerWidth - constrainedSize.width;
+      }
+      
+      if (adjustedPosition.y + constrainedSize.height > containerHeight) {
+        adjustedPosition.y = containerHeight - constrainedSize.height;
+      }
+      
+      // Ensure position is not negative
+      adjustedPosition.x = Math.max(0, adjustedPosition.x);
+      adjustedPosition.y = Math.max(0, adjustedPosition.y);
+      
+      return { size: constrainedSize, position: adjustedPosition };
+    };
+
     const handleWheel = (e: WheelEvent): void => {
       if (activeElementId && !zoomingRef.current) {
         const activeElement = elementInstances.find(
           (el) => el.id === activeElementId
         );
         if (!activeElement) return;
-
+    
         e.preventDefault();
         e.stopPropagation();
-
+    
         const currentWidth = activeElement.size.width;
         const currentHeight = activeElement.size.height;
         const aspectRatio = currentWidth / currentHeight;
-
+    
         const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
         const newWidth = Math.max(40, Math.min(240, currentWidth * zoomFactor));
         const newHeight = newWidth / aspectRatio;
-
+    
+        const constrained = constrainElementToBounds(
+          activeElementId,
+          { width: Math.round(newWidth), height: Math.round(newHeight) },
+          activeElement.position
+        );
+    
         updateElementInstance(activeElementId, {
-          size: { width: Math.round(newWidth), height: Math.round(newHeight) },
+          size: constrained.size,
+          position: constrained.position,
         });
       }
     };
