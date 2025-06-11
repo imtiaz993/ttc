@@ -55,7 +55,7 @@ const Thankyou = () => {
           </div>
           <div className="flex justify-between items-center mb-2.5">
             <p className="font-light">Development</p>
-            <p className="font-semibold">United Monks</p>
+            <p className="font-semibold">United Monks Technologies</p>
           </div>
           <div className="flex justify-between items-center mb-2.5">
             <p className="font-light">UI & UX Design</p>
@@ -70,7 +70,7 @@ const Thankyou = () => {
         </p>
       </div>
       <div className="w-full mt-6 flex justify-between items-center">
-        <img src="/icons/bofa-bank.svg" alt="" className="w-52" />
+        <img src="/images/bofa-bank.png" alt="" className="w-52" />
         <img src="/images/map-logo.png" alt="" className="w-16" />
       </div>
     </div>

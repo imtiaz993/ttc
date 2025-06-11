@@ -83,7 +83,7 @@ const OwnTikkaStep4 = () => {
           />
         </div>
 
-        <div>
+        <div className="w-full">
           <div className="w-full flex items-start mb-4 xs:mb-10">
             <div>
               <img
