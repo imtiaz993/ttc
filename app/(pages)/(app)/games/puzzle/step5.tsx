@@ -51,79 +51,85 @@ const PuzzleStep5 = () => {
         </div>
         <div className="relative w-full mt-6 xs:mt-14">
           <div
-            className="w-[148px] absolute left-0 xs:left-1 top-0 fade-in opacity-0"
-            style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
+            style={{
+              animationDelay: "0.5s",
+              animationFillMode: "forwards",
+              boxShadow: "0px 4px 4px 0px #0000001A",
+            }}
+            className="absolute left-0 xs:left-1 top-0 fade-in opacity-0 w-[148px] h-[56px] bg-[#FDD931] rounded-lg"
           >
+            <div
+              className="absolute -bottom-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[-45deg]"
+              style={{
+                clipPath: "polygon(0 100%, 100% 100%, 0 0)",
+                boxShadow: "0px 4px 4px 0px #0000001A",
+              }}
+            ></div>
             <p className="px-4 text-xs absolute top-3 z-10">
               Spot a pair of winged mermaids. . .
             </p>
-            <img
-              className="relative mt-0.5 w-full"
-              src="/icons/cloud-new-2.svg"
-              alt=""
-            />
-            <img
-              className="absolute bottom-0 right-0 w-6 h-[18px]"
-              src="/icons/cloud-tip.svg"
-              alt=""
-            />
           </div>
 
           <div
-            className="w-[148px] absolute right-0 xs:right-2 top-16 fade-in opacity-0"
-            style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
+            style={{
+              animationDelay: "1.5s",
+              animationFillMode: "forwards",
+              boxShadow: "0px 4px 4px 0px #0000001A",
+            }}
+            className="absolute right-0 xs:right-2 top-16 fade-in opacity-0 w-[148px] h-[56px] bg-[#FDD931] rounded-lg"
           >
+            <div
+              className="absolute -bottom-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[-45deg]"
+              style={{
+                clipPath: "polygon(0 100%, 100% 100%, 0 0)",
+                boxShadow: "0px 4px 4px 0px #0000001A",
+              }}
+            ></div>
             <p className="px-4 text-xs absolute top-3 z-10">
               Did you see a pair of black cats yet?
             </p>
-            <img
-              className="relative mt-1 w-[148px]"
-              src="/icons/cloud-new-2.svg"
-              alt=""
-            />
-            <img
-              className="absolute bottom-0 right-0 w-6 h-[18px]"
-              src="/icons/cloud-tip.svg"
-              alt=""
-            />
           </div>
+
           <div
-            className="w-[151px] absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0"
-            style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
+            style={{
+              animationDelay: "2.5s",
+              animationFillMode: "forwards",
+              boxShadow: "0px 4px 4px 0px #0000001A",
+            }}
+            className="absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0 w-[148px] h-[72px] bg-[#FDD931] rounded-lg"
           >
+            <div
+              className="absolute -top-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
+              style={{
+                clipPath: "polygon(0 100%, 100% 100%, 0 0)",
+                boxShadow: "0px 4px 4px 0px #0000001A",
+              }}
+            ></div>
             <p className="px-4 text-xs absolute top-3 z-10">
               Keep safe distance! A family of sharks swims underwater..
             </p>
-            <img
-              className="relative w-[151px]"
-              src="/icons/cloud-new-1.svg"
-              alt=""
-            />
-            <img
-              className="absolute -top-2 left-0 w-6 h-[18px] rotate-180"
-              src="/icons/cloud-tip.svg"
-              alt=""
-            />
           </div>
-          <div
-            className="w-[133px] absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0"
-            style={{ animationDelay: "3.5s", animationFillMode: "forwards" }}
-          >
-            <p className="px-4 bottom-0 text-xs absolute top-3 z-10">
-              What a feast! Find as many items one could eat!
-            </p>
-            <img
-              className="relative mb-1 w-[133px]"
-              src="/icons/cloud-new-1.svg"
-              alt=""
-            />
 
-            <img
-              className="absolute -top-2 left-0 w-6 h-[18px] rotate-180"
-              src="/icons/cloud-tip.svg"
-              alt=""
-            />
+          <div
+            style={{
+              animationDelay: "3.5s",
+              animationFillMode: "forwards",
+              boxShadow: "0px 4px 4px 0px #0000001A",
+            }}
+            className="absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0 w-[148px] h-[72px] bg-[#FDD931] rounded-lg"
+          >
+            <div
+              className="absolute -top-[18px] right-2 w-[18px] h-[18px] bg-[#FDD931] transform -translate-y-1/2 translate-x-1/2 origin-bottom-left rotate-[135deg]"
+              style={{
+                clipPath: "polygon(0 100%, 100% 100%, 0 0)",
+                boxShadow: "0px 4px 4px 0px #0000001A",
+              }}
+            ></div>
+            <p className="px-4 text-xs absolute top-3 z-10">
+              Keep safe distance! A family of sharks swims underwater..
+            </p>
           </div>
+
           <div className="flex justify-center items-center mx-auto w-40 h-[202px]"></div>
         </div>
       </div>
