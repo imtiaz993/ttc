@@ -124,7 +124,7 @@ const OwnTikkaStep4 = () => {
             <div className="grid grid-cols-3 gap-4 text-center text-sm font-medium">
               <a
                 href={`https://wa.me/?text=${encodeURIComponent(
-                  userData.createdTika
+                  `Check out this Tika! ${userData.createdTika}`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -137,35 +137,30 @@ const OwnTikkaStep4 = () => {
                 />
                 WhatsApp
               </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                  userData.createdTika
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => {
+                  copyToClipboard();
+                  window.open('https://www.instagram.com/', '_blank');
+                }}
                 className="flex flex-col items-center"
               >
                 <img
-                  src="/icons/facebook.svg"
-                  alt="Facebook"
+                  src="/icons/instagram.svg"
+                  alt="Instagram"
                   className="w-8 mb-1"
                 />
-                Facebook
-              </a>
+                Instagram
+              </button>
               <a
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                  userData.createdTika
-                )}&text=Check+out+this+Tika!`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:?subject=Check out this Tika!&body=Hi! I wanted to share this awesome Tika I created: ${encodeURIComponent(userData.createdTika)}`}
                 className="flex flex-col items-center"
               >
                 <img
-                  src="/icons/twitter.svg"
-                  alt="Twitter"
+                  src="/icons/gmail.svg"
+                  alt="Gmail"
                   className="w-8 mb-1"
                 />
-                Twitter
+                Gmail
               </a>
               <a
                 href={`https://t.me/share/url?url=${encodeURIComponent(
