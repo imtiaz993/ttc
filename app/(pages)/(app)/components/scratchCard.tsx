@@ -255,7 +255,7 @@ const ScratchCard = ({ isRevealed, setIsRevealed, animation }) => {
         <br />
         Last evening we had one of Papa’s merchant friends over. He brought us
         the loveliest fabric from Calcutta! But what caught my eye was not the
-        fabric, but this unusual label stuck on it. 
+        fabric, but this unusual picture stuck on it. 
         <br />
         <br />
         Can’t wait to show it to my closest friend Selma.Her family’s in the
