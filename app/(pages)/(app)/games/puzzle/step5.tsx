@@ -13,7 +13,7 @@ const PuzzleStep5 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 20000,
+    time: 2000000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
@@ -54,12 +54,17 @@ const PuzzleStep5 = () => {
             className="w-[148px] absolute left-0 xs:left-1 top-0 fade-in opacity-0"
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-3 px-4 text-xs absolute z-10">
+            <p className="px-4 text-xs absolute top-3 z-10">
               Spot a pair of winged mermaids. . .
             </p>
             <img
-              className="relative mt-0.5 w-[148px]"
-              src="/icons/cloud.svg"
+              className="relative mt-0.5 w-full"
+              src="/icons/cloud-new-2.svg"
+              alt=""
+            />
+            <img
+              className="absolute bottom-0 right-0 w-6 h-[18px]"
+              src="/icons/cloud-tip.svg"
               alt=""
             />
           </div>
@@ -68,12 +73,17 @@ const PuzzleStep5 = () => {
             className="w-[148px] absolute right-0 xs:right-2 top-16 fade-in opacity-0"
             style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-4 px-4 text-xs absolute z-10">
+            <p className="px-4 text-xs absolute top-3 z-10">
               Did you see a pair of black cats yet?
             </p>
             <img
               className="relative mt-1 w-[148px]"
-              src="/icons/cloud.svg"
+              src="/icons/cloud-new-2.svg"
+              alt=""
+            />
+            <img
+              className="absolute bottom-0 right-0 w-6 h-[18px]"
+              src="/icons/cloud-tip.svg"
               alt=""
             />
           </div>
@@ -81,12 +91,17 @@ const PuzzleStep5 = () => {
             className="w-[151px] absolute left-0 xs:left-9 -bottom-10 fade-in opacity-0"
             style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-4 px-4 text-xs absolute bottom-0 z-10">
+            <p className="px-4 text-xs absolute top-3 z-10">
               Keep safe distance! A family of sharks swims underwater..
             </p>
             <img
               className="relative w-[151px]"
-              src="/icons/cloud-2.svg"
+              src="/icons/cloud-new-1.svg"
+              alt=""
+            />
+            <img
+              className="absolute -top-2 left-0 w-6 h-[18px] rotate-180"
+              src="/icons/cloud-tip.svg"
               alt=""
             />
           </div>
@@ -94,12 +109,18 @@ const PuzzleStep5 = () => {
             className="w-[133px] absolute right-0 xs:right-2 -bottom-20 xs:-bottom-32 fade-in opacity-0"
             style={{ animationDelay: "3.5s", animationFillMode: "forwards" }}
           >
-            <p className="py-4 px-4 bottom-0 text-xs absolute z-10">
+            <p className="px-4 bottom-0 text-xs absolute top-3 z-10">
               What a feast! Find as many items one could eat!
             </p>
             <img
               className="relative mb-1 w-[133px]"
-              src="/icons/cloud-2.svg"
+              src="/icons/cloud-new-1.svg"
+              alt=""
+            />
+
+            <img
+              className="absolute -top-2 left-0 w-6 h-[18px] rotate-180"
+              src="/icons/cloud-tip.svg"
               alt=""
             />
           </div>
