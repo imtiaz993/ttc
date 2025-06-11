@@ -13,7 +13,7 @@ const PuzzleStep5 = () => {
   const [overlay, setOverlay] = useState(false);
   const displayOverlay = () => dispatch(openOverlay());
   useInactivity({
-    time: 200000000,
+    time: 20000,
     onInactivity: () => {
       setOverlay(true);
       displayOverlay();
