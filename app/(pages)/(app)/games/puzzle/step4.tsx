@@ -65,19 +65,19 @@ const PuzzleStep4 = () => {
             <img
               src="/images/wonder1.png"
               alt=""
-              className="w-[98px] xs:w-[118px]"
+              className="w-[98px] xs:w-[108px]"
             />
             <img
               src="/images/wonder2.png"
               alt=""
-              className="w-[106px] xs:w-[126px]"
+              className="w-[106px] xs:w-[116px]"
             />
           </div>
           <div className="flex justify-center mt-1 xs:mt-2">
             <img
               src="/images/wonder3.png"
               alt=""
-              className="w-[99px] xs:w-[119px]"
+              className="w-[99px] xs:w-[109px]"
             />
           </div>
         </div>

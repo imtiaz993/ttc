@@ -52,11 +52,13 @@ const GameStepper = () => {
         value = 58;
         break;
       case 10:
-        value = 62;
+        value = 64;
         break;
       case 11:
-      case 12:
         value = 66;
+        break;
+      case 12:
+        value = 68;
         break;
       case 13:
         value = 69;
@@ -66,10 +68,10 @@ const GameStepper = () => {
         value = 76;
         break;
       case 16:
-        value = 80;
+        value = 82;
         break;
       case 17:
-        value = 83;
+        value = 84;
         break;
       case 18:
         value = 86;

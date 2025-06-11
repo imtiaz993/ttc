@@ -9,7 +9,7 @@ const userSlice = createSlice({
       char: "char1",
       tooltip: false,
       menu: true,
-      overlay: true,
+      overlay: false,
       email: "",
       feedback: "",
       createdTika: "",
