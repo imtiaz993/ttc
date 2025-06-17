@@ -60,7 +60,8 @@ const Feedback = () => {
     formData.append("feedback", values.feedback);
     formData.append("userName", userData.name);
     formData.append("createdTika", userData.createdTika);
-
+    formData.append("agreeToPrivacyPolicy", userData.policy2);
+    formData.append("agreeToReceiveCommunication", userData.policy1);
     try {
       const response = await fetch(
         "https://tikka-backend.nvmsoft.fi/api/users",
@@ -87,7 +88,10 @@ const Feedback = () => {
     <>
       <Menu />
       {showPrivacy && <PrivacyPolicy setShowPrivacy={setShowPrivacy} />}
-      <div id="screen-30"  className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope">
+      <div
+        id="screen-30"
+        className="h-full pt-16 px-4 flex flex-col justify-start items-center bg-[#FFF8E7] font-manrope"
+      >
         <img
           src={`/images/${userData.char}.png`}
           alt=""
