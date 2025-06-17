@@ -60,8 +60,8 @@ const Feedback = () => {
     formData.append("feedback", values.feedback);
     formData.append("userName", userData.name);
     formData.append("createdTika", userData.createdTika);
-    formData.append("agreeToPrivacyPolicy", userData.policy2);
-    formData.append("agreeToReceiveCommunication", userData.policy1);
+    formData.append("agreeToPrivacyPolicy", values.policy2);
+    formData.append("agreeToReceiveCommunication", values.policy1);
     try {
       const response = await fetch(
         "https://tikka-backend.nvmsoft.fi/api/users",
