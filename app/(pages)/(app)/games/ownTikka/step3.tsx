@@ -524,27 +524,21 @@ const OwnTikkaStep3 = () => {
           if (!blob) return;
 
           const formData = new FormData();
-          formData.append("file", blob, "ticket.png");
-          formData.append(
-            "upload_preset",
-            process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || ""
-          );
-
+          formData.append("image", blob, "ticket.png");
           try {
-            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
             const response = await axios.post(
-              `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+              `https://tikka-backend.nvmsoft.fi/api/upload`,
               formData
             );
 
-            const { secure_url } = response.data;
-            if (response.data) {
+            const { url } = response.data.data;
+            if (response.data.data) {
               setIsFinishing(false);
             }
 
             updateUserData({
               ...userData,
-              createdTika: secure_url,
+              createdTika: url,
             });
             next();
           } catch (error) {
@@ -583,27 +577,22 @@ const OwnTikkaStep3 = () => {
           if (!blob) return;
 
           const formData = new FormData();
-          formData.append("file", blob, "ticket.png");
-          formData.append(
-            "upload_preset",
-            process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || ""
-          );
+          formData.append("image", blob, "ticket.png");
 
           try {
-            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
             const response = await axios.post(
-              `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+              `https://tikka-backend.nvmsoft.fi/api/upload`,
               formData
             );
 
-            const { secure_url } = response.data;
-            if (response.data) {
+            const { url } = response.data.data;
+            if (response.data.data) {
               setIsFinishing(false);
             }
 
             updateUserData({
               ...userData,
-              createdTika: secure_url,
+              createdTika: url,
             });
             next();
           } catch (error) {
