@@ -126,7 +126,7 @@ const PuzzleStep5 = () => {
               }}
             ></div>
             <p className="px-4 text-xs absolute top-3 z-10">
-              Keep safe distance! A family of sharks swims underwater..
+              What a feast! Find as many items one could eat!
             </p>
           </div>
 
