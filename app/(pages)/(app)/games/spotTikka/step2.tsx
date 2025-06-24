@@ -230,7 +230,15 @@ const SpotTikkaStep2 = () => {
           "/images/graham-bombay.png",
           "graham-bombay.png"
         );
+
+        const localImageFile2 = await convertImageUrlToFile(
+          "/images/words-1.jpg",
+          "graham-bombay-white.jpg"
+        );
+
         formData.append("image2", localImageFile, "local-image.png");
+
+        formData.append("image3", localImageFile2, "local-image2.png");
 
         const response = await axios.post(
           "https://tikka-backend.nvmsoft.fi/api/compare-images",
